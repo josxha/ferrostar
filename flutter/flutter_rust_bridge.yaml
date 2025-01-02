@@ -1,3 +1,4 @@
-rust_input: crate::api
-rust_root: rust/
+#rust_input: crate::lib
+rust_input: crate::models
+rust_root: ../common/ferrostar
 dart_output: lib/src/rust

@@ -3,13 +3,15 @@
 
 // ignore_for_file: unused_import, unused_element, unnecessary_import, duplicate_ignore, invalid_use_of_internal_member, annotate_overrides, non_constant_identifier_names, curly_braces_in_flow_control_structures, prefer_const_literals_to_create_immutables, unused_field
 
-import 'api/simple.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'frb_generated.dart';
 import 'frb_generated.io.dart'
     if (dart.library.js_interop) 'frb_generated.web.dart';
+import 'lib.dart';
+import 'models.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:uuid/uuid.dart';
 
 /// Main entrypoint of the Rust API
 class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
@@ -56,9 +58,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
       RustLibWire.fromExternalLibrary;
 
   @override
-  Future<void> executeRustInitializers() async {
-    await api.crateApiSimpleInitApp();
-  }
+  Future<void> executeRustInitializers() async {}
 
   @override
   ExternalLibraryLoaderConfig get defaultExternalLibraryLoaderConfig =>
@@ -68,20 +68,116 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.7.0';
 
   @override
-  int get rustContentHash => -1918914929;
+  int get rustContentHash => 169785891;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
-    stem: 'rust_lib_ferrostar',
-    ioDirectory: 'rust/target/release/',
+    stem: 'ferrostar',
+    ioDirectory: '../common/ferrostar/target/release/',
     webPrefix: 'pkg/',
   );
 }
 
 abstract class RustLibApi extends BaseApi {
-  String crateApiSimpleGreet({required String name});
+  int crateModelsHeadingAutoAccessorGetAccuracy({required Heading that});
 
-  Future<void> crateApiSimpleInitApp();
+  SystemTime crateModelsHeadingAutoAccessorGetTimestamp(
+      {required Heading that});
+
+  int crateModelsHeadingAutoAccessorGetTrueHeading({required Heading that});
+
+  void crateModelsHeadingAutoAccessorSetAccuracy(
+      {required Heading that, required int accuracy});
+
+  void crateModelsHeadingAutoAccessorSetTimestamp(
+      {required Heading that, required SystemTime timestamp});
+
+  void crateModelsHeadingAutoAccessorSetTrueHeading(
+      {required Heading that, required int trueHeading});
+
+  GeographicCoordinate crateModelsUserLocationAutoAccessorGetCoordinates(
+      {required UserLocation that});
+
+  CourseOverGround? crateModelsUserLocationAutoAccessorGetCourseOverGround(
+      {required UserLocation that});
+
+  double crateModelsUserLocationAutoAccessorGetHorizontalAccuracy(
+      {required UserLocation that});
+
+  Speed? crateModelsUserLocationAutoAccessorGetSpeed(
+      {required UserLocation that});
+
+  SystemTime crateModelsUserLocationAutoAccessorGetTimestamp(
+      {required UserLocation that});
+
+  void crateModelsUserLocationAutoAccessorSetCoordinates(
+      {required UserLocation that, required GeographicCoordinate coordinates});
+
+  void crateModelsUserLocationAutoAccessorSetCourseOverGround(
+      {required UserLocation that, CourseOverGround? courseOverGround});
+
+  void crateModelsUserLocationAutoAccessorSetHorizontalAccuracy(
+      {required UserLocation that, required double horizontalAccuracy});
+
+  void crateModelsUserLocationAutoAccessorSetSpeed(
+      {required UserLocation that, Speed? speed});
+
+  void crateModelsUserLocationAutoAccessorSetTimestamp(
+      {required UserLocation that, required SystemTime timestamp});
+
+  Future<CourseOverGround> crateModelsCourseOverGroundNew(
+      {required double degrees, int? accuracy});
+
+  Future<VisualInstruction?> crateModelsRouteStepGetActiveVisualInstruction(
+      {required RouteStep that, required double distanceToEndOfStep});
+
+  Future<String?> crateModelsRouteStepGetAnnotationAtCurrentIndex(
+      {required RouteStep that, required BigInt atCoordinateIndex});
+
+  Future<SpokenInstruction?> crateModelsRouteStepGetCurrentSpokenInstruction(
+      {required RouteStep that, required double distanceToEndOfStep});
+
+  Future<int> crateModelsUniffiFerrostarChecksumFuncGetRoutePolyline();
+
+  RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_Heading;
+
+  RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_Heading;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_HeadingPtr;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_SpokenInstruction;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_SpokenInstruction;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_SpokenInstructionPtr;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_SystemTime;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_SystemTime;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_SystemTimePtr;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_UserLocation;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_UserLocation;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_UserLocationPtr;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_VisualInstruction;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_VisualInstruction;
+
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_VisualInstructionPtr;
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -93,50 +189,735 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
-  String crateApiSimpleGreet({required String name}) {
+  int crateModelsHeadingAutoAccessorGetAccuracy({required Heading that}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
         final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_String(name, serializer);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+            that, serializer);
         return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 1)!;
       },
       codec: SseCodec(
-        decodeSuccessData: sse_decode_String,
+        decodeSuccessData: sse_decode_u_16,
         decodeErrorData: null,
       ),
-      constMeta: kCrateApiSimpleGreetConstMeta,
-      argValues: [name],
+      constMeta: kCrateModelsHeadingAutoAccessorGetAccuracyConstMeta,
+      argValues: [that],
       apiImpl: this,
     ));
   }
 
-  TaskConstMeta get kCrateApiSimpleGreetConstMeta => const TaskConstMeta(
-        debugName: "greet",
-        argNames: ["name"],
+  TaskConstMeta get kCrateModelsHeadingAutoAccessorGetAccuracyConstMeta =>
+      const TaskConstMeta(
+        debugName: "Heading_auto_accessor_get_accuracy",
+        argNames: ["that"],
       );
 
   @override
-  Future<void> crateApiSimpleInitApp() {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
+  SystemTime crateModelsHeadingAutoAccessorGetTimestamp(
+      {required Heading that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
         final serializer = SseSerializer(generalizedFrbRustBinding);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 2, port: port_);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+            that, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 2)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData:
+            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsHeadingAutoAccessorGetTimestampConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateModelsHeadingAutoAccessorGetTimestampConstMeta =>
+      const TaskConstMeta(
+        debugName: "Heading_auto_accessor_get_timestamp",
+        argNames: ["that"],
+      );
+
+  @override
+  int crateModelsHeadingAutoAccessorGetTrueHeading({required Heading that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+            that, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 3)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_u_16,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsHeadingAutoAccessorGetTrueHeadingConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateModelsHeadingAutoAccessorGetTrueHeadingConstMeta =>
+      const TaskConstMeta(
+        debugName: "Heading_auto_accessor_get_true_heading",
+        argNames: ["that"],
+      );
+
+  @override
+  void crateModelsHeadingAutoAccessorSetAccuracy(
+      {required Heading that, required int accuracy}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+            that, serializer);
+        sse_encode_u_16(accuracy, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 4)!;
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_unit,
         decodeErrorData: null,
       ),
-      constMeta: kCrateApiSimpleInitAppConstMeta,
+      constMeta: kCrateModelsHeadingAutoAccessorSetAccuracyConstMeta,
+      argValues: [that, accuracy],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateModelsHeadingAutoAccessorSetAccuracyConstMeta =>
+      const TaskConstMeta(
+        debugName: "Heading_auto_accessor_set_accuracy",
+        argNames: ["that", "accuracy"],
+      );
+
+  @override
+  void crateModelsHeadingAutoAccessorSetTimestamp(
+      {required Heading that, required SystemTime timestamp}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+            that, serializer);
+        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+            timestamp, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 5)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsHeadingAutoAccessorSetTimestampConstMeta,
+      argValues: [that, timestamp],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateModelsHeadingAutoAccessorSetTimestampConstMeta =>
+      const TaskConstMeta(
+        debugName: "Heading_auto_accessor_set_timestamp",
+        argNames: ["that", "timestamp"],
+      );
+
+  @override
+  void crateModelsHeadingAutoAccessorSetTrueHeading(
+      {required Heading that, required int trueHeading}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+            that, serializer);
+        sse_encode_u_16(trueHeading, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsHeadingAutoAccessorSetTrueHeadingConstMeta,
+      argValues: [that, trueHeading],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateModelsHeadingAutoAccessorSetTrueHeadingConstMeta =>
+      const TaskConstMeta(
+        debugName: "Heading_auto_accessor_set_true_heading",
+        argNames: ["that", "trueHeading"],
+      );
+
+  @override
+  GeographicCoordinate crateModelsUserLocationAutoAccessorGetCoordinates(
+      {required UserLocation that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_geographic_coordinate,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsUserLocationAutoAccessorGetCoordinatesConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateModelsUserLocationAutoAccessorGetCoordinatesConstMeta =>
+          const TaskConstMeta(
+            debugName: "UserLocation_auto_accessor_get_coordinates",
+            argNames: ["that"],
+          );
+
+  @override
+  CourseOverGround? crateModelsUserLocationAutoAccessorGetCourseOverGround(
+      {required UserLocation that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_opt_box_autoadd_course_over_ground,
+        decodeErrorData: null,
+      ),
+      constMeta:
+          kCrateModelsUserLocationAutoAccessorGetCourseOverGroundConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateModelsUserLocationAutoAccessorGetCourseOverGroundConstMeta =>
+          const TaskConstMeta(
+            debugName: "UserLocation_auto_accessor_get_course_over_ground",
+            argNames: ["that"],
+          );
+
+  @override
+  double crateModelsUserLocationAutoAccessorGetHorizontalAccuracy(
+      {required UserLocation that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 9)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_f_64,
+        decodeErrorData: null,
+      ),
+      constMeta:
+          kCrateModelsUserLocationAutoAccessorGetHorizontalAccuracyConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateModelsUserLocationAutoAccessorGetHorizontalAccuracyConstMeta =>
+          const TaskConstMeta(
+            debugName: "UserLocation_auto_accessor_get_horizontal_accuracy",
+            argNames: ["that"],
+          );
+
+  @override
+  Speed? crateModelsUserLocationAutoAccessorGetSpeed(
+      {required UserLocation that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_opt_box_autoadd_speed,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsUserLocationAutoAccessorGetSpeedConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateModelsUserLocationAutoAccessorGetSpeedConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_get_speed",
+        argNames: ["that"],
+      );
+
+  @override
+  SystemTime crateModelsUserLocationAutoAccessorGetTimestamp(
+      {required UserLocation that}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData:
+            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsUserLocationAutoAccessorGetTimestampConstMeta,
+      argValues: [that],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateModelsUserLocationAutoAccessorGetTimestampConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_get_timestamp",
+        argNames: ["that"],
+      );
+
+  @override
+  void crateModelsUserLocationAutoAccessorSetCoordinates(
+      {required UserLocation that, required GeographicCoordinate coordinates}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that, serializer);
+        sse_encode_geographic_coordinate(coordinates, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsUserLocationAutoAccessorSetCoordinatesConstMeta,
+      argValues: [that, coordinates],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateModelsUserLocationAutoAccessorSetCoordinatesConstMeta =>
+          const TaskConstMeta(
+            debugName: "UserLocation_auto_accessor_set_coordinates",
+            argNames: ["that", "coordinates"],
+          );
+
+  @override
+  void crateModelsUserLocationAutoAccessorSetCourseOverGround(
+      {required UserLocation that, CourseOverGround? courseOverGround}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that, serializer);
+        sse_encode_opt_box_autoadd_course_over_ground(
+            courseOverGround, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: null,
+      ),
+      constMeta:
+          kCrateModelsUserLocationAutoAccessorSetCourseOverGroundConstMeta,
+      argValues: [that, courseOverGround],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateModelsUserLocationAutoAccessorSetCourseOverGroundConstMeta =>
+          const TaskConstMeta(
+            debugName: "UserLocation_auto_accessor_set_course_over_ground",
+            argNames: ["that", "courseOverGround"],
+          );
+
+  @override
+  void crateModelsUserLocationAutoAccessorSetHorizontalAccuracy(
+      {required UserLocation that, required double horizontalAccuracy}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that, serializer);
+        sse_encode_f_64(horizontalAccuracy, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: null,
+      ),
+      constMeta:
+          kCrateModelsUserLocationAutoAccessorSetHorizontalAccuracyConstMeta,
+      argValues: [that, horizontalAccuracy],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta
+      get kCrateModelsUserLocationAutoAccessorSetHorizontalAccuracyConstMeta =>
+          const TaskConstMeta(
+            debugName: "UserLocation_auto_accessor_set_horizontal_accuracy",
+            argNames: ["that", "horizontalAccuracy"],
+          );
+
+  @override
+  void crateModelsUserLocationAutoAccessorSetSpeed(
+      {required UserLocation that, Speed? speed}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that, serializer);
+        sse_encode_opt_box_autoadd_speed(speed, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 15)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsUserLocationAutoAccessorSetSpeedConstMeta,
+      argValues: [that, speed],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateModelsUserLocationAutoAccessorSetSpeedConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_set_speed",
+        argNames: ["that", "speed"],
+      );
+
+  @override
+  void crateModelsUserLocationAutoAccessorSetTimestamp(
+      {required UserLocation that, required SystemTime timestamp}) {
+    return handler.executeSync(SyncTask(
+      callFfi: () {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that, serializer);
+        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+            timestamp, serializer);
+        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_unit,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsUserLocationAutoAccessorSetTimestampConstMeta,
+      argValues: [that, timestamp],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateModelsUserLocationAutoAccessorSetTimestampConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_set_timestamp",
+        argNames: ["that", "timestamp"],
+      );
+
+  @override
+  Future<CourseOverGround> crateModelsCourseOverGroundNew(
+      {required double degrees, int? accuracy}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_f_64(degrees, serializer);
+        sse_encode_opt_box_autoadd_u_16(accuracy, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer,
+            funcId: 17, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_course_over_ground,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsCourseOverGroundNewConstMeta,
+      argValues: [degrees, accuracy],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateModelsCourseOverGroundNewConstMeta =>
+      const TaskConstMeta(
+        debugName: "course_over_ground_new",
+        argNames: ["degrees", "accuracy"],
+      );
+
+  @override
+  Future<VisualInstruction?> crateModelsRouteStepGetActiveVisualInstruction(
+      {required RouteStep that, required double distanceToEndOfStep}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_box_autoadd_route_step(that, serializer);
+        sse_encode_f_64(distanceToEndOfStep, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer,
+            funcId: 18, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData:
+            sse_decode_opt_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsRouteStepGetActiveVisualInstructionConstMeta,
+      argValues: [that, distanceToEndOfStep],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateModelsRouteStepGetActiveVisualInstructionConstMeta =>
+      const TaskConstMeta(
+        debugName: "route_step_get_active_visual_instruction",
+        argNames: ["that", "distanceToEndOfStep"],
+      );
+
+  @override
+  Future<String?> crateModelsRouteStepGetAnnotationAtCurrentIndex(
+      {required RouteStep that, required BigInt atCoordinateIndex}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_box_autoadd_route_step(that, serializer);
+        sse_encode_u_64(atCoordinateIndex, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer,
+            funcId: 19, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_opt_String,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsRouteStepGetAnnotationAtCurrentIndexConstMeta,
+      argValues: [that, atCoordinateIndex],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateModelsRouteStepGetAnnotationAtCurrentIndexConstMeta =>
+      const TaskConstMeta(
+        debugName: "route_step_get_annotation_at_current_index",
+        argNames: ["that", "atCoordinateIndex"],
+      );
+
+  @override
+  Future<SpokenInstruction?> crateModelsRouteStepGetCurrentSpokenInstruction(
+      {required RouteStep that, required double distanceToEndOfStep}) {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_box_autoadd_route_step(that, serializer);
+        sse_encode_f_64(distanceToEndOfStep, serializer);
+        pdeCallFfi(generalizedFrbRustBinding, serializer,
+            funcId: 20, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData:
+            sse_decode_opt_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction,
+        decodeErrorData: null,
+      ),
+      constMeta: kCrateModelsRouteStepGetCurrentSpokenInstructionConstMeta,
+      argValues: [that, distanceToEndOfStep],
+      apiImpl: this,
+    ));
+  }
+
+  TaskConstMeta get kCrateModelsRouteStepGetCurrentSpokenInstructionConstMeta =>
+      const TaskConstMeta(
+        debugName: "route_step_get_current_spoken_instruction",
+        argNames: ["that", "distanceToEndOfStep"],
+      );
+
+  @override
+  Future<int> crateModelsUniffiFerrostarChecksumFuncGetRoutePolyline() {
+    return handler.executeNormal(NormalTask(
+      callFfi: (port_) {
+        final serializer = SseSerializer(generalizedFrbRustBinding);
+        pdeCallFfi(generalizedFrbRustBinding, serializer,
+            funcId: 21, port: port_);
+      },
+      codec: SseCodec(
+        decodeSuccessData: sse_decode_u_16,
+        decodeErrorData: null,
+      ),
+      constMeta:
+          kCrateModelsUniffiFerrostarChecksumFuncGetRoutePolylineConstMeta,
       argValues: [],
       apiImpl: this,
     ));
   }
 
-  TaskConstMeta get kCrateApiSimpleInitAppConstMeta => const TaskConstMeta(
-        debugName: "init_app",
-        argNames: [],
-      );
+  TaskConstMeta
+      get kCrateModelsUniffiFerrostarChecksumFuncGetRoutePolylineConstMeta =>
+          const TaskConstMeta(
+            debugName: "uniffi_ferrostar_checksum_func_get_route_polyline",
+            argNames: [],
+          );
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_Heading => wire
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_Heading => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_SpokenInstruction => wire
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_SpokenInstruction => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_SystemTime => wire
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_SystemTime => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_UserLocation => wire
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_UserLocation => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation;
+
+  RustArcIncrementStrongCountFnType
+      get rust_arc_increment_strong_count_VisualInstruction => wire
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction;
+
+  RustArcDecrementStrongCountFnType
+      get rust_arc_decrement_strong_count_VisualInstruction => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction;
+
+  @protected
+  Heading
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return HeadingImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  SystemTime
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return SystemTimeImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  UserLocation
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return UserLocationImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  Heading
+      dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return HeadingImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  UserLocation
+      dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return UserLocationImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  Heading
+      dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return HeadingImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  SpokenInstruction
+      dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return SpokenInstructionImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  UserLocation
+      dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return UserLocationImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  VisualInstruction
+      dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return VisualInstructionImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  DateTime dco_decode_Chrono_Utc(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeTimestamp(ts: dco_decode_i_64(raw).toInt(), isUtc: true);
+  }
+
+  @protected
+  Heading
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return HeadingImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  SpokenInstruction
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return SpokenInstructionImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  SystemTime
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return SystemTimeImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  UserLocation
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return UserLocationImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  VisualInstruction
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return VisualInstructionImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
 
   @protected
   String dco_decode_String(dynamic raw) {
@@ -145,9 +926,485 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  UuidValue dco_decode_Uuid(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return UuidValue.fromByteList(dco_decode_list_prim_u_8_strict(raw));
+  }
+
+  @protected
+  BlockedLane dco_decode_blocked_lane(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return BlockedLane.values[raw as int];
+  }
+
+  @protected
+  bool dco_decode_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as bool;
+  }
+
+  @protected
+  BoundingBox dco_decode_bounding_box(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return BoundingBox(
+      sw: dco_decode_geographic_coordinate(arr[0]),
+      ne: dco_decode_geographic_coordinate(arr[1]),
+    );
+  }
+
+  @protected
+  SpokenInstruction
+      dco_decode_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+        raw);
+  }
+
+  @protected
+  VisualInstruction
+      dco_decode_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+        raw);
+  }
+
+  @protected
+  DateTime dco_decode_box_autoadd_Chrono_Utc(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_Chrono_Utc(raw);
+  }
+
+  @protected
+  bool dco_decode_box_autoadd_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as bool;
+  }
+
+  @protected
+  BoundingBox dco_decode_box_autoadd_bounding_box(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_bounding_box(raw);
+  }
+
+  @protected
+  Congestion dco_decode_box_autoadd_congestion(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_congestion(raw);
+  }
+
+  @protected
+  CourseOverGround dco_decode_box_autoadd_course_over_ground(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_course_over_ground(raw);
+  }
+
+  @protected
+  double dco_decode_box_autoadd_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as double;
+  }
+
+  @protected
+  Impact dco_decode_box_autoadd_impact(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_impact(raw);
+  }
+
+  @protected
+  ManeuverModifier dco_decode_box_autoadd_maneuver_modifier(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_maneuver_modifier(raw);
+  }
+
+  @protected
+  ManeuverType dco_decode_box_autoadd_maneuver_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_maneuver_type(raw);
+  }
+
+  @protected
+  RouteStep dco_decode_box_autoadd_route_step(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_route_step(raw);
+  }
+
+  @protected
+  Speed dco_decode_box_autoadd_speed(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_speed(raw);
+  }
+
+  @protected
+  int dco_decode_box_autoadd_u_16(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
+  BigInt dco_decode_box_autoadd_u_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_u_64(raw);
+  }
+
+  @protected
+  VisualInstructionContent dco_decode_box_autoadd_visual_instruction_content(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_visual_instruction_content(raw);
+  }
+
+  @protected
+  Congestion dco_decode_congestion(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return Congestion(
+      value: dco_decode_u_8(arr[0]),
+    );
+  }
+
+  @protected
+  CourseOverGround dco_decode_course_over_ground(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return CourseOverGround(
+      degrees: dco_decode_u_16(arr[0]),
+      accuracy: dco_decode_opt_box_autoadd_u_16(arr[1]),
+    );
+  }
+
+  @protected
+  double dco_decode_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as double;
+  }
+
+  @protected
+  GeographicCoordinate dco_decode_geographic_coordinate(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return GeographicCoordinate(
+      lat: dco_decode_f_64(arr[0]),
+      lng: dco_decode_f_64(arr[1]),
+    );
+  }
+
+  @protected
+  int dco_decode_i_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
+  PlatformInt64 dco_decode_i_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeI64(raw);
+  }
+
+  @protected
+  Impact dco_decode_impact(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Impact.values[raw as int];
+  }
+
+  @protected
+  Incident dco_decode_incident(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 19)
+      throw Exception('unexpected arr length: expect 19 but see ${arr.length}');
+    return Incident(
+      id: dco_decode_String(arr[0]),
+      incidentType: dco_decode_incident_type(arr[1]),
+      description: dco_decode_opt_String(arr[2]),
+      longDescription: dco_decode_opt_String(arr[3]),
+      creationTime: dco_decode_opt_box_autoadd_Chrono_Utc(arr[4]),
+      startTime: dco_decode_opt_box_autoadd_Chrono_Utc(arr[5]),
+      endTime: dco_decode_opt_box_autoadd_Chrono_Utc(arr[6]),
+      impact: dco_decode_opt_box_autoadd_impact(arr[7]),
+      lanesBlocked: dco_decode_list_blocked_lane(arr[8]),
+      congestion: dco_decode_opt_box_autoadd_congestion(arr[9]),
+      closed: dco_decode_opt_box_autoadd_bool(arr[10]),
+      geometryIndexStart: dco_decode_u_64(arr[11]),
+      geometryIndexEnd: dco_decode_opt_box_autoadd_u_64(arr[12]),
+      subType: dco_decode_opt_String(arr[13]),
+      subTypeDescription: dco_decode_opt_String(arr[14]),
+      iso31661Alpha2: dco_decode_opt_String(arr[15]),
+      iso31661Alpha3: dco_decode_opt_String(arr[16]),
+      affectedRoadNames: dco_decode_list_String(arr[17]),
+      bbox: dco_decode_opt_box_autoadd_bounding_box(arr[18]),
+    );
+  }
+
+  @protected
+  IncidentType dco_decode_incident_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return IncidentType.values[raw as int];
+  }
+
+  @protected
+  LaneInfo dco_decode_lane_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return LaneInfo(
+      active: dco_decode_bool(arr[0]),
+      directions: dco_decode_list_String(arr[1]),
+      activeDirection: dco_decode_opt_String(arr[2]),
+    );
+  }
+
+  @protected
+  List<String> dco_decode_list_String(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_String).toList();
+  }
+
+  @protected
+  List<BlockedLane> dco_decode_list_blocked_lane(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_blocked_lane).toList();
+  }
+
+  @protected
+  List<GeographicCoordinate> dco_decode_list_geographic_coordinate(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_geographic_coordinate)
+        .toList();
+  }
+
+  @protected
+  List<Incident> dco_decode_list_incident(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_incident).toList();
+  }
+
+  @protected
+  List<LaneInfo> dco_decode_list_lane_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_lane_info).toList();
+  }
+
+  @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as Uint8List;
+  }
+
+  @protected
+  List<SpokenInstruction> dco_decode_list_spoken_instruction(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_spoken_instruction).toList();
+  }
+
+  @protected
+  List<VisualInstruction> dco_decode_list_visual_instruction(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_visual_instruction).toList();
+  }
+
+  @protected
+  ManeuverModifier dco_decode_maneuver_modifier(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ManeuverModifier.values[raw as int];
+  }
+
+  @protected
+  ManeuverType dco_decode_maneuver_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ManeuverType.values[raw as int];
+  }
+
+  @protected
+  String? dco_decode_opt_String(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_String(raw);
+  }
+
+  @protected
+  SpokenInstruction?
+      dco_decode_opt_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+            raw);
+  }
+
+  @protected
+  VisualInstruction?
+      dco_decode_opt_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+            raw);
+  }
+
+  @protected
+  DateTime? dco_decode_opt_box_autoadd_Chrono_Utc(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_Chrono_Utc(raw);
+  }
+
+  @protected
+  bool? dco_decode_opt_box_autoadd_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_bool(raw);
+  }
+
+  @protected
+  BoundingBox? dco_decode_opt_box_autoadd_bounding_box(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_bounding_box(raw);
+  }
+
+  @protected
+  Congestion? dco_decode_opt_box_autoadd_congestion(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_congestion(raw);
+  }
+
+  @protected
+  CourseOverGround? dco_decode_opt_box_autoadd_course_over_ground(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_course_over_ground(raw);
+  }
+
+  @protected
+  double? dco_decode_opt_box_autoadd_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_f_64(raw);
+  }
+
+  @protected
+  Impact? dco_decode_opt_box_autoadd_impact(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_impact(raw);
+  }
+
+  @protected
+  ManeuverModifier? dco_decode_opt_box_autoadd_maneuver_modifier(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_maneuver_modifier(raw);
+  }
+
+  @protected
+  ManeuverType? dco_decode_opt_box_autoadd_maneuver_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_maneuver_type(raw);
+  }
+
+  @protected
+  Speed? dco_decode_opt_box_autoadd_speed(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_speed(raw);
+  }
+
+  @protected
+  int? dco_decode_opt_box_autoadd_u_16(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_u_16(raw);
+  }
+
+  @protected
+  BigInt? dco_decode_opt_box_autoadd_u_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_u_64(raw);
+  }
+
+  @protected
+  VisualInstructionContent?
+      dco_decode_opt_box_autoadd_visual_instruction_content(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_visual_instruction_content(raw);
+  }
+
+  @protected
+  List<String>? dco_decode_opt_list_String(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_list_String(raw);
+  }
+
+  @protected
+  List<LaneInfo>? dco_decode_opt_list_lane_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_list_lane_info(raw);
+  }
+
+  @protected
+  RouteStep dco_decode_route_step(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 10)
+      throw Exception('unexpected arr length: expect 10 but see ${arr.length}');
+    return RouteStep(
+      geometry: dco_decode_list_geographic_coordinate(arr[0]),
+      distance: dco_decode_f_64(arr[1]),
+      duration: dco_decode_f_64(arr[2]),
+      roadName: dco_decode_opt_String(arr[3]),
+      exits: dco_decode_list_String(arr[4]),
+      instruction: dco_decode_String(arr[5]),
+      visualInstructions: dco_decode_list_visual_instruction(arr[6]),
+      spokenInstructions: dco_decode_list_spoken_instruction(arr[7]),
+      annotations: dco_decode_opt_list_String(arr[8]),
+      incidents: dco_decode_list_incident(arr[9]),
+    );
+  }
+
+  @protected
+  Speed dco_decode_speed(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return Speed(
+      value: dco_decode_f_64(arr[0]),
+      accuracy: dco_decode_opt_box_autoadd_f_64(arr[1]),
+    );
+  }
+
+  @protected
+  SpokenInstruction dco_decode_spoken_instruction(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return SpokenInstruction(
+      text: dco_decode_String(arr[0]),
+      ssml: dco_decode_opt_String(arr[1]),
+      triggerDistanceBeforeManeuver: dco_decode_f_64(arr[2]),
+      utteranceId: dco_decode_Uuid(arr[3]),
+    );
+  }
+
+  @protected
+  int dco_decode_u_16(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
+  BigInt dco_decode_u_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeU64(raw);
   }
 
   @protected
@@ -163,6 +1420,176 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  BigInt dco_decode_usize(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeU64(raw);
+  }
+
+  @protected
+  VisualInstruction dco_decode_visual_instruction(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return VisualInstruction(
+      primaryContent: dco_decode_visual_instruction_content(arr[0]),
+      secondaryContent:
+          dco_decode_opt_box_autoadd_visual_instruction_content(arr[1]),
+      subContent: dco_decode_opt_box_autoadd_visual_instruction_content(arr[2]),
+      triggerDistanceBeforeManeuver: dco_decode_f_64(arr[3]),
+    );
+  }
+
+  @protected
+  VisualInstructionContent dco_decode_visual_instruction_content(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 6)
+      throw Exception('unexpected arr length: expect 6 but see ${arr.length}');
+    return VisualInstructionContent(
+      text: dco_decode_String(arr[0]),
+      maneuverType: dco_decode_opt_box_autoadd_maneuver_type(arr[1]),
+      maneuverModifier: dco_decode_opt_box_autoadd_maneuver_modifier(arr[2]),
+      roundaboutExitDegrees: dco_decode_opt_box_autoadd_u_16(arr[3]),
+      laneInfo: dco_decode_opt_list_lane_info(arr[4]),
+      exitNumbers: dco_decode_list_String(arr[5]),
+    );
+  }
+
+  @protected
+  Heading
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return HeadingImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  SystemTime
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return SystemTimeImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  UserLocation
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return UserLocationImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  Heading
+      sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return HeadingImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  UserLocation
+      sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return UserLocationImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  Heading
+      sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return HeadingImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  SpokenInstruction
+      sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return SpokenInstructionImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  UserLocation
+      sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return UserLocationImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  VisualInstruction
+      sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return VisualInstructionImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  DateTime sse_decode_Chrono_Utc(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_64(deserializer);
+    return DateTime.fromMicrosecondsSinceEpoch(inner.toInt(), isUtc: true);
+  }
+
+  @protected
+  Heading
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return HeadingImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  SpokenInstruction
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return SpokenInstructionImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  SystemTime
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return SystemTimeImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  UserLocation
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return UserLocationImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  VisualInstruction
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return VisualInstructionImpl.frbInternalSseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
   String sse_decode_String(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_list_prim_u_8_strict(deserializer);
@@ -170,10 +1597,633 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  UuidValue sse_decode_Uuid(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_prim_u_8_strict(deserializer);
+    return UuidValue.fromByteList(inner);
+  }
+
+  @protected
+  BlockedLane sse_decode_blocked_lane(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return BlockedLane.values[inner];
+  }
+
+  @protected
+  bool sse_decode_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint8() != 0;
+  }
+
+  @protected
+  BoundingBox sse_decode_bounding_box(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_sw = sse_decode_geographic_coordinate(deserializer);
+    var var_ne = sse_decode_geographic_coordinate(deserializer);
+    return BoundingBox(sw: var_sw, ne: var_ne);
+  }
+
+  @protected
+  SpokenInstruction
+      sse_decode_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+        deserializer));
+  }
+
+  @protected
+  VisualInstruction
+      sse_decode_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+        deserializer));
+  }
+
+  @protected
+  DateTime sse_decode_box_autoadd_Chrono_Utc(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_Chrono_Utc(deserializer));
+  }
+
+  @protected
+  bool sse_decode_box_autoadd_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_bool(deserializer));
+  }
+
+  @protected
+  BoundingBox sse_decode_box_autoadd_bounding_box(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_bounding_box(deserializer));
+  }
+
+  @protected
+  Congestion sse_decode_box_autoadd_congestion(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_congestion(deserializer));
+  }
+
+  @protected
+  CourseOverGround sse_decode_box_autoadd_course_over_ground(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_course_over_ground(deserializer));
+  }
+
+  @protected
+  double sse_decode_box_autoadd_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_f_64(deserializer));
+  }
+
+  @protected
+  Impact sse_decode_box_autoadd_impact(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_impact(deserializer));
+  }
+
+  @protected
+  ManeuverModifier sse_decode_box_autoadd_maneuver_modifier(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_maneuver_modifier(deserializer));
+  }
+
+  @protected
+  ManeuverType sse_decode_box_autoadd_maneuver_type(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_maneuver_type(deserializer));
+  }
+
+  @protected
+  RouteStep sse_decode_box_autoadd_route_step(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_route_step(deserializer));
+  }
+
+  @protected
+  Speed sse_decode_box_autoadd_speed(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_speed(deserializer));
+  }
+
+  @protected
+  int sse_decode_box_autoadd_u_16(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_u_16(deserializer));
+  }
+
+  @protected
+  BigInt sse_decode_box_autoadd_u_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_u_64(deserializer));
+  }
+
+  @protected
+  VisualInstructionContent sse_decode_box_autoadd_visual_instruction_content(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_visual_instruction_content(deserializer));
+  }
+
+  @protected
+  Congestion sse_decode_congestion(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_value = sse_decode_u_8(deserializer);
+    return Congestion(value: var_value);
+  }
+
+  @protected
+  CourseOverGround sse_decode_course_over_ground(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_degrees = sse_decode_u_16(deserializer);
+    var var_accuracy = sse_decode_opt_box_autoadd_u_16(deserializer);
+    return CourseOverGround(degrees: var_degrees, accuracy: var_accuracy);
+  }
+
+  @protected
+  double sse_decode_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getFloat64();
+  }
+
+  @protected
+  GeographicCoordinate sse_decode_geographic_coordinate(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_lat = sse_decode_f_64(deserializer);
+    var var_lng = sse_decode_f_64(deserializer);
+    return GeographicCoordinate(lat: var_lat, lng: var_lng);
+  }
+
+  @protected
+  int sse_decode_i_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getInt32();
+  }
+
+  @protected
+  PlatformInt64 sse_decode_i_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getPlatformInt64();
+  }
+
+  @protected
+  Impact sse_decode_impact(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return Impact.values[inner];
+  }
+
+  @protected
+  Incident sse_decode_incident(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_String(deserializer);
+    var var_incidentType = sse_decode_incident_type(deserializer);
+    var var_description = sse_decode_opt_String(deserializer);
+    var var_longDescription = sse_decode_opt_String(deserializer);
+    var var_creationTime = sse_decode_opt_box_autoadd_Chrono_Utc(deserializer);
+    var var_startTime = sse_decode_opt_box_autoadd_Chrono_Utc(deserializer);
+    var var_endTime = sse_decode_opt_box_autoadd_Chrono_Utc(deserializer);
+    var var_impact = sse_decode_opt_box_autoadd_impact(deserializer);
+    var var_lanesBlocked = sse_decode_list_blocked_lane(deserializer);
+    var var_congestion = sse_decode_opt_box_autoadd_congestion(deserializer);
+    var var_closed = sse_decode_opt_box_autoadd_bool(deserializer);
+    var var_geometryIndexStart = sse_decode_u_64(deserializer);
+    var var_geometryIndexEnd = sse_decode_opt_box_autoadd_u_64(deserializer);
+    var var_subType = sse_decode_opt_String(deserializer);
+    var var_subTypeDescription = sse_decode_opt_String(deserializer);
+    var var_iso31661Alpha2 = sse_decode_opt_String(deserializer);
+    var var_iso31661Alpha3 = sse_decode_opt_String(deserializer);
+    var var_affectedRoadNames = sse_decode_list_String(deserializer);
+    var var_bbox = sse_decode_opt_box_autoadd_bounding_box(deserializer);
+    return Incident(
+        id: var_id,
+        incidentType: var_incidentType,
+        description: var_description,
+        longDescription: var_longDescription,
+        creationTime: var_creationTime,
+        startTime: var_startTime,
+        endTime: var_endTime,
+        impact: var_impact,
+        lanesBlocked: var_lanesBlocked,
+        congestion: var_congestion,
+        closed: var_closed,
+        geometryIndexStart: var_geometryIndexStart,
+        geometryIndexEnd: var_geometryIndexEnd,
+        subType: var_subType,
+        subTypeDescription: var_subTypeDescription,
+        iso31661Alpha2: var_iso31661Alpha2,
+        iso31661Alpha3: var_iso31661Alpha3,
+        affectedRoadNames: var_affectedRoadNames,
+        bbox: var_bbox);
+  }
+
+  @protected
+  IncidentType sse_decode_incident_type(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return IncidentType.values[inner];
+  }
+
+  @protected
+  LaneInfo sse_decode_lane_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_active = sse_decode_bool(deserializer);
+    var var_directions = sse_decode_list_String(deserializer);
+    var var_activeDirection = sse_decode_opt_String(deserializer);
+    return LaneInfo(
+        active: var_active,
+        directions: var_directions,
+        activeDirection: var_activeDirection);
+  }
+
+  @protected
+  List<String> sse_decode_list_String(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <String>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_String(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<BlockedLane> sse_decode_list_blocked_lane(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <BlockedLane>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_blocked_lane(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<GeographicCoordinate> sse_decode_list_geographic_coordinate(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <GeographicCoordinate>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_geographic_coordinate(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<Incident> sse_decode_list_incident(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <Incident>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_incident(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<LaneInfo> sse_decode_list_lane_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <LaneInfo>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_lane_info(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var len_ = sse_decode_i_32(deserializer);
     return deserializer.buffer.getUint8List(len_);
+  }
+
+  @protected
+  List<SpokenInstruction> sse_decode_list_spoken_instruction(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <SpokenInstruction>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_spoken_instruction(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<VisualInstruction> sse_decode_list_visual_instruction(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <VisualInstruction>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_visual_instruction(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  ManeuverModifier sse_decode_maneuver_modifier(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return ManeuverModifier.values[inner];
+  }
+
+  @protected
+  ManeuverType sse_decode_maneuver_type(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return ManeuverType.values[inner];
+  }
+
+  @protected
+  String? sse_decode_opt_String(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_String(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  SpokenInstruction?
+      sse_decode_opt_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  VisualInstruction?
+      sse_decode_opt_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  DateTime? sse_decode_opt_box_autoadd_Chrono_Utc(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_Chrono_Utc(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  bool? sse_decode_opt_box_autoadd_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_bool(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  BoundingBox? sse_decode_opt_box_autoadd_bounding_box(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_bounding_box(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Congestion? sse_decode_opt_box_autoadd_congestion(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_congestion(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  CourseOverGround? sse_decode_opt_box_autoadd_course_over_ground(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_course_over_ground(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_f_64(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Impact? sse_decode_opt_box_autoadd_impact(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_impact(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  ManeuverModifier? sse_decode_opt_box_autoadd_maneuver_modifier(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_maneuver_modifier(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  ManeuverType? sse_decode_opt_box_autoadd_maneuver_type(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_maneuver_type(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Speed? sse_decode_opt_box_autoadd_speed(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_speed(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  int? sse_decode_opt_box_autoadd_u_16(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_u_16(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  BigInt? sse_decode_opt_box_autoadd_u_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_u_64(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  VisualInstructionContent?
+      sse_decode_opt_box_autoadd_visual_instruction_content(
+          SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_visual_instruction_content(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  List<String>? sse_decode_opt_list_String(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_list_String(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  List<LaneInfo>? sse_decode_opt_list_lane_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_list_lane_info(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  RouteStep sse_decode_route_step(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_geometry = sse_decode_list_geographic_coordinate(deserializer);
+    var var_distance = sse_decode_f_64(deserializer);
+    var var_duration = sse_decode_f_64(deserializer);
+    var var_roadName = sse_decode_opt_String(deserializer);
+    var var_exits = sse_decode_list_String(deserializer);
+    var var_instruction = sse_decode_String(deserializer);
+    var var_visualInstructions =
+        sse_decode_list_visual_instruction(deserializer);
+    var var_spokenInstructions =
+        sse_decode_list_spoken_instruction(deserializer);
+    var var_annotations = sse_decode_opt_list_String(deserializer);
+    var var_incidents = sse_decode_list_incident(deserializer);
+    return RouteStep(
+        geometry: var_geometry,
+        distance: var_distance,
+        duration: var_duration,
+        roadName: var_roadName,
+        exits: var_exits,
+        instruction: var_instruction,
+        visualInstructions: var_visualInstructions,
+        spokenInstructions: var_spokenInstructions,
+        annotations: var_annotations,
+        incidents: var_incidents);
+  }
+
+  @protected
+  Speed sse_decode_speed(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_value = sse_decode_f_64(deserializer);
+    var var_accuracy = sse_decode_opt_box_autoadd_f_64(deserializer);
+    return Speed(value: var_value, accuracy: var_accuracy);
+  }
+
+  @protected
+  SpokenInstruction sse_decode_spoken_instruction(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_text = sse_decode_String(deserializer);
+    var var_ssml = sse_decode_opt_String(deserializer);
+    var var_triggerDistanceBeforeManeuver = sse_decode_f_64(deserializer);
+    var var_utteranceId = sse_decode_Uuid(deserializer);
+    return SpokenInstruction(
+        text: var_text,
+        ssml: var_ssml,
+        triggerDistanceBeforeManeuver: var_triggerDistanceBeforeManeuver,
+        utteranceId: var_utteranceId);
+  }
+
+  @protected
+  int sse_decode_u_16(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint16();
+  }
+
+  @protected
+  BigInt sse_decode_u_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getBigUint64();
   }
 
   @protected
@@ -188,15 +2238,190 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  int sse_decode_i_32(SseDeserializer deserializer) {
+  BigInt sse_decode_usize(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getInt32();
+    return deserializer.buffer.getBigUint64();
   }
 
   @protected
-  bool sse_decode_bool(SseDeserializer deserializer) {
+  VisualInstruction sse_decode_visual_instruction(
+      SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getUint8() != 0;
+    var var_primaryContent =
+        sse_decode_visual_instruction_content(deserializer);
+    var var_secondaryContent =
+        sse_decode_opt_box_autoadd_visual_instruction_content(deserializer);
+    var var_subContent =
+        sse_decode_opt_box_autoadd_visual_instruction_content(deserializer);
+    var var_triggerDistanceBeforeManeuver = sse_decode_f_64(deserializer);
+    return VisualInstruction(
+        primaryContent: var_primaryContent,
+        secondaryContent: var_secondaryContent,
+        subContent: var_subContent,
+        triggerDistanceBeforeManeuver: var_triggerDistanceBeforeManeuver);
+  }
+
+  @protected
+  VisualInstructionContent sse_decode_visual_instruction_content(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_text = sse_decode_String(deserializer);
+    var var_maneuverType =
+        sse_decode_opt_box_autoadd_maneuver_type(deserializer);
+    var var_maneuverModifier =
+        sse_decode_opt_box_autoadd_maneuver_modifier(deserializer);
+    var var_roundaboutExitDegrees =
+        sse_decode_opt_box_autoadd_u_16(deserializer);
+    var var_laneInfo = sse_decode_opt_list_lane_info(deserializer);
+    var var_exitNumbers = sse_decode_list_String(deserializer);
+    return VisualInstructionContent(
+        text: var_text,
+        maneuverType: var_maneuverType,
+        maneuverModifier: var_maneuverModifier,
+        roundaboutExitDegrees: var_roundaboutExitDegrees,
+        laneInfo: var_laneInfo,
+        exitNumbers: var_exitNumbers);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+          Heading self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as HeadingImpl).frbInternalSseEncode(move: true), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+          SystemTime self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as SystemTimeImpl).frbInternalSseEncode(move: true), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          UserLocation self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as UserLocationImpl).frbInternalSseEncode(move: true),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+          Heading self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as HeadingImpl).frbInternalSseEncode(move: false), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          UserLocation self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as UserLocationImpl).frbInternalSseEncode(move: false),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+          Heading self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as HeadingImpl).frbInternalSseEncode(move: false), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          SpokenInstruction self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as SpokenInstructionImpl).frbInternalSseEncode(move: false),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          UserLocation self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as UserLocationImpl).frbInternalSseEncode(move: false),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          VisualInstruction self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as VisualInstructionImpl).frbInternalSseEncode(move: false),
+        serializer);
+  }
+
+  @protected
+  void sse_encode_Chrono_Utc(DateTime self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(
+        PlatformInt64Util.from(self.microsecondsSinceEpoch), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerHeading(
+          Heading self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as HeadingImpl).frbInternalSseEncode(move: null), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          SpokenInstruction self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as SpokenInstructionImpl).frbInternalSseEncode(move: null),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+          SystemTime self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as SystemTimeImpl).frbInternalSseEncode(move: null), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          UserLocation self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as UserLocationImpl).frbInternalSseEncode(move: null),
+        serializer);
+  }
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          VisualInstruction self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+        (self as VisualInstructionImpl).frbInternalSseEncode(move: null),
+        serializer);
   }
 
   @protected
@@ -206,11 +2431,551 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_Uuid(UuidValue self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_prim_u_8_strict(self.toBytes(), serializer);
+  }
+
+  @protected
+  void sse_encode_blocked_lane(BlockedLane self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_bool(bool self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint8(self ? 1 : 0);
+  }
+
+  @protected
+  void sse_encode_bounding_box(BoundingBox self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_geographic_coordinate(self.sw, serializer);
+    sse_encode_geographic_coordinate(self.ne, serializer);
+  }
+
+  @protected
+  void
+      sse_encode_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          SpokenInstruction self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+        self, serializer);
+  }
+
+  @protected
+  void
+      sse_encode_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          VisualInstruction self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+        self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_Chrono_Utc(
+      DateTime self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_Chrono_Utc(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_bool(bool self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bool(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_bounding_box(
+      BoundingBox self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bounding_box(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_congestion(
+      Congestion self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_congestion(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_course_over_ground(
+      CourseOverGround self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_course_over_ground(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_impact(Impact self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_impact(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_maneuver_modifier(
+      ManeuverModifier self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_maneuver_modifier(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_maneuver_type(
+      ManeuverType self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_maneuver_type(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_route_step(
+      RouteStep self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_route_step(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_speed(Speed self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_speed(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_u_16(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_16(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_u_64(BigInt self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_64(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_visual_instruction_content(
+      VisualInstructionContent self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_visual_instruction_content(self, serializer);
+  }
+
+  @protected
+  void sse_encode_congestion(Congestion self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_8(self.value, serializer);
+  }
+
+  @protected
+  void sse_encode_course_over_ground(
+      CourseOverGround self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_16(self.degrees, serializer);
+    sse_encode_opt_box_autoadd_u_16(self.accuracy, serializer);
+  }
+
+  @protected
+  void sse_encode_f_64(double self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putFloat64(self);
+  }
+
+  @protected
+  void sse_encode_geographic_coordinate(
+      GeographicCoordinate self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.lat, serializer);
+    sse_encode_f_64(self.lng, serializer);
+  }
+
+  @protected
+  void sse_encode_i_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putInt32(self);
+  }
+
+  @protected
+  void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putPlatformInt64(self);
+  }
+
+  @protected
+  void sse_encode_impact(Impact self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_incident(Incident self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.id, serializer);
+    sse_encode_incident_type(self.incidentType, serializer);
+    sse_encode_opt_String(self.description, serializer);
+    sse_encode_opt_String(self.longDescription, serializer);
+    sse_encode_opt_box_autoadd_Chrono_Utc(self.creationTime, serializer);
+    sse_encode_opt_box_autoadd_Chrono_Utc(self.startTime, serializer);
+    sse_encode_opt_box_autoadd_Chrono_Utc(self.endTime, serializer);
+    sse_encode_opt_box_autoadd_impact(self.impact, serializer);
+    sse_encode_list_blocked_lane(self.lanesBlocked, serializer);
+    sse_encode_opt_box_autoadd_congestion(self.congestion, serializer);
+    sse_encode_opt_box_autoadd_bool(self.closed, serializer);
+    sse_encode_u_64(self.geometryIndexStart, serializer);
+    sse_encode_opt_box_autoadd_u_64(self.geometryIndexEnd, serializer);
+    sse_encode_opt_String(self.subType, serializer);
+    sse_encode_opt_String(self.subTypeDescription, serializer);
+    sse_encode_opt_String(self.iso31661Alpha2, serializer);
+    sse_encode_opt_String(self.iso31661Alpha3, serializer);
+    sse_encode_list_String(self.affectedRoadNames, serializer);
+    sse_encode_opt_box_autoadd_bounding_box(self.bbox, serializer);
+  }
+
+  @protected
+  void sse_encode_incident_type(IncidentType self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_lane_info(LaneInfo self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bool(self.active, serializer);
+    sse_encode_list_String(self.directions, serializer);
+    sse_encode_opt_String(self.activeDirection, serializer);
+  }
+
+  @protected
+  void sse_encode_list_String(List<String> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_String(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_blocked_lane(
+      List<BlockedLane> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_blocked_lane(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_geographic_coordinate(
+      List<GeographicCoordinate> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_geographic_coordinate(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_incident(List<Incident> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_incident(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_lane_info(
+      List<LaneInfo> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_lane_info(item, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_list_prim_u_8_strict(
       Uint8List self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     serializer.buffer.putUint8List(self);
+  }
+
+  @protected
+  void sse_encode_list_spoken_instruction(
+      List<SpokenInstruction> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_spoken_instruction(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_visual_instruction(
+      List<VisualInstruction> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_visual_instruction(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_maneuver_modifier(
+      ManeuverModifier self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_maneuver_type(ManeuverType self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_opt_String(String? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_String(self, serializer);
+    }
+  }
+
+  @protected
+  void
+      sse_encode_opt_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          SpokenInstruction? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSpokenInstruction(
+          self, serializer);
+    }
+  }
+
+  @protected
+  void
+      sse_encode_opt_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          VisualInstruction? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerVisualInstruction(
+          self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_Chrono_Utc(
+      DateTime? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_Chrono_Utc(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_bool(bool? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_bool(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_bounding_box(
+      BoundingBox? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_bounding_box(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_congestion(
+      Congestion? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_congestion(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_course_over_ground(
+      CourseOverGround? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_course_over_ground(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_f_64(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_impact(
+      Impact? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_impact(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_maneuver_modifier(
+      ManeuverModifier? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_maneuver_modifier(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_maneuver_type(
+      ManeuverType? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_maneuver_type(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_speed(Speed? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_speed(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_u_16(int? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_u_16(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_u_64(BigInt? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_u_64(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_visual_instruction_content(
+      VisualInstructionContent? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_visual_instruction_content(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_list_String(
+      List<String>? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_list_String(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_list_lane_info(
+      List<LaneInfo>? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_list_lane_info(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_route_step(RouteStep self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_geographic_coordinate(self.geometry, serializer);
+    sse_encode_f_64(self.distance, serializer);
+    sse_encode_f_64(self.duration, serializer);
+    sse_encode_opt_String(self.roadName, serializer);
+    sse_encode_list_String(self.exits, serializer);
+    sse_encode_String(self.instruction, serializer);
+    sse_encode_list_visual_instruction(self.visualInstructions, serializer);
+    sse_encode_list_spoken_instruction(self.spokenInstructions, serializer);
+    sse_encode_opt_list_String(self.annotations, serializer);
+    sse_encode_list_incident(self.incidents, serializer);
+  }
+
+  @protected
+  void sse_encode_speed(Speed self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.value, serializer);
+    sse_encode_opt_box_autoadd_f_64(self.accuracy, serializer);
+  }
+
+  @protected
+  void sse_encode_spoken_instruction(
+      SpokenInstruction self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.text, serializer);
+    sse_encode_opt_String(self.ssml, serializer);
+    sse_encode_f_64(self.triggerDistanceBeforeManeuver, serializer);
+    sse_encode_Uuid(self.utteranceId, serializer);
+  }
+
+  @protected
+  void sse_encode_u_16(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint16(self);
+  }
+
+  @protected
+  void sse_encode_u_64(BigInt self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putBigUint64(self);
   }
 
   @protected
@@ -225,14 +2990,239 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_i_32(int self, SseSerializer serializer) {
+  void sse_encode_usize(BigInt self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putInt32(self);
+    serializer.buffer.putBigUint64(self);
   }
 
   @protected
-  void sse_encode_bool(bool self, SseSerializer serializer) {
+  void sse_encode_visual_instruction(
+      VisualInstruction self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putUint8(self ? 1 : 0);
+    sse_encode_visual_instruction_content(self.primaryContent, serializer);
+    sse_encode_opt_box_autoadd_visual_instruction_content(
+        self.secondaryContent, serializer);
+    sse_encode_opt_box_autoadd_visual_instruction_content(
+        self.subContent, serializer);
+    sse_encode_f_64(self.triggerDistanceBeforeManeuver, serializer);
   }
+
+  @protected
+  void sse_encode_visual_instruction_content(
+      VisualInstructionContent self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.text, serializer);
+    sse_encode_opt_box_autoadd_maneuver_type(self.maneuverType, serializer);
+    sse_encode_opt_box_autoadd_maneuver_modifier(
+        self.maneuverModifier, serializer);
+    sse_encode_opt_box_autoadd_u_16(self.roundaboutExitDegrees, serializer);
+    sse_encode_opt_list_lane_info(self.laneInfo, serializer);
+    sse_encode_list_String(self.exitNumbers, serializer);
+  }
+}
+
+@sealed
+class HeadingImpl extends RustOpaque implements Heading {
+  // Not to be used by end users
+  HeadingImpl.frbInternalDcoDecode(List<dynamic> wire)
+      : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  HeadingImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_Heading,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_Heading,
+    rustArcDecrementStrongCountPtr:
+        RustLib.instance.api.rust_arc_decrement_strong_count_HeadingPtr,
+  );
+
+  int get accuracy =>
+      RustLib.instance.api.crateModelsHeadingAutoAccessorGetAccuracy(
+        that: this,
+      );
+
+  SystemTime get timestamp =>
+      RustLib.instance.api.crateModelsHeadingAutoAccessorGetTimestamp(
+        that: this,
+      );
+
+  int get trueHeading =>
+      RustLib.instance.api.crateModelsHeadingAutoAccessorGetTrueHeading(
+        that: this,
+      );
+
+  set accuracy(int accuracy) =>
+      RustLib.instance.api.crateModelsHeadingAutoAccessorSetAccuracy(
+          that: this, accuracy: accuracy);
+
+  set timestamp(SystemTime timestamp) =>
+      RustLib.instance.api.crateModelsHeadingAutoAccessorSetTimestamp(
+          that: this, timestamp: timestamp);
+
+  set trueHeading(int trueHeading) =>
+      RustLib.instance.api.crateModelsHeadingAutoAccessorSetTrueHeading(
+          that: this, trueHeading: trueHeading);
+}
+
+@sealed
+class SpokenInstructionImpl extends RustOpaque implements SpokenInstruction {
+  // Not to be used by end users
+  SpokenInstructionImpl.frbInternalDcoDecode(List<dynamic> wire)
+      : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  SpokenInstructionImpl.frbInternalSseDecode(
+      BigInt ptr, int externalSizeOnNative)
+      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_SpokenInstruction,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_SpokenInstruction,
+    rustArcDecrementStrongCountPtr: RustLib
+        .instance.api.rust_arc_decrement_strong_count_SpokenInstructionPtr,
+  );
+
+  @override
+  // TODO: implement ssml
+  String? get ssml => throw UnimplementedError();
+
+  @override
+  // TODO: implement text
+  String get text => throw UnimplementedError();
+
+  @override
+  // TODO: implement triggerDistanceBeforeManeuver
+  double get triggerDistanceBeforeManeuver => throw UnimplementedError();
+
+  @override
+  // TODO: implement utteranceId
+  UuidValue get utteranceId => throw UnimplementedError();
+}
+
+@sealed
+class SystemTimeImpl extends RustOpaque implements SystemTime {
+  // Not to be used by end users
+  SystemTimeImpl.frbInternalDcoDecode(List<dynamic> wire)
+      : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  SystemTimeImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_SystemTime,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_SystemTime,
+    rustArcDecrementStrongCountPtr:
+        RustLib.instance.api.rust_arc_decrement_strong_count_SystemTimePtr,
+  );
+}
+
+@sealed
+class UserLocationImpl extends RustOpaque implements UserLocation {
+  // Not to be used by end users
+  UserLocationImpl.frbInternalDcoDecode(List<dynamic> wire)
+      : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  UserLocationImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_UserLocation,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_UserLocation,
+    rustArcDecrementStrongCountPtr:
+        RustLib.instance.api.rust_arc_decrement_strong_count_UserLocationPtr,
+  );
+
+  GeographicCoordinate get coordinates =>
+      RustLib.instance.api.crateModelsUserLocationAutoAccessorGetCoordinates(
+        that: this,
+      );
+
+  CourseOverGround? get courseOverGround => RustLib.instance.api
+          .crateModelsUserLocationAutoAccessorGetCourseOverGround(
+        that: this,
+      );
+
+  double get horizontalAccuracy => RustLib.instance.api
+          .crateModelsUserLocationAutoAccessorGetHorizontalAccuracy(
+        that: this,
+      );
+
+  Speed? get speed =>
+      RustLib.instance.api.crateModelsUserLocationAutoAccessorGetSpeed(
+        that: this,
+      );
+
+  SystemTime get timestamp =>
+      RustLib.instance.api.crateModelsUserLocationAutoAccessorGetTimestamp(
+        that: this,
+      );
+
+  set coordinates(GeographicCoordinate coordinates) =>
+      RustLib.instance.api.crateModelsUserLocationAutoAccessorSetCoordinates(
+          that: this, coordinates: coordinates);
+
+  set courseOverGround(CourseOverGround? courseOverGround) =>
+      RustLib.instance.api
+          .crateModelsUserLocationAutoAccessorSetCourseOverGround(
+              that: this, courseOverGround: courseOverGround);
+
+  set horizontalAccuracy(double horizontalAccuracy) => RustLib.instance.api
+      .crateModelsUserLocationAutoAccessorSetHorizontalAccuracy(
+          that: this, horizontalAccuracy: horizontalAccuracy);
+
+  set speed(Speed? speed) => RustLib.instance.api
+      .crateModelsUserLocationAutoAccessorSetSpeed(that: this, speed: speed);
+
+  set timestamp(SystemTime timestamp) =>
+      RustLib.instance.api.crateModelsUserLocationAutoAccessorSetTimestamp(
+          that: this, timestamp: timestamp);
+}
+
+@sealed
+class VisualInstructionImpl extends RustOpaque implements VisualInstruction {
+  // Not to be used by end users
+  VisualInstructionImpl.frbInternalDcoDecode(List<dynamic> wire)
+      : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  VisualInstructionImpl.frbInternalSseDecode(
+      BigInt ptr, int externalSizeOnNative)
+      : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_VisualInstruction,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_VisualInstruction,
+    rustArcDecrementStrongCountPtr: RustLib
+        .instance.api.rust_arc_decrement_strong_count_VisualInstructionPtr,
+  );
+
+  @override
+  // TODO: implement primaryContent
+  VisualInstructionContent get primaryContent => throw UnimplementedError();
+
+  @override
+  // TODO: implement secondaryContent
+  VisualInstructionContent? get secondaryContent => throw UnimplementedError();
+
+  @override
+  // TODO: implement subContent
+  VisualInstructionContent? get subContent => throw UnimplementedError();
+
+  @override
+  // TODO: implement triggerDistanceBeforeManeuver
+  double get triggerDistanceBeforeManeuver => throw UnimplementedError();
 }
