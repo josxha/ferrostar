@@ -24,6 +24,7 @@ dependencies {
     def ferrostarVersion = 'X.Y.Z'
     implementation "com.stadiamaps.ferrostar:core:${ferrostarVersion}"
     implementation "com.stadiamaps.ferrostar:maplibreui:${ferrostarVersion}"
+    implementation "com.stadiamaps.ferrostar:composeui:${ferrostarVersion}"
 
     // Optional - if using Google Play Service's FusedLocation
     implementation "com.stadiamaps.ferrostar:google-play-services:${ferrostarVersion}"
@@ -119,7 +120,7 @@ If your app uses Google Play Services,
 you can use the `FusedLocationProvider`
 This normally offers better device positioning than the default Android location provider
 on supported devices.
-To make use of it, 
+To make use of it,
 you will need to include the optional `implementation "com.stadiamaps.ferrostar:google-play-services:${ferrostarVersion}"`
 in your Gradle dependencies block.
 
@@ -196,7 +197,7 @@ which will trigger updates.
 
 Before we configure the Ferrostar core, we need to set up an HTTP client.
 This is typically stored as an instance variable in one of your classes (ex: activity).
-We use the popular OkHttp library for this.
+We use the popular OkHttp library for this, but the Core is configured to allow alternatives through the HttpClientProvider interface.
 Here we’ve set up a client with a global timeout of 15 seconds.
 Refer to the [OkHttp documentation](https://square.github.io/okhttp/) for further details on configuration.
 
@@ -204,6 +205,7 @@ Refer to the [OkHttp documentation](https://square.github.io/okhttp/) for furthe
 private val httpClient = OkHttpClient.Builder()
     .callTimeout(Duration.ofSeconds(15))
     .build()
+    .toOkHttpClientProvider()
 ```
 
 ### (Optional) Configure annotation parsing
@@ -229,15 +231,14 @@ private val core =
           locationProvider = locationProvider,
           foregroundServiceManager = foregroundServiceManager,
           navigationControllerConfig =
-              NavigationControllerConfig(
-                  StepAdvanceMode.RelativeLineStringDistance(
-                      minimumHorizontalAccuracy = 25U,
-                      specialAdvanceConditions =
-                          // NOTE: We have not yet put this threshold through extensive real-world
-                          // testing
-                          SpecialAdvanceConditions.MinimumDistanceFromCurrentStepLine(10U)),
-                  RouteDeviationTracking.StaticThreshold(15U, 50.0),
-                  CourseFiltering.SNAP_TO_ROUTE)
+            NavigationControllerConfig(
+                WaypointAdvanceMode.WaypointWithinRange(100.0),
+                stepAdvanceDistanceEntryAndExit(30u, 5u, 32u),
+                // This is a special condition used for the last two steps of the route. As we can't assume the
+                // user continue moving past the step like the other conditions.
+                stepAdvanceDistanceToEndOfStep(30u, 32u),
+                RouteDeviationTracking.StaticThreshold(15U, 50.0),
+                CourseFiltering.SNAP_TO_ROUTE),
       )
 ```
 
@@ -255,6 +256,23 @@ If your routes include spoken instructions,
 Ferrostar can trigger the speech synthesis at the right time.
 Ferrostar includes the `AndroidTtsObserver` class,
 which uses the text-to-speech engine built into Android.
+
+The `AndroidTtsObserver` follows lifecycle recommendations from the Android documentation,
+[TextToSpeech shutdown behavior](https://developer.android.com/reference/android/speech/tts/TextToSpeech#shutdown()).
+This design means your activity should call `shutdown` on the observer in the `onDestroy` method and start it again
+in `onStart` if you want to continue using it. If the instance is shut down and not started again, you will not have spoken instructions.
+
+```kotlin
+override fun onStart() {
+    super.onStart()
+    ttsObserver.start()
+}
+
+override fun onDestroy() {
+    super.onDestroy()
+    ttsObserver.shutdown()
+}
+```
 
 You can also use your own implementation,
 such as a local AI model or cloud service like Amazon Polly.

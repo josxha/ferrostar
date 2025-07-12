@@ -1,8 +1,14 @@
 package com.stadiamaps.ferrostar.core
 
 import android.content.Context
+import android.media.AudioManager
 import android.speech.tts.TextToSpeech
 import android.speech.tts.TextToSpeech.OnInitListener
+import android.speech.tts.UtteranceProgressListener
+import androidx.annotation.VisibleForTesting
+import java.lang.ref.WeakReference
+import java.util.Timer
+import java.util.TimerTask
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -10,6 +16,7 @@ import kotlinx.coroutines.flow.update
 import uniffi.ferrostar.SpokenInstruction
 
 interface SpokenInstructionObserver {
+
   /**
    * Handles spoken instructions as they are triggered.
    *
@@ -40,6 +47,14 @@ interface AndroidTtsStatusListener {
   fun onTtsInitialized(tts: TextToSpeech?, status: Int)
 
   /**
+   * Invoked when the [TextToSpeech] instance is shut down and released to nil.
+   *
+   * After this point you must initialize a new instance to use TTS by calling
+   * [AndroidTtsObserver.start].
+   */
+  fun onTtsShutdownAndRelease()
+
+  /**
    * Invoked whenever [TextToSpeech.speak] returns a status code other than [TextToSpeech.SUCCESS].
    */
   fun onTtsSpeakError(utteranceId: String, status: Int)
@@ -64,7 +79,8 @@ interface AndroidTtsStatusListener {
  */
 class AndroidTtsObserver(
     context: Context,
-    engine: String? = null,
+    private val weakContext: WeakReference<Context> = WeakReference(context),
+    private val engine: String? = null,
     var statusObserver: AndroidTtsStatusListener? = null,
 ) : SpokenInstructionObserver, OnInitListener {
   companion object {
@@ -72,6 +88,25 @@ class AndroidTtsObserver(
   }
 
   private var _muteState: MutableStateFlow<Boolean> = MutableStateFlow(false)
+
+  private val context: Context?
+    get() = weakContext.get()
+
+  private val audioFocusManager =
+      AudioFocusManager(
+          context,
+          AudioManager.OnAudioFocusChangeListener { focusChange ->
+            when (focusChange) {
+              AudioManager.AUDIOFOCUS_LOSS,
+              AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
+                // Handle focus loss if needed (pause TTS)
+                stopAndClearQueue()
+              }
+              AudioManager.AUDIOFOCUS_GAIN -> {
+                // Audio focus regained; no action needed
+              }
+            }
+          })
 
   override fun setMuted(isMuted: Boolean) {
     _muteState.update { _ ->
@@ -84,7 +119,7 @@ class AndroidTtsObserver(
 
   override val muteState: StateFlow<Boolean> = _muteState.asStateFlow()
 
-  var tts: TextToSpeech?
+  var tts: TextToSpeech? = null
     private set
 
   /**
@@ -104,8 +139,23 @@ class AndroidTtsObserver(
   val isInitializedSuccessfully: Boolean
     get() = initStatus == TextToSpeech.SUCCESS
 
-  init {
-    tts = TextToSpeech(context, this, engine)
+  /**
+   * Starts a new [TextToSpeech] instance.
+   *
+   * Except [onInit] to fire when the engine is ready.
+   */
+  fun start(@VisibleForTesting injectedTts: TextToSpeech? = null) {
+    if (context == null) {
+      android.util.Log.e(TAG, "Context is null. Unable to start TTS.")
+      return
+    }
+
+    if (tts != null) {
+      android.util.Log.e(TAG, "TTS engine is already initialized.")
+      return
+    }
+
+    tts = injectedTts ?: TextToSpeech(context, this, engine)
   }
 
   /**
@@ -114,8 +164,18 @@ class AndroidTtsObserver(
    * Fails silently if TTS is unavailable.
    */
   override fun onSpokenInstructionTrigger(spokenInstruction: SpokenInstruction) {
-    val tts = tts
-    if (tts != null && isInitializedSuccessfully && !isMuted) {
+    if (tts == null || !isInitializedSuccessfully) {
+      android.util.Log.e(TAG, "TTS engine is not initialized.")
+      return
+    }
+    val tts = tts ?: return
+
+    if (!audioFocusManager.requestAudioFocus()) {
+      android.util.Log.w(
+          TAG, "Unable to request audio focus; TTS will mix with audio from other apps.")
+    }
+
+    if (!isMuted) {
       // In the future, someone may wish to parse SSML to get more natural utterances into TtsSpans.
       // Amazon Polly is generally the intended target for SSML on Android though.
       val status =
@@ -136,6 +196,8 @@ class AndroidTtsObserver(
     if (status != TextToSpeech.SUCCESS) {
       tts = null
       android.util.Log.e(TAG, "Unable to initialize TTS engine: code $status")
+    } else {
+      tts?.setOnUtteranceProgressListener(utteranceProgressListener)
     }
 
     statusObserver?.onTtsInitialized(tts, status)
@@ -143,16 +205,55 @@ class AndroidTtsObserver(
 
   override fun stopAndClearQueue() {
     tts?.stop()
+    audioFocusManager.releaseAudioFocus()
   }
 
   /**
    * Shuts down the underlying [TextToSpeech] engine.
    *
-   * The instance will no longer be usable after this. This method should usually be called from an
-   * activity's onDestroy method.
+   * The instance will be shut down and released after this call. You must call [start] to use TTS
+   * again. If you call this method, ensure that you've handled an start again.
    */
   fun shutdown() {
     tts?.shutdown()
     tts = null
+    statusObserver?.onTtsShutdownAndRelease()
+    audioFocusManager.releaseAudioFocus()
+  }
+
+  // Audio session ducking
+  private var releaseTimer: Timer? = null
+
+  // Create the listener as a property
+  private val utteranceProgressListener =
+      object : UtteranceProgressListener() {
+        override fun onStart(utteranceId: String?) {
+          releaseTimer?.cancel()
+          releaseTimer = null
+        }
+
+        override fun onDone(utteranceId: String?) {
+          scheduleAudioFocusRelease()
+        }
+
+        override fun onError(utteranceId: String?) {
+          audioFocusManager.releaseAudioFocus()
+        }
+      }
+
+  private val RELEASE_DELAY_MS = 500L // 500ms after last utterance
+
+  private fun scheduleAudioFocusRelease() {
+    releaseTimer?.cancel()
+    releaseTimer =
+        Timer().apply {
+          schedule(
+              object : TimerTask() {
+                override fun run() {
+                  audioFocusManager.releaseAudioFocus()
+                }
+              },
+              RELEASE_DELAY_MS)
+        }
   }
 }

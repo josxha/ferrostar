@@ -20,7 +20,9 @@ final class ValhallaCoreTests: XCTestCase {
             profile: "auto",
             locationProvider: SimulatedLocationProvider(),
             navigationControllerConfig: .init(
-                stepAdvance: .manual,
+                waypointAdvance: .waypointWithinRange(100.0),
+                stepAdvanceCondition: stepAdvanceManual(),
+                arrivalStepAdvanceCondition: stepAdvanceManual(),
                 routeDeviationTracking: .none,
                 snappedLocationCourseFiltering: .raw
             ),

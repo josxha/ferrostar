@@ -1,5 +1,6 @@
 package com.stadiamaps.ferrostar.core
 
+import com.stadiamaps.ferrostar.core.http.OkHttpClientProvider.Companion.toOkHttpClientProvider
 import com.stadiamaps.ferrostar.core.service.ForegroundServiceManager
 import java.time.Instant
 import kotlinx.coroutines.test.runTest
@@ -31,13 +32,15 @@ import uniffi.ferrostar.RouteRequest
 import uniffi.ferrostar.RouteRequestGenerator
 import uniffi.ferrostar.RouteResponseParser
 import uniffi.ferrostar.RouteStep
-import uniffi.ferrostar.SpecialAdvanceConditions
-import uniffi.ferrostar.StepAdvanceMode
 import uniffi.ferrostar.UserLocation
 import uniffi.ferrostar.VisualInstruction
 import uniffi.ferrostar.VisualInstructionContent
 import uniffi.ferrostar.Waypoint
+import uniffi.ferrostar.WaypointAdvanceMode
 import uniffi.ferrostar.WaypointKind
+import uniffi.ferrostar.stepAdvanceDistanceFromStep
+import uniffi.ferrostar.stepAdvanceDistanceToEndOfStep
+import uniffi.ferrostar.stepAdvanceManual
 
 private val valhallaEndpointUrl = "https://api.stadiamaps.com/navigate/v1"
 
@@ -143,12 +146,17 @@ class FerrostarCoreTest {
                 RouteAdapter(
                     requestGenerator = MockPostRouteRequestGenerator(),
                     responseParser = MockRouteResponseParser(routes = listOf())),
-            httpClient = OkHttpClient.Builder().addInterceptor(interceptor).build(),
+            httpClient =
+                OkHttpClient.Builder().addInterceptor(interceptor).build().toOkHttpClientProvider(),
             locationProvider = SimulatedLocationProvider(),
             foregroundServiceManager = MockForegroundNotificationManager(),
             navigationControllerConfig =
                 NavigationControllerConfig(
-                    StepAdvanceMode.Manual, RouteDeviationTracking.None, CourseFiltering.RAW))
+                    WaypointAdvanceMode.WaypointWithinRange(100.0),
+                    stepAdvanceManual(),
+                    stepAdvanceManual(),
+                    RouteDeviationTracking.None,
+                    CourseFiltering.RAW))
 
     try {
       // Tests that the core generates a request and attempts to process it, but throws due to the
@@ -191,12 +199,17 @@ class FerrostarCoreTest {
                 RouteAdapter(
                     requestGenerator = MockPostRouteRequestGenerator(),
                     responseParser = MockRouteResponseParser(routes = listOf(mockRoute))),
-            httpClient = OkHttpClient.Builder().addInterceptor(interceptor).build(),
+            httpClient =
+                OkHttpClient.Builder().addInterceptor(interceptor).build().toOkHttpClientProvider(),
             locationProvider = SimulatedLocationProvider(),
             foregroundServiceManager = MockForegroundNotificationManager(),
             navigationControllerConfig =
                 NavigationControllerConfig(
-                    StepAdvanceMode.Manual, RouteDeviationTracking.None, CourseFiltering.RAW))
+                    WaypointAdvanceMode.WaypointWithinRange(100.0),
+                    stepAdvanceManual(),
+                    stepAdvanceManual(),
+                    RouteDeviationTracking.None,
+                    CourseFiltering.RAW))
     val routes =
         core.getRoutes(
             initialLocation =
@@ -234,12 +247,17 @@ class FerrostarCoreTest {
                 RouteAdapter(
                     requestGenerator = MockGetRouteRequestGenerator(),
                     responseParser = MockRouteResponseParser(routes = listOf(mockRoute))),
-            httpClient = OkHttpClient.Builder().addInterceptor(interceptor).build(),
+            httpClient =
+                OkHttpClient.Builder().addInterceptor(interceptor).build().toOkHttpClientProvider(),
             locationProvider = SimulatedLocationProvider(),
             foregroundServiceManager = MockForegroundNotificationManager(),
             navigationControllerConfig =
                 NavigationControllerConfig(
-                    StepAdvanceMode.Manual, RouteDeviationTracking.None, CourseFiltering.RAW))
+                    WaypointAdvanceMode.WaypointWithinRange(100.0),
+                    stepAdvanceManual(),
+                    stepAdvanceManual(),
+                    RouteDeviationTracking.None,
+                    CourseFiltering.RAW))
     val routes =
         core.getRoutes(
             initialLocation =
@@ -285,12 +303,17 @@ class FerrostarCoreTest {
     val core =
         FerrostarCore(
             customRouteProvider = routeProvider,
-            httpClient = OkHttpClient.Builder().addInterceptor(interceptor).build(),
+            httpClient =
+                OkHttpClient.Builder().addInterceptor(interceptor).build().toOkHttpClientProvider(),
             locationProvider = SimulatedLocationProvider(),
             foregroundServiceManager = MockForegroundNotificationManager(),
             navigationControllerConfig =
                 NavigationControllerConfig(
-                    StepAdvanceMode.Manual, RouteDeviationTracking.None, CourseFiltering.RAW))
+                    WaypointAdvanceMode.WaypointWithinRange(100.0),
+                    stepAdvanceManual(),
+                    stepAdvanceManual(),
+                    RouteDeviationTracking.None,
+                    CourseFiltering.RAW))
     val routes =
         core.getRoutes(
             initialLocation =
@@ -356,12 +379,17 @@ class FerrostarCoreTest {
                 RouteAdapter(
                     requestGenerator = MockPostRouteRequestGenerator(),
                     responseParser = MockRouteResponseParser(routes = listOf(mockRoute))),
-            httpClient = OkHttpClient.Builder().addInterceptor(interceptor).build(),
+            httpClient =
+                OkHttpClient.Builder().addInterceptor(interceptor).build().toOkHttpClientProvider(),
             locationProvider = locationProvider,
             foregroundServiceManager = foregroundServiceManager,
             navigationControllerConfig =
                 NavigationControllerConfig(
-                    StepAdvanceMode.Manual, RouteDeviationTracking.None, CourseFiltering.RAW))
+                    WaypointAdvanceMode.WaypointWithinRange(100.0),
+                    stepAdvanceManual(),
+                    stepAdvanceManual(),
+                    RouteDeviationTracking.None,
+                    CourseFiltering.RAW))
 
     val deviationHandler = DeviationHandler()
     core.deviationHandler = deviationHandler
@@ -398,11 +426,9 @@ class FerrostarCoreTest {
     core.startNavigation(
         routes.first(),
         NavigationControllerConfig(
-            stepAdvance =
-                StepAdvanceMode.RelativeLineStringDistance(
-                    16U,
-                    specialAdvanceConditions =
-                        SpecialAdvanceConditions.MinimumDistanceFromCurrentStepLine(16U)),
+            WaypointAdvanceMode.WaypointWithinRange(100.0),
+            stepAdvanceDistanceFromStep(16u, 32u),
+            stepAdvanceDistanceToEndOfStep(16u, 32u),
             routeDeviationTracking =
                 RouteDeviationTracking.Custom(
                     detector =

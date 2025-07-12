@@ -6,6 +6,10 @@ import FerrostarCoreFFI
 /// In case you do though, this sample implementation shows what you'll need to get started
 /// by re-implementing the default behaviors of the core.
 class NavigationDelegate: FerrostarCoreDelegate {
+    func core(_: FerrostarCore, didStartWith _: Route) {
+        // TODO: Create defaults extension on FerrostarCoreDelegate
+    }
+
     func core(_: FerrostarCore, correctiveActionForDeviation _: Double,
               remainingWaypoints waypoints: [Waypoint]) -> CorrectiveAction
     {
@@ -24,10 +28,16 @@ class NavigationDelegate: FerrostarCoreDelegate {
                 // Most implementations will probably reuse existing configs (the default implementation does),
                 // but we provide devs with flexibility here.
                 let config = SwiftNavigationControllerConfig(
-                    stepAdvance: .relativeLineStringDistance(minimumHorizontalAccuracy: 32,
-                                                             specialAdvanceConditions: .minimumDistanceFromCurrentStepLine(
-                                                                 10
-                                                             )),
+                    waypointAdvance: .waypointWithinRange(100.0),
+                    stepAdvanceCondition: stepAdvanceDistanceEntryAndExit(
+                        distanceToEndOfStep: 30,
+                        distanceAfterEndOfStep: 2,
+                        minimumHorizontalAccuracy: 32
+                    ),
+                    arrivalStepAdvanceCondition: stepAdvanceDistanceToEndOfStep(
+                        distance: 30,
+                        minimumHorizontalAccuracy: 32
+                    ),
                     routeDeviationTracking: .staticThreshold(minimumHorizontalAccuracy: 25, maxAcceptableDeviation: 20),
                     snappedLocationCourseFiltering: .snapToRoute
                 )

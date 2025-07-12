@@ -7,7 +7,9 @@ import com.stadiamaps.ferrostar.core.annotation.AnnotationPublisher
 import com.stadiamaps.ferrostar.core.annotation.AnnotationWrapper
 import com.stadiamaps.ferrostar.core.annotation.NoOpAnnotationPublisher
 import com.stadiamaps.ferrostar.core.extensions.currentRoadName
+import com.stadiamaps.ferrostar.core.extensions.currentStepGeometryIndex
 import com.stadiamaps.ferrostar.core.extensions.deviation
+import com.stadiamaps.ferrostar.core.extensions.preferredUserLocation
 import com.stadiamaps.ferrostar.core.extensions.progress
 import com.stadiamaps.ferrostar.core.extensions.remainingSteps
 import com.stadiamaps.ferrostar.core.extensions.visualInstruction
@@ -22,15 +24,12 @@ import uniffi.ferrostar.RouteDeviation
 import uniffi.ferrostar.RouteStep
 import uniffi.ferrostar.SpokenInstruction
 import uniffi.ferrostar.TripProgress
-import uniffi.ferrostar.TripState
 import uniffi.ferrostar.UserLocation
 import uniffi.ferrostar.VisualInstruction
 
 data class NavigationUiState(
     /** The user's location as reported by the location provider. */
     val location: UserLocation?,
-    /** The user's location snapped to the route shape. */
-    val snappedLocation: UserLocation?,
     /**
      * The last known heading of the user.
      *
@@ -57,6 +56,11 @@ data class NavigationUiState(
     val isMuted: Boolean?,
     /** The name of the road which the current route step is traversing. */
     val currentStepRoadName: String?,
+    /**
+     * The index of the closest coordinate to the user's snapped location. The index is Relative to
+     * the *current* (i.e. first in remainingSteps) RouteStep Geometry
+     */
+    val currentStepGeometryIndex: Int?,
     /** The remaining steps in the trip (including the current step). */
     val remainingSteps: List<RouteStep>?,
     /** The route annotation object at the current location. */
@@ -66,13 +70,10 @@ data class NavigationUiState(
     fun fromFerrostar(
         coreState: NavigationState,
         isMuted: Boolean?,
-        location: UserLocation?,
-        snappedLocation: UserLocation?,
         annotation: AnnotationWrapper<*>? = null
     ): NavigationUiState =
         NavigationUiState(
-            snappedLocation = snappedLocation,
-            location = location,
+            location = coreState.tripState.preferredUserLocation(),
             // TODO: Heading/course over ground
             heading = null,
             routeGeometry = coreState.routeGeometry,
@@ -83,6 +84,7 @@ data class NavigationUiState(
             routeDeviation = coreState.tripState.deviation(),
             isMuted = isMuted,
             currentStepRoadName = coreState.tripState.currentRoadName(),
+            currentStepGeometryIndex = coreState.tripState.currentStepGeometryIndex(),
             remainingSteps = coreState.tripState.remainingSteps(),
             currentAnnotation = annotation)
   }
@@ -124,17 +126,9 @@ open class DefaultNavigationViewModel(
           }
           // The following converts coreState into an annotations wrapped state.
           .map { (coreState, muteState, annotationWrapper) ->
-            val location = ferrostarCore.locationProvider.lastLocation
-            val userLocation =
-                when (coreState.tripState) {
-                  is TripState.Navigating -> coreState.tripState.snappedUserLocation
-                  is TripState.Complete,
-                  TripState.Idle -> ferrostarCore.locationProvider.lastLocation
-                }
-            uiState(coreState, muteState, location, userLocation, annotationWrapper)
+            uiState(coreState, muteState, annotationWrapper)
             // This awkward dance is required because Kotlin doesn't have a way to map over
-            // StateFlows
-            // without converting to a generic Flow in the process.
+            // StateFlows without converting to a generic Flow in the process.
           }
           .stateIn(
               scope = viewModelScope,
@@ -143,8 +137,6 @@ open class DefaultNavigationViewModel(
                   uiState(
                       ferrostarCore.state.value,
                       ferrostarCore.spokenInstructionObserver?.isMuted,
-                      ferrostarCore.locationProvider.lastLocation,
-                      ferrostarCore.locationProvider.lastLocation,
                       null))
 
   override fun stopNavigation(stopLocationUpdates: Boolean) {
@@ -165,10 +157,6 @@ open class DefaultNavigationViewModel(
   private fun uiState(
       coreState: NavigationState,
       isMuted: Boolean?,
-      location: UserLocation?,
-      snappedLocation: UserLocation?,
       annotationWrapper: AnnotationWrapper<*>?
-  ) =
-      NavigationUiState.fromFerrostar(
-          coreState, isMuted, location, snappedLocation, annotationWrapper)
+  ) = NavigationUiState.fromFerrostar(coreState, isMuted, annotationWrapper)
 }

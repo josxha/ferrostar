@@ -33,6 +33,9 @@ public enum CorrectiveAction {
 ///
 /// This is the central point responsible for relaying updates back to the application.
 public protocol FerrostarCoreDelegate: AnyObject {
+    /// Called when navigation is started on a specific route.
+    func core(_ core: FerrostarCore, didStartWith route: Route)
+
     /// Called when the core detects that the user has deviated from the route.
     ///
     /// This hook enables app developers to take the most appropriate corrective action.
@@ -69,7 +72,7 @@ public protocol FerrostarCoreDelegate: AnyObject {
     public weak var delegate: FerrostarCoreDelegate?
 
     /// The spoken instruction observer; responsible for text-to-speech announcements.
-    public var spokenInstructionObserver: SpokenInstructionObserver?
+    public let spokenInstructionObserver: SpokenInstructionObserver
 
     /// The minimum time to wait before initiating another route recalculation.
     ///
@@ -78,18 +81,27 @@ public protocol FerrostarCoreDelegate: AnyObject {
     /// This adds a minimum delay (default 5 seconds).
     public var minimumTimeBeforeRecalculaton: TimeInterval = 5
 
+    /// The minimum distance (in meters) the user must move before performing another route recaluclation.
+    ///
+    /// This ensures that, while the user remains off the route, we don't keep triggering useless recalculations.
+    public var minimumMovementBeforeRecaluclation = CLLocationDistance(50)
+
     /// The observable state of the model (for easy binding in SwiftUI views).
+    @Published private var coreNavState: NavState?
     @Published public private(set) var state: NavigationState?
+    @Published public private(set) var route: Route?
 
     public let annotation: (any AnnotationPublishing)?
 
     private let networkSession: URLRequestLoading
     private let routeProvider: RouteProvider
     private let locationProvider: LocationProviding
-    private var navigationController: NavigationControllerProtocol?
+    private var navigationController: NavigatorProtocol?
     private var routeRequestInFlight = false
     private var lastAutomaticRecalculation: Date? = nil
     private var lastLocation: UserLocation? = nil
+    // The last location from which we triggered a recalculation
+    private var lastRecalculationLocation: UserLocation? = nil
     private var recalculationTask: Task<Void, Never>?
     private var queuedUtteranceIDs: Set<UUID> = Set()
 
@@ -113,13 +125,16 @@ public protocol FerrostarCoreDelegate: AnyObject {
         locationProvider: LocationProviding,
         navigationControllerConfig: SwiftNavigationControllerConfig,
         networkSession: URLRequestLoading,
-        annotation: (any AnnotationPublishing)? = nil
+        annotation: (any AnnotationPublishing)? = nil,
+        spokenInstructionObserver: SpokenInstructionObserver =
+            .initAVSpeechSynthesizer() // Set up the a standard Apple AV Speech Synth.
     ) {
         self.routeProvider = routeProvider
         self.locationProvider = locationProvider
         config = navigationControllerConfig
         self.networkSession = networkSession
         self.annotation = annotation
+        self.spokenInstructionObserver = spokenInstructionObserver
 
         super.init()
 
@@ -150,12 +165,16 @@ public protocol FerrostarCoreDelegate: AnyObject {
         navigationControllerConfig: SwiftNavigationControllerConfig,
         options: [String: Any] = [:],
         networkSession: URLRequestLoading = URLSession.shared,
-        annotation: (any AnnotationPublishing)? = nil
+        annotation: (any AnnotationPublishing)? = nil,
+        spokenInstructionObserver: SpokenInstructionObserver =
+            .initAVSpeechSynthesizer()
     ) throws {
-        guard let jsonOptions = try String(
-            data: JSONSerialization.data(withJSONObject: options),
-            encoding: .utf8
-        ) else {
+        guard
+            let jsonOptions = try String(
+                data: JSONSerialization.data(withJSONObject: options),
+                encoding: .utf8
+            )
+        else {
             throw InstantiationError.OptionsJsonParseError
         }
 
@@ -169,7 +188,8 @@ public protocol FerrostarCoreDelegate: AnyObject {
             locationProvider: locationProvider,
             navigationControllerConfig: navigationControllerConfig,
             networkSession: networkSession,
-            annotation: annotation
+            annotation: annotation,
+            spokenInstructionObserver: spokenInstructionObserver
         )
     }
 
@@ -178,14 +198,17 @@ public protocol FerrostarCoreDelegate: AnyObject {
         locationProvider: LocationProviding,
         navigationControllerConfig: SwiftNavigationControllerConfig,
         networkSession: URLRequestLoading = URLSession.shared,
-        annotation: (any AnnotationPublishing)? = nil
+        annotation: (any AnnotationPublishing)? = nil,
+        spokenInstructionObserver: SpokenInstructionObserver =
+            .initAVSpeechSynthesizer()
     ) {
         self.init(
             routeProvider: .routeAdapter(routeAdapter),
             locationProvider: locationProvider,
             navigationControllerConfig: navigationControllerConfig,
             networkSession: networkSession,
-            annotation: annotation
+            annotation: annotation,
+            spokenInstructionObserver: spokenInstructionObserver
         )
     }
 
@@ -194,21 +217,26 @@ public protocol FerrostarCoreDelegate: AnyObject {
         locationProvider: LocationProviding,
         navigationControllerConfig: SwiftNavigationControllerConfig,
         networkSession: URLRequestLoading = URLSession.shared,
-        annotation: (any AnnotationPublishing)? = nil
+        annotation: (any AnnotationPublishing)? = nil,
+        spokenInstructionObserver: SpokenInstructionObserver =
+            .initAVSpeechSynthesizer()
     ) {
         self.init(
             routeProvider: .customProvider(customRouteProvider),
             locationProvider: locationProvider,
             navigationControllerConfig: navigationControllerConfig,
             networkSession: networkSession,
-            annotation: annotation
+            annotation: annotation,
+            spokenInstructionObserver: spokenInstructionObserver
         )
     }
 
     /// Tries to get routes visiting one or more waypoints starting from the initial location.
     ///
     /// Success and failure are communicated via ``delegate`` methods.
-    public func getRoutes(initialLocation: UserLocation, waypoints: [Waypoint]) async throws -> [Route] {
+    public func getRoutes(initialLocation: UserLocation, waypoints: [Waypoint]) async throws
+        -> [Route]
+    {
         routeRequestInFlight = true
 
         defer {
@@ -241,12 +269,22 @@ public protocol FerrostarCoreDelegate: AnyObject {
     ///
     /// - Parameters:
     ///   - route: The route to navigate.
+    ///   - userLocation: The user's location. This should be as close to the users location and the start of the route
+    /// as possible. If the location is too stale, the user may be almost immediately flagged as off the route,
+    /// triggering a recalculation.
+    /// If this parameter is `nil`, the last location will be obtained from the configured location provider
+    /// automatically.
+    /// If no location is available, this method will throw an exception.
     ///   - config: Override the configuration for the navigation session. This was provided on init.
-    public func startNavigation(route: Route, config: SwiftNavigationControllerConfig? = nil) throws {
+    public func startNavigation(
+        route: Route,
+        userLocation: UserLocation? = nil,
+        config: SwiftNavigationControllerConfig? = nil
+    ) throws {
         // This is technically possible, so we need to check and throw, but
         // it should be rather difficult to get a location fix, get a route,
         // and then somehow this property go nil again.
-        guard let location = locationProvider.lastLocation else {
+        guard let location = userLocation ?? locationProvider.lastLocation else {
             throw FerrostarCoreError.userLocationUnknown
         }
         // TODO: We should be able to circumvent this and simply start updating, wait and start nav.
@@ -255,28 +293,35 @@ public protocol FerrostarCoreDelegate: AnyObject {
         self.config = config ?? self.config
 
         // Configure the navigation controller. This is required to build the initial state.
-        let controller = NavigationController(route: route, config: self.config.ffiValue)
+        let controller = createNavigator(
+            route: route, config: self.config.ffiValue, shouldRecord: false
+        )
         navigationController = controller
 
         locationProvider.startUpdating()
 
+        self.route = route
+
+        let navState = controller.getInitialState(location: location)
+        coreNavState = navState
         state = NavigationState(
-            tripState: controller.getInitialState(location: location),
+            navState: navState,
             routeGeometry: route.geometry
         )
 
         DispatchQueue.main.async {
-            self.update(newState: controller.getInitialState(location: location), location: location)
+            self.update(navState, location: location)
         }
     }
 
     public func advanceToNextStep() {
-        guard let controller = navigationController, let tripState = state?.tripState, let lastLocation else {
+        guard let controller = navigationController, let state = coreNavState, let lastLocation
+        else {
             return
         }
 
-        let newState = controller.advanceToNextStep(state: tripState)
-        update(newState: newState, location: lastLocation)
+        let newState = controller.advanceToNextStep(state: state)
+        update(newState, location: lastLocation)
     }
 
     // TODO: Ability to pause without totally stopping and clearing state
@@ -284,26 +329,31 @@ public protocol FerrostarCoreDelegate: AnyObject {
     /// Stops navigation and stops requesting location updates (to save battery).
     public func stopNavigation() {
         navigationController = nil
+        route = nil
         state = nil
         queuedUtteranceIDs.removeAll()
         locationProvider.stopUpdating()
-        spokenInstructionObserver?.stopAndClearQueue()
+        spokenInstructionObserver.stopAndClearQueue()
+        lastRecalculationLocation = nil
     }
 
     /// Internal state update.
     ///
     /// You should call this rather than setting properties directly
-    private func update(newState: TripState, location: UserLocation) {
+    private func update(_ state: NavState, location: UserLocation) {
         DispatchQueue.main.async {
-            self.state?.tripState = newState
+            self.coreNavState = state
+            self.state?.tripState = state.tripState
 
-            switch newState {
+            switch state.tripState {
             case let .navigating(
                 currentStepGeometryIndex: _,
+                userLocation: _,
                 snappedUserLocation: _,
                 remainingSteps: _,
                 remainingWaypoints: remainingWaypoints,
                 progress: _,
+                summary: _,
                 deviation: deviation,
                 visualInstruction: _,
                 spokenInstruction: spokenInstruction,
@@ -314,10 +364,16 @@ public protocol FerrostarCoreDelegate: AnyObject {
                     // No action
                     break
                 case let .offRoute(deviationFromRouteLine: deviationFromRouteLine):
-                    guard !self.routeRequestInFlight,
+                    guard !self.routeRequestInFlight, // We can't have a request in flight already
+                          // Ensure a minimum cool down before a new route fetch
                           self.lastAutomaticRecalculation?.timeIntervalSinceNow ?? -TimeInterval
                           .greatestFiniteMagnitude < -self
-                          .minimumTimeBeforeRecalculaton
+                          .minimumTimeBeforeRecalculaton,
+                          // Don't recalculate again if the user hasn't moved much
+                          self.lastRecalculationLocation?.clLocation
+                          .distance(from: location.clLocation) ?? .greatestFiniteMagnitude
+                          > self
+                          .minimumMovementBeforeRecaluclation
                     else {
                         break
                     }
@@ -331,6 +387,7 @@ public protocol FerrostarCoreDelegate: AnyObject {
                         break
                     case let .getNewRoutes(waypoints):
                         self.state?.isCalculatingNewRoute = true
+                        self.lastRecalculationLocation = location
                         self.recalculationTask = Task {
                             do {
                                 let routes = try await self.getRoutes(
@@ -356,14 +413,16 @@ public protocol FerrostarCoreDelegate: AnyObject {
                     }
                 }
 
-                if let spokenInstruction, !self.queuedUtteranceIDs.contains(spokenInstruction.utteranceId) {
+                if let spokenInstruction,
+                   !self.queuedUtteranceIDs.contains(spokenInstruction.utteranceId)
+                {
                     self.queuedUtteranceIDs.insert(spokenInstruction.utteranceId)
 
                     // This sholud not happen on the main queue as it can block;
                     // we'll probably remove the need for this eventually
                     // by making FerrostarCore its own actor
                     DispatchQueue.global(qos: .default).async {
-                        self.spokenInstructionObserver?.spokenInstructionTriggered(spokenInstruction)
+                        self.spokenInstructionObserver.spokenInstructionTriggered(spokenInstruction)
                     }
                 }
             default:
@@ -377,20 +436,22 @@ extension FerrostarCore: LocationManagingDelegate {
     @MainActor
     public func locationManager(_: LocationProviding, didUpdateLocations locations: [UserLocation]) {
         guard let location = locations.last,
-              let state = state?.tripState,
-              let newState = navigationController?.updateUserLocation(location: location, state: state)
+              let navState = coreNavState,
+              let newState = navigationController?.updateUserLocation(
+                  location: location, state: navState
+              )
         else {
             return
         }
 
         lastLocation = location
 
-        update(newState: newState, location: location)
+        update(newState, location: location)
     }
 
     public func locationManager(_: LocationProviding, didUpdateHeading _: Heading) {
         // TODO: Make use of heading in TripState?
-//        state?.heading = newHeading
+        //        state?.heading = newHeading
     }
 
     public func locationManager(_: LocationProviding, didFailWithError _: Error) {

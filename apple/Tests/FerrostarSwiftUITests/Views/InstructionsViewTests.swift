@@ -1,3 +1,4 @@
+import TestSupport
 import XCTest
 @testable import FerrostarCore
 @testable import FerrostarCoreFFI
@@ -27,7 +28,7 @@ final class InstructionsViewTests: XCTestCase {
                     subContent: nil,
                     triggerDistanceBeforeManeuver: 123
                 ),
-                distanceFormatter: americanDistanceFormatter
+                distanceFormatter: usaDistanceFormatter
             )
             .padding()
         }
@@ -56,7 +57,7 @@ final class InstructionsViewTests: XCTestCase {
                     subContent: nil,
                     triggerDistanceBeforeManeuver: 123
                 ),
-                distanceFormatter: americanDistanceFormatter
+                distanceFormatter: usaDistanceFormatter
             )
             .padding()
         }
@@ -78,7 +79,7 @@ final class InstructionsViewTests: XCTestCase {
                     subContent: nil,
                     triggerDistanceBeforeManeuver: 123
                 ),
-                distanceFormatter: americanDistanceFormatter
+                distanceFormatter: usaDistanceFormatter
             )
             .padding()
         }
@@ -100,7 +101,7 @@ final class InstructionsViewTests: XCTestCase {
                     subContent: nil,
                     triggerDistanceBeforeManeuver: 123
                 ),
-                distanceFormatter: americanDistanceFormatter,
+                distanceFormatter: usaDistanceFormatter,
                 remainingSteps: RouteStepFactory().buildMany(3)
             )
             .padding()
@@ -123,7 +124,7 @@ final class InstructionsViewTests: XCTestCase {
                     subContent: nil,
                     triggerDistanceBeforeManeuver: 123
                 ),
-                distanceFormatter: americanDistanceFormatter,
+                distanceFormatter: usaDistanceFormatter,
                 remainingSteps: RouteStepFactory().buildMany(3)
             )
             .padding()
@@ -146,7 +147,7 @@ final class InstructionsViewTests: XCTestCase {
                     subContent: nil,
                     triggerDistanceBeforeManeuver: 123
                 ),
-                distanceFormatter: americanDistanceFormatter,
+                distanceFormatter: usaDistanceFormatter,
                 remainingSteps: RouteStepFactory().buildMany(3),
                 isExpanded: .constant(true)
             )
@@ -170,7 +171,7 @@ final class InstructionsViewTests: XCTestCase {
                     subContent: nil,
                     triggerDistanceBeforeManeuver: 123
                 ),
-                distanceFormatter: americanDistanceFormatter,
+                distanceFormatter: usaDistanceFormatter,
                 remainingSteps: RouteStepFactory().buildMany(3),
                 isExpanded: .constant(true)
             )

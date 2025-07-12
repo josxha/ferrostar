@@ -25,7 +25,7 @@ mod frb_generated; /* AUTO INJECTED BY flutter_rust_bridge. This line may not be
 extern crate alloc;
 
 #[cfg(target_os = "android")]
-use android_logger::{Config, FilterBuilder};
+use android_logger::Config;
 
 pub mod algorithms;
 pub mod deviation_detection;
@@ -57,7 +57,7 @@ pub fn create_ferrostar_logger() {
 
 #[cfg(feature = "uniffi")]
 mod uniffi_deps {
-    pub use crate::models::Route;
+    pub use crate::models::{Route, Waypoint};
     pub use crate::routing_adapters::{
         error::{InstantiationError, ParsingError},
         osrm::{
@@ -80,41 +80,30 @@ use uniffi_deps::*;
 uniffi::setup_scaffolding!();
 
 #[cfg(feature = "uniffi")]
-uniffi::custom_type!(Uuid, String);
-
-#[cfg(feature = "uniffi")]
-impl UniffiCustomTypeConverter for Uuid {
-    type Builtin = String;
-
-    fn into_custom(val: Self::Builtin) -> uniffi::Result<Self> {
+uniffi::custom_type!(Uuid, String, {
+    remote,
+    try_lift: |val| {
         Ok(Uuid::from_str(&val)?)
-    }
-
-    fn from_custom(obj: Self) -> Self::Builtin {
+    },
+    lower: |obj| {
         obj.to_string()
     }
-}
+});
 
 // Silliness to keep the macro happy; TODO: open a ticket
 #[cfg(feature = "uniffi")]
 type UtcDateTime = DateTime<Utc>;
 
 #[cfg(feature = "uniffi")]
-uniffi::custom_type!(UtcDateTime, i64);
-
-#[cfg(feature = "uniffi")]
-impl UniffiCustomTypeConverter for DateTime<Utc> {
-    type Builtin = i64;
-
-    fn into_custom(val: Self::Builtin) -> uniffi::Result<Self> {
-        Self::from_timestamp_millis(val).ok_or(anyhow!("Timestamp {val} out of range"))
-    }
-
-    fn from_custom(obj: Self) -> Self::Builtin {
+uniffi::custom_type!(UtcDateTime, i64, {
+    remote,
+    try_lift: |val| {
+        DateTime::<Utc>::from_timestamp_millis(val).ok_or(anyhow!("Timestamp {val} out of range"))
+    },
+    lower: |obj| {
         obj.timestamp_millis()
     }
-}
-
+});
 //
 // Helpers that are only exposed via the FFI interface.
 //
@@ -169,4 +158,20 @@ fn create_route_from_osrm(
     let route: OsrmRoute = serde_json::from_slice(route_data)?;
     let waypoints: Vec<OsrmWaypoint> = serde_json::from_slice(waypoint_data)?;
     Route::from_osrm(&route, &waypoints, polyline_precision)
+}
+
+/// Creates a [`Route`] from OSRM route data and ferrostar waypoints.
+///
+/// This uses the same logic as the [`OsrmResponseParser`] and is designed to be fairly flexible,
+/// supporting both vanilla OSRM and enhanced Valhalla (ex: from Stadia Maps and Mapbox) outputs
+/// which contain richer information like banners and voice instructions for navigation.
+#[cfg(feature = "uniffi")]
+#[uniffi::export]
+fn create_route_from_osrm_route(
+    route_data: &[u8],
+    waypoints: &[Waypoint],
+    polyline_precision: u32,
+) -> Result<Route, ParsingError> {
+    let route: OsrmRoute = serde_json::from_slice(route_data)?;
+    Route::from_osrm_with_standard_waypoints(&route, waypoints, polyline_precision)
 }

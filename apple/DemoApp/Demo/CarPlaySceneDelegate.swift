@@ -1,56 +1,84 @@
 import CarPlay
 import FerrostarCarPlayUI
 import FerrostarCore
+import MapLibreSwiftUI
+import os
 import SwiftUI
 import UIKit
 
-class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
-    // Get the AppDelegate associated with the SwiftUI App/@main as the type you defined it as.
-    @UIApplicationDelegateAdaptor(DemoAppDelegate.self) var appDelegate
+private extension Logger {
+    static let carPlay = Logger(subsystem: "ferrostar", category: "carplaydelegate")
+}
 
-    private var ferrostarManager: FerrostarCarPlayManager?
+private let ModelKey = "com.stadiamaps.ferrostar.model"
 
-    func configure() {
-        guard ferrostarManager == nil else { return }
-
-        ferrostarManager = FerrostarCarPlayManager(
-            ferrostarCore: appDelegate.appEnvironment.ferrostarCore,
-            styleURL: AppDefaults.mapStyleURL
-        )
+private extension UISceneSession {
+    var model: DemoCarPlayModel? {
+        get {
+            userInfo?[ModelKey] as? DemoCarPlayModel
+        }
+        set {
+            var info = userInfo ?? [:]
+            info[ModelKey] = newValue
+            userInfo = info
+        }
     }
+}
 
+class CarPlaySceneDelegate: NSObject, CPTemplateApplicationSceneDelegate {
     func templateApplicationScene(
         _ templateApplicationScene: CPTemplateApplicationScene,
         didConnect interfaceController: CPInterfaceController,
         to window: CPWindow
     ) {
-        configure()
-        ferrostarManager!.templateApplicationScene(templateApplicationScene,
-                                                   didConnect: interfaceController,
-                                                   to: window)
+        Logger.carPlay.debug("\(#function)")
+
+        guard templateApplicationScene.session.model == nil else {
+            Logger.carPlay.error("CarPlay already connected?")
+            return
+        }
+
+        guard let model = demoModel else {
+            Logger.carPlay.error("No shared DemoModel")
+            return
+        }
+
+        let carPlayModel = DemoCarPlayModel(model: model)
+        templateApplicationScene.session.model = carPlayModel
+
+        let view = DemoCarPlayNavigationView(model: carPlayModel)
+
+        let vc = UIHostingController(rootView: view)
+        window.rootViewController = vc
+        window.makeKeyAndVisible()
+
+        let mapTemplate = carPlayModel.createAndAttachTemplate()
+
+        Task { @MainActor in
+            do {
+                _ = try await interfaceController.setRootTemplate(mapTemplate, animated: true)
+            } catch {
+                Logger.carPlay.error("Cannot setRootTemplate")
+                carPlayModel.errorMessage = error.localizedDescription
+            }
+        }
     }
-}
 
-extension CarPlaySceneDelegate: CPTemplateApplicationDashboardSceneDelegate {
-    func templateApplicationDashboardScene(_: CPTemplateApplicationDashboardScene,
-                                           didConnect _: CPDashboardController,
-                                           to _: UIWindow) {}
+    public func templateApplicationScene(
+        _ templateApplicationScene: CPTemplateApplicationScene,
+        didDisconnect _: CPInterfaceController,
+        from window: CPWindow
+    ) {
+        Logger.carPlay.debug("\(#function)")
 
-    func templateApplicationDashboardScene(_: CPTemplateApplicationDashboardScene,
-                                           didDisconnect _: CPDashboardController,
-                                           from _: UIWindow) {}
-}
+        guard let model = templateApplicationScene.session.model else {
+            Logger.carPlay.error("CarPlay not connected?")
+            return
+        }
 
-extension CarPlaySceneDelegate: CPTemplateApplicationInstrumentClusterSceneDelegate {
-    // swiftlint:disable identifier_name vertical_parameter_alignment
-    func templateApplicationInstrumentClusterScene(
-        _: CPTemplateApplicationInstrumentClusterScene,
-        didConnect _: CPInstrumentClusterController
-    ) {}
+        model.stop(cancelTrip: true, mapTemplate: nil)
+        window.isHidden = true
 
-    func templateApplicationInstrumentClusterScene(
-        _: CPTemplateApplicationInstrumentClusterScene,
-        didDisconnectInstrumentClusterController _: CPInstrumentClusterController
-    ) {}
-    // swiftlint:enable identifier_name vertical_parameter_alignment
+        templateApplicationScene.session.model = nil
+    }
 }

@@ -1,5 +1,6 @@
 import MapKit
 import SwiftUI
+import TestSupport
 import XCTest
 @testable import FerrostarCoreFFI
 @testable import FerrostarSwiftUI
@@ -9,7 +10,7 @@ final class ManeuverInstructionViewTests: XCTestCase {
         assertView {
             ManeuverInstructionView(
                 text: "Turn Right on Road Ave.",
-                distanceFormatter: americanDistanceFormatter,
+                distanceFormatter: usaDistanceFormatter,
                 distanceToNextManeuver: 24140.16,
                 theme: TestingInstructionRowTheme()
             ) {
@@ -27,7 +28,7 @@ final class ManeuverInstructionViewTests: XCTestCase {
         assertView {
             ManeuverInstructionView(
                 text: "Merge Left",
-                distanceFormatter: americanDistanceFormatter,
+                distanceFormatter: usaDistanceFormatter,
                 distanceToNextManeuver: 152.4,
                 theme: TestingInstructionRowTheme()
             ) {
@@ -61,7 +62,7 @@ final class ManeuverInstructionViewTests: XCTestCase {
         assertView {
             ManeuverInstructionView(
                 text: "ادمج يسارًا",
-                distanceFormatter: americanDistanceFormatter,
+                distanceFormatter: usaDistanceFormatter,
                 theme: TestingInstructionRowTheme()
             ) {
                 ManeuverImage(maneuverType: .merge, maneuverModifier: .left)

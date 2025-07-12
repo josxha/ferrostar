@@ -1,13 +1,8 @@
-import { css, html, LitElement, PropertyValues, unsafeCSS } from "lit";
+import { css, html, LitElement, PropertyValues } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import maplibregl, {
-  GeolocateControl,
-  LngLat,
-  LngLatLike,
-  Map,
-} from "maplibre-gl";
-import maplibreglStyles from "maplibre-gl/dist/maplibre-gl.css?inline";
+import maplibregl, { GeolocateControl, Map } from "maplibre-gl";
 import {
+  JsNavState,
   NavigationController,
   RouteAdapter,
   TripState,
@@ -26,19 +21,7 @@ export class FerrostarMap extends LitElement {
   valhallaEndpointUrl: string = "";
 
   @property()
-  styleUrl: string = "";
-
-  @property()
   profile: string = "";
-
-  @property()
-  center: LngLatLike | null = null;
-
-  @property()
-  pitch: number = 60;
-
-  @property()
-  zoom: number = 6;
 
   @property({ attribute: false })
   httpClient?: Function = fetch;
@@ -52,11 +35,7 @@ export class FerrostarMap extends LitElement {
   options: object = {};
 
   @state()
-  protected _tripState: TripState | null = null;
-
-  // Configures the control on first load.
-  @property({ type: Function, attribute: false })
-  configureMap?: (map: Map) => void;
+  protected _navState: JsNavState | null = null;
 
   @property({ type: Function, attribute: false })
   onNavigationStart?: (map: Map) => void;
@@ -64,9 +43,11 @@ export class FerrostarMap extends LitElement {
   @property({ type: Function, attribute: false })
   onNavigationStop?: (map: Map) => void;
 
+  @property({ type: Function, attribute: true })
+  onTripStateChange?: (newState: TripState | null) => void;
+
   /**
    *  Styles to load which will apply inside the component
-   *  (ex: for MapLibre plugins)
    */
   @property({ type: Object, attribute: false })
   customStyles?: object | null;
@@ -80,28 +61,55 @@ export class FerrostarMap extends LitElement {
 
   /**
    * Automatically geolocates the user on map load.
+   *
    * Defaults to true.
+   * Has no effect if `addGeolocateControl` is false.
    */
   @property({ type: Boolean })
   geolocateOnLoad: boolean = true;
 
+  /**
+   * Optionally adds a geolocate control to the map.
+   *
+   * Defaults to true.
+   * Set this to false if you want to disable the geolocation control or bring your own.
+   */
+  @property({ type: Boolean })
+  addGeolocateControl: boolean = true;
+
   routeAdapter: RouteAdapter | null = null;
-  map: maplibregl.Map | null = null;
+
+  /**
+   * The MapLibre map instance.
+   *
+   * You have to explicitly set this value when initializing
+   * the web component to provide your own map instance.
+   *
+   */
+  @property({ type: Object })
+  map!: maplibregl.Map;
+
   geolocateControl: GeolocateControl | null = null;
   navigationController: NavigationController | null = null;
   simulatedLocationMarker: maplibregl.Marker | null = null;
   lastSpokenUtteranceId: string | null = null;
 
   static styles = [
-    unsafeCSS(maplibreglStyles),
     css`
       [hidden] {
         display: none !important;
       }
 
-      #map {
+      #container {
         height: 100%;
         width: 100%;
+      }
+
+      #map,
+      ::slotted(:first-child) {
+        height: 100%;
+        width: 100%;
+        display: block;
       }
 
       instructions-view {
@@ -146,6 +154,17 @@ export class FerrostarMap extends LitElement {
       #stop-button:hover {
         background-color: #e0e0e0;
       }
+
+      @media (max-width: 600px) {
+        #stop-button {
+          padding: 14px;
+        }
+
+        #stop-button .icon {
+          width: 10px;
+          height: 10px;
+        }
+      }
     `,
   ];
 
@@ -162,64 +181,25 @@ export class FerrostarMap extends LitElement {
     if (changedProperties.has("locationProvider") && this.locationProvider) {
       this.locationProvider.updateCallback = this.onLocationUpdated.bind(this);
     }
-    if (this.map) {
-      if (changedProperties.has("styleUrl")) {
-        this.map.setStyle(this.styleUrl);
-      }
-      if (changedProperties.has("center")) {
-        if (changedProperties.get("center") === null && this.center !== null) {
-          this.map.jumpTo({ center: this.center });
-        } else if (this.center !== null) {
-          if (
-            this.map.getCenter().distanceTo(LngLat.convert(this.center)) >
-            500_000
-          ) {
-            this.map.jumpTo({ center: this.center });
-          } else {
-            this.map.flyTo({ center: this.center });
-          }
-        }
-      }
-      if (changedProperties.has("pitch")) {
-        this.map.setPitch(this.pitch);
-      }
-      if (changedProperties.has("zoom")) {
-        this.map.setZoom(this.zoom);
-      }
-    }
   }
 
   firstUpdated() {
-    this.map = new maplibregl.Map({
-      container: this.shadowRoot!.getElementById("map")!,
-      style: this.styleUrl
-        ? this.styleUrl
-        : "https://demotiles.maplibre.org/style.json",
-      center: this.center ?? [0, 0],
-      pitch: this.pitch,
-      bearing: 0,
-      zoom: this.zoom,
-      attributionControl: { compact: true },
-    });
+    if (this.addGeolocateControl) {
+      this.geolocateControl = new GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+      });
 
-    this.geolocateControl = new GeolocateControl({
-      positionOptions: {
-        enableHighAccuracy: true,
-      },
-      trackUserLocation: true,
-    });
+      this.map.addControl(this.geolocateControl);
 
-    this.map.addControl(this.geolocateControl);
-
-    this.map.on("load", (e) => {
-      if (this.geolocateOnLoad) {
-        this.geolocateControl?.trigger();
-      }
-
-      if (this.configureMap !== undefined) {
-        this.configureMap(e.target);
-      }
-    });
+      this.map.on("load", (_) => {
+        if (this.geolocateOnLoad) {
+          this.geolocateControl?.trigger();
+        }
+      });
+    }
   }
 
   // TODO: type
@@ -250,7 +230,12 @@ export class FerrostarMap extends LitElement {
     });
 
     const responseData = new Uint8Array(await response.arrayBuffer());
-    return this.routeAdapter.parseResponse(responseData);
+    try {
+      return this.routeAdapter.parseResponse(responseData);
+    } catch (e) {
+      console.error("Error parsing route response:", e);
+      throw e;
+    }
   }
 
   // TODO: types
@@ -259,7 +244,7 @@ export class FerrostarMap extends LitElement {
     if (this.onNavigationStart && this.map) this.onNavigationStart(this.map);
 
     // Initialize the navigation controller
-    this.navigationController = new NavigationController(route, config);
+    this.navigationController = new NavigationController(route, config, false);
     this.locationProvider.updateCallback = this.onLocationUpdated.bind(this);
 
     // Initialize the trip state
@@ -273,8 +258,9 @@ export class FerrostarMap extends LitElement {
           speed: null,
         };
 
-    this._tripState =
-      this.navigationController.getInitialState(startingLocation);
+    this.navStateUpdate(
+      this.navigationController.getInitialState(startingLocation),
+    );
 
     // Update the UI with the initial trip state
     this.clearMap();
@@ -293,6 +279,7 @@ export class FerrostarMap extends LitElement {
       },
     });
 
+    // TODO: Configuration param where to insert the layer
     this.map?.addLayer({
       id: "route",
       type: "line",
@@ -302,12 +289,31 @@ export class FerrostarMap extends LitElement {
         "line-cap": "round",
       },
       paint: {
-        "line-color": "#3700B3",
+        "line-color": "#3478f6",
         "line-width": 8,
       },
     });
 
-    this.map?.setCenter(route.geometry[0]);
+    this.map?.addLayer(
+      {
+        id: "route-border",
+        type: "line",
+        source: "route",
+        layout: {
+          "line-join": "round",
+          "line-cap": "round",
+        },
+        paint: {
+          "line-color": "#FFFFFF",
+          "line-width": 13,
+        },
+      },
+      "route",
+    );
+
+    this.map?.flyTo({
+      center: route.geometry[0],
+    });
 
     if (this.locationProvider instanceof SimulatedLocationProvider) {
       this.simulatedLocationMarker = new maplibregl.Marker({
@@ -324,10 +330,15 @@ export class FerrostarMap extends LitElement {
     this.routeAdapter = null;
     this.navigationController?.free();
     this.navigationController = null;
-    this._tripState = null;
+    this.navStateUpdate(null);
     this.clearMap();
     if (this.locationProvider) this.locationProvider.updateCallback = null;
     if (this.onNavigationStop && this.map) this.onNavigationStop(this.map);
+  }
+
+  private navStateUpdate(newState: JsNavState | null) {
+    this._navState = newState;
+    this.onTripStateChange?.(newState?.tripState || null);
   }
 
   private onLocationUpdated() {
@@ -335,10 +346,11 @@ export class FerrostarMap extends LitElement {
       return;
     }
     // Update the trip state with the new location
-    this._tripState = this.navigationController!.updateUserLocation(
+    const newNavState = this.navigationController!.updateUserLocation(
       this.locationProvider.lastLocation,
-      this._tripState,
+      this._navState,
     );
+    this.navStateUpdate(newNavState);
 
     // Update the simulated location marker if needed
     this.simulatedLocationMarker?.setLngLat(
@@ -352,7 +364,7 @@ export class FerrostarMap extends LitElement {
     });
 
     // Speak the next instruction if voice guidance is enabled
-    const tripState = this._tripState;
+    const tripState = this._navState?.tripState;
     if (
       this.useVoiceGuidance &&
       tripState != null &&
@@ -378,6 +390,7 @@ export class FerrostarMap extends LitElement {
 
   private clearMap() {
     this.map?.getLayer("route") && this.map?.removeLayer("route");
+    this.map?.getLayer("route-border") && this.map?.removeLayer("route-border");
     this.map?.getSource("route") && this.map?.removeSource("route");
     this.simulatedLocationMarker?.remove();
   }
@@ -387,19 +400,27 @@ export class FerrostarMap extends LitElement {
       <style>
         ${this.customStyles}
       </style>
-      <div id="map">
-        <instructions-view .tripState=${this._tripState}></instructions-view>
-        <div id="bottom-component">
-          <trip-progress-view
-            .tripState=${this._tripState}
-          ></trip-progress-view>
-          <button
-            id="stop-button"
-            @click=${this.stopNavigation}
-            ?hidden=${!this._tripState}
-          >
-            <img src=${CloseSvg} alt="Stop navigation" class="icon" />
-          </button>
+      <div id="container">
+        <div id="map">
+          <!-- Fix names/ids; currently this is a breaking change -->
+          <div id="overlay">
+            <instructions-view
+              .tripState=${this._navState?.tripState}
+            ></instructions-view>
+
+            <div id="bottom-component">
+              <trip-progress-view
+                .tripState=${this._navState?.tripState}
+              ></trip-progress-view>
+              <button
+                id="stop-button"
+                @click=${this.stopNavigation}
+                ?hidden=${!this._navState?.tripState}
+              >
+                <img src=${CloseSvg} alt="Stop navigation" class="icon" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     `;
