@@ -423,7 +423,6 @@ version = "0.39.0"
 dependencies = [
  "android_logger",
  "chrono",
- "flutter_rust_bridge",
  "geo",
  "log",
  "polyline",

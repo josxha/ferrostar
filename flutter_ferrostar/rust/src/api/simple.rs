@@ -10,20 +10,3 @@ pub fn init_app() {
     // Default utilities - feel free to customize
     flutter_rust_bridge::setup_default_user_utils();
 }
-
-#[frb::bridge]
-mod ffi {
-    extern "Rust" {
-        type NavigationController;
-
-        #[constructor]
-        fn new_navigation_controller() -> NavigationController;
-
-        // define other functions as needed
-    }
-}
-
-// Implement the methods
-pub fn new_navigation_controller() -> NavigationController {
-    NavigationController::new()  // or appropriate initializer
-}
