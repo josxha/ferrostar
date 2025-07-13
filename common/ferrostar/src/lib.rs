@@ -1,23 +1,23 @@
 mod frb_generated; /* AUTO INJECTED BY flutter_rust_bridge. This line may not be accurate, and you can change it according to your needs. */
-//! # Ferrostar
-//!
-//! Ferrostar is a modern SDK for building turn-by-turn navigation applications.
-//!
-//! ![A screenshot of Ferrostar running on iOS](https://docs.stadiamaps.com/img/ferrostar-screenshot.png)
-//!
-//! This crate is the [core](https://stadiamaps.github.io/ferrostar/architecture.html) of Ferrostar,
-//! which contains common data models, traits and integrations with common routing backends
-//! like Valhalla, spatial algorithms, and the navigation state machine.
-//!
-//! If you're looking to build a navigation experience for a platform
-//! where Ferrostar doesn't currently offer a high-level interface,
-//! you want to use the primitives in your existing architecture,
-//! or you're genuinely curious about the internals,
-//! you're in the right spot!
-//!
-//! And if you're a developer wanting to build a navigation experience in your application,
-//! check out the [User Guide](https://stadiamaps.github.io/ferrostar/) for a high-level overview
-//! and tutorials for major platforms including iOS and Android.
+// # Ferrostar
+//
+// Ferrostar is a modern SDK for building turn-by-turn navigation applications.
+//
+// ![A screenshot of Ferrostar running on iOS](https://docs.stadiamaps.com/img/ferrostar-screenshot.png)
+//
+// This crate is the [core](https://stadiamaps.github.io/ferrostar/architecture.html) of Ferrostar,
+// which contains common data models, traits and integrations with common routing backends
+// like Valhalla, spatial algorithms, and the navigation state machine.
+//
+// If you're looking to build a navigation experience for a platform
+// where Ferrostar doesn't currently offer a high-level interface,
+// you want to use the primitives in your existing architecture,
+// or you're genuinely curious about the internals,
+// you're in the right spot!
+//
+// And if you're a developer wanting to build a navigation experience in your application,
+// check out the [User Guide](https://stadiamaps.github.io/ferrostar/) for a high-level overview
+// and tutorials for major platforms including iOS and Android.
 
 #![cfg_attr(not(feature = "std"), no_std)]
 
