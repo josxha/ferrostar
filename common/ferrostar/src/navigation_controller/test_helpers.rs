@@ -1,10 +1,46 @@
+use std::sync::Arc;
+
+use crate::deviation_detection::RouteDeviationTracking;
 use crate::models::{BoundingBox, GeographicCoordinate, Route, RouteStep, Waypoint, WaypointKind};
+use crate::navigation_controller::models::{
+    CourseFiltering, NavigationControllerConfig, WaypointAdvanceMode,
+};
+use crate::navigation_controller::step_advance::conditions::DistanceToEndOfStepCondition;
+use crate::navigation_controller::step_advance::StepAdvanceCondition;
 use crate::routing_adapters::{osrm::OsrmResponseParser, RouteResponseParser};
 #[cfg(feature = "alloc")]
 use alloc::string::ToString;
 use chrono::{DateTime, Utc};
-use geo::{point, BoundingRect, Distance, Haversine, LineString, Point};
+use geo::{point, BoundingRect, Coord, Distance, Haversine, LineString, Point};
 use insta::{dynamic_redaction, Settings};
+
+pub fn get_test_navigation_controller_config(
+    step_advance_condition: Arc<dyn StepAdvanceCondition>,
+) -> NavigationControllerConfig {
+    NavigationControllerConfig {
+        waypoint_advance: WaypointAdvanceMode::WaypointWithinRange(100.0),
+        // Careful setup: if the user is ever off the route
+        // (ex: because of an improper automatic step advance),
+        // we want to know about it.
+        route_deviation_tracking: RouteDeviationTracking::StaticThreshold {
+            minimum_horizontal_accuracy: 0,
+            max_acceptable_deviation: 0.0,
+        },
+        snapped_location_course_filtering: CourseFiltering::Raw,
+        step_advance_condition,
+        arrival_step_advance_condition: Arc::new(DistanceToEndOfStepCondition {
+            distance: 5,
+            minimum_horizontal_accuracy: 0,
+        }),
+    }
+}
+
+pub fn get_test_step_advance_condition(distance: u16) -> Arc<dyn StepAdvanceCondition> {
+    Arc::new(DistanceToEndOfStepCondition {
+        distance,
+        minimum_horizontal_accuracy: 0,
+    })
+}
 
 pub enum TestRoute {
     /// Gets a longer + more complex route.
@@ -74,15 +110,18 @@ pub fn gen_dummy_route_step(
 ///
 /// # Arguments
 ///
-/// * `coordinates` - A vector of (longitude, latitude) pairs that will be converted to `GeographicCoordinate`s
-pub fn gen_route_step_with_coords(coordinates: Vec<(f64, f64)>) -> RouteStep {
+/// * `coordinates` - A vector of coordinates
+pub fn gen_route_step_with_coords(coordinates: Vec<Coord>) -> RouteStep {
     if coordinates.len() < 2 {
         panic!("A route step requires at least 2 coordinates");
     }
 
     let geo_coordinates: Vec<GeographicCoordinate> = coordinates
         .into_iter()
-        .map(|(lng, lat)| GeographicCoordinate { lng, lat })
+        .map(|coord| GeographicCoordinate {
+            lng: coord.x,
+            lat: coord.y,
+        })
         .collect();
 
     // Calculate the total distance along the route
@@ -155,6 +194,11 @@ fn create_timestamp_redaction(
                 Ok(_) => "[timestamp]",
                 Err(_) => "[invalid-timestamp]",
             }
+        } else if let Some(timestamp_num) = value.as_i64() {
+            match DateTime::<Utc>::from_timestamp_millis(timestamp_num) {
+                Some(_) => "[timestamp]",
+                None => "[invalid-timestamp]",
+            }
         } else {
             "[unexpected-value]"
         }
@@ -196,6 +240,14 @@ pub(crate) fn nav_controller_insta_settings() -> Settings {
         ".**.endedAt",
         dynamic_redaction(create_timestamp_redaction()),
     );
+    settings.add_redaction(
+        ".**.timestamp",
+        dynamic_redaction(create_timestamp_redaction()),
+    );
+    settings.add_redaction(
+        ".**.initial_timestamp",
+        dynamic_redaction(create_timestamp_redaction()),
+    );
 
     settings.add_redaction(
         ".**.distanceTraveled",
@@ -217,6 +269,7 @@ pub(crate) fn nav_controller_insta_settings() -> Settings {
         ".**.durationRemaining",
         dynamic_redaction(create_distance_redaction()),
     );
+    settings.add_redaction(".version", "[version]");
 
     settings
 }

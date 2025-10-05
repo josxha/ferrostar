@@ -30,8 +30,12 @@ pub mod algorithms;
 pub mod deviation_detection;
 pub mod models;
 pub mod navigation_controller;
+pub mod navigation_session;
 pub mod routing_adapters;
 pub mod simulation;
+
+#[cfg(test)]
+pub(crate) mod test_utils;
 
 #[cfg(target_os = "android")]
 fn init_logger() {

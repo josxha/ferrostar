@@ -1,12 +1,15 @@
 //! The navigation state machine.
 
 pub mod models;
-pub mod recording;
 pub mod step_advance;
 
 #[cfg(test)]
 pub(crate) mod test_helpers;
 
+#[cfg(feature = "wasm-bindgen")]
+use crate::navigation_controller::models::{
+    SerializableNavState, SerializableNavigationControllerConfig,
+};
 use crate::{
     algorithms::{
         advance_step, apply_snapped_course, calculate_trip_progress,
@@ -14,6 +17,7 @@ use crate::{
     },
     models::{Route, RouteStep, UserLocation, Waypoint},
     navigation_controller::models::TripSummary,
+    navigation_session::{recording::NavigationRecorder, NavigationObserver, NavigationSession},
 };
 use chrono::Utc;
 use geo::{
@@ -25,9 +29,6 @@ use models::{
 };
 use std::clone::Clone;
 use std::sync::Arc;
-
-#[cfg(feature = "wasm-bindgen")]
-use crate::navigation_controller::models::{JsNavState, JsNavigationControllerConfig};
 #[cfg(feature = "wasm-bindgen")]
 use wasm_bindgen::{prelude::wasm_bindgen, JsValue};
 
@@ -38,6 +39,7 @@ use wasm_bindgen::{prelude::wasm_bindgen, JsValue};
 /// around [`NavigationController`] in a composable manner.
 #[cfg_attr(feature = "uniffi", uniffi::export)]
 pub trait Navigator: Send + Sync {
+    fn route(&self) -> Route;
     fn get_initial_state(&self, location: UserLocation) -> NavState;
     fn advance_to_next_step(&self, state: NavState) -> NavState;
     fn update_user_location(&self, location: UserLocation, state: NavState) -> NavState;
@@ -53,14 +55,20 @@ pub fn create_navigator(
     config: NavigationControllerConfig,
     should_record: bool,
 ) -> Arc<dyn Navigator> {
-    if should_record {
-        // Creates a navigation controller with a wrapper that records events.
-        // TODO: Currently just returns the regular controller
-        Arc::new(NavigationController { route, config })
+    let observers: Vec<Arc<dyn NavigationObserver>> = if should_record {
+        vec![Arc::new(NavigationRecorder::new(
+            route.clone(),
+            config.clone(),
+        ))]
     } else {
-        // Creates a normal navigation controller.
-        Arc::new(NavigationController { route, config })
-    }
+        vec![]
+    };
+
+    // Creates a normal navigation controller.
+    Arc::new(NavigationSession::new(
+        Arc::new(NavigationController::new(route, config)),
+        observers,
+    ))
 }
 
 /// Manages the navigation lifecycle through a route,
@@ -85,6 +93,11 @@ impl NavigationController {
 }
 
 impl Navigator for NavigationController {
+    /// The route associated with this controller.
+    fn route(&self) -> Route {
+        self.route.clone()
+    }
+
     /// Returns initial trip state as if the user had just started the route with no progress.
     fn get_initial_state(&self, location: UserLocation) -> NavState {
         let remaining_steps = self.route.steps.clone();
@@ -180,9 +193,7 @@ impl Navigator for NavigationController {
 
                         NavState::new(trip_state, state.step_advance_condition())
                     }
-                    StepAdvanceStatus::EndOfRoute => {
-                        NavState::complete(user_location, summary.clone())
-                    }
+                    StepAdvanceStatus::EndOfRoute => NavState::complete(user_location, summary),
                 }
             }
             // Pass through
@@ -232,6 +243,7 @@ impl Navigator for NavigationController {
                     )
                 };
 
+                let should_advance = step_advance_result.should_advance();
                 let intermediate_nav_state = NavState::new(
                     self.create_intermediate_trip_state(
                         state.trip_state(),
@@ -243,7 +255,7 @@ impl Navigator for NavigationController {
                     step_advance_result.next_iteration,
                 );
 
-                if step_advance_result.should_advance {
+                if should_advance {
                     // Advance to the next step
                     return self.advance_to_next_step(intermediate_nav_state);
                 }
@@ -392,6 +404,8 @@ impl NavigationController {
 }
 
 /// JavaScript wrapper for `NavigationController`.
+/// This wrapper is required because `NavigationController` cannot be directly converted to a JavaScript object
+/// and requires serialization/deserialization of its methods' inputs and outputs.
 #[cfg(feature = "wasm-bindgen")]
 #[wasm_bindgen(js_name = NavigationController)]
 pub struct JsNavigationController(Arc<dyn Navigator>);
@@ -406,7 +420,8 @@ impl JsNavigationController {
         should_record: JsValue,
     ) -> Result<JsNavigationController, JsValue> {
         let route: Route = serde_wasm_bindgen::from_value(route)?;
-        let config: JsNavigationControllerConfig = serde_wasm_bindgen::from_value(config)?;
+        let config: SerializableNavigationControllerConfig =
+            serde_wasm_bindgen::from_value(config)?;
         let should_record: bool = serde_wasm_bindgen::from_value(should_record)?;
 
         Ok(JsNavigationController(create_navigator(
@@ -420,17 +435,17 @@ impl JsNavigationController {
     pub fn get_initial_state(&self, location: JsValue) -> Result<JsValue, JsValue> {
         let location: UserLocation = serde_wasm_bindgen::from_value(location)?;
         let nav_state = self.0.get_initial_state(location);
-        let result: JsNavState = nav_state.into();
+        let result: SerializableNavState = nav_state.into();
 
         serde_wasm_bindgen::to_value(&result).map_err(|e| JsValue::from_str(&format!("{:?}", e)))
     }
 
     #[wasm_bindgen(js_name = advanceToNextStep)]
     pub fn advance_to_next_step(&self, state: JsValue) -> Result<JsValue, JsValue> {
-        let state: JsNavState = serde_wasm_bindgen::from_value(state)?;
+        let state: SerializableNavState = serde_wasm_bindgen::from_value(state)?;
         let new_state = self.0.advance_to_next_step(state.into());
 
-        serde_wasm_bindgen::to_value(&JsNavState::from(new_state))
+        serde_wasm_bindgen::to_value(&SerializableNavState::from(new_state))
             .map_err(|e| JsValue::from_str(&format!("{:?}", e)))
     }
 
@@ -441,10 +456,10 @@ impl JsNavigationController {
         state: JsValue,
     ) -> Result<JsValue, JsValue> {
         let location: UserLocation = serde_wasm_bindgen::from_value(location)?;
-        let state: JsNavState = serde_wasm_bindgen::from_value(state)?;
+        let state: SerializableNavState = serde_wasm_bindgen::from_value(state)?;
         let new_state = self.0.update_user_location(location, state.into());
 
-        serde_wasm_bindgen::to_value(&JsNavState::from(new_state))
+        serde_wasm_bindgen::to_value(&SerializableNavState::from(new_state))
             .map_err(|e| JsValue::from_str(&format!("{:?}", e)))
     }
 }
@@ -453,13 +468,13 @@ impl JsNavigationController {
 mod tests {
     use super::step_advance::StepAdvanceCondition;
     use super::*;
-    use crate::deviation_detection::{RouteDeviation, RouteDeviationTracking};
-    use crate::navigation_controller::models::CourseFiltering;
+    use crate::deviation_detection::RouteDeviation;
     use crate::navigation_controller::step_advance::conditions::{
         DistanceEntryAndExitCondition, DistanceToEndOfStepCondition,
     };
     use crate::navigation_controller::test_helpers::{
-        get_test_route, nav_controller_insta_settings, TestRoute,
+        get_test_navigation_controller_config, get_test_route, nav_controller_insta_settings,
+        TestRoute,
     };
     use crate::simulation::{
         advance_location_simulation, location_simulation_from_route, LocationBias,
@@ -469,30 +484,16 @@ mod tests {
     fn test_full_route_state_snapshot(
         route: Route,
         step_advance_condition: Arc<dyn StepAdvanceCondition>,
-    ) -> Vec<TripState> {
+        should_record: bool,
+    ) -> (Arc<dyn Navigator>, Vec<NavState>) {
         let mut simulation_state =
             location_simulation_from_route(&route, Some(10.0), LocationBias::None)
                 .expect("Unable to create simulation");
 
         let controller = create_navigator(
             route,
-            NavigationControllerConfig {
-                waypoint_advance: WaypointAdvanceMode::WaypointWithinRange(100.0),
-                // Careful setup: if the user is ever off the route
-                // (ex: because of an improper automatic step advance),
-                // we want to know about it.
-                route_deviation_tracking: RouteDeviationTracking::StaticThreshold {
-                    minimum_horizontal_accuracy: 0,
-                    max_acceptable_deviation: 0.0,
-                },
-                snapped_location_course_filtering: CourseFiltering::Raw,
-                step_advance_condition,
-                arrival_step_advance_condition: Arc::new(DistanceToEndOfStepCondition {
-                    distance: 5,
-                    minimum_horizontal_accuracy: 0,
-                }),
-            },
-            false,
+            get_test_navigation_controller_config(step_advance_condition),
+            should_record,
         );
 
         let mut state = controller.get_initial_state(simulation_state.current_location);
@@ -535,7 +536,7 @@ mod tests {
             states.push(new_state);
         }
 
-        states.into_iter().map(|state| state.trip_state()).collect()
+        (controller, states)
     }
 
     // Full simulations for several routes with different settings
@@ -543,59 +544,84 @@ mod tests {
     #[test]
     fn test_extended_exact_distance() {
         nav_controller_insta_settings().bind(|| {
-            insta::assert_yaml_snapshot!(test_full_route_state_snapshot(
+            let (_, states) = test_full_route_state_snapshot(
                 get_test_route(TestRoute::Extended),
                 Arc::new(DistanceToEndOfStepCondition {
                     distance: 0,
                     minimum_horizontal_accuracy: 0,
-                })
-            ));
+                }),
+                false,
+            );
+            insta::assert_yaml_snapshot!(states
+                .into_iter()
+                .map(|state| state.trip_state())
+                .collect::<Vec<_>>());
         });
     }
 
     #[test]
     fn test_extended_relative_linestring() {
         nav_controller_insta_settings().bind(|| {
-            insta::assert_yaml_snapshot!(test_full_route_state_snapshot(
+            let (_, states) = test_full_route_state_snapshot(
                 get_test_route(TestRoute::Extended),
-                Arc::new(DistanceEntryAndExitCondition::new(0, 0, 0))
-            ));
+                Arc::new(DistanceEntryAndExitCondition::exact()),
+                false,
+            );
+            insta::assert_yaml_snapshot!(states
+                .into_iter()
+                .map(|state| state.trip_state())
+                .collect::<Vec<_>>());
         });
     }
 
     #[test]
     fn test_self_intersecting_exact_distance() {
         nav_controller_insta_settings().bind(|| {
-            insta::assert_yaml_snapshot!(test_full_route_state_snapshot(
+            let (_, states) = test_full_route_state_snapshot(
                 get_test_route(TestRoute::SelfIntersecting),
                 Arc::new(DistanceToEndOfStepCondition {
                     distance: 0,
                     minimum_horizontal_accuracy: 0,
-                })
-            ));
+                }),
+                false,
+            );
+            insta::assert_yaml_snapshot!(states
+                .into_iter()
+                .map(|state| state.trip_state())
+                .collect::<Vec<_>>());
         });
     }
 
     #[test]
     fn test_self_intersecting_relative_linestring() {
         nav_controller_insta_settings().bind(|| {
-            insta::assert_yaml_snapshot!(test_full_route_state_snapshot(
+            let (_, states) = test_full_route_state_snapshot(
                 get_test_route(TestRoute::SelfIntersecting),
-                Arc::new(DistanceEntryAndExitCondition::new(0, 0, 0))
-            ));
+                Arc::new(DistanceEntryAndExitCondition::exact()),
+                false,
+            );
+            insta::assert_yaml_snapshot!(states
+                .into_iter()
+                .map(|state| state.trip_state())
+                .collect::<Vec<_>>());
         });
     }
 
     #[test]
     fn test_self_intersecting_relative_linestring_min_line_distance() {
         nav_controller_insta_settings().bind(|| {
-            insta::assert_yaml_snapshot!(test_full_route_state_snapshot(
+            let (_, states) = test_full_route_state_snapshot(
                 get_test_route(TestRoute::SelfIntersecting),
                 Arc::new(DistanceToEndOfStepCondition {
                     distance: 0,
                     minimum_horizontal_accuracy: 0,
-                })
-            ));
+                }),
+                false,
+            );
+            insta::assert_yaml_snapshot!(states
+                .into_iter()
+                .map(|state| state.trip_state())
+                .collect::<Vec<_>>());
         });
     }
 }
