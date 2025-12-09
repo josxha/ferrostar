@@ -3,12 +3,15 @@
 
 // ignore_for_file: unused_import, unused_element, unnecessary_import, duplicate_ignore, invalid_use_of_internal_member, annotate_overrides, non_constant_identifier_names, curly_braces_in_flow_control_structures, prefer_const_literals_to_create_immutables, unused_field
 
+import 'api/models.dart';
+import 'api/navigation.dart';
 import 'api/simple.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi' as ffi;
 import 'frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
+import 'package:uuid/uuid.dart';
 
 abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   RustLibApiImplPlatform({
@@ -18,11 +21,312 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     required super.portManager,
   });
 
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_FlutterNavStatePtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavStatePtr;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_FlutterNavigationControllerPtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationControllerPtr;
+
+  @protected
+  FlutterNavState
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    dynamic raw,
+  );
+
+  @protected
+  FlutterNavigationController
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    dynamic raw,
+  );
+
+  @protected
+  FlutterNavState
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    dynamic raw,
+  );
+
+  @protected
+  FlutterNavigationController
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    dynamic raw,
+  );
+
+  @protected
+  DateTime dco_decode_Chrono_Utc(dynamic raw);
+
+  @protected
+  FlutterNavState
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    dynamic raw,
+  );
+
+  @protected
+  FlutterNavigationController
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    dynamic raw,
+  );
+
   @protected
   String dco_decode_String(dynamic raw);
 
   @protected
+  UuidValue dco_decode_Uuid(dynamic raw);
+
+  @protected
+  BlockedLane dco_decode_blocked_lane(dynamic raw);
+
+  @protected
+  bool dco_decode_bool(dynamic raw);
+
+  @protected
+  BoundingBox dco_decode_bounding_box(dynamic raw);
+
+  @protected
+  DateTime dco_decode_box_autoadd_Chrono_Utc(dynamic raw);
+
+  @protected
+  bool dco_decode_box_autoadd_bool(dynamic raw);
+
+  @protected
+  BoundingBox dco_decode_box_autoadd_bounding_box(dynamic raw);
+
+  @protected
+  Congestion dco_decode_box_autoadd_congestion(dynamic raw);
+
+  @protected
+  CourseOverGround dco_decode_box_autoadd_course_over_ground(dynamic raw);
+
+  @protected
+  double dco_decode_box_autoadd_f_64(dynamic raw);
+
+  @protected
+  FlutterNavigationControllerConfig
+  dco_decode_box_autoadd_flutter_navigation_controller_config(dynamic raw);
+
+  @protected
+  FlutterUserLocation dco_decode_box_autoadd_flutter_user_location(dynamic raw);
+
+  @protected
+  Impact dco_decode_box_autoadd_impact(dynamic raw);
+
+  @protected
+  ManeuverModifier dco_decode_box_autoadd_maneuver_modifier(dynamic raw);
+
+  @protected
+  ManeuverType dco_decode_box_autoadd_maneuver_type(dynamic raw);
+
+  @protected
+  Route dco_decode_box_autoadd_route(dynamic raw);
+
+  @protected
+  RouteDeviation dco_decode_box_autoadd_route_deviation(dynamic raw);
+
+  @protected
+  Speed dco_decode_box_autoadd_speed(dynamic raw);
+
+  @protected
+  SpokenInstruction dco_decode_box_autoadd_spoken_instruction(dynamic raw);
+
+  @protected
+  TripProgress dco_decode_box_autoadd_trip_progress(dynamic raw);
+
+  @protected
+  TripSummary dco_decode_box_autoadd_trip_summary(dynamic raw);
+
+  @protected
+  int dco_decode_box_autoadd_u_16(dynamic raw);
+
+  @protected
+  BigInt dco_decode_box_autoadd_u_64(dynamic raw);
+
+  @protected
+  VisualInstruction dco_decode_box_autoadd_visual_instruction(dynamic raw);
+
+  @protected
+  VisualInstructionContent dco_decode_box_autoadd_visual_instruction_content(
+    dynamic raw,
+  );
+
+  @protected
+  Congestion dco_decode_congestion(dynamic raw);
+
+  @protected
+  CourseFiltering dco_decode_course_filtering(dynamic raw);
+
+  @protected
+  CourseOverGround dco_decode_course_over_ground(dynamic raw);
+
+  @protected
+  double dco_decode_f_64(dynamic raw);
+
+  @protected
+  FlutterNavigationControllerConfig
+  dco_decode_flutter_navigation_controller_config(dynamic raw);
+
+  @protected
+  FlutterRouteDeviationTracking dco_decode_flutter_route_deviation_tracking(
+    dynamic raw,
+  );
+
+  @protected
+  FlutterTripState dco_decode_flutter_trip_state(dynamic raw);
+
+  @protected
+  FlutterUserLocation dco_decode_flutter_user_location(dynamic raw);
+
+  @protected
+  GeographicCoordinate dco_decode_geographic_coordinate(dynamic raw);
+
+  @protected
+  int dco_decode_i_32(dynamic raw);
+
+  @protected
+  PlatformInt64 dco_decode_i_64(dynamic raw);
+
+  @protected
+  Impact dco_decode_impact(dynamic raw);
+
+  @protected
+  Incident dco_decode_incident(dynamic raw);
+
+  @protected
+  IncidentType dco_decode_incident_type(dynamic raw);
+
+  @protected
+  LaneInfo dco_decode_lane_info(dynamic raw);
+
+  @protected
+  List<String> dco_decode_list_String(dynamic raw);
+
+  @protected
+  List<BlockedLane> dco_decode_list_blocked_lane(dynamic raw);
+
+  @protected
+  List<GeographicCoordinate> dco_decode_list_geographic_coordinate(dynamic raw);
+
+  @protected
+  List<Incident> dco_decode_list_incident(dynamic raw);
+
+  @protected
+  List<LaneInfo> dco_decode_list_lane_info(dynamic raw);
+
+  @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
+
+  @protected
+  List<RouteStep> dco_decode_list_route_step(dynamic raw);
+
+  @protected
+  List<SerializableStepAdvanceCondition>
+  dco_decode_list_serializable_step_advance_condition(dynamic raw);
+
+  @protected
+  List<SpokenInstruction> dco_decode_list_spoken_instruction(dynamic raw);
+
+  @protected
+  List<VisualInstruction> dco_decode_list_visual_instruction(dynamic raw);
+
+  @protected
+  List<Waypoint> dco_decode_list_waypoint(dynamic raw);
+
+  @protected
+  ManeuverModifier dco_decode_maneuver_modifier(dynamic raw);
+
+  @protected
+  ManeuverType dco_decode_maneuver_type(dynamic raw);
+
+  @protected
+  String? dco_decode_opt_String(dynamic raw);
+
+  @protected
+  DateTime? dco_decode_opt_box_autoadd_Chrono_Utc(dynamic raw);
+
+  @protected
+  bool? dco_decode_opt_box_autoadd_bool(dynamic raw);
+
+  @protected
+  BoundingBox? dco_decode_opt_box_autoadd_bounding_box(dynamic raw);
+
+  @protected
+  Congestion? dco_decode_opt_box_autoadd_congestion(dynamic raw);
+
+  @protected
+  CourseOverGround? dco_decode_opt_box_autoadd_course_over_ground(dynamic raw);
+
+  @protected
+  double? dco_decode_opt_box_autoadd_f_64(dynamic raw);
+
+  @protected
+  FlutterUserLocation? dco_decode_opt_box_autoadd_flutter_user_location(
+    dynamic raw,
+  );
+
+  @protected
+  Impact? dco_decode_opt_box_autoadd_impact(dynamic raw);
+
+  @protected
+  ManeuverModifier? dco_decode_opt_box_autoadd_maneuver_modifier(dynamic raw);
+
+  @protected
+  ManeuverType? dco_decode_opt_box_autoadd_maneuver_type(dynamic raw);
+
+  @protected
+  Speed? dco_decode_opt_box_autoadd_speed(dynamic raw);
+
+  @protected
+  SpokenInstruction? dco_decode_opt_box_autoadd_spoken_instruction(dynamic raw);
+
+  @protected
+  int? dco_decode_opt_box_autoadd_u_16(dynamic raw);
+
+  @protected
+  BigInt? dco_decode_opt_box_autoadd_u_64(dynamic raw);
+
+  @protected
+  VisualInstruction? dco_decode_opt_box_autoadd_visual_instruction(dynamic raw);
+
+  @protected
+  VisualInstructionContent?
+  dco_decode_opt_box_autoadd_visual_instruction_content(dynamic raw);
+
+  @protected
+  List<String>? dco_decode_opt_list_String(dynamic raw);
+
+  @protected
+  List<LaneInfo>? dco_decode_opt_list_lane_info(dynamic raw);
+
+  @protected
+  Route dco_decode_route(dynamic raw);
+
+  @protected
+  RouteDeviation dco_decode_route_deviation(dynamic raw);
+
+  @protected
+  RouteStep dco_decode_route_step(dynamic raw);
+
+  @protected
+  SerializableStepAdvanceCondition
+  dco_decode_serializable_step_advance_condition(dynamic raw);
+
+  @protected
+  Speed dco_decode_speed(dynamic raw);
+
+  @protected
+  SpokenInstruction dco_decode_spoken_instruction(dynamic raw);
+
+  @protected
+  TripProgress dco_decode_trip_progress(dynamic raw);
+
+  @protected
+  TripSummary dco_decode_trip_summary(dynamic raw);
+
+  @protected
+  int dco_decode_u_16(dynamic raw);
+
+  @protected
+  BigInt dco_decode_u_64(dynamic raw);
 
   @protected
   int dco_decode_u_8(dynamic raw);
@@ -31,10 +335,367 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void dco_decode_unit(dynamic raw);
 
   @protected
+  BigInt dco_decode_usize(dynamic raw);
+
+  @protected
+  VisualInstruction dco_decode_visual_instruction(dynamic raw);
+
+  @protected
+  VisualInstructionContent dco_decode_visual_instruction_content(dynamic raw);
+
+  @protected
+  Waypoint dco_decode_waypoint(dynamic raw);
+
+  @protected
+  WaypointAdvanceMode dco_decode_waypoint_advance_mode(dynamic raw);
+
+  @protected
+  WaypointKind dco_decode_waypoint_kind(dynamic raw);
+
+  @protected
+  FlutterNavState
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  FlutterNavigationController
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  FlutterNavState
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  FlutterNavigationController
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  DateTime sse_decode_Chrono_Utc(SseDeserializer deserializer);
+
+  @protected
+  FlutterNavState
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  FlutterNavigationController
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   String sse_decode_String(SseDeserializer deserializer);
 
   @protected
+  UuidValue sse_decode_Uuid(SseDeserializer deserializer);
+
+  @protected
+  BlockedLane sse_decode_blocked_lane(SseDeserializer deserializer);
+
+  @protected
+  bool sse_decode_bool(SseDeserializer deserializer);
+
+  @protected
+  BoundingBox sse_decode_bounding_box(SseDeserializer deserializer);
+
+  @protected
+  DateTime sse_decode_box_autoadd_Chrono_Utc(SseDeserializer deserializer);
+
+  @protected
+  bool sse_decode_box_autoadd_bool(SseDeserializer deserializer);
+
+  @protected
+  BoundingBox sse_decode_box_autoadd_bounding_box(SseDeserializer deserializer);
+
+  @protected
+  Congestion sse_decode_box_autoadd_congestion(SseDeserializer deserializer);
+
+  @protected
+  CourseOverGround sse_decode_box_autoadd_course_over_ground(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  double sse_decode_box_autoadd_f_64(SseDeserializer deserializer);
+
+  @protected
+  FlutterNavigationControllerConfig
+  sse_decode_box_autoadd_flutter_navigation_controller_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  FlutterUserLocation sse_decode_box_autoadd_flutter_user_location(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Impact sse_decode_box_autoadd_impact(SseDeserializer deserializer);
+
+  @protected
+  ManeuverModifier sse_decode_box_autoadd_maneuver_modifier(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ManeuverType sse_decode_box_autoadd_maneuver_type(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Route sse_decode_box_autoadd_route(SseDeserializer deserializer);
+
+  @protected
+  RouteDeviation sse_decode_box_autoadd_route_deviation(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Speed sse_decode_box_autoadd_speed(SseDeserializer deserializer);
+
+  @protected
+  SpokenInstruction sse_decode_box_autoadd_spoken_instruction(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  TripProgress sse_decode_box_autoadd_trip_progress(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  TripSummary sse_decode_box_autoadd_trip_summary(SseDeserializer deserializer);
+
+  @protected
+  int sse_decode_box_autoadd_u_16(SseDeserializer deserializer);
+
+  @protected
+  BigInt sse_decode_box_autoadd_u_64(SseDeserializer deserializer);
+
+  @protected
+  VisualInstruction sse_decode_box_autoadd_visual_instruction(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  VisualInstructionContent sse_decode_box_autoadd_visual_instruction_content(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Congestion sse_decode_congestion(SseDeserializer deserializer);
+
+  @protected
+  CourseFiltering sse_decode_course_filtering(SseDeserializer deserializer);
+
+  @protected
+  CourseOverGround sse_decode_course_over_ground(SseDeserializer deserializer);
+
+  @protected
+  double sse_decode_f_64(SseDeserializer deserializer);
+
+  @protected
+  FlutterNavigationControllerConfig
+  sse_decode_flutter_navigation_controller_config(SseDeserializer deserializer);
+
+  @protected
+  FlutterRouteDeviationTracking sse_decode_flutter_route_deviation_tracking(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  FlutterTripState sse_decode_flutter_trip_state(SseDeserializer deserializer);
+
+  @protected
+  FlutterUserLocation sse_decode_flutter_user_location(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  GeographicCoordinate sse_decode_geographic_coordinate(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  int sse_decode_i_32(SseDeserializer deserializer);
+
+  @protected
+  PlatformInt64 sse_decode_i_64(SseDeserializer deserializer);
+
+  @protected
+  Impact sse_decode_impact(SseDeserializer deserializer);
+
+  @protected
+  Incident sse_decode_incident(SseDeserializer deserializer);
+
+  @protected
+  IncidentType sse_decode_incident_type(SseDeserializer deserializer);
+
+  @protected
+  LaneInfo sse_decode_lane_info(SseDeserializer deserializer);
+
+  @protected
+  List<String> sse_decode_list_String(SseDeserializer deserializer);
+
+  @protected
+  List<BlockedLane> sse_decode_list_blocked_lane(SseDeserializer deserializer);
+
+  @protected
+  List<GeographicCoordinate> sse_decode_list_geographic_coordinate(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<Incident> sse_decode_list_incident(SseDeserializer deserializer);
+
+  @protected
+  List<LaneInfo> sse_decode_list_lane_info(SseDeserializer deserializer);
+
+  @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
+
+  @protected
+  List<RouteStep> sse_decode_list_route_step(SseDeserializer deserializer);
+
+  @protected
+  List<SerializableStepAdvanceCondition>
+  sse_decode_list_serializable_step_advance_condition(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<SpokenInstruction> sse_decode_list_spoken_instruction(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<VisualInstruction> sse_decode_list_visual_instruction(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<Waypoint> sse_decode_list_waypoint(SseDeserializer deserializer);
+
+  @protected
+  ManeuverModifier sse_decode_maneuver_modifier(SseDeserializer deserializer);
+
+  @protected
+  ManeuverType sse_decode_maneuver_type(SseDeserializer deserializer);
+
+  @protected
+  String? sse_decode_opt_String(SseDeserializer deserializer);
+
+  @protected
+  DateTime? sse_decode_opt_box_autoadd_Chrono_Utc(SseDeserializer deserializer);
+
+  @protected
+  bool? sse_decode_opt_box_autoadd_bool(SseDeserializer deserializer);
+
+  @protected
+  BoundingBox? sse_decode_opt_box_autoadd_bounding_box(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Congestion? sse_decode_opt_box_autoadd_congestion(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  CourseOverGround? sse_decode_opt_box_autoadd_course_over_ground(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer);
+
+  @protected
+  FlutterUserLocation? sse_decode_opt_box_autoadd_flutter_user_location(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Impact? sse_decode_opt_box_autoadd_impact(SseDeserializer deserializer);
+
+  @protected
+  ManeuverModifier? sse_decode_opt_box_autoadd_maneuver_modifier(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ManeuverType? sse_decode_opt_box_autoadd_maneuver_type(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Speed? sse_decode_opt_box_autoadd_speed(SseDeserializer deserializer);
+
+  @protected
+  SpokenInstruction? sse_decode_opt_box_autoadd_spoken_instruction(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  int? sse_decode_opt_box_autoadd_u_16(SseDeserializer deserializer);
+
+  @protected
+  BigInt? sse_decode_opt_box_autoadd_u_64(SseDeserializer deserializer);
+
+  @protected
+  VisualInstruction? sse_decode_opt_box_autoadd_visual_instruction(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  VisualInstructionContent?
+  sse_decode_opt_box_autoadd_visual_instruction_content(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<String>? sse_decode_opt_list_String(SseDeserializer deserializer);
+
+  @protected
+  List<LaneInfo>? sse_decode_opt_list_lane_info(SseDeserializer deserializer);
+
+  @protected
+  Route sse_decode_route(SseDeserializer deserializer);
+
+  @protected
+  RouteDeviation sse_decode_route_deviation(SseDeserializer deserializer);
+
+  @protected
+  RouteStep sse_decode_route_step(SseDeserializer deserializer);
+
+  @protected
+  SerializableStepAdvanceCondition
+  sse_decode_serializable_step_advance_condition(SseDeserializer deserializer);
+
+  @protected
+  Speed sse_decode_speed(SseDeserializer deserializer);
+
+  @protected
+  SpokenInstruction sse_decode_spoken_instruction(SseDeserializer deserializer);
+
+  @protected
+  TripProgress sse_decode_trip_progress(SseDeserializer deserializer);
+
+  @protected
+  TripSummary sse_decode_trip_summary(SseDeserializer deserializer);
+
+  @protected
+  int sse_decode_u_16(SseDeserializer deserializer);
+
+  @protected
+  BigInt sse_decode_u_64(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_8(SseDeserializer deserializer);
@@ -43,13 +704,278 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_decode_unit(SseDeserializer deserializer);
 
   @protected
-  int sse_decode_i_32(SseDeserializer deserializer);
+  BigInt sse_decode_usize(SseDeserializer deserializer);
 
   @protected
-  bool sse_decode_bool(SseDeserializer deserializer);
+  VisualInstruction sse_decode_visual_instruction(SseDeserializer deserializer);
+
+  @protected
+  VisualInstructionContent sse_decode_visual_instruction_content(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  Waypoint sse_decode_waypoint(SseDeserializer deserializer);
+
+  @protected
+  WaypointAdvanceMode sse_decode_waypoint_advance_mode(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  WaypointKind sse_decode_waypoint_kind(SseDeserializer deserializer);
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    FlutterNavState self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    FlutterNavigationController self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    FlutterNavState self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    FlutterNavigationController self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_Chrono_Utc(DateTime self, SseSerializer serializer);
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    FlutterNavState self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    FlutterNavigationController self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_String(String self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_Uuid(UuidValue self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_blocked_lane(BlockedLane self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_bool(bool self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_bounding_box(BoundingBox self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_Chrono_Utc(
+    DateTime self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_bool(bool self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_bounding_box(
+    BoundingBox self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_congestion(
+    Congestion self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_course_over_ground(
+    CourseOverGround self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_flutter_navigation_controller_config(
+    FlutterNavigationControllerConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_flutter_user_location(
+    FlutterUserLocation self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_impact(Impact self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_maneuver_modifier(
+    ManeuverModifier self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_maneuver_type(
+    ManeuverType self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_route(Route self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_route_deviation(
+    RouteDeviation self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_speed(Speed self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_spoken_instruction(
+    SpokenInstruction self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_trip_progress(
+    TripProgress self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_trip_summary(
+    TripSummary self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_u_16(int self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_u_64(BigInt self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_visual_instruction(
+    VisualInstruction self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_visual_instruction_content(
+    VisualInstructionContent self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_congestion(Congestion self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_course_filtering(
+    CourseFiltering self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_course_over_ground(
+    CourseOverGround self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_f_64(double self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_flutter_navigation_controller_config(
+    FlutterNavigationControllerConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_flutter_route_deviation_tracking(
+    FlutterRouteDeviationTracking self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_flutter_trip_state(
+    FlutterTripState self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_flutter_user_location(
+    FlutterUserLocation self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_geographic_coordinate(
+    GeographicCoordinate self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_i_32(int self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_impact(Impact self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_incident(Incident self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_incident_type(IncidentType self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_lane_info(LaneInfo self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_String(List<String> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_blocked_lane(
+    List<BlockedLane> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_geographic_coordinate(
+    List<GeographicCoordinate> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_incident(List<Incident> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_lane_info(List<LaneInfo> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_prim_u_8_strict(
@@ -58,16 +984,205 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_route_step(
+    List<RouteStep> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_serializable_step_advance_condition(
+    List<SerializableStepAdvanceCondition> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_spoken_instruction(
+    List<SpokenInstruction> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_visual_instruction(
+    List<VisualInstruction> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_waypoint(List<Waypoint> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_maneuver_modifier(
+    ManeuverModifier self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_maneuver_type(ManeuverType self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_String(String? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_Chrono_Utc(
+    DateTime? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_bool(bool? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_bounding_box(
+    BoundingBox? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_congestion(
+    Congestion? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_course_over_ground(
+    CourseOverGround? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_flutter_user_location(
+    FlutterUserLocation? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_impact(
+    Impact? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_maneuver_modifier(
+    ManeuverModifier? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_maneuver_type(
+    ManeuverType? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_speed(Speed? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_spoken_instruction(
+    SpokenInstruction? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_u_16(int? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_u_64(BigInt? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_visual_instruction(
+    VisualInstruction? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_visual_instruction_content(
+    VisualInstructionContent? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_list_String(List<String>? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_list_lane_info(
+    List<LaneInfo>? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_route(Route self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_route_deviation(
+    RouteDeviation self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_route_step(RouteStep self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_serializable_step_advance_condition(
+    SerializableStepAdvanceCondition self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_speed(Speed self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_spoken_instruction(
+    SpokenInstruction self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_trip_progress(TripProgress self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_trip_summary(TripSummary self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_u_16(int self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_u_64(BigInt self, SseSerializer serializer);
+
+  @protected
   void sse_encode_u_8(int self, SseSerializer serializer);
 
   @protected
   void sse_encode_unit(void self, SseSerializer serializer);
 
   @protected
-  void sse_encode_i_32(int self, SseSerializer serializer);
+  void sse_encode_usize(BigInt self, SseSerializer serializer);
 
   @protected
-  void sse_encode_bool(bool self, SseSerializer serializer);
+  void sse_encode_visual_instruction(
+    VisualInstruction self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_visual_instruction_content(
+    VisualInstructionContent self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_waypoint(Waypoint self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_waypoint_advance_mode(
+    WaypointAdvanceMode self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_waypoint_kind(WaypointKind self, SseSerializer serializer);
 }
 
 // Section: wire_class
@@ -83,4 +1198,72 @@ class RustLibWire implements BaseWire {
   /// The symbols are looked up in [dynamicLibrary].
   RustLibWire(ffi.DynamicLibrary dynamicLibrary)
     : _lookup = dynamicLibrary.lookup;
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavStatePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_flutter_ferrostar_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavStatePtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavStatePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_flutter_ferrostar_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavStatePtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationControllerPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_flutter_ferrostar_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController',
+      );
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationControllerPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationControllerPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+        'frbgen_flutter_ferrostar_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController',
+      );
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationControllerPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 }

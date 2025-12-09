@@ -25,6 +25,7 @@
 
 // Section: imports
 
+use crate::api::navigation::*;
 use flutter_rust_bridge::for_generated::byteorder::{NativeEndian, ReadBytesExt, WriteBytesExt};
 use flutter_rust_bridge::for_generated::{transform_result_dco, Lifetimeable, Lockable};
 use flutter_rust_bridge::{Handler, IntoIntoDart};
@@ -37,7 +38,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.11.1";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1918914929;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1746079739;
 
 // Section: executor
 
@@ -45,6 +46,324 @@ flutter_rust_bridge::frb_generated_default_handler!();
 
 // Section: wire_funcs
 
+fn wire__crate__api__navigation__FlutterNavState_trip_state_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "FlutterNavState_trip_state",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_that_guard = api_that_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::api::navigation::FlutterNavState::trip_state(&*api_that_guard),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__api__navigation__FlutterNavigationController_advance_to_next_step_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "FlutterNavigationController_advance_to_next_step",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<
+                    FlutterNavigationController,
+                >,
+            >>::sse_decode(&mut deserializer);
+            let api_state = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_that_guard = None;
+                    let mut api_state_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, false,
+                            ),
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_state, 1, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                            1 => api_state_guard = Some(api_state.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_that_guard = api_that_guard.unwrap();
+                    let api_state_guard = api_state_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::api::navigation::FlutterNavigationController::advance_to_next_step(
+                            &*api_that_guard,
+                            &*api_state_guard,
+                        ),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__api__navigation__FlutterNavigationController_get_initial_state_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "FlutterNavigationController_get_initial_state",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<
+                    FlutterNavigationController,
+                >,
+            >>::sse_decode(&mut deserializer);
+            let api_location =
+                <crate::api::models::FlutterUserLocation>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_that_guard = api_that_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::api::navigation::FlutterNavigationController::get_initial_state(
+                            &*api_that_guard,
+                            api_location,
+                        ),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__api__navigation__FlutterNavigationController_new_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "FlutterNavigationController_new",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_route = <crate::api::models::Route>::sse_decode(&mut deserializer);
+            let api_config = <crate::api::models::FlutterNavigationControllerConfig>::sse_decode(
+                &mut deserializer,
+            );
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::api::navigation::FlutterNavigationController::new(
+                            api_route, api_config,
+                        ),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__api__navigation__FlutterNavigationController_update_user_location_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "FlutterNavigationController_update_user_location",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<
+                    FlutterNavigationController,
+                >,
+            >>::sse_decode(&mut deserializer);
+            let api_location =
+                <crate::api::models::FlutterUserLocation>::sse_decode(&mut deserializer);
+            let api_state = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let mut api_that_guard = None;
+                    let mut api_state_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, false,
+                            ),
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_state, 1, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                            1 => api_state_guard = Some(api_state.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_that_guard = api_that_guard.unwrap();
+                    let api_state_guard = api_state_guard.unwrap();
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::api::navigation::FlutterNavigationController::update_user_location(
+                            &*api_that_guard,
+                            api_location,
+                            &*api_state_guard,
+                        ),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__api__simple__create_coordinate_string_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "create_coordinate_string",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_lat = <f64>::sse_decode(&mut deserializer);
+            let api_lng = <f64>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::api::simple::create_coordinate_string(api_lat, api_lng),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
 fn wire__crate__api__simple__greet_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -110,13 +429,648 @@ fn wire__crate__api__simple__init_app_impl(
     )
 }
 
+// Section: static_checks
+
+#[allow(clippy::unnecessary_literal_unwrap)]
+const _: fn() = || {
+    {
+        let BoundingBox = None::<crate::api::models::BoundingBox>.unwrap();
+        let _: crate::api::models::GeographicCoordinate = BoundingBox.sw;
+        let _: crate::api::models::GeographicCoordinate = BoundingBox.ne;
+    }
+    {
+        let Congestion = None::<crate::api::models::Congestion>.unwrap();
+        let _: u8 = Congestion.value;
+    }
+    {
+        let CourseOverGround = None::<crate::api::models::CourseOverGround>.unwrap();
+        let _: u16 = CourseOverGround.degrees;
+        let _: Option<u16> = CourseOverGround.accuracy;
+    }
+    {
+        let GeographicCoordinate = None::<crate::api::models::GeographicCoordinate>.unwrap();
+        let _: f64 = GeographicCoordinate.lat;
+        let _: f64 = GeographicCoordinate.lng;
+    }
+    {
+        let Incident = None::<crate::api::models::Incident>.unwrap();
+        let _: String = Incident.id;
+        let _: crate::api::models::IncidentType = Incident.incident_type;
+        let _: Option<String> = Incident.description;
+        let _: Option<String> = Incident.long_description;
+        let _: Option<chrono::DateTime<chrono::Utc>> = Incident.creation_time;
+        let _: Option<chrono::DateTime<chrono::Utc>> = Incident.start_time;
+        let _: Option<chrono::DateTime<chrono::Utc>> = Incident.end_time;
+        let _: Option<crate::api::models::Impact> = Incident.impact;
+        let _: Vec<crate::api::models::BlockedLane> = Incident.lanes_blocked;
+        let _: Option<crate::api::models::Congestion> = Incident.congestion;
+        let _: Option<bool> = Incident.closed;
+        let _: u64 = Incident.geometry_index_start;
+        let _: Option<u64> = Incident.geometry_index_end;
+        let _: Option<String> = Incident.sub_type;
+        let _: Option<String> = Incident.sub_type_description;
+        let _: Option<String> = Incident.iso_3166_1_alpha2;
+        let _: Option<String> = Incident.iso_3166_1_alpha3;
+        let _: Vec<String> = Incident.affected_road_names;
+        let _: Option<crate::api::models::BoundingBox> = Incident.bbox;
+    }
+    {
+        let LaneInfo = None::<crate::api::models::LaneInfo>.unwrap();
+        let _: bool = LaneInfo.active;
+        let _: Vec<String> = LaneInfo.directions;
+        let _: Option<String> = LaneInfo.active_direction;
+    }
+    {
+        let Route = None::<crate::api::models::Route>.unwrap();
+        let _: Vec<crate::api::models::GeographicCoordinate> = Route.geometry;
+        let _: crate::api::models::BoundingBox = Route.bbox;
+        let _: f64 = Route.distance;
+        let _: Vec<crate::api::models::Waypoint> = Route.waypoints;
+        let _: Vec<crate::api::models::RouteStep> = Route.steps;
+    }
+    match None::<crate::api::models::RouteDeviation>.unwrap() {
+        crate::api::models::RouteDeviation::NoDeviation => {}
+        crate::api::models::RouteDeviation::OffRoute {
+            deviation_from_route_line,
+        } => {
+            let _: f64 = deviation_from_route_line;
+        }
+    }
+    {
+        let RouteStep = None::<crate::api::models::RouteStep>.unwrap();
+        let _: Vec<crate::api::models::GeographicCoordinate> = RouteStep.geometry;
+        let _: f64 = RouteStep.distance;
+        let _: f64 = RouteStep.duration;
+        let _: Option<String> = RouteStep.road_name;
+        let _: Vec<String> = RouteStep.exits;
+        let _: String = RouteStep.instruction;
+        let _: Vec<crate::api::models::VisualInstruction> = RouteStep.visual_instructions;
+        let _: Vec<crate::api::models::SpokenInstruction> = RouteStep.spoken_instructions;
+        let _: Option<Vec<String>> = RouteStep.annotations;
+        let _: Vec<crate::api::models::Incident> = RouteStep.incidents;
+    }
+    match None::<crate::api::models::SerializableStepAdvanceCondition>.unwrap() {
+        crate::api::models::SerializableStepAdvanceCondition::Manual => {}
+        crate::api::models::SerializableStepAdvanceCondition::DistanceToEndOfStep {
+            distance,
+            minimum_horizontal_accuracy,
+        } => {
+            let _: u16 = distance;
+            let _: u16 = minimum_horizontal_accuracy;
+        }
+        crate::api::models::SerializableStepAdvanceCondition::DistanceFromStep {
+            distance,
+            minimum_horizontal_accuracy,
+        } => {
+            let _: u16 = distance;
+            let _: u16 = minimum_horizontal_accuracy;
+        }
+        crate::api::models::SerializableStepAdvanceCondition::DistanceEntryExit {
+            distance_to_end_of_step,
+            distance_after_end_step,
+            minimum_horizontal_accuracy,
+            has_reached_end_of_current_step,
+        } => {
+            let _: u16 = distance_to_end_of_step;
+            let _: u16 = distance_after_end_step;
+            let _: u16 = minimum_horizontal_accuracy;
+            let _: bool = has_reached_end_of_current_step;
+        }
+        crate::api::models::SerializableStepAdvanceCondition::OrAdvanceConditions {
+            conditions,
+        } => {
+            let _: Vec<crate::api::models::SerializableStepAdvanceCondition> = conditions;
+        }
+        crate::api::models::SerializableStepAdvanceCondition::AndAdvanceConditions {
+            conditions,
+        } => {
+            let _: Vec<crate::api::models::SerializableStepAdvanceCondition> = conditions;
+        }
+    }
+    {
+        let Speed = None::<crate::api::models::Speed>.unwrap();
+        let _: f64 = Speed.value;
+        let _: Option<f64> = Speed.accuracy;
+    }
+    {
+        let SpokenInstruction = None::<crate::api::models::SpokenInstruction>.unwrap();
+        let _: String = SpokenInstruction.text;
+        let _: Option<String> = SpokenInstruction.ssml;
+        let _: f64 = SpokenInstruction.trigger_distance_before_maneuver;
+        let _: uuid::Uuid = SpokenInstruction.utterance_id;
+    }
+    {
+        let TripProgress = None::<crate::api::models::TripProgress>.unwrap();
+        let _: f64 = TripProgress.distance_to_next_maneuver;
+        let _: f64 = TripProgress.distance_remaining;
+        let _: f64 = TripProgress.duration_remaining;
+    }
+    {
+        let TripSummary = None::<crate::api::models::TripSummary>.unwrap();
+        let _: f64 = TripSummary.distance_traveled;
+        let _: f64 = TripSummary.snapped_distance_traveled;
+        let _: chrono::DateTime<chrono::Utc> = TripSummary.started_at;
+        let _: Option<chrono::DateTime<chrono::Utc>> = TripSummary.ended_at;
+    }
+    {
+        let VisualInstruction = None::<crate::api::models::VisualInstruction>.unwrap();
+        let _: crate::api::models::VisualInstructionContent = VisualInstruction.primary_content;
+        let _: Option<crate::api::models::VisualInstructionContent> =
+            VisualInstruction.secondary_content;
+        let _: Option<crate::api::models::VisualInstructionContent> = VisualInstruction.sub_content;
+        let _: f64 = VisualInstruction.trigger_distance_before_maneuver;
+    }
+    {
+        let VisualInstructionContent =
+            None::<crate::api::models::VisualInstructionContent>.unwrap();
+        let _: String = VisualInstructionContent.text;
+        let _: Option<crate::api::models::ManeuverType> = VisualInstructionContent.maneuver_type;
+        let _: Option<crate::api::models::ManeuverModifier> =
+            VisualInstructionContent.maneuver_modifier;
+        let _: Option<u16> = VisualInstructionContent.roundabout_exit_degrees;
+        let _: Option<Vec<crate::api::models::LaneInfo>> = VisualInstructionContent.lane_info;
+        let _: Vec<String> = VisualInstructionContent.exit_numbers;
+    }
+    {
+        let Waypoint = None::<crate::api::models::Waypoint>.unwrap();
+        let _: crate::api::models::GeographicCoordinate = Waypoint.coordinate;
+        let _: crate::api::models::WaypointKind = Waypoint.kind;
+    }
+    match None::<crate::api::models::WaypointAdvanceMode>.unwrap() {
+        crate::api::models::WaypointAdvanceMode::WaypointWithinRange(field0) => {
+            let _: f64 = field0;
+        }
+    }
+};
+
+// Section: related_funcs
+
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>
+);
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavigationController>
+);
+
 // Section: dart2rust
+
+impl SseDecode for FlutterNavState {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for FlutterNavigationController {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavigationController>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for chrono::DateTime<chrono::Utc> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i64>::sse_decode(deserializer);
+        return chrono::DateTime::<chrono::Utc>::from_naive_utc_and_offset(
+            chrono::DateTime::from_timestamp_micros(inner)
+                .expect("invalid or out-of-range datetime")
+                .naive_utc(),
+            chrono::Utc,
+        );
+    }
+}
+
+impl SseDecode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode
+    for RustOpaqueMoi<
+        flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavigationController>,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
 
 impl SseDecode for String {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <Vec<u8>>::sse_decode(deserializer);
         return String::from_utf8(inner).unwrap();
+    }
+}
+
+impl SseDecode for uuid::Uuid {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <Vec<u8>>::sse_decode(deserializer);
+        return uuid::Uuid::from_slice(&inner).expect("fail to decode uuid");
+    }
+}
+
+impl SseDecode for crate::api::models::BlockedLane {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::models::BlockedLane::Left,
+            1 => crate::api::models::BlockedLane::LeftCenter,
+            2 => crate::api::models::BlockedLane::LeftTurnLane,
+            3 => crate::api::models::BlockedLane::Center,
+            4 => crate::api::models::BlockedLane::Right,
+            5 => crate::api::models::BlockedLane::RightCenter,
+            6 => crate::api::models::BlockedLane::RightTurnLane,
+            7 => crate::api::models::BlockedLane::HOV,
+            _ => unreachable!("Invalid variant for BlockedLane: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for bool {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u8().unwrap() != 0
+    }
+}
+
+impl SseDecode for crate::api::models::BoundingBox {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_sw = <crate::api::models::GeographicCoordinate>::sse_decode(deserializer);
+        let mut var_ne = <crate::api::models::GeographicCoordinate>::sse_decode(deserializer);
+        return crate::api::models::BoundingBox {
+            sw: var_sw,
+            ne: var_ne,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::Congestion {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_value = <u8>::sse_decode(deserializer);
+        return crate::api::models::Congestion { value: var_value };
+    }
+}
+
+impl SseDecode for crate::api::models::CourseFiltering {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::models::CourseFiltering::SnapToRoute,
+            1 => crate::api::models::CourseFiltering::Raw,
+            _ => unreachable!("Invalid variant for CourseFiltering: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::CourseOverGround {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_degrees = <u16>::sse_decode(deserializer);
+        let mut var_accuracy = <Option<u16>>::sse_decode(deserializer);
+        return crate::api::models::CourseOverGround {
+            degrees: var_degrees,
+            accuracy: var_accuracy,
+        };
+    }
+}
+
+impl SseDecode for f64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_f64::<NativeEndian>().unwrap()
+    }
+}
+
+impl SseDecode for crate::api::models::FlutterNavigationControllerConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_waypointAdvance =
+            <crate::api::models::WaypointAdvanceMode>::sse_decode(deserializer);
+        let mut var_stepAdvanceCondition =
+            <crate::api::models::SerializableStepAdvanceCondition>::sse_decode(deserializer);
+        let mut var_arrivalStepAdvanceCondition =
+            <crate::api::models::SerializableStepAdvanceCondition>::sse_decode(deserializer);
+        let mut var_routeDeviationTracking =
+            <crate::api::models::FlutterRouteDeviationTracking>::sse_decode(deserializer);
+        let mut var_snappedLocationCourseFiltering =
+            <crate::api::models::CourseFiltering>::sse_decode(deserializer);
+        return crate::api::models::FlutterNavigationControllerConfig {
+            waypoint_advance: var_waypointAdvance,
+            step_advance_condition: var_stepAdvanceCondition,
+            arrival_step_advance_condition: var_arrivalStepAdvanceCondition,
+            route_deviation_tracking: var_routeDeviationTracking,
+            snapped_location_course_filtering: var_snappedLocationCourseFiltering,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::FlutterRouteDeviationTracking {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                return crate::api::models::FlutterRouteDeviationTracking::None;
+            }
+            1 => {
+                let mut var_minimumHorizontalAccuracy = <u16>::sse_decode(deserializer);
+                let mut var_maxAcceptableDeviation = <f64>::sse_decode(deserializer);
+                return crate::api::models::FlutterRouteDeviationTracking::StaticThreshold {
+                    minimum_horizontal_accuracy: var_minimumHorizontalAccuracy,
+                    max_acceptable_deviation: var_maxAcceptableDeviation,
+                };
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::api::models::FlutterTripState {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_userLocation =
+                    <Option<crate::api::models::FlutterUserLocation>>::sse_decode(deserializer);
+                return crate::api::models::FlutterTripState::Idle {
+                    user_location: var_userLocation,
+                };
+            }
+            1 => {
+                let mut var_currentStepGeometryIndex = <Option<u64>>::sse_decode(deserializer);
+                let mut var_userLocation =
+                    <crate::api::models::FlutterUserLocation>::sse_decode(deserializer);
+                let mut var_snappedUserLocation =
+                    <crate::api::models::FlutterUserLocation>::sse_decode(deserializer);
+                let mut var_remainingSteps =
+                    <Vec<crate::api::models::RouteStep>>::sse_decode(deserializer);
+                let mut var_remainingWaypoints =
+                    <Vec<crate::api::models::Waypoint>>::sse_decode(deserializer);
+                let mut var_progress = <crate::api::models::TripProgress>::sse_decode(deserializer);
+                let mut var_summary = <crate::api::models::TripSummary>::sse_decode(deserializer);
+                let mut var_deviation =
+                    <crate::api::models::RouteDeviation>::sse_decode(deserializer);
+                let mut var_visualInstruction =
+                    <Option<crate::api::models::VisualInstruction>>::sse_decode(deserializer);
+                let mut var_spokenInstruction =
+                    <Option<crate::api::models::SpokenInstruction>>::sse_decode(deserializer);
+                let mut var_annotationJson = <Option<String>>::sse_decode(deserializer);
+                return crate::api::models::FlutterTripState::Navigating {
+                    current_step_geometry_index: var_currentStepGeometryIndex,
+                    user_location: var_userLocation,
+                    snapped_user_location: var_snappedUserLocation,
+                    remaining_steps: var_remainingSteps,
+                    remaining_waypoints: var_remainingWaypoints,
+                    progress: var_progress,
+                    summary: var_summary,
+                    deviation: var_deviation,
+                    visual_instruction: var_visualInstruction,
+                    spoken_instruction: var_spokenInstruction,
+                    annotation_json: var_annotationJson,
+                };
+            }
+            2 => {
+                let mut var_userLocation =
+                    <crate::api::models::FlutterUserLocation>::sse_decode(deserializer);
+                let mut var_summary = <crate::api::models::TripSummary>::sse_decode(deserializer);
+                return crate::api::models::FlutterTripState::Complete {
+                    user_location: var_userLocation,
+                    summary: var_summary,
+                };
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::api::models::FlutterUserLocation {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_coordinates =
+            <crate::api::models::GeographicCoordinate>::sse_decode(deserializer);
+        let mut var_horizontalAccuracy = <f64>::sse_decode(deserializer);
+        let mut var_courseOverGround =
+            <Option<crate::api::models::CourseOverGround>>::sse_decode(deserializer);
+        let mut var_timestamp = <chrono::DateTime<chrono::Utc>>::sse_decode(deserializer);
+        let mut var_speed = <Option<crate::api::models::Speed>>::sse_decode(deserializer);
+        return crate::api::models::FlutterUserLocation {
+            coordinates: var_coordinates,
+            horizontal_accuracy: var_horizontalAccuracy,
+            course_over_ground: var_courseOverGround,
+            timestamp: var_timestamp,
+            speed: var_speed,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::GeographicCoordinate {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_lat = <f64>::sse_decode(deserializer);
+        let mut var_lng = <f64>::sse_decode(deserializer);
+        return crate::api::models::GeographicCoordinate {
+            lat: var_lat,
+            lng: var_lng,
+        };
+    }
+}
+
+impl SseDecode for i32 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_i32::<NativeEndian>().unwrap()
+    }
+}
+
+impl SseDecode for i64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_i64::<NativeEndian>().unwrap()
+    }
+}
+
+impl SseDecode for crate::api::models::Impact {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::models::Impact::Unknown,
+            1 => crate::api::models::Impact::Critical,
+            2 => crate::api::models::Impact::Major,
+            3 => crate::api::models::Impact::Minor,
+            4 => crate::api::models::Impact::Low,
+            _ => unreachable!("Invalid variant for Impact: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::Incident {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_id = <String>::sse_decode(deserializer);
+        let mut var_incidentType = <crate::api::models::IncidentType>::sse_decode(deserializer);
+        let mut var_description = <Option<String>>::sse_decode(deserializer);
+        let mut var_longDescription = <Option<String>>::sse_decode(deserializer);
+        let mut var_creationTime =
+            <Option<chrono::DateTime<chrono::Utc>>>::sse_decode(deserializer);
+        let mut var_startTime = <Option<chrono::DateTime<chrono::Utc>>>::sse_decode(deserializer);
+        let mut var_endTime = <Option<chrono::DateTime<chrono::Utc>>>::sse_decode(deserializer);
+        let mut var_impact = <Option<crate::api::models::Impact>>::sse_decode(deserializer);
+        let mut var_lanesBlocked = <Vec<crate::api::models::BlockedLane>>::sse_decode(deserializer);
+        let mut var_congestion = <Option<crate::api::models::Congestion>>::sse_decode(deserializer);
+        let mut var_closed = <Option<bool>>::sse_decode(deserializer);
+        let mut var_geometryIndexStart = <u64>::sse_decode(deserializer);
+        let mut var_geometryIndexEnd = <Option<u64>>::sse_decode(deserializer);
+        let mut var_subType = <Option<String>>::sse_decode(deserializer);
+        let mut var_subTypeDescription = <Option<String>>::sse_decode(deserializer);
+        let mut var_iso31661Alpha2 = <Option<String>>::sse_decode(deserializer);
+        let mut var_iso31661Alpha3 = <Option<String>>::sse_decode(deserializer);
+        let mut var_affectedRoadNames = <Vec<String>>::sse_decode(deserializer);
+        let mut var_bbox = <Option<crate::api::models::BoundingBox>>::sse_decode(deserializer);
+        return crate::api::models::Incident {
+            id: var_id,
+            incident_type: var_incidentType,
+            description: var_description,
+            long_description: var_longDescription,
+            creation_time: var_creationTime,
+            start_time: var_startTime,
+            end_time: var_endTime,
+            impact: var_impact,
+            lanes_blocked: var_lanesBlocked,
+            congestion: var_congestion,
+            closed: var_closed,
+            geometry_index_start: var_geometryIndexStart,
+            geometry_index_end: var_geometryIndexEnd,
+            sub_type: var_subType,
+            sub_type_description: var_subTypeDescription,
+            iso_3166_1_alpha2: var_iso31661Alpha2,
+            iso_3166_1_alpha3: var_iso31661Alpha3,
+            affected_road_names: var_affectedRoadNames,
+            bbox: var_bbox,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::IncidentType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::models::IncidentType::Accident,
+            1 => crate::api::models::IncidentType::Congestion,
+            2 => crate::api::models::IncidentType::Construction,
+            3 => crate::api::models::IncidentType::DisabledVehicle,
+            4 => crate::api::models::IncidentType::LaneRestriction,
+            5 => crate::api::models::IncidentType::MassTransit,
+            6 => crate::api::models::IncidentType::Miscellaneous,
+            7 => crate::api::models::IncidentType::OtherNews,
+            8 => crate::api::models::IncidentType::PlannedEvent,
+            9 => crate::api::models::IncidentType::RoadClosure,
+            10 => crate::api::models::IncidentType::RoadHazard,
+            11 => crate::api::models::IncidentType::Weather,
+            _ => unreachable!("Invalid variant for IncidentType: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::LaneInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_active = <bool>::sse_decode(deserializer);
+        let mut var_directions = <Vec<String>>::sse_decode(deserializer);
+        let mut var_activeDirection = <Option<String>>::sse_decode(deserializer);
+        return crate::api::models::LaneInfo {
+            active: var_active,
+            directions: var_directions,
+            active_direction: var_activeDirection,
+        };
+    }
+}
+
+impl SseDecode for Vec<String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<String>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::api::models::BlockedLane> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::api::models::BlockedLane>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::api::models::GeographicCoordinate> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::api::models::GeographicCoordinate>::sse_decode(
+                deserializer,
+            ));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::api::models::Incident> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::api::models::Incident>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::api::models::LaneInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::api::models::LaneInfo>::sse_decode(deserializer));
+        }
+        return ans_;
     }
 }
 
@@ -132,6 +1086,541 @@ impl SseDecode for Vec<u8> {
     }
 }
 
+impl SseDecode for Vec<crate::api::models::RouteStep> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::api::models::RouteStep>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::api::models::SerializableStepAdvanceCondition> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(
+                <crate::api::models::SerializableStepAdvanceCondition>::sse_decode(deserializer),
+            );
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::api::models::SpokenInstruction> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::api::models::SpokenInstruction>::sse_decode(
+                deserializer,
+            ));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::api::models::VisualInstruction> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::api::models::VisualInstruction>::sse_decode(
+                deserializer,
+            ));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::api::models::Waypoint> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::api::models::Waypoint>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for crate::api::models::ManeuverModifier {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::models::ManeuverModifier::UTurn,
+            1 => crate::api::models::ManeuverModifier::SharpRight,
+            2 => crate::api::models::ManeuverModifier::Right,
+            3 => crate::api::models::ManeuverModifier::SlightRight,
+            4 => crate::api::models::ManeuverModifier::Straight,
+            5 => crate::api::models::ManeuverModifier::SlightLeft,
+            6 => crate::api::models::ManeuverModifier::Left,
+            7 => crate::api::models::ManeuverModifier::SharpLeft,
+            _ => unreachable!("Invalid variant for ManeuverModifier: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::ManeuverType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::models::ManeuverType::Turn,
+            1 => crate::api::models::ManeuverType::NewName,
+            2 => crate::api::models::ManeuverType::Depart,
+            3 => crate::api::models::ManeuverType::Arrive,
+            4 => crate::api::models::ManeuverType::Merge,
+            5 => crate::api::models::ManeuverType::OnRamp,
+            6 => crate::api::models::ManeuverType::OffRamp,
+            7 => crate::api::models::ManeuverType::Fork,
+            8 => crate::api::models::ManeuverType::EndOfRoad,
+            9 => crate::api::models::ManeuverType::Continue,
+            10 => crate::api::models::ManeuverType::Roundabout,
+            11 => crate::api::models::ManeuverType::Rotary,
+            12 => crate::api::models::ManeuverType::RoundaboutTurn,
+            13 => crate::api::models::ManeuverType::Notification,
+            14 => crate::api::models::ManeuverType::ExitRoundabout,
+            15 => crate::api::models::ManeuverType::ExitRotary,
+            _ => unreachable!("Invalid variant for ManeuverType: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for Option<String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<String>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<chrono::DateTime<chrono::Utc>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<chrono::DateTime<chrono::Utc>>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<bool>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::BoundingBox> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::api::models::BoundingBox>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::Congestion> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::api::models::Congestion>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::CourseOverGround> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::api::models::CourseOverGround>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<f64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<f64>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::FlutterUserLocation> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::api::models::FlutterUserLocation>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::Impact> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::api::models::Impact>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::ManeuverModifier> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::api::models::ManeuverModifier>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::ManeuverType> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::api::models::ManeuverType>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::Speed> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::api::models::Speed>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::SpokenInstruction> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::api::models::SpokenInstruction>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<u16> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<u16>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<u64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<u64>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::VisualInstruction> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::api::models::VisualInstruction>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::VisualInstructionContent> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::api::models::VisualInstructionContent>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<Vec<String>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<Vec<String>>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<Vec<crate::api::models::LaneInfo>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<Vec<crate::api::models::LaneInfo>>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for crate::api::models::Route {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_geometry =
+            <Vec<crate::api::models::GeographicCoordinate>>::sse_decode(deserializer);
+        let mut var_bbox = <crate::api::models::BoundingBox>::sse_decode(deserializer);
+        let mut var_distance = <f64>::sse_decode(deserializer);
+        let mut var_waypoints = <Vec<crate::api::models::Waypoint>>::sse_decode(deserializer);
+        let mut var_steps = <Vec<crate::api::models::RouteStep>>::sse_decode(deserializer);
+        return crate::api::models::Route {
+            geometry: var_geometry,
+            bbox: var_bbox,
+            distance: var_distance,
+            waypoints: var_waypoints,
+            steps: var_steps,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::RouteDeviation {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                return crate::api::models::RouteDeviation::NoDeviation;
+            }
+            1 => {
+                let mut var_deviationFromRouteLine = <f64>::sse_decode(deserializer);
+                return crate::api::models::RouteDeviation::OffRoute {
+                    deviation_from_route_line: var_deviationFromRouteLine,
+                };
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::api::models::RouteStep {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_geometry =
+            <Vec<crate::api::models::GeographicCoordinate>>::sse_decode(deserializer);
+        let mut var_distance = <f64>::sse_decode(deserializer);
+        let mut var_duration = <f64>::sse_decode(deserializer);
+        let mut var_roadName = <Option<String>>::sse_decode(deserializer);
+        let mut var_exits = <Vec<String>>::sse_decode(deserializer);
+        let mut var_instruction = <String>::sse_decode(deserializer);
+        let mut var_visualInstructions =
+            <Vec<crate::api::models::VisualInstruction>>::sse_decode(deserializer);
+        let mut var_spokenInstructions =
+            <Vec<crate::api::models::SpokenInstruction>>::sse_decode(deserializer);
+        let mut var_annotations = <Option<Vec<String>>>::sse_decode(deserializer);
+        let mut var_incidents = <Vec<crate::api::models::Incident>>::sse_decode(deserializer);
+        return crate::api::models::RouteStep {
+            geometry: var_geometry,
+            distance: var_distance,
+            duration: var_duration,
+            road_name: var_roadName,
+            exits: var_exits,
+            instruction: var_instruction,
+            visual_instructions: var_visualInstructions,
+            spoken_instructions: var_spokenInstructions,
+            annotations: var_annotations,
+            incidents: var_incidents,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::SerializableStepAdvanceCondition {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                return crate::api::models::SerializableStepAdvanceCondition::Manual;
+            }
+            1 => {
+                let mut var_distance = <u16>::sse_decode(deserializer);
+                let mut var_minimumHorizontalAccuracy = <u16>::sse_decode(deserializer);
+                return crate::api::models::SerializableStepAdvanceCondition::DistanceToEndOfStep {
+                    distance: var_distance,
+                    minimum_horizontal_accuracy: var_minimumHorizontalAccuracy,
+                };
+            }
+            2 => {
+                let mut var_distance = <u16>::sse_decode(deserializer);
+                let mut var_minimumHorizontalAccuracy = <u16>::sse_decode(deserializer);
+                return crate::api::models::SerializableStepAdvanceCondition::DistanceFromStep {
+                    distance: var_distance,
+                    minimum_horizontal_accuracy: var_minimumHorizontalAccuracy,
+                };
+            }
+            3 => {
+                let mut var_distanceToEndOfStep = <u16>::sse_decode(deserializer);
+                let mut var_distanceAfterEndStep = <u16>::sse_decode(deserializer);
+                let mut var_minimumHorizontalAccuracy = <u16>::sse_decode(deserializer);
+                let mut var_hasReachedEndOfCurrentStep = <bool>::sse_decode(deserializer);
+                return crate::api::models::SerializableStepAdvanceCondition::DistanceEntryExit {
+                    distance_to_end_of_step: var_distanceToEndOfStep,
+                    distance_after_end_step: var_distanceAfterEndStep,
+                    minimum_horizontal_accuracy: var_minimumHorizontalAccuracy,
+                    has_reached_end_of_current_step: var_hasReachedEndOfCurrentStep,
+                };
+            }
+            4 => {
+                let mut var_conditions =
+                    <Vec<crate::api::models::SerializableStepAdvanceCondition>>::sse_decode(
+                        deserializer,
+                    );
+                return crate::api::models::SerializableStepAdvanceCondition::OrAdvanceConditions {
+                    conditions: var_conditions,
+                };
+            }
+            5 => {
+                let mut var_conditions =
+                    <Vec<crate::api::models::SerializableStepAdvanceCondition>>::sse_decode(
+                        deserializer,
+                    );
+                return crate::api::models::SerializableStepAdvanceCondition::AndAdvanceConditions{conditions: var_conditions};
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::api::models::Speed {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_value = <f64>::sse_decode(deserializer);
+        let mut var_accuracy = <Option<f64>>::sse_decode(deserializer);
+        return crate::api::models::Speed {
+            value: var_value,
+            accuracy: var_accuracy,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::SpokenInstruction {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_text = <String>::sse_decode(deserializer);
+        let mut var_ssml = <Option<String>>::sse_decode(deserializer);
+        let mut var_triggerDistanceBeforeManeuver = <f64>::sse_decode(deserializer);
+        let mut var_utteranceId = <uuid::Uuid>::sse_decode(deserializer);
+        return crate::api::models::SpokenInstruction {
+            text: var_text,
+            ssml: var_ssml,
+            trigger_distance_before_maneuver: var_triggerDistanceBeforeManeuver,
+            utterance_id: var_utteranceId,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::TripProgress {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_distanceToNextManeuver = <f64>::sse_decode(deserializer);
+        let mut var_distanceRemaining = <f64>::sse_decode(deserializer);
+        let mut var_durationRemaining = <f64>::sse_decode(deserializer);
+        return crate::api::models::TripProgress {
+            distance_to_next_maneuver: var_distanceToNextManeuver,
+            distance_remaining: var_distanceRemaining,
+            duration_remaining: var_durationRemaining,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::TripSummary {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_distanceTraveled = <f64>::sse_decode(deserializer);
+        let mut var_snappedDistanceTraveled = <f64>::sse_decode(deserializer);
+        let mut var_startedAt = <chrono::DateTime<chrono::Utc>>::sse_decode(deserializer);
+        let mut var_endedAt = <Option<chrono::DateTime<chrono::Utc>>>::sse_decode(deserializer);
+        return crate::api::models::TripSummary {
+            distance_traveled: var_distanceTraveled,
+            snapped_distance_traveled: var_snappedDistanceTraveled,
+            started_at: var_startedAt,
+            ended_at: var_endedAt,
+        };
+    }
+}
+
+impl SseDecode for u16 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u16::<NativeEndian>().unwrap()
+    }
+}
+
+impl SseDecode for u64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u64::<NativeEndian>().unwrap()
+    }
+}
+
 impl SseDecode for u8 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -144,17 +1633,93 @@ impl SseDecode for () {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {}
 }
 
-impl SseDecode for i32 {
+impl SseDecode for usize {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        deserializer.cursor.read_i32::<NativeEndian>().unwrap()
+        deserializer.cursor.read_u64::<NativeEndian>().unwrap() as _
     }
 }
 
-impl SseDecode for bool {
+impl SseDecode for crate::api::models::VisualInstruction {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        deserializer.cursor.read_u8().unwrap() != 0
+        let mut var_primaryContent =
+            <crate::api::models::VisualInstructionContent>::sse_decode(deserializer);
+        let mut var_secondaryContent =
+            <Option<crate::api::models::VisualInstructionContent>>::sse_decode(deserializer);
+        let mut var_subContent =
+            <Option<crate::api::models::VisualInstructionContent>>::sse_decode(deserializer);
+        let mut var_triggerDistanceBeforeManeuver = <f64>::sse_decode(deserializer);
+        return crate::api::models::VisualInstruction {
+            primary_content: var_primaryContent,
+            secondary_content: var_secondaryContent,
+            sub_content: var_subContent,
+            trigger_distance_before_maneuver: var_triggerDistanceBeforeManeuver,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::VisualInstructionContent {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_text = <String>::sse_decode(deserializer);
+        let mut var_maneuverType =
+            <Option<crate::api::models::ManeuverType>>::sse_decode(deserializer);
+        let mut var_maneuverModifier =
+            <Option<crate::api::models::ManeuverModifier>>::sse_decode(deserializer);
+        let mut var_roundaboutExitDegrees = <Option<u16>>::sse_decode(deserializer);
+        let mut var_laneInfo =
+            <Option<Vec<crate::api::models::LaneInfo>>>::sse_decode(deserializer);
+        let mut var_exitNumbers = <Vec<String>>::sse_decode(deserializer);
+        return crate::api::models::VisualInstructionContent {
+            text: var_text,
+            maneuver_type: var_maneuverType,
+            maneuver_modifier: var_maneuverModifier,
+            roundabout_exit_degrees: var_roundaboutExitDegrees,
+            lane_info: var_laneInfo,
+            exit_numbers: var_exitNumbers,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::Waypoint {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_coordinate =
+            <crate::api::models::GeographicCoordinate>::sse_decode(deserializer);
+        let mut var_kind = <crate::api::models::WaypointKind>::sse_decode(deserializer);
+        return crate::api::models::Waypoint {
+            coordinate: var_coordinate,
+            kind: var_kind,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::WaypointAdvanceMode {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut tag_ = <i32>::sse_decode(deserializer);
+        match tag_ {
+            0 => {
+                let mut var_field0 = <f64>::sse_decode(deserializer);
+                return crate::api::models::WaypointAdvanceMode::WaypointWithinRange(var_field0);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseDecode for crate::api::models::WaypointKind {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::models::WaypointKind::Break,
+            1 => crate::api::models::WaypointKind::Via,
+            _ => unreachable!("Invalid variant for WaypointKind: {}", inner),
+        };
     }
 }
 
@@ -167,7 +1732,43 @@ fn pde_ffi_dispatcher_primary_impl(
 ) {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        2 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        1 => wire__crate__api__navigation__FlutterNavState_trip_state_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        2 => wire__crate__api__navigation__FlutterNavigationController_advance_to_next_step_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        3 => wire__crate__api__navigation__FlutterNavigationController_get_initial_state_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        4 => wire__crate__api__navigation__FlutterNavigationController_new_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        5 => wire__crate__api__navigation__FlutterNavigationController_update_user_location_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        6 => wire__crate__api__simple__create_coordinate_string_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        8 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -180,17 +1781,1266 @@ fn pde_ffi_dispatcher_sync_impl(
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        1 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
+        7 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
 
 // Section: rust2dart
 
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<FlutterNavState> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for FrbWrapper<FlutterNavState> {}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<FlutterNavState>> for FlutterNavState {
+    fn into_into_dart(self) -> FrbWrapper<FlutterNavState> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<FlutterNavigationController> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<FlutterNavigationController>
+{
+}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<FlutterNavigationController>>
+    for FlutterNavigationController
+{
+    fn into_into_dart(self) -> FrbWrapper<FlutterNavigationController> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::BlockedLane> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self.0 {
+            crate::api::models::BlockedLane::Left => 0.into_dart(),
+            crate::api::models::BlockedLane::LeftCenter => 1.into_dart(),
+            crate::api::models::BlockedLane::LeftTurnLane => 2.into_dart(),
+            crate::api::models::BlockedLane::Center => 3.into_dart(),
+            crate::api::models::BlockedLane::Right => 4.into_dart(),
+            crate::api::models::BlockedLane::RightCenter => 5.into_dart(),
+            crate::api::models::BlockedLane::RightTurnLane => 6.into_dart(),
+            crate::api::models::BlockedLane::HOV => 7.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::BlockedLane>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::BlockedLane>>
+    for crate::api::models::BlockedLane
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::BlockedLane> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::BoundingBox> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.sw.into_into_dart().into_dart(),
+            self.0.ne.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::BoundingBox>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::BoundingBox>>
+    for crate::api::models::BoundingBox
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::BoundingBox> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::Congestion> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.0.value.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::Congestion>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::Congestion>>
+    for crate::api::models::Congestion
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::Congestion> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::CourseFiltering> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self.0 {
+            crate::api::models::CourseFiltering::SnapToRoute => 0.into_dart(),
+            crate::api::models::CourseFiltering::Raw => 1.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::CourseFiltering>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::CourseFiltering>>
+    for crate::api::models::CourseFiltering
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::CourseFiltering> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::CourseOverGround> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.degrees.into_into_dart().into_dart(),
+            self.0.accuracy.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::CourseOverGround>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::CourseOverGround>>
+    for crate::api::models::CourseOverGround
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::CourseOverGround> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::models::FlutterNavigationControllerConfig {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.waypoint_advance.into_into_dart().into_dart(),
+            self.step_advance_condition.into_into_dart().into_dart(),
+            self.arrival_step_advance_condition
+                .into_into_dart()
+                .into_dart(),
+            self.route_deviation_tracking.into_into_dart().into_dart(),
+            self.snapped_location_course_filtering
+                .into_into_dart()
+                .into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::models::FlutterNavigationControllerConfig
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::FlutterNavigationControllerConfig>
+    for crate::api::models::FlutterNavigationControllerConfig
+{
+    fn into_into_dart(self) -> crate::api::models::FlutterNavigationControllerConfig {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::models::FlutterRouteDeviationTracking {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::api::models::FlutterRouteDeviationTracking::None => [0.into_dart()].into_dart(),
+            crate::api::models::FlutterRouteDeviationTracking::StaticThreshold {
+                minimum_horizontal_accuracy,
+                max_acceptable_deviation,
+            } => [
+                1.into_dart(),
+                minimum_horizontal_accuracy.into_into_dart().into_dart(),
+                max_acceptable_deviation.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::models::FlutterRouteDeviationTracking
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::FlutterRouteDeviationTracking>
+    for crate::api::models::FlutterRouteDeviationTracking
+{
+    fn into_into_dart(self) -> crate::api::models::FlutterRouteDeviationTracking {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::models::FlutterTripState {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            crate::api::models::FlutterTripState::Idle { user_location } => {
+                [0.into_dart(), user_location.into_into_dart().into_dart()].into_dart()
+            }
+            crate::api::models::FlutterTripState::Navigating {
+                current_step_geometry_index,
+                user_location,
+                snapped_user_location,
+                remaining_steps,
+                remaining_waypoints,
+                progress,
+                summary,
+                deviation,
+                visual_instruction,
+                spoken_instruction,
+                annotation_json,
+            } => [
+                1.into_dart(),
+                current_step_geometry_index.into_into_dart().into_dart(),
+                user_location.into_into_dart().into_dart(),
+                snapped_user_location.into_into_dart().into_dart(),
+                remaining_steps.into_into_dart().into_dart(),
+                remaining_waypoints.into_into_dart().into_dart(),
+                progress.into_into_dart().into_dart(),
+                summary.into_into_dart().into_dart(),
+                deviation.into_into_dart().into_dart(),
+                visual_instruction.into_into_dart().into_dart(),
+                spoken_instruction.into_into_dart().into_dart(),
+                annotation_json.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            crate::api::models::FlutterTripState::Complete {
+                user_location,
+                summary,
+            } => [
+                2.into_dart(),
+                user_location.into_into_dart().into_dart(),
+                summary.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::models::FlutterTripState
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::FlutterTripState>
+    for crate::api::models::FlutterTripState
+{
+    fn into_into_dart(self) -> crate::api::models::FlutterTripState {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::models::FlutterUserLocation {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.coordinates.into_into_dart().into_dart(),
+            self.horizontal_accuracy.into_into_dart().into_dart(),
+            self.course_over_ground.into_into_dart().into_dart(),
+            self.timestamp.into_into_dart().into_dart(),
+            self.speed.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::models::FlutterUserLocation
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::models::FlutterUserLocation>
+    for crate::api::models::FlutterUserLocation
+{
+    fn into_into_dart(self) -> crate::api::models::FlutterUserLocation {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::GeographicCoordinate> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.lat.into_into_dart().into_dart(),
+            self.0.lng.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::GeographicCoordinate>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::GeographicCoordinate>>
+    for crate::api::models::GeographicCoordinate
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::GeographicCoordinate> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::Impact> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self.0 {
+            crate::api::models::Impact::Unknown => 0.into_dart(),
+            crate::api::models::Impact::Critical => 1.into_dart(),
+            crate::api::models::Impact::Major => 2.into_dart(),
+            crate::api::models::Impact::Minor => 3.into_dart(),
+            crate::api::models::Impact::Low => 4.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::Impact>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::Impact>>
+    for crate::api::models::Impact
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::Impact> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::Incident> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.id.into_into_dart().into_dart(),
+            self.0.incident_type.into_into_dart().into_dart(),
+            self.0.description.into_into_dart().into_dart(),
+            self.0.long_description.into_into_dart().into_dart(),
+            self.0.creation_time.into_into_dart().into_dart(),
+            self.0.start_time.into_into_dart().into_dart(),
+            self.0.end_time.into_into_dart().into_dart(),
+            self.0.impact.into_into_dart().into_dart(),
+            self.0.lanes_blocked.into_into_dart().into_dart(),
+            self.0.congestion.into_into_dart().into_dart(),
+            self.0.closed.into_into_dart().into_dart(),
+            self.0.geometry_index_start.into_into_dart().into_dart(),
+            self.0.geometry_index_end.into_into_dart().into_dart(),
+            self.0.sub_type.into_into_dart().into_dart(),
+            self.0.sub_type_description.into_into_dart().into_dart(),
+            self.0.iso_3166_1_alpha2.into_into_dart().into_dart(),
+            self.0.iso_3166_1_alpha3.into_into_dart().into_dart(),
+            self.0.affected_road_names.into_into_dart().into_dart(),
+            self.0.bbox.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::Incident>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::Incident>>
+    for crate::api::models::Incident
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::Incident> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::IncidentType> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self.0 {
+            crate::api::models::IncidentType::Accident => 0.into_dart(),
+            crate::api::models::IncidentType::Congestion => 1.into_dart(),
+            crate::api::models::IncidentType::Construction => 2.into_dart(),
+            crate::api::models::IncidentType::DisabledVehicle => 3.into_dart(),
+            crate::api::models::IncidentType::LaneRestriction => 4.into_dart(),
+            crate::api::models::IncidentType::MassTransit => 5.into_dart(),
+            crate::api::models::IncidentType::Miscellaneous => 6.into_dart(),
+            crate::api::models::IncidentType::OtherNews => 7.into_dart(),
+            crate::api::models::IncidentType::PlannedEvent => 8.into_dart(),
+            crate::api::models::IncidentType::RoadClosure => 9.into_dart(),
+            crate::api::models::IncidentType::RoadHazard => 10.into_dart(),
+            crate::api::models::IncidentType::Weather => 11.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::IncidentType>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::IncidentType>>
+    for crate::api::models::IncidentType
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::IncidentType> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::LaneInfo> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.active.into_into_dart().into_dart(),
+            self.0.directions.into_into_dart().into_dart(),
+            self.0.active_direction.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::LaneInfo>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::LaneInfo>>
+    for crate::api::models::LaneInfo
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::LaneInfo> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::ManeuverModifier> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self.0 {
+            crate::api::models::ManeuverModifier::UTurn => 0.into_dart(),
+            crate::api::models::ManeuverModifier::SharpRight => 1.into_dart(),
+            crate::api::models::ManeuverModifier::Right => 2.into_dart(),
+            crate::api::models::ManeuverModifier::SlightRight => 3.into_dart(),
+            crate::api::models::ManeuverModifier::Straight => 4.into_dart(),
+            crate::api::models::ManeuverModifier::SlightLeft => 5.into_dart(),
+            crate::api::models::ManeuverModifier::Left => 6.into_dart(),
+            crate::api::models::ManeuverModifier::SharpLeft => 7.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::ManeuverModifier>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::ManeuverModifier>>
+    for crate::api::models::ManeuverModifier
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::ManeuverModifier> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::ManeuverType> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self.0 {
+            crate::api::models::ManeuverType::Turn => 0.into_dart(),
+            crate::api::models::ManeuverType::NewName => 1.into_dart(),
+            crate::api::models::ManeuverType::Depart => 2.into_dart(),
+            crate::api::models::ManeuverType::Arrive => 3.into_dart(),
+            crate::api::models::ManeuverType::Merge => 4.into_dart(),
+            crate::api::models::ManeuverType::OnRamp => 5.into_dart(),
+            crate::api::models::ManeuverType::OffRamp => 6.into_dart(),
+            crate::api::models::ManeuverType::Fork => 7.into_dart(),
+            crate::api::models::ManeuverType::EndOfRoad => 8.into_dart(),
+            crate::api::models::ManeuverType::Continue => 9.into_dart(),
+            crate::api::models::ManeuverType::Roundabout => 10.into_dart(),
+            crate::api::models::ManeuverType::Rotary => 11.into_dart(),
+            crate::api::models::ManeuverType::RoundaboutTurn => 12.into_dart(),
+            crate::api::models::ManeuverType::Notification => 13.into_dart(),
+            crate::api::models::ManeuverType::ExitRoundabout => 14.into_dart(),
+            crate::api::models::ManeuverType::ExitRotary => 15.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::ManeuverType>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::ManeuverType>>
+    for crate::api::models::ManeuverType
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::ManeuverType> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::Route> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.geometry.into_into_dart().into_dart(),
+            self.0.bbox.into_into_dart().into_dart(),
+            self.0.distance.into_into_dart().into_dart(),
+            self.0.waypoints.into_into_dart().into_dart(),
+            self.0.steps.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::Route>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::Route>>
+    for crate::api::models::Route
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::Route> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::RouteDeviation> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self.0 {
+            crate::api::models::RouteDeviation::NoDeviation => [0.into_dart()].into_dart(),
+            crate::api::models::RouteDeviation::OffRoute {
+                deviation_from_route_line,
+            } => [
+                1.into_dart(),
+                deviation_from_route_line.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::RouteDeviation>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::RouteDeviation>>
+    for crate::api::models::RouteDeviation
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::RouteDeviation> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::RouteStep> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.geometry.into_into_dart().into_dart(),
+            self.0.distance.into_into_dart().into_dart(),
+            self.0.duration.into_into_dart().into_dart(),
+            self.0.road_name.into_into_dart().into_dart(),
+            self.0.exits.into_into_dart().into_dart(),
+            self.0.instruction.into_into_dart().into_dart(),
+            self.0.visual_instructions.into_into_dart().into_dart(),
+            self.0.spoken_instructions.into_into_dart().into_dart(),
+            self.0.annotations.into_into_dart().into_dart(),
+            self.0.incidents.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::RouteStep>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::RouteStep>>
+    for crate::api::models::RouteStep
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::RouteStep> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for FrbWrapper<crate::api::models::SerializableStepAdvanceCondition>
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self.0 {
+            crate::api::models::SerializableStepAdvanceCondition::Manual => {
+                [0.into_dart()].into_dart()
+            }
+            crate::api::models::SerializableStepAdvanceCondition::DistanceToEndOfStep {
+                distance,
+                minimum_horizontal_accuracy,
+            } => [
+                1.into_dart(),
+                distance.into_into_dart().into_dart(),
+                minimum_horizontal_accuracy.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            crate::api::models::SerializableStepAdvanceCondition::DistanceFromStep {
+                distance,
+                minimum_horizontal_accuracy,
+            } => [
+                2.into_dart(),
+                distance.into_into_dart().into_dart(),
+                minimum_horizontal_accuracy.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            crate::api::models::SerializableStepAdvanceCondition::DistanceEntryExit {
+                distance_to_end_of_step,
+                distance_after_end_step,
+                minimum_horizontal_accuracy,
+                has_reached_end_of_current_step,
+            } => [
+                3.into_dart(),
+                distance_to_end_of_step.into_into_dart().into_dart(),
+                distance_after_end_step.into_into_dart().into_dart(),
+                minimum_horizontal_accuracy.into_into_dart().into_dart(),
+                has_reached_end_of_current_step.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
+            crate::api::models::SerializableStepAdvanceCondition::OrAdvanceConditions {
+                conditions,
+            } => [4.into_dart(), conditions.into_into_dart().into_dart()].into_dart(),
+            crate::api::models::SerializableStepAdvanceCondition::AndAdvanceConditions {
+                conditions,
+            } => [5.into_dart(), conditions.into_into_dart().into_dart()].into_dart(),
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::SerializableStepAdvanceCondition>
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        FrbWrapper<crate::api::models::SerializableStepAdvanceCondition>,
+    > for crate::api::models::SerializableStepAdvanceCondition
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::SerializableStepAdvanceCondition> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::Speed> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.value.into_into_dart().into_dart(),
+            self.0.accuracy.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::Speed>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::Speed>>
+    for crate::api::models::Speed
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::Speed> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::SpokenInstruction> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.text.into_into_dart().into_dart(),
+            self.0.ssml.into_into_dart().into_dart(),
+            self.0
+                .trigger_distance_before_maneuver
+                .into_into_dart()
+                .into_dart(),
+            self.0.utterance_id.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::SpokenInstruction>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::SpokenInstruction>>
+    for crate::api::models::SpokenInstruction
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::SpokenInstruction> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::TripProgress> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0
+                .distance_to_next_maneuver
+                .into_into_dart()
+                .into_dart(),
+            self.0.distance_remaining.into_into_dart().into_dart(),
+            self.0.duration_remaining.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::TripProgress>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::TripProgress>>
+    for crate::api::models::TripProgress
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::TripProgress> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::TripSummary> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.distance_traveled.into_into_dart().into_dart(),
+            self.0
+                .snapped_distance_traveled
+                .into_into_dart()
+                .into_dart(),
+            self.0.started_at.into_into_dart().into_dart(),
+            self.0.ended_at.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::TripSummary>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::TripSummary>>
+    for crate::api::models::TripSummary
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::TripSummary> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::VisualInstruction> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.primary_content.into_into_dart().into_dart(),
+            self.0.secondary_content.into_into_dart().into_dart(),
+            self.0.sub_content.into_into_dart().into_dart(),
+            self.0
+                .trigger_distance_before_maneuver
+                .into_into_dart()
+                .into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::VisualInstruction>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::VisualInstruction>>
+    for crate::api::models::VisualInstruction
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::VisualInstruction> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::VisualInstructionContent> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.text.into_into_dart().into_dart(),
+            self.0.maneuver_type.into_into_dart().into_dart(),
+            self.0.maneuver_modifier.into_into_dart().into_dart(),
+            self.0.roundabout_exit_degrees.into_into_dart().into_dart(),
+            self.0.lane_info.into_into_dart().into_dart(),
+            self.0.exit_numbers.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::VisualInstructionContent>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::VisualInstructionContent>>
+    for crate::api::models::VisualInstructionContent
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::VisualInstructionContent> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::Waypoint> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.coordinate.into_into_dart().into_dart(),
+            self.0.kind.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::Waypoint>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::Waypoint>>
+    for crate::api::models::Waypoint
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::Waypoint> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::WaypointAdvanceMode> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self.0 {
+            crate::api::models::WaypointAdvanceMode::WaypointWithinRange(field0) => {
+                [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::WaypointAdvanceMode>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::WaypointAdvanceMode>>
+    for crate::api::models::WaypointAdvanceMode
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::WaypointAdvanceMode> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::WaypointKind> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self.0 {
+            crate::api::models::WaypointKind::Break => 0.into_dart(),
+            crate::api::models::WaypointKind::Via => 1.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::WaypointKind>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::WaypointKind>>
+    for crate::api::models::WaypointKind
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::WaypointKind> {
+        self.into()
+    }
+}
+
+impl SseEncode for FlutterNavState {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>>>::sse_encode(flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self), serializer);
+    }
+}
+
+impl SseEncode for FlutterNavigationController {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavigationController>,
+        >>::sse_encode(
+            flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self),
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for chrono::DateTime<chrono::Utc> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i64>::sse_encode(self.timestamp_micros(), serializer);
+    }
+}
+
+impl SseEncode
+    for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode
+    for RustOpaqueMoi<
+        flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavigationController>,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
 impl SseEncode for String {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <Vec<u8>>::sse_encode(self.into_bytes(), serializer);
+    }
+}
+
+impl SseEncode for uuid::Uuid {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<u8>>::sse_encode(self.as_bytes().to_vec(), serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::BlockedLane {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::models::BlockedLane::Left => 0,
+                crate::api::models::BlockedLane::LeftCenter => 1,
+                crate::api::models::BlockedLane::LeftTurnLane => 2,
+                crate::api::models::BlockedLane::Center => 3,
+                crate::api::models::BlockedLane::Right => 4,
+                crate::api::models::BlockedLane::RightCenter => 5,
+                crate::api::models::BlockedLane::RightTurnLane => 6,
+                crate::api::models::BlockedLane::HOV => 7,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for bool {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u8(self as _).unwrap();
+    }
+}
+
+impl SseEncode for crate::api::models::BoundingBox {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::api::models::GeographicCoordinate>::sse_encode(self.sw, serializer);
+        <crate::api::models::GeographicCoordinate>::sse_encode(self.ne, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::Congestion {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <u8>::sse_encode(self.value, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::CourseFiltering {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::models::CourseFiltering::SnapToRoute => 0,
+                crate::api::models::CourseFiltering::Raw => 1,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::api::models::CourseOverGround {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <u16>::sse_encode(self.degrees, serializer);
+        <Option<u16>>::sse_encode(self.accuracy, serializer);
+    }
+}
+
+impl SseEncode for f64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_f64::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for crate::api::models::FlutterNavigationControllerConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::api::models::WaypointAdvanceMode>::sse_encode(self.waypoint_advance, serializer);
+        <crate::api::models::SerializableStepAdvanceCondition>::sse_encode(
+            self.step_advance_condition,
+            serializer,
+        );
+        <crate::api::models::SerializableStepAdvanceCondition>::sse_encode(
+            self.arrival_step_advance_condition,
+            serializer,
+        );
+        <crate::api::models::FlutterRouteDeviationTracking>::sse_encode(
+            self.route_deviation_tracking,
+            serializer,
+        );
+        <crate::api::models::CourseFiltering>::sse_encode(
+            self.snapped_location_course_filtering,
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::api::models::FlutterRouteDeviationTracking {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::api::models::FlutterRouteDeviationTracking::None => {
+                <i32>::sse_encode(0, serializer);
+            }
+            crate::api::models::FlutterRouteDeviationTracking::StaticThreshold {
+                minimum_horizontal_accuracy,
+                max_acceptable_deviation,
+            } => {
+                <i32>::sse_encode(1, serializer);
+                <u16>::sse_encode(minimum_horizontal_accuracy, serializer);
+                <f64>::sse_encode(max_acceptable_deviation, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::api::models::FlutterTripState {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::api::models::FlutterTripState::Idle { user_location } => {
+                <i32>::sse_encode(0, serializer);
+                <Option<crate::api::models::FlutterUserLocation>>::sse_encode(
+                    user_location,
+                    serializer,
+                );
+            }
+            crate::api::models::FlutterTripState::Navigating {
+                current_step_geometry_index,
+                user_location,
+                snapped_user_location,
+                remaining_steps,
+                remaining_waypoints,
+                progress,
+                summary,
+                deviation,
+                visual_instruction,
+                spoken_instruction,
+                annotation_json,
+            } => {
+                <i32>::sse_encode(1, serializer);
+                <Option<u64>>::sse_encode(current_step_geometry_index, serializer);
+                <crate::api::models::FlutterUserLocation>::sse_encode(user_location, serializer);
+                <crate::api::models::FlutterUserLocation>::sse_encode(
+                    snapped_user_location,
+                    serializer,
+                );
+                <Vec<crate::api::models::RouteStep>>::sse_encode(remaining_steps, serializer);
+                <Vec<crate::api::models::Waypoint>>::sse_encode(remaining_waypoints, serializer);
+                <crate::api::models::TripProgress>::sse_encode(progress, serializer);
+                <crate::api::models::TripSummary>::sse_encode(summary, serializer);
+                <crate::api::models::RouteDeviation>::sse_encode(deviation, serializer);
+                <Option<crate::api::models::VisualInstruction>>::sse_encode(
+                    visual_instruction,
+                    serializer,
+                );
+                <Option<crate::api::models::SpokenInstruction>>::sse_encode(
+                    spoken_instruction,
+                    serializer,
+                );
+                <Option<String>>::sse_encode(annotation_json, serializer);
+            }
+            crate::api::models::FlutterTripState::Complete {
+                user_location,
+                summary,
+            } => {
+                <i32>::sse_encode(2, serializer);
+                <crate::api::models::FlutterUserLocation>::sse_encode(user_location, serializer);
+                <crate::api::models::TripSummary>::sse_encode(summary, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::api::models::FlutterUserLocation {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::api::models::GeographicCoordinate>::sse_encode(self.coordinates, serializer);
+        <f64>::sse_encode(self.horizontal_accuracy, serializer);
+        <Option<crate::api::models::CourseOverGround>>::sse_encode(
+            self.course_over_ground,
+            serializer,
+        );
+        <chrono::DateTime<chrono::Utc>>::sse_encode(self.timestamp, serializer);
+        <Option<crate::api::models::Speed>>::sse_encode(self.speed, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::GeographicCoordinate {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.lat, serializer);
+        <f64>::sse_encode(self.lng, serializer);
+    }
+}
+
+impl SseEncode for i32 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_i32::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for i64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_i64::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for crate::api::models::Impact {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::models::Impact::Unknown => 0,
+                crate::api::models::Impact::Critical => 1,
+                crate::api::models::Impact::Major => 2,
+                crate::api::models::Impact::Minor => 3,
+                crate::api::models::Impact::Low => 4,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::api::models::Incident {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.id, serializer);
+        <crate::api::models::IncidentType>::sse_encode(self.incident_type, serializer);
+        <Option<String>>::sse_encode(self.description, serializer);
+        <Option<String>>::sse_encode(self.long_description, serializer);
+        <Option<chrono::DateTime<chrono::Utc>>>::sse_encode(self.creation_time, serializer);
+        <Option<chrono::DateTime<chrono::Utc>>>::sse_encode(self.start_time, serializer);
+        <Option<chrono::DateTime<chrono::Utc>>>::sse_encode(self.end_time, serializer);
+        <Option<crate::api::models::Impact>>::sse_encode(self.impact, serializer);
+        <Vec<crate::api::models::BlockedLane>>::sse_encode(self.lanes_blocked, serializer);
+        <Option<crate::api::models::Congestion>>::sse_encode(self.congestion, serializer);
+        <Option<bool>>::sse_encode(self.closed, serializer);
+        <u64>::sse_encode(self.geometry_index_start, serializer);
+        <Option<u64>>::sse_encode(self.geometry_index_end, serializer);
+        <Option<String>>::sse_encode(self.sub_type, serializer);
+        <Option<String>>::sse_encode(self.sub_type_description, serializer);
+        <Option<String>>::sse_encode(self.iso_3166_1_alpha2, serializer);
+        <Option<String>>::sse_encode(self.iso_3166_1_alpha3, serializer);
+        <Vec<String>>::sse_encode(self.affected_road_names, serializer);
+        <Option<crate::api::models::BoundingBox>>::sse_encode(self.bbox, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::IncidentType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::models::IncidentType::Accident => 0,
+                crate::api::models::IncidentType::Congestion => 1,
+                crate::api::models::IncidentType::Construction => 2,
+                crate::api::models::IncidentType::DisabledVehicle => 3,
+                crate::api::models::IncidentType::LaneRestriction => 4,
+                crate::api::models::IncidentType::MassTransit => 5,
+                crate::api::models::IncidentType::Miscellaneous => 6,
+                crate::api::models::IncidentType::OtherNews => 7,
+                crate::api::models::IncidentType::PlannedEvent => 8,
+                crate::api::models::IncidentType::RoadClosure => 9,
+                crate::api::models::IncidentType::RoadHazard => 10,
+                crate::api::models::IncidentType::Weather => 11,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::api::models::LaneInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.active, serializer);
+        <Vec<String>>::sse_encode(self.directions, serializer);
+        <Option<String>>::sse_encode(self.active_direction, serializer);
+    }
+}
+
+impl SseEncode for Vec<String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <String>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::api::models::BlockedLane> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::models::BlockedLane>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::api::models::GeographicCoordinate> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::models::GeographicCoordinate>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::api::models::Incident> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::models::Incident>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::api::models::LaneInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::models::LaneInfo>::sse_encode(item, serializer);
+        }
     }
 }
 
@@ -201,6 +3051,460 @@ impl SseEncode for Vec<u8> {
         for item in self {
             <u8>::sse_encode(item, serializer);
         }
+    }
+}
+
+impl SseEncode for Vec<crate::api::models::RouteStep> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::models::RouteStep>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::api::models::SerializableStepAdvanceCondition> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::models::SerializableStepAdvanceCondition>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::api::models::SpokenInstruction> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::models::SpokenInstruction>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::api::models::VisualInstruction> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::models::VisualInstruction>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::api::models::Waypoint> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::models::Waypoint>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for crate::api::models::ManeuverModifier {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::models::ManeuverModifier::UTurn => 0,
+                crate::api::models::ManeuverModifier::SharpRight => 1,
+                crate::api::models::ManeuverModifier::Right => 2,
+                crate::api::models::ManeuverModifier::SlightRight => 3,
+                crate::api::models::ManeuverModifier::Straight => 4,
+                crate::api::models::ManeuverModifier::SlightLeft => 5,
+                crate::api::models::ManeuverModifier::Left => 6,
+                crate::api::models::ManeuverModifier::SharpLeft => 7,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::api::models::ManeuverType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::models::ManeuverType::Turn => 0,
+                crate::api::models::ManeuverType::NewName => 1,
+                crate::api::models::ManeuverType::Depart => 2,
+                crate::api::models::ManeuverType::Arrive => 3,
+                crate::api::models::ManeuverType::Merge => 4,
+                crate::api::models::ManeuverType::OnRamp => 5,
+                crate::api::models::ManeuverType::OffRamp => 6,
+                crate::api::models::ManeuverType::Fork => 7,
+                crate::api::models::ManeuverType::EndOfRoad => 8,
+                crate::api::models::ManeuverType::Continue => 9,
+                crate::api::models::ManeuverType::Roundabout => 10,
+                crate::api::models::ManeuverType::Rotary => 11,
+                crate::api::models::ManeuverType::RoundaboutTurn => 12,
+                crate::api::models::ManeuverType::Notification => 13,
+                crate::api::models::ManeuverType::ExitRoundabout => 14,
+                crate::api::models::ManeuverType::ExitRotary => 15,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for Option<String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <String>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<chrono::DateTime<chrono::Utc>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <chrono::DateTime<chrono::Utc>>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<bool> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <bool>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::BoundingBox> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::BoundingBox>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::Congestion> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::Congestion>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::CourseOverGround> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::CourseOverGround>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<f64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <f64>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::FlutterUserLocation> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::FlutterUserLocation>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::Impact> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::Impact>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::ManeuverModifier> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::ManeuverModifier>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::ManeuverType> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::ManeuverType>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::Speed> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::Speed>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::SpokenInstruction> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::SpokenInstruction>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<u16> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <u16>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<u64> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <u64>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::VisualInstruction> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::VisualInstruction>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::VisualInstructionContent> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::VisualInstructionContent>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<Vec<String>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <Vec<String>>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<Vec<crate::api::models::LaneInfo>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <Vec<crate::api::models::LaneInfo>>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for crate::api::models::Route {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<crate::api::models::GeographicCoordinate>>::sse_encode(self.geometry, serializer);
+        <crate::api::models::BoundingBox>::sse_encode(self.bbox, serializer);
+        <f64>::sse_encode(self.distance, serializer);
+        <Vec<crate::api::models::Waypoint>>::sse_encode(self.waypoints, serializer);
+        <Vec<crate::api::models::RouteStep>>::sse_encode(self.steps, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::RouteDeviation {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::api::models::RouteDeviation::NoDeviation => {
+                <i32>::sse_encode(0, serializer);
+            }
+            crate::api::models::RouteDeviation::OffRoute {
+                deviation_from_route_line,
+            } => {
+                <i32>::sse_encode(1, serializer);
+                <f64>::sse_encode(deviation_from_route_line, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::api::models::RouteStep {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<crate::api::models::GeographicCoordinate>>::sse_encode(self.geometry, serializer);
+        <f64>::sse_encode(self.distance, serializer);
+        <f64>::sse_encode(self.duration, serializer);
+        <Option<String>>::sse_encode(self.road_name, serializer);
+        <Vec<String>>::sse_encode(self.exits, serializer);
+        <String>::sse_encode(self.instruction, serializer);
+        <Vec<crate::api::models::VisualInstruction>>::sse_encode(
+            self.visual_instructions,
+            serializer,
+        );
+        <Vec<crate::api::models::SpokenInstruction>>::sse_encode(
+            self.spoken_instructions,
+            serializer,
+        );
+        <Option<Vec<String>>>::sse_encode(self.annotations, serializer);
+        <Vec<crate::api::models::Incident>>::sse_encode(self.incidents, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::SerializableStepAdvanceCondition {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::api::models::SerializableStepAdvanceCondition::Manual => {
+                <i32>::sse_encode(0, serializer);
+            }
+            crate::api::models::SerializableStepAdvanceCondition::DistanceToEndOfStep {
+                distance,
+                minimum_horizontal_accuracy,
+            } => {
+                <i32>::sse_encode(1, serializer);
+                <u16>::sse_encode(distance, serializer);
+                <u16>::sse_encode(minimum_horizontal_accuracy, serializer);
+            }
+            crate::api::models::SerializableStepAdvanceCondition::DistanceFromStep {
+                distance,
+                minimum_horizontal_accuracy,
+            } => {
+                <i32>::sse_encode(2, serializer);
+                <u16>::sse_encode(distance, serializer);
+                <u16>::sse_encode(minimum_horizontal_accuracy, serializer);
+            }
+            crate::api::models::SerializableStepAdvanceCondition::DistanceEntryExit {
+                distance_to_end_of_step,
+                distance_after_end_step,
+                minimum_horizontal_accuracy,
+                has_reached_end_of_current_step,
+            } => {
+                <i32>::sse_encode(3, serializer);
+                <u16>::sse_encode(distance_to_end_of_step, serializer);
+                <u16>::sse_encode(distance_after_end_step, serializer);
+                <u16>::sse_encode(minimum_horizontal_accuracy, serializer);
+                <bool>::sse_encode(has_reached_end_of_current_step, serializer);
+            }
+            crate::api::models::SerializableStepAdvanceCondition::OrAdvanceConditions {
+                conditions,
+            } => {
+                <i32>::sse_encode(4, serializer);
+                <Vec<crate::api::models::SerializableStepAdvanceCondition>>::sse_encode(
+                    conditions, serializer,
+                );
+            }
+            crate::api::models::SerializableStepAdvanceCondition::AndAdvanceConditions {
+                conditions,
+            } => {
+                <i32>::sse_encode(5, serializer);
+                <Vec<crate::api::models::SerializableStepAdvanceCondition>>::sse_encode(
+                    conditions, serializer,
+                );
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::api::models::Speed {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.value, serializer);
+        <Option<f64>>::sse_encode(self.accuracy, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::SpokenInstruction {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.text, serializer);
+        <Option<String>>::sse_encode(self.ssml, serializer);
+        <f64>::sse_encode(self.trigger_distance_before_maneuver, serializer);
+        <uuid::Uuid>::sse_encode(self.utterance_id, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::TripProgress {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.distance_to_next_maneuver, serializer);
+        <f64>::sse_encode(self.distance_remaining, serializer);
+        <f64>::sse_encode(self.duration_remaining, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::TripSummary {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <f64>::sse_encode(self.distance_traveled, serializer);
+        <f64>::sse_encode(self.snapped_distance_traveled, serializer);
+        <chrono::DateTime<chrono::Utc>>::sse_encode(self.started_at, serializer);
+        <Option<chrono::DateTime<chrono::Utc>>>::sse_encode(self.ended_at, serializer);
+    }
+}
+
+impl SseEncode for u16 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u16::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for u64 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u64::<NativeEndian>(self).unwrap();
     }
 }
 
@@ -216,17 +3520,86 @@ impl SseEncode for () {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {}
 }
 
-impl SseEncode for i32 {
+impl SseEncode for usize {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        serializer.cursor.write_i32::<NativeEndian>(self).unwrap();
+        serializer
+            .cursor
+            .write_u64::<NativeEndian>(self as _)
+            .unwrap();
     }
 }
 
-impl SseEncode for bool {
+impl SseEncode for crate::api::models::VisualInstruction {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        serializer.cursor.write_u8(self as _).unwrap();
+        <crate::api::models::VisualInstructionContent>::sse_encode(
+            self.primary_content,
+            serializer,
+        );
+        <Option<crate::api::models::VisualInstructionContent>>::sse_encode(
+            self.secondary_content,
+            serializer,
+        );
+        <Option<crate::api::models::VisualInstructionContent>>::sse_encode(
+            self.sub_content,
+            serializer,
+        );
+        <f64>::sse_encode(self.trigger_distance_before_maneuver, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::VisualInstructionContent {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.text, serializer);
+        <Option<crate::api::models::ManeuverType>>::sse_encode(self.maneuver_type, serializer);
+        <Option<crate::api::models::ManeuverModifier>>::sse_encode(
+            self.maneuver_modifier,
+            serializer,
+        );
+        <Option<u16>>::sse_encode(self.roundabout_exit_degrees, serializer);
+        <Option<Vec<crate::api::models::LaneInfo>>>::sse_encode(self.lane_info, serializer);
+        <Vec<String>>::sse_encode(self.exit_numbers, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::Waypoint {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::api::models::GeographicCoordinate>::sse_encode(self.coordinate, serializer);
+        <crate::api::models::WaypointKind>::sse_encode(self.kind, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::WaypointAdvanceMode {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        match self {
+            crate::api::models::WaypointAdvanceMode::WaypointWithinRange(field0) => {
+                <i32>::sse_encode(0, serializer);
+                <f64>::sse_encode(field0, serializer);
+            }
+            _ => {
+                unimplemented!("");
+            }
+        }
+    }
+}
+
+impl SseEncode for crate::api::models::WaypointKind {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::models::WaypointKind::Break => 0,
+                crate::api::models::WaypointKind::Via => 1,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
     }
 }
 
@@ -238,6 +3611,7 @@ mod io {
     // Section: imports
 
     use super::*;
+    use crate::api::navigation::*;
     use flutter_rust_bridge::for_generated::byteorder::{
         NativeEndian, ReadBytesExt, WriteBytesExt,
     };
@@ -247,6 +3621,38 @@ mod io {
     // Section: boilerplate
 
     flutter_rust_bridge::frb_generated_boilerplate_io!();
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_flutter_ferrostar_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>>::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_flutter_ferrostar_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>>::decrement_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_flutter_ferrostar_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavigationController>,
+        >::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_flutter_ferrostar_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavigationController>,
+        >::decrement_strong_count(ptr as _);
+    }
 }
 #[cfg(not(target_family = "wasm"))]
 pub use io::*;
@@ -260,6 +3666,7 @@ mod web {
     // Section: imports
 
     use super::*;
+    use crate::api::navigation::*;
     use flutter_rust_bridge::for_generated::byteorder::{
         NativeEndian, ReadBytesExt, WriteBytesExt,
     };
@@ -271,6 +3678,38 @@ mod web {
     // Section: boilerplate
 
     flutter_rust_bridge::frb_generated_boilerplate_web!();
+
+    #[wasm_bindgen]
+    pub fn rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>>::increment_strong_count(ptr as _);
+    }
+
+    #[wasm_bindgen]
+    pub fn rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>>::decrement_strong_count(ptr as _);
+    }
+
+    #[wasm_bindgen]
+    pub fn rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavigationController>,
+        >::increment_strong_count(ptr as _);
+    }
+
+    #[wasm_bindgen]
+    pub fn rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavigationController>,
+        >::decrement_strong_count(ptr as _);
+    }
 }
 #[cfg(target_family = "wasm")]
 pub use web::*;

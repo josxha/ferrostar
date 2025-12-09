@@ -8,3 +8,11 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 String greet({required String name}) =>
     RustLib.instance.api.crateApiSimpleGreet(name: name);
+
+Future<String> createCoordinateString({
+  required double lat,
+  required double lng,
+}) => RustLib.instance.api.crateApiSimpleCreateCoordinateString(
+  lat: lat,
+  lng: lng,
+);

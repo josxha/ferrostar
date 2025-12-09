@@ -3,6 +3,8 @@
 
 // ignore_for_file: unused_import, unused_element, unnecessary_import, duplicate_ignore, invalid_use_of_internal_member, annotate_overrides, non_constant_identifier_names, curly_braces_in_flow_control_structures, prefer_const_literals_to_create_immutables, unused_field
 
+import 'api/models.dart';
+import 'api/navigation.dart';
 import 'api/simple.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -10,6 +12,7 @@ import 'frb_generated.dart';
 import 'frb_generated.io.dart'
     if (dart.library.js_interop) 'frb_generated.web.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:uuid/uuid.dart';
 
 /// Main entrypoint of the Rust API
 class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
@@ -66,7 +69,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.11.1';
 
   @override
-  int get rustContentHash => -1918914929;
+  int get rustContentHash => 1746079739;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -77,9 +80,61 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 }
 
 abstract class RustLibApi extends BaseApi {
+  Future<FlutterTripState> crateApiNavigationFlutterNavStateTripState({
+    required FlutterNavState that,
+  });
+
+  Future<FlutterNavState>
+  crateApiNavigationFlutterNavigationControllerAdvanceToNextStep({
+    required FlutterNavigationController that,
+    required FlutterNavState state,
+  });
+
+  Future<FlutterNavState>
+  crateApiNavigationFlutterNavigationControllerGetInitialState({
+    required FlutterNavigationController that,
+    required FlutterUserLocation location,
+  });
+
+  Future<FlutterNavigationController>
+  crateApiNavigationFlutterNavigationControllerNew({
+    required Route route,
+    required FlutterNavigationControllerConfig config,
+  });
+
+  Future<FlutterNavState>
+  crateApiNavigationFlutterNavigationControllerUpdateUserLocation({
+    required FlutterNavigationController that,
+    required FlutterUserLocation location,
+    required FlutterNavState state,
+  });
+
+  Future<String> crateApiSimpleCreateCoordinateString({
+    required double lat,
+    required double lng,
+  });
+
   String crateApiSimpleGreet({required String name});
 
   Future<void> crateApiSimpleInitApp();
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_FlutterNavState;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_FlutterNavState;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_FlutterNavStatePtr;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_FlutterNavigationController;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_FlutterNavigationController;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_FlutterNavigationControllerPtr;
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -91,13 +146,259 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
+  Future<FlutterTripState> crateApiNavigationFlutterNavStateTripState({
+    required FlutterNavState that,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+            that,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 1,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_flutter_trip_state,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiNavigationFlutterNavStateTripStateConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiNavigationFlutterNavStateTripStateConstMeta =>
+      const TaskConstMeta(
+        debugName: "FlutterNavState_trip_state",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<FlutterNavState>
+  crateApiNavigationFlutterNavigationControllerAdvanceToNextStep({
+    required FlutterNavigationController that,
+    required FlutterNavState state,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+            state,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 2,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiNavigationFlutterNavigationControllerAdvanceToNextStepConstMeta,
+        argValues: [that, state],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiNavigationFlutterNavigationControllerAdvanceToNextStepConstMeta =>
+      const TaskConstMeta(
+        debugName: "FlutterNavigationController_advance_to_next_step",
+        argNames: ["that", "state"],
+      );
+
+  @override
+  Future<FlutterNavState>
+  crateApiNavigationFlutterNavigationControllerGetInitialState({
+    required FlutterNavigationController that,
+    required FlutterUserLocation location,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+            that,
+            serializer,
+          );
+          sse_encode_box_autoadd_flutter_user_location(location, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 3,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiNavigationFlutterNavigationControllerGetInitialStateConstMeta,
+        argValues: [that, location],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiNavigationFlutterNavigationControllerGetInitialStateConstMeta =>
+      const TaskConstMeta(
+        debugName: "FlutterNavigationController_get_initial_state",
+        argNames: ["that", "location"],
+      );
+
+  @override
+  Future<FlutterNavigationController>
+  crateApiNavigationFlutterNavigationControllerNew({
+    required Route route,
+    required FlutterNavigationControllerConfig config,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_route(route, serializer);
+          sse_encode_box_autoadd_flutter_navigation_controller_config(
+            config,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 4,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiNavigationFlutterNavigationControllerNewConstMeta,
+        argValues: [route, config],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiNavigationFlutterNavigationControllerNewConstMeta =>
+      const TaskConstMeta(
+        debugName: "FlutterNavigationController_new",
+        argNames: ["route", "config"],
+      );
+
+  @override
+  Future<FlutterNavState>
+  crateApiNavigationFlutterNavigationControllerUpdateUserLocation({
+    required FlutterNavigationController that,
+    required FlutterUserLocation location,
+    required FlutterNavState state,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+            that,
+            serializer,
+          );
+          sse_encode_box_autoadd_flutter_user_location(location, serializer);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+            state,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 5,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiNavigationFlutterNavigationControllerUpdateUserLocationConstMeta,
+        argValues: [that, location, state],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiNavigationFlutterNavigationControllerUpdateUserLocationConstMeta =>
+      const TaskConstMeta(
+        debugName: "FlutterNavigationController_update_user_location",
+        argNames: ["that", "location", "state"],
+      );
+
+  @override
+  Future<String> crateApiSimpleCreateCoordinateString({
+    required double lat,
+    required double lng,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_f_64(lat, serializer);
+          sse_encode_f_64(lng, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 6,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiSimpleCreateCoordinateStringConstMeta,
+        argValues: [lat, lng],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiSimpleCreateCoordinateStringConstMeta =>
+      const TaskConstMeta(
+        debugName: "create_coordinate_string",
+        argNames: ["lat", "lng"],
+      );
+
+  @override
   String crateApiSimpleGreet({required String name}) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(name, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 1)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_String,
@@ -122,7 +423,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 2,
+            funcId: 8,
             port: port_,
           );
         },
@@ -140,6 +441,88 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiSimpleInitAppConstMeta =>
       const TaskConstMeta(debugName: "init_app", argNames: []);
 
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_FlutterNavState => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_FlutterNavState => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_FlutterNavigationController => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_FlutterNavigationController => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController;
+
+  @protected
+  FlutterNavState
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FlutterNavStateImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  FlutterNavigationController
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FlutterNavigationControllerImpl.frbInternalDcoDecode(
+      raw as List<dynamic>,
+    );
+  }
+
+  @protected
+  FlutterNavState
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FlutterNavStateImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  FlutterNavigationController
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FlutterNavigationControllerImpl.frbInternalDcoDecode(
+      raw as List<dynamic>,
+    );
+  }
+
+  @protected
+  DateTime dco_decode_Chrono_Utc(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeTimestamp(ts: dco_decode_i_64(raw).toInt(), isUtc: true);
+  }
+
+  @protected
+  FlutterNavState
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FlutterNavStateImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  FlutterNavigationController
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return FlutterNavigationControllerImpl.frbInternalDcoDecode(
+      raw as List<dynamic>,
+    );
+  }
+
   @protected
   String dco_decode_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -147,9 +530,735 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  UuidValue dco_decode_Uuid(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return UuidValue.fromByteList(dco_decode_list_prim_u_8_strict(raw));
+  }
+
+  @protected
+  BlockedLane dco_decode_blocked_lane(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return BlockedLane.values[raw as int];
+  }
+
+  @protected
+  bool dco_decode_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as bool;
+  }
+
+  @protected
+  BoundingBox dco_decode_bounding_box(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return BoundingBox(
+      sw: dco_decode_geographic_coordinate(arr[0]),
+      ne: dco_decode_geographic_coordinate(arr[1]),
+    );
+  }
+
+  @protected
+  DateTime dco_decode_box_autoadd_Chrono_Utc(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_Chrono_Utc(raw);
+  }
+
+  @protected
+  bool dco_decode_box_autoadd_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as bool;
+  }
+
+  @protected
+  BoundingBox dco_decode_box_autoadd_bounding_box(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_bounding_box(raw);
+  }
+
+  @protected
+  Congestion dco_decode_box_autoadd_congestion(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_congestion(raw);
+  }
+
+  @protected
+  CourseOverGround dco_decode_box_autoadd_course_over_ground(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_course_over_ground(raw);
+  }
+
+  @protected
+  double dco_decode_box_autoadd_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as double;
+  }
+
+  @protected
+  FlutterNavigationControllerConfig
+  dco_decode_box_autoadd_flutter_navigation_controller_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_flutter_navigation_controller_config(raw);
+  }
+
+  @protected
+  FlutterUserLocation dco_decode_box_autoadd_flutter_user_location(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_flutter_user_location(raw);
+  }
+
+  @protected
+  Impact dco_decode_box_autoadd_impact(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_impact(raw);
+  }
+
+  @protected
+  ManeuverModifier dco_decode_box_autoadd_maneuver_modifier(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_maneuver_modifier(raw);
+  }
+
+  @protected
+  ManeuverType dco_decode_box_autoadd_maneuver_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_maneuver_type(raw);
+  }
+
+  @protected
+  Route dco_decode_box_autoadd_route(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_route(raw);
+  }
+
+  @protected
+  RouteDeviation dco_decode_box_autoadd_route_deviation(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_route_deviation(raw);
+  }
+
+  @protected
+  Speed dco_decode_box_autoadd_speed(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_speed(raw);
+  }
+
+  @protected
+  SpokenInstruction dco_decode_box_autoadd_spoken_instruction(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_spoken_instruction(raw);
+  }
+
+  @protected
+  TripProgress dco_decode_box_autoadd_trip_progress(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_trip_progress(raw);
+  }
+
+  @protected
+  TripSummary dco_decode_box_autoadd_trip_summary(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_trip_summary(raw);
+  }
+
+  @protected
+  int dco_decode_box_autoadd_u_16(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
+  BigInt dco_decode_box_autoadd_u_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_u_64(raw);
+  }
+
+  @protected
+  VisualInstruction dco_decode_box_autoadd_visual_instruction(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_visual_instruction(raw);
+  }
+
+  @protected
+  VisualInstructionContent dco_decode_box_autoadd_visual_instruction_content(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_visual_instruction_content(raw);
+  }
+
+  @protected
+  Congestion dco_decode_congestion(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return Congestion(value: dco_decode_u_8(arr[0]));
+  }
+
+  @protected
+  CourseFiltering dco_decode_course_filtering(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return CourseFiltering.values[raw as int];
+  }
+
+  @protected
+  CourseOverGround dco_decode_course_over_ground(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return CourseOverGround(
+      degrees: dco_decode_u_16(arr[0]),
+      accuracy: dco_decode_opt_box_autoadd_u_16(arr[1]),
+    );
+  }
+
+  @protected
+  double dco_decode_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as double;
+  }
+
+  @protected
+  FlutterNavigationControllerConfig
+  dco_decode_flutter_navigation_controller_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return FlutterNavigationControllerConfig(
+      waypointAdvance: dco_decode_waypoint_advance_mode(arr[0]),
+      stepAdvanceCondition: dco_decode_serializable_step_advance_condition(
+        arr[1],
+      ),
+      arrivalStepAdvanceCondition:
+          dco_decode_serializable_step_advance_condition(arr[2]),
+      routeDeviationTracking: dco_decode_flutter_route_deviation_tracking(
+        arr[3],
+      ),
+      snappedLocationCourseFiltering: dco_decode_course_filtering(arr[4]),
+    );
+  }
+
+  @protected
+  FlutterRouteDeviationTracking dco_decode_flutter_route_deviation_tracking(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return FlutterRouteDeviationTracking_None();
+      case 1:
+        return FlutterRouteDeviationTracking_StaticThreshold(
+          minimumHorizontalAccuracy: dco_decode_u_16(raw[1]),
+          maxAcceptableDeviation: dco_decode_f_64(raw[2]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  FlutterTripState dco_decode_flutter_trip_state(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return FlutterTripState_Idle(
+          userLocation: dco_decode_opt_box_autoadd_flutter_user_location(
+            raw[1],
+          ),
+        );
+      case 1:
+        return FlutterTripState_Navigating(
+          currentStepGeometryIndex: dco_decode_opt_box_autoadd_u_64(raw[1]),
+          userLocation: dco_decode_box_autoadd_flutter_user_location(raw[2]),
+          snappedUserLocation: dco_decode_box_autoadd_flutter_user_location(
+            raw[3],
+          ),
+          remainingSteps: dco_decode_list_route_step(raw[4]),
+          remainingWaypoints: dco_decode_list_waypoint(raw[5]),
+          progress: dco_decode_box_autoadd_trip_progress(raw[6]),
+          summary: dco_decode_box_autoadd_trip_summary(raw[7]),
+          deviation: dco_decode_box_autoadd_route_deviation(raw[8]),
+          visualInstruction: dco_decode_opt_box_autoadd_visual_instruction(
+            raw[9],
+          ),
+          spokenInstruction: dco_decode_opt_box_autoadd_spoken_instruction(
+            raw[10],
+          ),
+          annotationJson: dco_decode_opt_String(raw[11]),
+        );
+      case 2:
+        return FlutterTripState_Complete(
+          userLocation: dco_decode_box_autoadd_flutter_user_location(raw[1]),
+          summary: dco_decode_box_autoadd_trip_summary(raw[2]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  FlutterUserLocation dco_decode_flutter_user_location(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return FlutterUserLocation(
+      coordinates: dco_decode_geographic_coordinate(arr[0]),
+      horizontalAccuracy: dco_decode_f_64(arr[1]),
+      courseOverGround: dco_decode_opt_box_autoadd_course_over_ground(arr[2]),
+      timestamp: dco_decode_Chrono_Utc(arr[3]),
+      speed: dco_decode_opt_box_autoadd_speed(arr[4]),
+    );
+  }
+
+  @protected
+  GeographicCoordinate dco_decode_geographic_coordinate(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return GeographicCoordinate(
+      lat: dco_decode_f_64(arr[0]),
+      lng: dco_decode_f_64(arr[1]),
+    );
+  }
+
+  @protected
+  int dco_decode_i_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
+  PlatformInt64 dco_decode_i_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeI64(raw);
+  }
+
+  @protected
+  Impact dco_decode_impact(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Impact.values[raw as int];
+  }
+
+  @protected
+  Incident dco_decode_incident(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 19)
+      throw Exception('unexpected arr length: expect 19 but see ${arr.length}');
+    return Incident(
+      id: dco_decode_String(arr[0]),
+      incidentType: dco_decode_incident_type(arr[1]),
+      description: dco_decode_opt_String(arr[2]),
+      longDescription: dco_decode_opt_String(arr[3]),
+      creationTime: dco_decode_opt_box_autoadd_Chrono_Utc(arr[4]),
+      startTime: dco_decode_opt_box_autoadd_Chrono_Utc(arr[5]),
+      endTime: dco_decode_opt_box_autoadd_Chrono_Utc(arr[6]),
+      impact: dco_decode_opt_box_autoadd_impact(arr[7]),
+      lanesBlocked: dco_decode_list_blocked_lane(arr[8]),
+      congestion: dco_decode_opt_box_autoadd_congestion(arr[9]),
+      closed: dco_decode_opt_box_autoadd_bool(arr[10]),
+      geometryIndexStart: dco_decode_u_64(arr[11]),
+      geometryIndexEnd: dco_decode_opt_box_autoadd_u_64(arr[12]),
+      subType: dco_decode_opt_String(arr[13]),
+      subTypeDescription: dco_decode_opt_String(arr[14]),
+      iso31661Alpha2: dco_decode_opt_String(arr[15]),
+      iso31661Alpha3: dco_decode_opt_String(arr[16]),
+      affectedRoadNames: dco_decode_list_String(arr[17]),
+      bbox: dco_decode_opt_box_autoadd_bounding_box(arr[18]),
+    );
+  }
+
+  @protected
+  IncidentType dco_decode_incident_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return IncidentType.values[raw as int];
+  }
+
+  @protected
+  LaneInfo dco_decode_lane_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return LaneInfo(
+      active: dco_decode_bool(arr[0]),
+      directions: dco_decode_list_String(arr[1]),
+      activeDirection: dco_decode_opt_String(arr[2]),
+    );
+  }
+
+  @protected
+  List<String> dco_decode_list_String(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_String).toList();
+  }
+
+  @protected
+  List<BlockedLane> dco_decode_list_blocked_lane(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_blocked_lane).toList();
+  }
+
+  @protected
+  List<GeographicCoordinate> dco_decode_list_geographic_coordinate(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_geographic_coordinate)
+        .toList();
+  }
+
+  @protected
+  List<Incident> dco_decode_list_incident(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_incident).toList();
+  }
+
+  @protected
+  List<LaneInfo> dco_decode_list_lane_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_lane_info).toList();
+  }
+
+  @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as Uint8List;
+  }
+
+  @protected
+  List<RouteStep> dco_decode_list_route_step(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_route_step).toList();
+  }
+
+  @protected
+  List<SerializableStepAdvanceCondition>
+  dco_decode_list_serializable_step_advance_condition(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(dco_decode_serializable_step_advance_condition)
+        .toList();
+  }
+
+  @protected
+  List<SpokenInstruction> dco_decode_list_spoken_instruction(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_spoken_instruction).toList();
+  }
+
+  @protected
+  List<VisualInstruction> dco_decode_list_visual_instruction(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_visual_instruction).toList();
+  }
+
+  @protected
+  List<Waypoint> dco_decode_list_waypoint(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_waypoint).toList();
+  }
+
+  @protected
+  ManeuverModifier dco_decode_maneuver_modifier(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ManeuverModifier.values[raw as int];
+  }
+
+  @protected
+  ManeuverType dco_decode_maneuver_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ManeuverType.values[raw as int];
+  }
+
+  @protected
+  String? dco_decode_opt_String(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_String(raw);
+  }
+
+  @protected
+  DateTime? dco_decode_opt_box_autoadd_Chrono_Utc(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_Chrono_Utc(raw);
+  }
+
+  @protected
+  bool? dco_decode_opt_box_autoadd_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_bool(raw);
+  }
+
+  @protected
+  BoundingBox? dco_decode_opt_box_autoadd_bounding_box(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_bounding_box(raw);
+  }
+
+  @protected
+  Congestion? dco_decode_opt_box_autoadd_congestion(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_congestion(raw);
+  }
+
+  @protected
+  CourseOverGround? dco_decode_opt_box_autoadd_course_over_ground(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_course_over_ground(raw);
+  }
+
+  @protected
+  double? dco_decode_opt_box_autoadd_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_f_64(raw);
+  }
+
+  @protected
+  FlutterUserLocation? dco_decode_opt_box_autoadd_flutter_user_location(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_flutter_user_location(raw);
+  }
+
+  @protected
+  Impact? dco_decode_opt_box_autoadd_impact(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_impact(raw);
+  }
+
+  @protected
+  ManeuverModifier? dco_decode_opt_box_autoadd_maneuver_modifier(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_maneuver_modifier(raw);
+  }
+
+  @protected
+  ManeuverType? dco_decode_opt_box_autoadd_maneuver_type(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_maneuver_type(raw);
+  }
+
+  @protected
+  Speed? dco_decode_opt_box_autoadd_speed(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_speed(raw);
+  }
+
+  @protected
+  SpokenInstruction? dco_decode_opt_box_autoadd_spoken_instruction(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_spoken_instruction(raw);
+  }
+
+  @protected
+  int? dco_decode_opt_box_autoadd_u_16(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_u_16(raw);
+  }
+
+  @protected
+  BigInt? dco_decode_opt_box_autoadd_u_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_u_64(raw);
+  }
+
+  @protected
+  VisualInstruction? dco_decode_opt_box_autoadd_visual_instruction(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_visual_instruction(raw);
+  }
+
+  @protected
+  VisualInstructionContent?
+  dco_decode_opt_box_autoadd_visual_instruction_content(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_visual_instruction_content(raw);
+  }
+
+  @protected
+  List<String>? dco_decode_opt_list_String(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_list_String(raw);
+  }
+
+  @protected
+  List<LaneInfo>? dco_decode_opt_list_lane_info(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_list_lane_info(raw);
+  }
+
+  @protected
+  Route dco_decode_route(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return Route(
+      geometry: dco_decode_list_geographic_coordinate(arr[0]),
+      bbox: dco_decode_bounding_box(arr[1]),
+      distance: dco_decode_f_64(arr[2]),
+      waypoints: dco_decode_list_waypoint(arr[3]),
+      steps: dco_decode_list_route_step(arr[4]),
+    );
+  }
+
+  @protected
+  RouteDeviation dco_decode_route_deviation(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return RouteDeviation_NoDeviation();
+      case 1:
+        return RouteDeviation_OffRoute(
+          deviationFromRouteLine: dco_decode_f_64(raw[1]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  RouteStep dco_decode_route_step(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 10)
+      throw Exception('unexpected arr length: expect 10 but see ${arr.length}');
+    return RouteStep(
+      geometry: dco_decode_list_geographic_coordinate(arr[0]),
+      distance: dco_decode_f_64(arr[1]),
+      duration: dco_decode_f_64(arr[2]),
+      roadName: dco_decode_opt_String(arr[3]),
+      exits: dco_decode_list_String(arr[4]),
+      instruction: dco_decode_String(arr[5]),
+      visualInstructions: dco_decode_list_visual_instruction(arr[6]),
+      spokenInstructions: dco_decode_list_spoken_instruction(arr[7]),
+      annotations: dco_decode_opt_list_String(arr[8]),
+      incidents: dco_decode_list_incident(arr[9]),
+    );
+  }
+
+  @protected
+  SerializableStepAdvanceCondition
+  dco_decode_serializable_step_advance_condition(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return SerializableStepAdvanceCondition_Manual();
+      case 1:
+        return SerializableStepAdvanceCondition_DistanceToEndOfStep(
+          distance: dco_decode_u_16(raw[1]),
+          minimumHorizontalAccuracy: dco_decode_u_16(raw[2]),
+        );
+      case 2:
+        return SerializableStepAdvanceCondition_DistanceFromStep(
+          distance: dco_decode_u_16(raw[1]),
+          minimumHorizontalAccuracy: dco_decode_u_16(raw[2]),
+        );
+      case 3:
+        return SerializableStepAdvanceCondition_DistanceEntryExit(
+          distanceToEndOfStep: dco_decode_u_16(raw[1]),
+          distanceAfterEndStep: dco_decode_u_16(raw[2]),
+          minimumHorizontalAccuracy: dco_decode_u_16(raw[3]),
+          hasReachedEndOfCurrentStep: dco_decode_bool(raw[4]),
+        );
+      case 4:
+        return SerializableStepAdvanceCondition_OrAdvanceConditions(
+          conditions: dco_decode_list_serializable_step_advance_condition(
+            raw[1],
+          ),
+        );
+      case 5:
+        return SerializableStepAdvanceCondition_AndAdvanceConditions(
+          conditions: dco_decode_list_serializable_step_advance_condition(
+            raw[1],
+          ),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  Speed dco_decode_speed(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return Speed(
+      value: dco_decode_f_64(arr[0]),
+      accuracy: dco_decode_opt_box_autoadd_f_64(arr[1]),
+    );
+  }
+
+  @protected
+  SpokenInstruction dco_decode_spoken_instruction(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return SpokenInstruction(
+      text: dco_decode_String(arr[0]),
+      ssml: dco_decode_opt_String(arr[1]),
+      triggerDistanceBeforeManeuver: dco_decode_f_64(arr[2]),
+      utteranceId: dco_decode_Uuid(arr[3]),
+    );
+  }
+
+  @protected
+  TripProgress dco_decode_trip_progress(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
+    return TripProgress(
+      distanceToNextManeuver: dco_decode_f_64(arr[0]),
+      distanceRemaining: dco_decode_f_64(arr[1]),
+      durationRemaining: dco_decode_f_64(arr[2]),
+    );
+  }
+
+  @protected
+  TripSummary dco_decode_trip_summary(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return TripSummary(
+      distanceTraveled: dco_decode_f_64(arr[0]),
+      snappedDistanceTraveled: dco_decode_f_64(arr[1]),
+      startedAt: dco_decode_Chrono_Utc(arr[2]),
+      endedAt: dco_decode_opt_box_autoadd_Chrono_Utc(arr[3]),
+    );
+  }
+
+  @protected
+  int dco_decode_u_16(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
+  BigInt dco_decode_u_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeU64(raw);
   }
 
   @protected
@@ -165,6 +1274,152 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  BigInt dco_decode_usize(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeU64(raw);
+  }
+
+  @protected
+  VisualInstruction dco_decode_visual_instruction(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return VisualInstruction(
+      primaryContent: dco_decode_visual_instruction_content(arr[0]),
+      secondaryContent: dco_decode_opt_box_autoadd_visual_instruction_content(
+        arr[1],
+      ),
+      subContent: dco_decode_opt_box_autoadd_visual_instruction_content(arr[2]),
+      triggerDistanceBeforeManeuver: dco_decode_f_64(arr[3]),
+    );
+  }
+
+  @protected
+  VisualInstructionContent dco_decode_visual_instruction_content(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 6)
+      throw Exception('unexpected arr length: expect 6 but see ${arr.length}');
+    return VisualInstructionContent(
+      text: dco_decode_String(arr[0]),
+      maneuverType: dco_decode_opt_box_autoadd_maneuver_type(arr[1]),
+      maneuverModifier: dco_decode_opt_box_autoadd_maneuver_modifier(arr[2]),
+      roundaboutExitDegrees: dco_decode_opt_box_autoadd_u_16(arr[3]),
+      laneInfo: dco_decode_opt_list_lane_info(arr[4]),
+      exitNumbers: dco_decode_list_String(arr[5]),
+    );
+  }
+
+  @protected
+  Waypoint dco_decode_waypoint(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return Waypoint(
+      coordinate: dco_decode_geographic_coordinate(arr[0]),
+      kind: dco_decode_waypoint_kind(arr[1]),
+    );
+  }
+
+  @protected
+  WaypointAdvanceMode dco_decode_waypoint_advance_mode(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return WaypointAdvanceMode_WaypointWithinRange(dco_decode_f_64(raw[1]));
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  WaypointKind dco_decode_waypoint_kind(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return WaypointKind.values[raw as int];
+  }
+
+  @protected
+  FlutterNavState
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return FlutterNavStateImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  FlutterNavigationController
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return FlutterNavigationControllerImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  FlutterNavState
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return FlutterNavStateImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  FlutterNavigationController
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return FlutterNavigationControllerImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  DateTime sse_decode_Chrono_Utc(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_64(deserializer);
+    return DateTime.fromMicrosecondsSinceEpoch(inner.toInt(), isUtc: true);
+  }
+
+  @protected
+  FlutterNavState
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return FlutterNavStateImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  FlutterNavigationController
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return FlutterNavigationControllerImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
   String sse_decode_String(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_list_prim_u_8_strict(deserializer);
@@ -172,10 +1427,993 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  UuidValue sse_decode_Uuid(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_prim_u_8_strict(deserializer);
+    return UuidValue.fromByteList(inner);
+  }
+
+  @protected
+  BlockedLane sse_decode_blocked_lane(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return BlockedLane.values[inner];
+  }
+
+  @protected
+  bool sse_decode_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint8() != 0;
+  }
+
+  @protected
+  BoundingBox sse_decode_bounding_box(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_sw = sse_decode_geographic_coordinate(deserializer);
+    var var_ne = sse_decode_geographic_coordinate(deserializer);
+    return BoundingBox(sw: var_sw, ne: var_ne);
+  }
+
+  @protected
+  DateTime sse_decode_box_autoadd_Chrono_Utc(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_Chrono_Utc(deserializer));
+  }
+
+  @protected
+  bool sse_decode_box_autoadd_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_bool(deserializer));
+  }
+
+  @protected
+  BoundingBox sse_decode_box_autoadd_bounding_box(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_bounding_box(deserializer));
+  }
+
+  @protected
+  Congestion sse_decode_box_autoadd_congestion(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_congestion(deserializer));
+  }
+
+  @protected
+  CourseOverGround sse_decode_box_autoadd_course_over_ground(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_course_over_ground(deserializer));
+  }
+
+  @protected
+  double sse_decode_box_autoadd_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_f_64(deserializer));
+  }
+
+  @protected
+  FlutterNavigationControllerConfig
+  sse_decode_box_autoadd_flutter_navigation_controller_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_flutter_navigation_controller_config(deserializer));
+  }
+
+  @protected
+  FlutterUserLocation sse_decode_box_autoadd_flutter_user_location(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_flutter_user_location(deserializer));
+  }
+
+  @protected
+  Impact sse_decode_box_autoadd_impact(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_impact(deserializer));
+  }
+
+  @protected
+  ManeuverModifier sse_decode_box_autoadd_maneuver_modifier(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_maneuver_modifier(deserializer));
+  }
+
+  @protected
+  ManeuverType sse_decode_box_autoadd_maneuver_type(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_maneuver_type(deserializer));
+  }
+
+  @protected
+  Route sse_decode_box_autoadd_route(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_route(deserializer));
+  }
+
+  @protected
+  RouteDeviation sse_decode_box_autoadd_route_deviation(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_route_deviation(deserializer));
+  }
+
+  @protected
+  Speed sse_decode_box_autoadd_speed(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_speed(deserializer));
+  }
+
+  @protected
+  SpokenInstruction sse_decode_box_autoadd_spoken_instruction(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_spoken_instruction(deserializer));
+  }
+
+  @protected
+  TripProgress sse_decode_box_autoadd_trip_progress(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_trip_progress(deserializer));
+  }
+
+  @protected
+  TripSummary sse_decode_box_autoadd_trip_summary(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_trip_summary(deserializer));
+  }
+
+  @protected
+  int sse_decode_box_autoadd_u_16(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_u_16(deserializer));
+  }
+
+  @protected
+  BigInt sse_decode_box_autoadd_u_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_u_64(deserializer));
+  }
+
+  @protected
+  VisualInstruction sse_decode_box_autoadd_visual_instruction(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_visual_instruction(deserializer));
+  }
+
+  @protected
+  VisualInstructionContent sse_decode_box_autoadd_visual_instruction_content(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_visual_instruction_content(deserializer));
+  }
+
+  @protected
+  Congestion sse_decode_congestion(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_value = sse_decode_u_8(deserializer);
+    return Congestion(value: var_value);
+  }
+
+  @protected
+  CourseFiltering sse_decode_course_filtering(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return CourseFiltering.values[inner];
+  }
+
+  @protected
+  CourseOverGround sse_decode_course_over_ground(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_degrees = sse_decode_u_16(deserializer);
+    var var_accuracy = sse_decode_opt_box_autoadd_u_16(deserializer);
+    return CourseOverGround(degrees: var_degrees, accuracy: var_accuracy);
+  }
+
+  @protected
+  double sse_decode_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getFloat64();
+  }
+
+  @protected
+  FlutterNavigationControllerConfig
+  sse_decode_flutter_navigation_controller_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_waypointAdvance = sse_decode_waypoint_advance_mode(deserializer);
+    var var_stepAdvanceCondition =
+        sse_decode_serializable_step_advance_condition(deserializer);
+    var var_arrivalStepAdvanceCondition =
+        sse_decode_serializable_step_advance_condition(deserializer);
+    var var_routeDeviationTracking =
+        sse_decode_flutter_route_deviation_tracking(deserializer);
+    var var_snappedLocationCourseFiltering = sse_decode_course_filtering(
+      deserializer,
+    );
+    return FlutterNavigationControllerConfig(
+      waypointAdvance: var_waypointAdvance,
+      stepAdvanceCondition: var_stepAdvanceCondition,
+      arrivalStepAdvanceCondition: var_arrivalStepAdvanceCondition,
+      routeDeviationTracking: var_routeDeviationTracking,
+      snappedLocationCourseFiltering: var_snappedLocationCourseFiltering,
+    );
+  }
+
+  @protected
+  FlutterRouteDeviationTracking sse_decode_flutter_route_deviation_tracking(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        return FlutterRouteDeviationTracking_None();
+      case 1:
+        var var_minimumHorizontalAccuracy = sse_decode_u_16(deserializer);
+        var var_maxAcceptableDeviation = sse_decode_f_64(deserializer);
+        return FlutterRouteDeviationTracking_StaticThreshold(
+          minimumHorizontalAccuracy: var_minimumHorizontalAccuracy,
+          maxAcceptableDeviation: var_maxAcceptableDeviation,
+        );
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  FlutterTripState sse_decode_flutter_trip_state(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_userLocation = sse_decode_opt_box_autoadd_flutter_user_location(
+          deserializer,
+        );
+        return FlutterTripState_Idle(userLocation: var_userLocation);
+      case 1:
+        var var_currentStepGeometryIndex = sse_decode_opt_box_autoadd_u_64(
+          deserializer,
+        );
+        var var_userLocation = sse_decode_box_autoadd_flutter_user_location(
+          deserializer,
+        );
+        var var_snappedUserLocation =
+            sse_decode_box_autoadd_flutter_user_location(deserializer);
+        var var_remainingSteps = sse_decode_list_route_step(deserializer);
+        var var_remainingWaypoints = sse_decode_list_waypoint(deserializer);
+        var var_progress = sse_decode_box_autoadd_trip_progress(deserializer);
+        var var_summary = sse_decode_box_autoadd_trip_summary(deserializer);
+        var var_deviation = sse_decode_box_autoadd_route_deviation(
+          deserializer,
+        );
+        var var_visualInstruction =
+            sse_decode_opt_box_autoadd_visual_instruction(deserializer);
+        var var_spokenInstruction =
+            sse_decode_opt_box_autoadd_spoken_instruction(deserializer);
+        var var_annotationJson = sse_decode_opt_String(deserializer);
+        return FlutterTripState_Navigating(
+          currentStepGeometryIndex: var_currentStepGeometryIndex,
+          userLocation: var_userLocation,
+          snappedUserLocation: var_snappedUserLocation,
+          remainingSteps: var_remainingSteps,
+          remainingWaypoints: var_remainingWaypoints,
+          progress: var_progress,
+          summary: var_summary,
+          deviation: var_deviation,
+          visualInstruction: var_visualInstruction,
+          spokenInstruction: var_spokenInstruction,
+          annotationJson: var_annotationJson,
+        );
+      case 2:
+        var var_userLocation = sse_decode_box_autoadd_flutter_user_location(
+          deserializer,
+        );
+        var var_summary = sse_decode_box_autoadd_trip_summary(deserializer);
+        return FlutterTripState_Complete(
+          userLocation: var_userLocation,
+          summary: var_summary,
+        );
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  FlutterUserLocation sse_decode_flutter_user_location(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_coordinates = sse_decode_geographic_coordinate(deserializer);
+    var var_horizontalAccuracy = sse_decode_f_64(deserializer);
+    var var_courseOverGround = sse_decode_opt_box_autoadd_course_over_ground(
+      deserializer,
+    );
+    var var_timestamp = sse_decode_Chrono_Utc(deserializer);
+    var var_speed = sse_decode_opt_box_autoadd_speed(deserializer);
+    return FlutterUserLocation(
+      coordinates: var_coordinates,
+      horizontalAccuracy: var_horizontalAccuracy,
+      courseOverGround: var_courseOverGround,
+      timestamp: var_timestamp,
+      speed: var_speed,
+    );
+  }
+
+  @protected
+  GeographicCoordinate sse_decode_geographic_coordinate(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_lat = sse_decode_f_64(deserializer);
+    var var_lng = sse_decode_f_64(deserializer);
+    return GeographicCoordinate(lat: var_lat, lng: var_lng);
+  }
+
+  @protected
+  int sse_decode_i_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getInt32();
+  }
+
+  @protected
+  PlatformInt64 sse_decode_i_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getPlatformInt64();
+  }
+
+  @protected
+  Impact sse_decode_impact(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return Impact.values[inner];
+  }
+
+  @protected
+  Incident sse_decode_incident(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_String(deserializer);
+    var var_incidentType = sse_decode_incident_type(deserializer);
+    var var_description = sse_decode_opt_String(deserializer);
+    var var_longDescription = sse_decode_opt_String(deserializer);
+    var var_creationTime = sse_decode_opt_box_autoadd_Chrono_Utc(deserializer);
+    var var_startTime = sse_decode_opt_box_autoadd_Chrono_Utc(deserializer);
+    var var_endTime = sse_decode_opt_box_autoadd_Chrono_Utc(deserializer);
+    var var_impact = sse_decode_opt_box_autoadd_impact(deserializer);
+    var var_lanesBlocked = sse_decode_list_blocked_lane(deserializer);
+    var var_congestion = sse_decode_opt_box_autoadd_congestion(deserializer);
+    var var_closed = sse_decode_opt_box_autoadd_bool(deserializer);
+    var var_geometryIndexStart = sse_decode_u_64(deserializer);
+    var var_geometryIndexEnd = sse_decode_opt_box_autoadd_u_64(deserializer);
+    var var_subType = sse_decode_opt_String(deserializer);
+    var var_subTypeDescription = sse_decode_opt_String(deserializer);
+    var var_iso31661Alpha2 = sse_decode_opt_String(deserializer);
+    var var_iso31661Alpha3 = sse_decode_opt_String(deserializer);
+    var var_affectedRoadNames = sse_decode_list_String(deserializer);
+    var var_bbox = sse_decode_opt_box_autoadd_bounding_box(deserializer);
+    return Incident(
+      id: var_id,
+      incidentType: var_incidentType,
+      description: var_description,
+      longDescription: var_longDescription,
+      creationTime: var_creationTime,
+      startTime: var_startTime,
+      endTime: var_endTime,
+      impact: var_impact,
+      lanesBlocked: var_lanesBlocked,
+      congestion: var_congestion,
+      closed: var_closed,
+      geometryIndexStart: var_geometryIndexStart,
+      geometryIndexEnd: var_geometryIndexEnd,
+      subType: var_subType,
+      subTypeDescription: var_subTypeDescription,
+      iso31661Alpha2: var_iso31661Alpha2,
+      iso31661Alpha3: var_iso31661Alpha3,
+      affectedRoadNames: var_affectedRoadNames,
+      bbox: var_bbox,
+    );
+  }
+
+  @protected
+  IncidentType sse_decode_incident_type(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return IncidentType.values[inner];
+  }
+
+  @protected
+  LaneInfo sse_decode_lane_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_active = sse_decode_bool(deserializer);
+    var var_directions = sse_decode_list_String(deserializer);
+    var var_activeDirection = sse_decode_opt_String(deserializer);
+    return LaneInfo(
+      active: var_active,
+      directions: var_directions,
+      activeDirection: var_activeDirection,
+    );
+  }
+
+  @protected
+  List<String> sse_decode_list_String(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <String>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_String(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<BlockedLane> sse_decode_list_blocked_lane(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <BlockedLane>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_blocked_lane(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<GeographicCoordinate> sse_decode_list_geographic_coordinate(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <GeographicCoordinate>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_geographic_coordinate(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<Incident> sse_decode_list_incident(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <Incident>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_incident(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<LaneInfo> sse_decode_list_lane_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <LaneInfo>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_lane_info(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var len_ = sse_decode_i_32(deserializer);
     return deserializer.buffer.getUint8List(len_);
+  }
+
+  @protected
+  List<RouteStep> sse_decode_list_route_step(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <RouteStep>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_route_step(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<SerializableStepAdvanceCondition>
+  sse_decode_list_serializable_step_advance_condition(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <SerializableStepAdvanceCondition>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_serializable_step_advance_condition(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<SpokenInstruction> sse_decode_list_spoken_instruction(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <SpokenInstruction>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_spoken_instruction(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<VisualInstruction> sse_decode_list_visual_instruction(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <VisualInstruction>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_visual_instruction(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<Waypoint> sse_decode_list_waypoint(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <Waypoint>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_waypoint(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  ManeuverModifier sse_decode_maneuver_modifier(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return ManeuverModifier.values[inner];
+  }
+
+  @protected
+  ManeuverType sse_decode_maneuver_type(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return ManeuverType.values[inner];
+  }
+
+  @protected
+  String? sse_decode_opt_String(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_String(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  DateTime? sse_decode_opt_box_autoadd_Chrono_Utc(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_Chrono_Utc(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  bool? sse_decode_opt_box_autoadd_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_bool(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  BoundingBox? sse_decode_opt_box_autoadd_bounding_box(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_bounding_box(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Congestion? sse_decode_opt_box_autoadd_congestion(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_congestion(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  CourseOverGround? sse_decode_opt_box_autoadd_course_over_ground(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_course_over_ground(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_f_64(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  FlutterUserLocation? sse_decode_opt_box_autoadd_flutter_user_location(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_flutter_user_location(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Impact? sse_decode_opt_box_autoadd_impact(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_impact(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  ManeuverModifier? sse_decode_opt_box_autoadd_maneuver_modifier(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_maneuver_modifier(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  ManeuverType? sse_decode_opt_box_autoadd_maneuver_type(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_maneuver_type(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Speed? sse_decode_opt_box_autoadd_speed(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_speed(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  SpokenInstruction? sse_decode_opt_box_autoadd_spoken_instruction(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_spoken_instruction(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  int? sse_decode_opt_box_autoadd_u_16(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_u_16(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  BigInt? sse_decode_opt_box_autoadd_u_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_u_64(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  VisualInstruction? sse_decode_opt_box_autoadd_visual_instruction(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_visual_instruction(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  VisualInstructionContent?
+  sse_decode_opt_box_autoadd_visual_instruction_content(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_visual_instruction_content(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  List<String>? sse_decode_opt_list_String(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_list_String(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  List<LaneInfo>? sse_decode_opt_list_lane_info(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_list_lane_info(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  Route sse_decode_route(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_geometry = sse_decode_list_geographic_coordinate(deserializer);
+    var var_bbox = sse_decode_bounding_box(deserializer);
+    var var_distance = sse_decode_f_64(deserializer);
+    var var_waypoints = sse_decode_list_waypoint(deserializer);
+    var var_steps = sse_decode_list_route_step(deserializer);
+    return Route(
+      geometry: var_geometry,
+      bbox: var_bbox,
+      distance: var_distance,
+      waypoints: var_waypoints,
+      steps: var_steps,
+    );
+  }
+
+  @protected
+  RouteDeviation sse_decode_route_deviation(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        return RouteDeviation_NoDeviation();
+      case 1:
+        var var_deviationFromRouteLine = sse_decode_f_64(deserializer);
+        return RouteDeviation_OffRoute(
+          deviationFromRouteLine: var_deviationFromRouteLine,
+        );
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  RouteStep sse_decode_route_step(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_geometry = sse_decode_list_geographic_coordinate(deserializer);
+    var var_distance = sse_decode_f_64(deserializer);
+    var var_duration = sse_decode_f_64(deserializer);
+    var var_roadName = sse_decode_opt_String(deserializer);
+    var var_exits = sse_decode_list_String(deserializer);
+    var var_instruction = sse_decode_String(deserializer);
+    var var_visualInstructions = sse_decode_list_visual_instruction(
+      deserializer,
+    );
+    var var_spokenInstructions = sse_decode_list_spoken_instruction(
+      deserializer,
+    );
+    var var_annotations = sse_decode_opt_list_String(deserializer);
+    var var_incidents = sse_decode_list_incident(deserializer);
+    return RouteStep(
+      geometry: var_geometry,
+      distance: var_distance,
+      duration: var_duration,
+      roadName: var_roadName,
+      exits: var_exits,
+      instruction: var_instruction,
+      visualInstructions: var_visualInstructions,
+      spokenInstructions: var_spokenInstructions,
+      annotations: var_annotations,
+      incidents: var_incidents,
+    );
+  }
+
+  @protected
+  SerializableStepAdvanceCondition
+  sse_decode_serializable_step_advance_condition(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        return SerializableStepAdvanceCondition_Manual();
+      case 1:
+        var var_distance = sse_decode_u_16(deserializer);
+        var var_minimumHorizontalAccuracy = sse_decode_u_16(deserializer);
+        return SerializableStepAdvanceCondition_DistanceToEndOfStep(
+          distance: var_distance,
+          minimumHorizontalAccuracy: var_minimumHorizontalAccuracy,
+        );
+      case 2:
+        var var_distance = sse_decode_u_16(deserializer);
+        var var_minimumHorizontalAccuracy = sse_decode_u_16(deserializer);
+        return SerializableStepAdvanceCondition_DistanceFromStep(
+          distance: var_distance,
+          minimumHorizontalAccuracy: var_minimumHorizontalAccuracy,
+        );
+      case 3:
+        var var_distanceToEndOfStep = sse_decode_u_16(deserializer);
+        var var_distanceAfterEndStep = sse_decode_u_16(deserializer);
+        var var_minimumHorizontalAccuracy = sse_decode_u_16(deserializer);
+        var var_hasReachedEndOfCurrentStep = sse_decode_bool(deserializer);
+        return SerializableStepAdvanceCondition_DistanceEntryExit(
+          distanceToEndOfStep: var_distanceToEndOfStep,
+          distanceAfterEndStep: var_distanceAfterEndStep,
+          minimumHorizontalAccuracy: var_minimumHorizontalAccuracy,
+          hasReachedEndOfCurrentStep: var_hasReachedEndOfCurrentStep,
+        );
+      case 4:
+        var var_conditions =
+            sse_decode_list_serializable_step_advance_condition(deserializer);
+        return SerializableStepAdvanceCondition_OrAdvanceConditions(
+          conditions: var_conditions,
+        );
+      case 5:
+        var var_conditions =
+            sse_decode_list_serializable_step_advance_condition(deserializer);
+        return SerializableStepAdvanceCondition_AndAdvanceConditions(
+          conditions: var_conditions,
+        );
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  Speed sse_decode_speed(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_value = sse_decode_f_64(deserializer);
+    var var_accuracy = sse_decode_opt_box_autoadd_f_64(deserializer);
+    return Speed(value: var_value, accuracy: var_accuracy);
+  }
+
+  @protected
+  SpokenInstruction sse_decode_spoken_instruction(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_text = sse_decode_String(deserializer);
+    var var_ssml = sse_decode_opt_String(deserializer);
+    var var_triggerDistanceBeforeManeuver = sse_decode_f_64(deserializer);
+    var var_utteranceId = sse_decode_Uuid(deserializer);
+    return SpokenInstruction(
+      text: var_text,
+      ssml: var_ssml,
+      triggerDistanceBeforeManeuver: var_triggerDistanceBeforeManeuver,
+      utteranceId: var_utteranceId,
+    );
+  }
+
+  @protected
+  TripProgress sse_decode_trip_progress(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_distanceToNextManeuver = sse_decode_f_64(deserializer);
+    var var_distanceRemaining = sse_decode_f_64(deserializer);
+    var var_durationRemaining = sse_decode_f_64(deserializer);
+    return TripProgress(
+      distanceToNextManeuver: var_distanceToNextManeuver,
+      distanceRemaining: var_distanceRemaining,
+      durationRemaining: var_durationRemaining,
+    );
+  }
+
+  @protected
+  TripSummary sse_decode_trip_summary(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_distanceTraveled = sse_decode_f_64(deserializer);
+    var var_snappedDistanceTraveled = sse_decode_f_64(deserializer);
+    var var_startedAt = sse_decode_Chrono_Utc(deserializer);
+    var var_endedAt = sse_decode_opt_box_autoadd_Chrono_Utc(deserializer);
+    return TripSummary(
+      distanceTraveled: var_distanceTraveled,
+      snappedDistanceTraveled: var_snappedDistanceTraveled,
+      startedAt: var_startedAt,
+      endedAt: var_endedAt,
+    );
+  }
+
+  @protected
+  int sse_decode_u_16(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint16();
+  }
+
+  @protected
+  BigInt sse_decode_u_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getBigUint64();
   }
 
   @protected
@@ -190,21 +2428,649 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  int sse_decode_i_32(SseDeserializer deserializer) {
+  BigInt sse_decode_usize(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getInt32();
+    return deserializer.buffer.getBigUint64();
   }
 
   @protected
-  bool sse_decode_bool(SseDeserializer deserializer) {
+  VisualInstruction sse_decode_visual_instruction(
+    SseDeserializer deserializer,
+  ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getUint8() != 0;
+    var var_primaryContent = sse_decode_visual_instruction_content(
+      deserializer,
+    );
+    var var_secondaryContent =
+        sse_decode_opt_box_autoadd_visual_instruction_content(deserializer);
+    var var_subContent = sse_decode_opt_box_autoadd_visual_instruction_content(
+      deserializer,
+    );
+    var var_triggerDistanceBeforeManeuver = sse_decode_f_64(deserializer);
+    return VisualInstruction(
+      primaryContent: var_primaryContent,
+      secondaryContent: var_secondaryContent,
+      subContent: var_subContent,
+      triggerDistanceBeforeManeuver: var_triggerDistanceBeforeManeuver,
+    );
+  }
+
+  @protected
+  VisualInstructionContent sse_decode_visual_instruction_content(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_text = sse_decode_String(deserializer);
+    var var_maneuverType = sse_decode_opt_box_autoadd_maneuver_type(
+      deserializer,
+    );
+    var var_maneuverModifier = sse_decode_opt_box_autoadd_maneuver_modifier(
+      deserializer,
+    );
+    var var_roundaboutExitDegrees = sse_decode_opt_box_autoadd_u_16(
+      deserializer,
+    );
+    var var_laneInfo = sse_decode_opt_list_lane_info(deserializer);
+    var var_exitNumbers = sse_decode_list_String(deserializer);
+    return VisualInstructionContent(
+      text: var_text,
+      maneuverType: var_maneuverType,
+      maneuverModifier: var_maneuverModifier,
+      roundaboutExitDegrees: var_roundaboutExitDegrees,
+      laneInfo: var_laneInfo,
+      exitNumbers: var_exitNumbers,
+    );
+  }
+
+  @protected
+  Waypoint sse_decode_waypoint(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_coordinate = sse_decode_geographic_coordinate(deserializer);
+    var var_kind = sse_decode_waypoint_kind(deserializer);
+    return Waypoint(coordinate: var_coordinate, kind: var_kind);
+  }
+
+  @protected
+  WaypointAdvanceMode sse_decode_waypoint_advance_mode(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_field0 = sse_decode_f_64(deserializer);
+        return WaypointAdvanceMode_WaypointWithinRange(var_field0);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  WaypointKind sse_decode_waypoint_kind(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return WaypointKind.values[inner];
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    FlutterNavState self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as FlutterNavStateImpl).frbInternalSseEncode(move: true),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    FlutterNavigationController self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as FlutterNavigationControllerImpl).frbInternalSseEncode(
+        move: true,
+      ),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    FlutterNavState self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as FlutterNavStateImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    FlutterNavigationController self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as FlutterNavigationControllerImpl).frbInternalSseEncode(
+        move: false,
+      ),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Chrono_Utc(DateTime self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_64(
+      PlatformInt64Util.from(self.microsecondsSinceEpoch),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
+    FlutterNavState self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as FlutterNavStateImpl).frbInternalSseEncode(move: null),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    FlutterNavigationController self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as FlutterNavigationControllerImpl).frbInternalSseEncode(
+        move: null,
+      ),
+      serializer,
+    );
   }
 
   @protected
   void sse_encode_String(String self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_prim_u_8_strict(utf8.encoder.convert(self), serializer);
+  }
+
+  @protected
+  void sse_encode_Uuid(UuidValue self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_prim_u_8_strict(self.toBytes(), serializer);
+  }
+
+  @protected
+  void sse_encode_blocked_lane(BlockedLane self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_bool(bool self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint8(self ? 1 : 0);
+  }
+
+  @protected
+  void sse_encode_bounding_box(BoundingBox self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_geographic_coordinate(self.sw, serializer);
+    sse_encode_geographic_coordinate(self.ne, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_Chrono_Utc(
+    DateTime self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_Chrono_Utc(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_bool(bool self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bool(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_bounding_box(
+    BoundingBox self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bounding_box(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_congestion(
+    Congestion self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_congestion(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_course_over_ground(
+    CourseOverGround self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_course_over_ground(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_flutter_navigation_controller_config(
+    FlutterNavigationControllerConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_flutter_navigation_controller_config(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_flutter_user_location(
+    FlutterUserLocation self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_flutter_user_location(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_impact(Impact self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_impact(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_maneuver_modifier(
+    ManeuverModifier self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_maneuver_modifier(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_maneuver_type(
+    ManeuverType self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_maneuver_type(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_route(Route self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_route(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_route_deviation(
+    RouteDeviation self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_route_deviation(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_speed(Speed self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_speed(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_spoken_instruction(
+    SpokenInstruction self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_spoken_instruction(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_trip_progress(
+    TripProgress self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_trip_progress(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_trip_summary(
+    TripSummary self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_trip_summary(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_u_16(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_16(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_u_64(BigInt self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_64(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_visual_instruction(
+    VisualInstruction self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_visual_instruction(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_visual_instruction_content(
+    VisualInstructionContent self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_visual_instruction_content(self, serializer);
+  }
+
+  @protected
+  void sse_encode_congestion(Congestion self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_8(self.value, serializer);
+  }
+
+  @protected
+  void sse_encode_course_filtering(
+    CourseFiltering self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_course_over_ground(
+    CourseOverGround self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_16(self.degrees, serializer);
+    sse_encode_opt_box_autoadd_u_16(self.accuracy, serializer);
+  }
+
+  @protected
+  void sse_encode_f_64(double self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putFloat64(self);
+  }
+
+  @protected
+  void sse_encode_flutter_navigation_controller_config(
+    FlutterNavigationControllerConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_waypoint_advance_mode(self.waypointAdvance, serializer);
+    sse_encode_serializable_step_advance_condition(
+      self.stepAdvanceCondition,
+      serializer,
+    );
+    sse_encode_serializable_step_advance_condition(
+      self.arrivalStepAdvanceCondition,
+      serializer,
+    );
+    sse_encode_flutter_route_deviation_tracking(
+      self.routeDeviationTracking,
+      serializer,
+    );
+    sse_encode_course_filtering(
+      self.snappedLocationCourseFiltering,
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_flutter_route_deviation_tracking(
+    FlutterRouteDeviationTracking self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case FlutterRouteDeviationTracking_None():
+        sse_encode_i_32(0, serializer);
+      case FlutterRouteDeviationTracking_StaticThreshold(
+        minimumHorizontalAccuracy: final minimumHorizontalAccuracy,
+        maxAcceptableDeviation: final maxAcceptableDeviation,
+      ):
+        sse_encode_i_32(1, serializer);
+        sse_encode_u_16(minimumHorizontalAccuracy, serializer);
+        sse_encode_f_64(maxAcceptableDeviation, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_flutter_trip_state(
+    FlutterTripState self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case FlutterTripState_Idle(userLocation: final userLocation):
+        sse_encode_i_32(0, serializer);
+        sse_encode_opt_box_autoadd_flutter_user_location(
+          userLocation,
+          serializer,
+        );
+      case FlutterTripState_Navigating(
+        currentStepGeometryIndex: final currentStepGeometryIndex,
+        userLocation: final userLocation,
+        snappedUserLocation: final snappedUserLocation,
+        remainingSteps: final remainingSteps,
+        remainingWaypoints: final remainingWaypoints,
+        progress: final progress,
+        summary: final summary,
+        deviation: final deviation,
+        visualInstruction: final visualInstruction,
+        spokenInstruction: final spokenInstruction,
+        annotationJson: final annotationJson,
+      ):
+        sse_encode_i_32(1, serializer);
+        sse_encode_opt_box_autoadd_u_64(currentStepGeometryIndex, serializer);
+        sse_encode_box_autoadd_flutter_user_location(userLocation, serializer);
+        sse_encode_box_autoadd_flutter_user_location(
+          snappedUserLocation,
+          serializer,
+        );
+        sse_encode_list_route_step(remainingSteps, serializer);
+        sse_encode_list_waypoint(remainingWaypoints, serializer);
+        sse_encode_box_autoadd_trip_progress(progress, serializer);
+        sse_encode_box_autoadd_trip_summary(summary, serializer);
+        sse_encode_box_autoadd_route_deviation(deviation, serializer);
+        sse_encode_opt_box_autoadd_visual_instruction(
+          visualInstruction,
+          serializer,
+        );
+        sse_encode_opt_box_autoadd_spoken_instruction(
+          spokenInstruction,
+          serializer,
+        );
+        sse_encode_opt_String(annotationJson, serializer);
+      case FlutterTripState_Complete(
+        userLocation: final userLocation,
+        summary: final summary,
+      ):
+        sse_encode_i_32(2, serializer);
+        sse_encode_box_autoadd_flutter_user_location(userLocation, serializer);
+        sse_encode_box_autoadd_trip_summary(summary, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_flutter_user_location(
+    FlutterUserLocation self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_geographic_coordinate(self.coordinates, serializer);
+    sse_encode_f_64(self.horizontalAccuracy, serializer);
+    sse_encode_opt_box_autoadd_course_over_ground(
+      self.courseOverGround,
+      serializer,
+    );
+    sse_encode_Chrono_Utc(self.timestamp, serializer);
+    sse_encode_opt_box_autoadd_speed(self.speed, serializer);
+  }
+
+  @protected
+  void sse_encode_geographic_coordinate(
+    GeographicCoordinate self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.lat, serializer);
+    sse_encode_f_64(self.lng, serializer);
+  }
+
+  @protected
+  void sse_encode_i_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putInt32(self);
+  }
+
+  @protected
+  void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putPlatformInt64(self);
+  }
+
+  @protected
+  void sse_encode_impact(Impact self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_incident(Incident self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.id, serializer);
+    sse_encode_incident_type(self.incidentType, serializer);
+    sse_encode_opt_String(self.description, serializer);
+    sse_encode_opt_String(self.longDescription, serializer);
+    sse_encode_opt_box_autoadd_Chrono_Utc(self.creationTime, serializer);
+    sse_encode_opt_box_autoadd_Chrono_Utc(self.startTime, serializer);
+    sse_encode_opt_box_autoadd_Chrono_Utc(self.endTime, serializer);
+    sse_encode_opt_box_autoadd_impact(self.impact, serializer);
+    sse_encode_list_blocked_lane(self.lanesBlocked, serializer);
+    sse_encode_opt_box_autoadd_congestion(self.congestion, serializer);
+    sse_encode_opt_box_autoadd_bool(self.closed, serializer);
+    sse_encode_u_64(self.geometryIndexStart, serializer);
+    sse_encode_opt_box_autoadd_u_64(self.geometryIndexEnd, serializer);
+    sse_encode_opt_String(self.subType, serializer);
+    sse_encode_opt_String(self.subTypeDescription, serializer);
+    sse_encode_opt_String(self.iso31661Alpha2, serializer);
+    sse_encode_opt_String(self.iso31661Alpha3, serializer);
+    sse_encode_list_String(self.affectedRoadNames, serializer);
+    sse_encode_opt_box_autoadd_bounding_box(self.bbox, serializer);
+  }
+
+  @protected
+  void sse_encode_incident_type(IncidentType self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_lane_info(LaneInfo self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bool(self.active, serializer);
+    sse_encode_list_String(self.directions, serializer);
+    sse_encode_opt_String(self.activeDirection, serializer);
+  }
+
+  @protected
+  void sse_encode_list_String(List<String> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_String(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_blocked_lane(
+    List<BlockedLane> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_blocked_lane(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_geographic_coordinate(
+    List<GeographicCoordinate> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_geographic_coordinate(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_incident(List<Incident> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_incident(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_lane_info(
+    List<LaneInfo> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_lane_info(item, serializer);
+    }
   }
 
   @protected
@@ -215,6 +3081,450 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     serializer.buffer.putUint8List(self);
+  }
+
+  @protected
+  void sse_encode_list_route_step(
+    List<RouteStep> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_route_step(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_serializable_step_advance_condition(
+    List<SerializableStepAdvanceCondition> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_serializable_step_advance_condition(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_spoken_instruction(
+    List<SpokenInstruction> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_spoken_instruction(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_visual_instruction(
+    List<VisualInstruction> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_visual_instruction(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_waypoint(List<Waypoint> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_waypoint(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_maneuver_modifier(
+    ManeuverModifier self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_maneuver_type(ManeuverType self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_opt_String(String? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_String(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_Chrono_Utc(
+    DateTime? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_Chrono_Utc(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_bool(bool? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_bool(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_bounding_box(
+    BoundingBox? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_bounding_box(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_congestion(
+    Congestion? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_congestion(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_course_over_ground(
+    CourseOverGround? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_course_over_ground(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_f_64(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_flutter_user_location(
+    FlutterUserLocation? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_flutter_user_location(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_impact(
+    Impact? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_impact(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_maneuver_modifier(
+    ManeuverModifier? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_maneuver_modifier(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_maneuver_type(
+    ManeuverType? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_maneuver_type(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_speed(Speed? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_speed(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_spoken_instruction(
+    SpokenInstruction? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_spoken_instruction(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_u_16(int? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_u_16(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_u_64(BigInt? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_u_64(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_visual_instruction(
+    VisualInstruction? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_visual_instruction(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_visual_instruction_content(
+    VisualInstructionContent? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_visual_instruction_content(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_list_String(
+    List<String>? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_list_String(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_list_lane_info(
+    List<LaneInfo>? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_list_lane_info(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_route(Route self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_geographic_coordinate(self.geometry, serializer);
+    sse_encode_bounding_box(self.bbox, serializer);
+    sse_encode_f_64(self.distance, serializer);
+    sse_encode_list_waypoint(self.waypoints, serializer);
+    sse_encode_list_route_step(self.steps, serializer);
+  }
+
+  @protected
+  void sse_encode_route_deviation(
+    RouteDeviation self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case RouteDeviation_NoDeviation():
+        sse_encode_i_32(0, serializer);
+      case RouteDeviation_OffRoute(
+        deviationFromRouteLine: final deviationFromRouteLine,
+      ):
+        sse_encode_i_32(1, serializer);
+        sse_encode_f_64(deviationFromRouteLine, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_route_step(RouteStep self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_geographic_coordinate(self.geometry, serializer);
+    sse_encode_f_64(self.distance, serializer);
+    sse_encode_f_64(self.duration, serializer);
+    sse_encode_opt_String(self.roadName, serializer);
+    sse_encode_list_String(self.exits, serializer);
+    sse_encode_String(self.instruction, serializer);
+    sse_encode_list_visual_instruction(self.visualInstructions, serializer);
+    sse_encode_list_spoken_instruction(self.spokenInstructions, serializer);
+    sse_encode_opt_list_String(self.annotations, serializer);
+    sse_encode_list_incident(self.incidents, serializer);
+  }
+
+  @protected
+  void sse_encode_serializable_step_advance_condition(
+    SerializableStepAdvanceCondition self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case SerializableStepAdvanceCondition_Manual():
+        sse_encode_i_32(0, serializer);
+      case SerializableStepAdvanceCondition_DistanceToEndOfStep(
+        distance: final distance,
+        minimumHorizontalAccuracy: final minimumHorizontalAccuracy,
+      ):
+        sse_encode_i_32(1, serializer);
+        sse_encode_u_16(distance, serializer);
+        sse_encode_u_16(minimumHorizontalAccuracy, serializer);
+      case SerializableStepAdvanceCondition_DistanceFromStep(
+        distance: final distance,
+        minimumHorizontalAccuracy: final minimumHorizontalAccuracy,
+      ):
+        sse_encode_i_32(2, serializer);
+        sse_encode_u_16(distance, serializer);
+        sse_encode_u_16(minimumHorizontalAccuracy, serializer);
+      case SerializableStepAdvanceCondition_DistanceEntryExit(
+        distanceToEndOfStep: final distanceToEndOfStep,
+        distanceAfterEndStep: final distanceAfterEndStep,
+        minimumHorizontalAccuracy: final minimumHorizontalAccuracy,
+        hasReachedEndOfCurrentStep: final hasReachedEndOfCurrentStep,
+      ):
+        sse_encode_i_32(3, serializer);
+        sse_encode_u_16(distanceToEndOfStep, serializer);
+        sse_encode_u_16(distanceAfterEndStep, serializer);
+        sse_encode_u_16(minimumHorizontalAccuracy, serializer);
+        sse_encode_bool(hasReachedEndOfCurrentStep, serializer);
+      case SerializableStepAdvanceCondition_OrAdvanceConditions(
+        conditions: final conditions,
+      ):
+        sse_encode_i_32(4, serializer);
+        sse_encode_list_serializable_step_advance_condition(
+          conditions,
+          serializer,
+        );
+      case SerializableStepAdvanceCondition_AndAdvanceConditions(
+        conditions: final conditions,
+      ):
+        sse_encode_i_32(5, serializer);
+        sse_encode_list_serializable_step_advance_condition(
+          conditions,
+          serializer,
+        );
+    }
+  }
+
+  @protected
+  void sse_encode_speed(Speed self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.value, serializer);
+    sse_encode_opt_box_autoadd_f_64(self.accuracy, serializer);
+  }
+
+  @protected
+  void sse_encode_spoken_instruction(
+    SpokenInstruction self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.text, serializer);
+    sse_encode_opt_String(self.ssml, serializer);
+    sse_encode_f_64(self.triggerDistanceBeforeManeuver, serializer);
+    sse_encode_Uuid(self.utteranceId, serializer);
+  }
+
+  @protected
+  void sse_encode_trip_progress(TripProgress self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.distanceToNextManeuver, serializer);
+    sse_encode_f_64(self.distanceRemaining, serializer);
+    sse_encode_f_64(self.durationRemaining, serializer);
+  }
+
+  @protected
+  void sse_encode_trip_summary(TripSummary self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.distanceTraveled, serializer);
+    sse_encode_f_64(self.snappedDistanceTraveled, serializer);
+    sse_encode_Chrono_Utc(self.startedAt, serializer);
+    sse_encode_opt_box_autoadd_Chrono_Utc(self.endedAt, serializer);
+  }
+
+  @protected
+  void sse_encode_u_16(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint16(self);
+  }
+
+  @protected
+  void sse_encode_u_64(BigInt self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putBigUint64(self);
   }
 
   @protected
@@ -229,14 +3539,146 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_i_32(int self, SseSerializer serializer) {
+  void sse_encode_usize(BigInt self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putInt32(self);
+    serializer.buffer.putBigUint64(self);
   }
 
   @protected
-  void sse_encode_bool(bool self, SseSerializer serializer) {
+  void sse_encode_visual_instruction(
+    VisualInstruction self,
+    SseSerializer serializer,
+  ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putUint8(self ? 1 : 0);
+    sse_encode_visual_instruction_content(self.primaryContent, serializer);
+    sse_encode_opt_box_autoadd_visual_instruction_content(
+      self.secondaryContent,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_visual_instruction_content(
+      self.subContent,
+      serializer,
+    );
+    sse_encode_f_64(self.triggerDistanceBeforeManeuver, serializer);
   }
+
+  @protected
+  void sse_encode_visual_instruction_content(
+    VisualInstructionContent self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.text, serializer);
+    sse_encode_opt_box_autoadd_maneuver_type(self.maneuverType, serializer);
+    sse_encode_opt_box_autoadd_maneuver_modifier(
+      self.maneuverModifier,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_u_16(self.roundaboutExitDegrees, serializer);
+    sse_encode_opt_list_lane_info(self.laneInfo, serializer);
+    sse_encode_list_String(self.exitNumbers, serializer);
+  }
+
+  @protected
+  void sse_encode_waypoint(Waypoint self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_geographic_coordinate(self.coordinate, serializer);
+    sse_encode_waypoint_kind(self.kind, serializer);
+  }
+
+  @protected
+  void sse_encode_waypoint_advance_mode(
+    WaypointAdvanceMode self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case WaypointAdvanceMode_WaypointWithinRange(field0: final field0):
+        sse_encode_i_32(0, serializer);
+        sse_encode_f_64(field0, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_waypoint_kind(WaypointKind self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+}
+
+@sealed
+class FlutterNavStateImpl extends RustOpaque implements FlutterNavState {
+  // Not to be used by end users
+  FlutterNavStateImpl.frbInternalDcoDecode(List<dynamic> wire)
+    : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  FlutterNavStateImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+    : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_FlutterNavState,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_FlutterNavState,
+    rustArcDecrementStrongCountPtr:
+        RustLib.instance.api.rust_arc_decrement_strong_count_FlutterNavStatePtr,
+  );
+
+  Future<FlutterTripState> tripState() => RustLib.instance.api
+      .crateApiNavigationFlutterNavStateTripState(that: this);
+}
+
+@sealed
+class FlutterNavigationControllerImpl extends RustOpaque
+    implements FlutterNavigationController {
+  // Not to be used by end users
+  FlutterNavigationControllerImpl.frbInternalDcoDecode(List<dynamic> wire)
+    : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  FlutterNavigationControllerImpl.frbInternalSseDecode(
+    BigInt ptr,
+    int externalSizeOnNative,
+  ) : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: RustLib
+        .instance
+        .api
+        .rust_arc_increment_strong_count_FlutterNavigationController,
+    rustArcDecrementStrongCount: RustLib
+        .instance
+        .api
+        .rust_arc_decrement_strong_count_FlutterNavigationController,
+    rustArcDecrementStrongCountPtr: RustLib
+        .instance
+        .api
+        .rust_arc_decrement_strong_count_FlutterNavigationControllerPtr,
+  );
+
+  Future<FlutterNavState> advanceToNextStep({required FlutterNavState state}) =>
+      RustLib.instance.api
+          .crateApiNavigationFlutterNavigationControllerAdvanceToNextStep(
+            that: this,
+            state: state,
+          );
+
+  Future<FlutterNavState> getInitialState({
+    required FlutterUserLocation location,
+  }) => RustLib.instance.api
+      .crateApiNavigationFlutterNavigationControllerGetInitialState(
+        that: this,
+        location: location,
+      );
+
+  Future<FlutterNavState> updateUserLocation({
+    required FlutterUserLocation location,
+    required FlutterNavState state,
+  }) => RustLib.instance.api
+      .crateApiNavigationFlutterNavigationControllerUpdateUserLocation(
+        that: this,
+        location: location,
+        state: state,
+      );
 }
