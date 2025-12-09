@@ -38,6 +38,9 @@ class BoundingBox {
           runtimeType == other.runtimeType &&
           sw == other.sw &&
           ne == other.ne;
+
+  @override
+  String toString() => 'BoundingBox(sw: $sw, ne: $ne)';
 }
 
 class Congestion {
@@ -54,6 +57,9 @@ class Congestion {
       other is Congestion &&
           runtimeType == other.runtimeType &&
           value == other.value;
+
+  @override
+  String toString() => 'Congestion(value: $value)';
 }
 
 enum CourseFiltering { snapToRoute, raw }
@@ -74,6 +80,9 @@ class CourseOverGround {
           runtimeType == other.runtimeType &&
           degrees == other.degrees &&
           accuracy == other.accuracy;
+
+  @override
+  String toString() => 'CourseOverGround(degrees: $degrees, accuracy: $accuracy)';
 }
 
 class FlutterNavigationControllerConfig {
@@ -110,6 +119,10 @@ class FlutterNavigationControllerConfig {
           routeDeviationTracking == other.routeDeviationTracking &&
           snappedLocationCourseFiltering ==
               other.snappedLocationCourseFiltering;
+
+  @override
+  String toString() =>
+      'FlutterNavigationControllerConfig(waypointAdvance: $waypointAdvance, stepAdvanceCondition: $stepAdvanceCondition, arrivalStepAdvanceCondition: $arrivalStepAdvanceCondition, routeDeviationTracking: $routeDeviationTracking, snappedLocationCourseFiltering: $snappedLocationCourseFiltering)';
 }
 
 @freezed
@@ -183,6 +196,10 @@ class FlutterUserLocation {
           courseOverGround == other.courseOverGround &&
           timestamp == other.timestamp &&
           speed == other.speed;
+
+  @override
+  String toString() =>
+      'FlutterUserLocation(coordinates: $coordinates, horizontalAccuracy: $horizontalAccuracy, courseOverGround: $courseOverGround, timestamp: $timestamp, speed: $speed)';
 }
 
 class GeographicCoordinate {
@@ -201,6 +218,9 @@ class GeographicCoordinate {
           runtimeType == other.runtimeType &&
           lat == other.lat &&
           lng == other.lng;
+
+  @override
+  String toString() => 'GeographicCoordinate(lat: $lat, lng: $lng)';
 }
 
 enum Impact { unknown, critical, major, minor, low }
@@ -294,6 +314,10 @@ class Incident {
           iso31661Alpha3 == other.iso31661Alpha3 &&
           affectedRoadNames == other.affectedRoadNames &&
           bbox == other.bbox;
+
+  @override
+  String toString() =>
+      'Incident(id: $id, incidentType: $incidentType, description: $description, longDescription: $longDescription, creationTime: $creationTime, startTime: $startTime, endTime: $endTime, impact: $impact, lanesBlocked: $lanesBlocked, congestion: $congestion, closed: $closed, geometryIndexStart: $geometryIndexStart, geometryIndexEnd: $geometryIndexEnd, subType: $subType, subTypeDescription: $subTypeDescription, iso31661Alpha2: $iso31661Alpha2, iso31661Alpha3: $iso31661Alpha3, affectedRoadNames: $affectedRoadNames, bbox: $bbox)';
 }
 
 enum IncidentType {
@@ -334,6 +358,10 @@ class LaneInfo {
           active == other.active &&
           directions == other.directions &&
           activeDirection == other.activeDirection;
+
+  @override
+  String toString() =>
+      'LaneInfo(active: $active, directions: $directions, activeDirection: $activeDirection)';
 }
 
 enum ManeuverModifier {
@@ -399,6 +427,10 @@ class Route {
           distance == other.distance &&
           waypoints == other.waypoints &&
           steps == other.steps;
+
+  @override
+  String toString() =>
+      'Route(geometry: $geometry, bbox: $bbox, distance: $distance, waypoints: $waypoints, steps: $steps)';
 }
 
 @freezed
@@ -464,6 +496,10 @@ class RouteStep {
           spokenInstructions == other.spokenInstructions &&
           annotations == other.annotations &&
           incidents == other.incidents;
+
+  @override
+  String toString() =>
+      'RouteStep(geometry: $geometry, distance: $distance, duration: $duration, roadName: $roadName, exits: $exits, instruction: $instruction, visualInstructions: $visualInstructions, spokenInstructions: $spokenInstructions, annotations: $annotations, incidents: $incidents)';
 }
 
 @freezed
@@ -511,6 +547,9 @@ class Speed {
           runtimeType == other.runtimeType &&
           value == other.value &&
           accuracy == other.accuracy;
+
+  @override
+  String toString() => 'Speed(value: $value, accuracy: $accuracy)';
 }
 
 class SpokenInstruction {
@@ -543,6 +582,10 @@ class SpokenInstruction {
           triggerDistanceBeforeManeuver ==
               other.triggerDistanceBeforeManeuver &&
           utteranceId == other.utteranceId;
+
+  @override
+  String toString() =>
+      'SpokenInstruction(text: $text, ssml: $ssml, triggerDistanceBeforeManeuver: $triggerDistanceBeforeManeuver, utteranceId: $utteranceId)';
 }
 
 class TripProgress {
@@ -570,6 +613,10 @@ class TripProgress {
           distanceToNextManeuver == other.distanceToNextManeuver &&
           distanceRemaining == other.distanceRemaining &&
           durationRemaining == other.durationRemaining;
+
+  @override
+  String toString() =>
+      'TripProgress(distanceToNextManeuver: $distanceToNextManeuver, distanceRemaining: $distanceRemaining, durationRemaining: $durationRemaining)';
 }
 
 class TripSummary {
@@ -601,6 +648,10 @@ class TripSummary {
           snappedDistanceTraveled == other.snappedDistanceTraveled &&
           startedAt == other.startedAt &&
           endedAt == other.endedAt;
+
+  @override
+  String toString() =>
+      'TripSummary(distanceTraveled: $distanceTraveled, snappedDistanceTraveled: $snappedDistanceTraveled, startedAt: $startedAt, endedAt: $endedAt)';
 }
 
 class VisualInstruction {
@@ -632,6 +683,10 @@ class VisualInstruction {
           secondaryContent == other.secondaryContent &&
           subContent == other.subContent &&
           triggerDistanceBeforeManeuver == other.triggerDistanceBeforeManeuver;
+
+  @override
+  String toString() =>
+      'VisualInstruction(primaryContent: $primaryContent, secondaryContent: $secondaryContent, subContent: $subContent, triggerDistanceBeforeManeuver: $triggerDistanceBeforeManeuver)';
 }
 
 class VisualInstructionContent {
@@ -671,6 +726,10 @@ class VisualInstructionContent {
           roundaboutExitDegrees == other.roundaboutExitDegrees &&
           laneInfo == other.laneInfo &&
           exitNumbers == other.exitNumbers;
+
+  @override
+  String toString() =>
+      'VisualInstructionContent(text: $text, maneuverType: $maneuverType, maneuverModifier: $maneuverModifier, roundaboutExitDegrees: $roundaboutExitDegrees, laneInfo: $laneInfo, exitNumbers: $exitNumbers)';
 }
 
 class Waypoint {
@@ -689,6 +748,9 @@ class Waypoint {
           runtimeType == other.runtimeType &&
           coordinate == other.coordinate &&
           kind == other.kind;
+
+  @override
+  String toString() => 'Waypoint(coordinate: $coordinate, kind: $kind)';
 }
 
 @freezed
