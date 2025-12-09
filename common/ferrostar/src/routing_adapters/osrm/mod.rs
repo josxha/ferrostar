@@ -8,12 +8,13 @@ use crate::models::{
     AnyAnnotationValue, GeographicCoordinate, Incident, LaneInfo, RouteStep, SpokenInstruction,
     VisualInstruction, VisualInstructionContent, Waypoint, WaypointKind,
 };
+use crate::routing_adapters::osrm::models::OsrmWaypointProperties;
 use crate::routing_adapters::utilities::get_coordinates_from_geometry;
 use crate::routing_adapters::{
+    ParsingError, Route,
     osrm::models::{
         Route as OsrmRoute, RouteResponse, RouteStep as OsrmRouteStep, Waypoint as OsrmWaypoint,
     },
-    ParsingError, Route,
 };
 #[cfg(all(not(feature = "std"), feature = "alloc"))]
 use alloc::{string::ToString, vec, vec::Vec};
@@ -27,6 +28,14 @@ use uuid::Uuid;
 ///
 /// The parser is NOT limited to only the standard OSRM format; many Valhalla/Mapbox tags are also
 /// parsed and are included in the final route.
+///
+/// # Waypoint properties
+///
+/// Waypoint properties will always be returned as UTF-8 encoded JSON bytes.
+/// This adapter knows about properties defined in [`OsrmWaypointProperties`].
+/// However, some servers (like the Valhalla derivatives run by Stadia Maps and Mapbox)
+/// **may not echo back all rich location properties in OSRM mode**.
+/// Keep this in mind when designing your rerouting flow.
 #[derive(Debug)]
 pub struct OsrmResponseParser {
     polyline_precision: u32,
@@ -61,7 +70,7 @@ impl Route {
     ///
     /// # Arguments
     /// * `route` - The OSRM route.
-    /// * `waypoints` - The OSRM waypoints.
+    /// * `waypoints` - The OSRM waypoints. Properties, if present, are a JSON serialized [`OsrmWaypointProperties`] object.
     /// * `polyline_precision` - The precision of the polyline.
     pub fn from_osrm(
         route: &OsrmRoute,
@@ -86,6 +95,18 @@ impl Route {
                     WaypointKind::Via
                 } else {
                     WaypointKind::Break
+                },
+                properties: if waypoint.name.is_some() || waypoint.distance.is_some() {
+                    Some(
+                        #[expect(clippy::missing_panics_doc)]
+                        serde_json::to_vec(&OsrmWaypointProperties {
+                            name: waypoint.name.clone(),
+                            distance: waypoint.distance,
+                        })
+                        .expect("Infallible JSON serialization"),
+                    )
+                } else {
+                    None
                 },
             })
             .collect();
@@ -189,15 +210,15 @@ impl Route {
 
                         start_index = end_index;
 
-                        RouteStep::from_osrm_and_geom(
+                        Ok(RouteStep::from_osrm_and_geom(
                             step,
                             step_geometry,
                             annotation_slice,
                             relevant_incidents_slice,
-                        )
+                        ))
                     })
                 })
-                .collect::<Result<Vec<_>, _>>()?;
+                .collect::<Result<Vec<_>, ParsingError>>()?;
 
             Ok(Route {
                 geometry,
@@ -229,7 +250,7 @@ impl RouteStep {
         geometry: Vec<GeographicCoordinate>,
         annotations: Option<Vec<AnyAnnotationValue>>,
         incidents: Vec<Incident>,
-    ) -> Result<Self, ParsingError> {
+    ) -> Self {
         let visual_instructions = value
             .banner_instructions
             .iter()
@@ -249,7 +270,7 @@ impl RouteStep {
                         maneuver_modifier: secondary.maneuver_modifier,
                         roundabout_exit_degrees: banner.primary.roundabout_exit_degrees,
                         lane_info: None,
-                        exit_numbers: Self::extract_exit_numbers(&secondary),
+                        exit_numbers: Self::extract_exit_numbers(secondary),
                     }
                 }),
                 sub_content: banner.sub.as_ref().map(|sub| VisualInstructionContent {
@@ -275,7 +296,7 @@ impl RouteStep {
                             Some(lane_infos)
                         }
                     },
-                    exit_numbers: Self::extract_exit_numbers(&sub),
+                    exit_numbers: Self::extract_exit_numbers(sub),
                 }),
                 trigger_distance_before_maneuver: banner.distance_along_geometry,
             })
@@ -307,7 +328,7 @@ impl RouteStep {
             None => Vec::new(),
         };
 
-        Ok(RouteStep {
+        RouteStep {
             geometry,
             // TODO: Investigate using the haversine distance or geodesics to normalize.
             // Valhalla in particular is a bit nonstandard. See https://github.com/valhalla/valhalla/issues/1717
@@ -320,13 +341,14 @@ impl RouteStep {
             spoken_instructions,
             annotations: annotations_as_strings,
             incidents,
-        })
+        }
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::test_utils::redact_properties;
 
     const STANDARD_OSRM_POLYLINE6_RESPONSE: &str =
         include_str!("fixtures/standard_osrm_polyline6_response.json");
@@ -344,7 +366,9 @@ mod tests {
         let routes = parser
             .parse_response(STANDARD_OSRM_POLYLINE6_RESPONSE.into())
             .expect("Unable to parse OSRM response");
-        insta::assert_yaml_snapshot!(routes);
+        insta::assert_yaml_snapshot!(routes, {
+            "[].waypoints[].properties" => insta::dynamic_redaction(redact_properties::<OsrmWaypointProperties>),
+        });
     }
 
     #[test]
@@ -355,7 +379,8 @@ mod tests {
             .expect("Unable to parse Valhalla OSRM response");
 
         insta::assert_yaml_snapshot!(routes, {
-            ".**.annotations" => "redacted annotations json strings vec"
+            ".**.annotations" => "redacted annotations json strings vec",
+            "[].waypoints[].properties" => insta::dynamic_redaction(redact_properties::<OsrmWaypointProperties>),
         });
     }
 
@@ -367,7 +392,8 @@ mod tests {
             .expect("Unable to parse Valhalla OSRM response");
 
         insta::assert_yaml_snapshot!(routes, {
-            ".**.annotations" => "redacted annotations json strings vec"
+            ".**.annotations" => "redacted annotations json strings vec",
+            "[].waypoints[].properties" => insta::dynamic_redaction(redact_properties::<OsrmWaypointProperties>),
         });
     }
 
@@ -448,7 +474,8 @@ mod tests {
             .expect("Unable to parse OSRM response");
 
         insta::assert_yaml_snapshot!(routes, {
-            ".**.annotations" => "redacted annotations json strings vec"
+            ".**.annotations" => "redacted annotations json strings vec",
+            "[].waypoints[].properties" => insta::dynamic_redaction(redact_properties::<OsrmWaypointProperties>),
         });
     }
 

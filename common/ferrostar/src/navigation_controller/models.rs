@@ -239,6 +239,54 @@ pub enum TripState {
     },
 }
 
+impl TripState {
+    pub(crate) fn user_location(&self) -> Option<UserLocation> {
+        match self {
+            TripState::Navigating { user_location, .. } => Some(*user_location),
+            _ => None,
+        }
+    }
+
+    pub(crate) fn snapped_user_location(&self) -> Option<UserLocation> {
+        match self {
+            TripState::Navigating {
+                snapped_user_location,
+                ..
+            } => Some(*snapped_user_location),
+            _ => None,
+        }
+    }
+
+    pub(crate) fn current_step(&self) -> Option<RouteStep> {
+        match self {
+            TripState::Navigating {
+                remaining_steps, ..
+            } => remaining_steps.first().cloned(),
+            _ => None,
+        }
+    }
+
+    pub(crate) fn next_step(&self) -> Option<RouteStep> {
+        self.get_step(1)
+    }
+
+    pub(crate) fn get_step(&self, index: usize) -> Option<RouteStep> {
+        match self {
+            TripState::Navigating {
+                remaining_steps, ..
+            } => remaining_steps.get(index).cloned(),
+            _ => None,
+        }
+    }
+
+    pub(crate) fn deviation(&self) -> Option<RouteDeviation> {
+        match self {
+            TripState::Navigating { deviation, .. } => Some(*deviation),
+            _ => None,
+        }
+    }
+}
+
 #[allow(clippy::large_enum_variant)]
 pub enum StepAdvanceStatus {
     /// Navigation has advanced, and the information on the next step is embedded.
@@ -285,7 +333,15 @@ pub enum CourseFiltering {
 #[cfg_attr(feature = "wasm-bindgen", tsify(from_wasm_abi))]
 pub enum WaypointAdvanceMode {
     /// Advance when the waypoint is within a certain range of meters from the user's location.
+    ///
+    /// This condition is potentially more rigorous, requiring the user to actually visit within
+    /// a range of every waypoint regardless of step advance.
     WaypointWithinRange(f64),
+    /// Advance when a waypoint is within a certain range of meters of any point on the advancing step.
+    ///
+    /// This condition considers the step being advanced, not the user's location. As a result,
+    /// it can recover when your step advance conditions allow the user to skip forward on the route.
+    WaypointAlongAdvancingStep(f64),
 }
 
 #[derive(Clone)]

@@ -83,10 +83,10 @@ public protocol FerrostarCoreDelegate: AnyObject {
     /// This adds a minimum delay (default 5 seconds).
     public var minimumTimeBeforeRecalculaton: TimeInterval = 5
 
-    /// The minimum distance (in meters) the user must move before performing another route recaluclation.
+    /// The minimum distance (in meters) the user must move before performing another route recalculation.
     ///
     /// This ensures that, while the user remains off the route, we don't keep triggering useless recalculations.
-    public var minimumMovementBeforeRecaluclation = CLLocationDistance(50)
+    public var minimumMovementBeforeRecalculation = CLLocationDistance(50)
 
     /// The observable state of the model (for easy binding in SwiftUI views).
     @Published private var coreNavState: NavState?
@@ -177,12 +177,11 @@ public protocol FerrostarCoreDelegate: AnyObject {
         )
     }
 
-    /// Initializes a core instance for a Valhalla API accessed over HTTP.
+    /// Initializes a core instance for a well-known API accessed over HTTP.
+    /// This convenience initializer provides easy access for any built-in route provider.
     ///
     /// - Parameters
-    ///   - valhallaEndpointUrl: The URL of the Valhalla endpoint you're trying to hit for route requests. If necessary,
-    /// include your API key here.
-    ///   - profile: The Valhalla costing model to use for route requests.
+    ///   - routingEngine: The configuration for a well-known routing engine.
     ///   - navigationControllerConfig: Configuration of the navigation session.
     ///   - options: A dictionary of options to include in the request. The Valhalla request generator sets several
     /// automatically (like `format`), but this lets you add arbitrary options so you can access the full API.
@@ -191,31 +190,16 @@ public protocol FerrostarCoreDelegate: AnyObject {
     ///   - annotation: An implementation of the annotation publisher that transforms custom annotation JSON into
     /// published values of defined swift types.
     public convenience init(
-        valhallaEndpointUrl: URL,
-        profile: String,
+        wellKnownRouteProvider: WellKnownRouteProvider,
         locationProvider: LocationProviding,
         navigationControllerConfig: SwiftNavigationControllerConfig,
-        options: [String: Any] = [:],
         networkSession: URLRequestLoading = URLSession.shared,
         annotation: (any AnnotationPublishing)? = nil,
         spokenInstructionObserver: SpokenInstructionObserver =
             .initAVSpeechSynthesizer(),
         widgetProvider: WidgetProviding? = nil
     ) throws {
-        guard
-            let jsonOptions = try String(
-                data: JSONSerialization.data(withJSONObject: options),
-                encoding: .utf8
-            )
-        else {
-            throw InstantiationError.OptionsJsonParseError
-        }
-
-        let adapter = try RouteAdapter.newValhallaHttp(
-            endpointUrl: valhallaEndpointUrl.absoluteString,
-            profile: profile,
-            optionsJson: jsonOptions
-        )
+        let adapter = try RouteAdapter.fromWellKnownRouteProvider(wellKnownRouteProvider: wellKnownRouteProvider)
         self.init(
             routeProvider: .routeAdapter(adapter),
             locationProvider: locationProvider,
@@ -375,7 +359,7 @@ public protocol FerrostarCoreDelegate: AnyObject {
     ///
     /// - Parameter userLocation: The user's current location.
     public func resumeNavigation(
-        userLocation: UserLocation? = nil,
+        userLocation: UserLocation? = nil
     ) throws {
         // This is technically possible, so we need to check and throw, but
         // it should be rather difficult to get a location fix, get a route,
@@ -436,6 +420,8 @@ public protocol FerrostarCoreDelegate: AnyObject {
             self.state?.tripState = state.tripState
 
             switch state.tripState {
+            case .idle(userLocation: _):
+                break
             case let .navigating(
                 currentStepGeometryIndex: _,
                 userLocation: _,
@@ -463,7 +449,7 @@ public protocol FerrostarCoreDelegate: AnyObject {
                           self.lastRecalculationLocation?.clLocation
                           .distance(from: location.clLocation) ?? .greatestFiniteMagnitude
                           > self
-                          .minimumMovementBeforeRecaluclation
+                          .minimumMovementBeforeRecalculation
                     else {
                         break
                     }
@@ -503,15 +489,15 @@ public protocol FerrostarCoreDelegate: AnyObject {
                     }
                 }
 
-                // Update the dynamic island if it's being used.
-                if let visualInstruction {
-                    self.widgetProvider?.update(visualInstruction: visualInstruction, tripProgress: tripProgress)
-                }
-
+                var spokenInstructionToAlert: SpokenInstruction?
                 if let spokenInstruction,
                    !self.queuedUtteranceIDs.contains(spokenInstruction.utteranceId)
                 {
                     self.queuedUtteranceIDs.insert(spokenInstruction.utteranceId)
+
+                    // Only set the spoken instruction to alert when it's queued here.
+                    // Otherwise we'll ignore it.
+                    spokenInstructionToAlert = spokenInstruction
 
                     // This sholud not happen on the main queue as it can block;
                     // we'll probably remove the need for this eventually
@@ -520,8 +506,19 @@ public protocol FerrostarCoreDelegate: AnyObject {
                         self.spokenInstructionObserver.spokenInstructionTriggered(spokenInstruction)
                     }
                 }
-            default:
-                break
+
+                // Update the dynamic island if it's being used.
+                if let visualInstruction {
+                    self.widgetProvider?.update(
+                        visualInstruction: visualInstruction,
+                        spokenInstruction: spokenInstructionToAlert,
+                        tripProgress: tripProgress
+                    )
+                }
+            case .complete(userLocation: _, summary: _):
+                // End the widget session if the route is completed, regardless of whether stop is called.
+                // This avoids a dangling LiveActivity the user must close.
+                self.widgetProvider?.terminate()
             }
         }
     }

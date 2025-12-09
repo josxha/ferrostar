@@ -1,18 +1,22 @@
 use std::sync::Arc;
 
+use crate::deviation_detection::RouteDeviation;
 use crate::deviation_detection::RouteDeviationTracking;
-use crate::models::{BoundingBox, GeographicCoordinate, Route, RouteStep, Waypoint, WaypointKind};
-use crate::navigation_controller::models::{
-    CourseFiltering, NavigationControllerConfig, WaypointAdvanceMode,
+use crate::models::{
+    BoundingBox, GeographicCoordinate, Route, RouteStep, UserLocation, Waypoint, WaypointKind,
 };
-use crate::navigation_controller::step_advance::conditions::DistanceToEndOfStepCondition;
+use crate::navigation_controller::models::{
+    CourseFiltering, NavigationControllerConfig, TripProgress, TripState, TripSummary,
+    WaypointAdvanceMode,
+};
 use crate::navigation_controller::step_advance::StepAdvanceCondition;
-use crate::routing_adapters::{osrm::OsrmResponseParser, RouteResponseParser};
+use crate::navigation_controller::step_advance::conditions::DistanceToEndOfStepCondition;
+use crate::routing_adapters::{RouteResponseParser, osrm::OsrmResponseParser};
 #[cfg(feature = "alloc")]
 use alloc::string::ToString;
 use chrono::{DateTime, Utc};
-use geo::{point, BoundingRect, Coord, Distance, Haversine, LineString, Point};
-use insta::{dynamic_redaction, Settings};
+use geo::{BoundingRect, Coord, Distance, Haversine, LineString, Point, point};
+use insta::{Settings, dynamic_redaction};
 
 pub fn get_test_navigation_controller_config(
     step_advance_condition: Arc<dyn StepAdvanceCondition>,
@@ -171,21 +175,23 @@ pub fn gen_route_from_steps(steps: Vec<RouteStep>) -> Route {
             Waypoint {
                 coordinate: steps.first().unwrap().geometry.first().cloned().unwrap(),
                 kind: WaypointKind::Break,
+                properties: None,
             },
             Waypoint {
                 coordinate: steps.last().unwrap().geometry.last().cloned().unwrap(),
                 kind: WaypointKind::Break,
+                properties: None,
             },
         ],
         steps,
     }
 }
 
-fn create_timestamp_redaction(
-) -> impl Fn(insta::internals::Content, insta::internals::ContentPath<'_>) -> &'static str
-       + Send
-       + Sync
-       + 'static {
+fn create_timestamp_redaction()
+-> impl Fn(insta::internals::Content, insta::internals::ContentPath<'_>) -> &'static str
++ Send
++ Sync
++ 'static {
     |value, _path| {
         if value.is_nil() {
             "[none]"
@@ -205,11 +211,11 @@ fn create_timestamp_redaction(
     }
 }
 
-fn create_distance_redaction(
-) -> impl Fn(insta::internals::Content, insta::internals::ContentPath<'_>) -> String
-       + Send
-       + Sync
-       + 'static {
+fn create_distance_redaction()
+-> impl Fn(insta::internals::Content, insta::internals::ContentPath<'_>) -> String
++ Send
++ Sync
++ 'static {
     |value, _path| {
         if value.is_nil() {
             "[none]".to_string()
@@ -272,4 +278,42 @@ pub(crate) fn nav_controller_insta_settings() -> Settings {
     settings.add_redaction(".version", "[version]");
 
     settings
+}
+
+/// Creates a TripState::Navigating for testing purposes.
+///
+/// This is a convenience function to reduce boilerplate in tests that need a navigating state.
+///
+/// # Parameters
+///
+/// * `user_location` - The user's current location
+/// * `remaining_waypoints` - The remaining waypoints in the trip
+pub fn get_navigating_trip_state(
+    user_location: UserLocation,
+    remaining_steps: Vec<RouteStep>,
+    remaining_waypoints: Vec<Waypoint>,
+    deviation: RouteDeviation,
+) -> TripState {
+    TripState::Navigating {
+        current_step_geometry_index: Some(0),
+        user_location: user_location.clone(),
+        snapped_user_location: user_location,
+        remaining_steps,
+        remaining_waypoints,
+        progress: TripProgress {
+            distance_to_next_maneuver: 100.0,
+            distance_remaining: 1000.0,
+            duration_remaining: 600.0,
+        },
+        deviation,
+        summary: TripSummary {
+            distance_traveled: 0.0,
+            snapped_distance_traveled: 0.0,
+            started_at: Utc::now(),
+            ended_at: None,
+        },
+        visual_instruction: None,
+        spoken_instruction: None,
+        annotation_json: None,
+    }
 }

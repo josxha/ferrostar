@@ -30,25 +30,25 @@ private extension FerrostarCore {
             waypointAdvance: .waypointWithinRange(100.0),
             stepAdvanceCondition: stepAdvanceDistanceEntryAndExit(
                 distanceToEndOfStep: 30,
-                distanceAfterEndOfStep: 2,
+                distanceAfterEndOfStep: 5,
                 minimumHorizontalAccuracy: 32
             ),
             arrivalStepAdvanceCondition: stepAdvanceDistanceToEndOfStep(
-                distance: 30,
+                distance: 10,
                 minimumHorizontalAccuracy: 32
             ),
-            routeDeviationTracking: .staticThreshold(minimumHorizontalAccuracy: 25, maxAcceptableDeviation: 20),
+            routeDeviationTracking: .staticThreshold(minimumHorizontalAccuracy: 15, maxAcceptableDeviation: 50),
             snappedLocationCourseFiltering: .snapToRoute
         )
 
         return try FerrostarCore(
-            valhallaEndpointUrl: URL(
-                string: "https://api.stadiamaps.com/route/v1?api_key=\(sharedAPIKeys.stadiaMapsAPIKey)"
-            )!,
-            profile: "bicycle",
+            wellKnownRouteProvider: .valhalla(
+                endpointUrl: "https://api.stadiamaps.com/route/v1?api_key=\(sharedAPIKeys.stadiaMapsAPIKey)",
+                profile: "bicycle"
+            )
+            .withJsonOptions(options: ["costing_options": ["bicycle": ["use_roads": 0.2]]]),
             locationProvider: locationProvider,
             navigationControllerConfig: config,
-            options: ["costing_options": ["bicycle": ["use_roads": 0.2]]],
             // This is how you can set up annotation publishing;
             // We provide "extended OSRM" support out of the box,
             // but this is fully extendable!
