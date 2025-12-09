@@ -9,7 +9,10 @@ void main() {
       const ne = GeographicCoordinate(lat: 10, lng: 10);
       const bbox1 = BoundingBox(sw: sw, ne: ne);
       const bbox2 = BoundingBox(sw: sw, ne: ne);
-      const bbox3 = BoundingBox(sw: sw, ne: GeographicCoordinate(lat: 20, lng: 20));
+      const bbox3 = BoundingBox(
+        sw: sw,
+        ne: GeographicCoordinate(lat: 20, lng: 20),
+      );
 
       expect(bbox1, equals(bbox2));
       expect(bbox1.hashCode, equals(bbox2.hashCode));
@@ -40,21 +43,24 @@ void main() {
       final c1 = FlutterNavigationControllerConfig(
         waypointAdvance: const WaypointAdvanceMode.waypointWithinRange(15.0),
         stepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
-        arrivalStepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
+        arrivalStepAdvanceCondition:
+            const SerializableStepAdvanceCondition.manual(),
         routeDeviationTracking: const FlutterRouteDeviationTracking.none(),
         snappedLocationCourseFiltering: CourseFiltering.snapToRoute,
       );
       final c2 = FlutterNavigationControllerConfig(
         waypointAdvance: const WaypointAdvanceMode.waypointWithinRange(15.0),
         stepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
-        arrivalStepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
+        arrivalStepAdvanceCondition:
+            const SerializableStepAdvanceCondition.manual(),
         routeDeviationTracking: const FlutterRouteDeviationTracking.none(),
         snappedLocationCourseFiltering: CourseFiltering.snapToRoute,
       );
       final c3 = FlutterNavigationControllerConfig(
         waypointAdvance: const WaypointAdvanceMode.waypointWithinRange(20.0),
         stepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
-        arrivalStepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
+        arrivalStepAdvanceCondition:
+            const SerializableStepAdvanceCondition.manual(),
         routeDeviationTracking: const FlutterRouteDeviationTracking.none(),
         snappedLocationCourseFiltering: CourseFiltering.snapToRoute,
       );
@@ -122,7 +128,10 @@ void main() {
         iso31661Alpha2: 'US',
         iso31661Alpha3: 'USA',
         affectedRoadNames: const [],
-        bbox: const BoundingBox(sw: GeographicCoordinate(lat: 0, lng: 0), ne: GeographicCoordinate(lat: 10, lng: 10)),
+        bbox: const BoundingBox(
+          sw: GeographicCoordinate(lat: 0, lng: 0),
+          ne: GeographicCoordinate(lat: 10, lng: 10),
+        ),
       );
       final i2 = Incident(
         id: '1',
@@ -143,7 +152,10 @@ void main() {
         iso31661Alpha2: 'US',
         iso31661Alpha3: 'USA',
         affectedRoadNames: const [],
-        bbox: const BoundingBox(sw: GeographicCoordinate(lat: 0, lng: 0), ne: GeographicCoordinate(lat: 10, lng: 10)),
+        bbox: const BoundingBox(
+          sw: GeographicCoordinate(lat: 0, lng: 0),
+          ne: GeographicCoordinate(lat: 10, lng: 10),
+        ),
       );
       final i3 = Incident(
         id: '2',
@@ -164,7 +176,10 @@ void main() {
         iso31661Alpha2: 'US',
         iso31661Alpha3: 'USA',
         affectedRoadNames: const [],
-        bbox: const BoundingBox(sw: GeographicCoordinate(lat: 0, lng: 0), ne: GeographicCoordinate(lat: 10, lng: 10)),
+        bbox: const BoundingBox(
+          sw: GeographicCoordinate(lat: 0, lng: 0),
+          ne: GeographicCoordinate(lat: 10, lng: 10),
+        ),
       );
 
       expect(i1, equals(i2));
@@ -173,9 +188,21 @@ void main() {
     });
 
     test('LaneInfo equality', () {
-      const l1 = LaneInfo(active: true, directions: ['straight'], activeDirection: 'straight');
-      const l2 = LaneInfo(active: true, directions: ['straight'], activeDirection: 'straight');
-      const l3 = LaneInfo(active: false, directions: ['straight'], activeDirection: 'straight');
+      const l1 = LaneInfo(
+        active: true,
+        directions: ['straight'],
+        activeDirection: 'straight',
+      );
+      const l2 = LaneInfo(
+        active: true,
+        directions: ['straight'],
+        activeDirection: 'straight',
+      );
+      const l3 = LaneInfo(
+        active: false,
+        directions: ['straight'],
+        activeDirection: 'straight',
+      );
 
       expect(l1, equals(l2));
       expect(l1.hashCode, equals(l2.hashCode));
@@ -185,21 +212,30 @@ void main() {
     test('Route equality', () {
       final r1 = Route(
         geometry: const [],
-        bbox: const BoundingBox(sw: GeographicCoordinate(lat: 0, lng: 0), ne: GeographicCoordinate(lat: 10, lng: 10)),
+        bbox: const BoundingBox(
+          sw: GeographicCoordinate(lat: 0, lng: 0),
+          ne: GeographicCoordinate(lat: 10, lng: 10),
+        ),
         distance: 100,
         steps: const [],
         waypoints: const [],
       );
       final r2 = Route(
         geometry: const [],
-        bbox: const BoundingBox(sw: GeographicCoordinate(lat: 0, lng: 0), ne: GeographicCoordinate(lat: 10, lng: 10)),
+        bbox: const BoundingBox(
+          sw: GeographicCoordinate(lat: 0, lng: 0),
+          ne: GeographicCoordinate(lat: 10, lng: 10),
+        ),
         distance: 100,
         steps: const [],
         waypoints: const [],
       );
       final r3 = Route(
         geometry: const [],
-        bbox: const BoundingBox(sw: GeographicCoordinate(lat: 0, lng: 0), ne: GeographicCoordinate(lat: 10, lng: 10)),
+        bbox: const BoundingBox(
+          sw: GeographicCoordinate(lat: 0, lng: 0),
+          ne: GeographicCoordinate(lat: 10, lng: 10),
+        ),
         distance: 200,
         steps: const [],
         waypoints: const [],
@@ -262,9 +298,24 @@ void main() {
 
     test('SpokenInstruction equality', () {
       final uuid = UuidValue.fromString('11111111-1111-1111-1111-111111111111');
-      final s1 = SpokenInstruction(text: 'Turn right', ssml: null, triggerDistanceBeforeManeuver: 50, utteranceId: uuid);
-      final s2 = SpokenInstruction(text: 'Turn right', ssml: null, triggerDistanceBeforeManeuver: 50, utteranceId: uuid);
-      final s3 = SpokenInstruction(text: 'Turn left', ssml: null, triggerDistanceBeforeManeuver: 50, utteranceId: uuid);
+      final s1 = SpokenInstruction(
+        text: 'Turn right',
+        ssml: null,
+        triggerDistanceBeforeManeuver: 50,
+        utteranceId: uuid,
+      );
+      final s2 = SpokenInstruction(
+        text: 'Turn right',
+        ssml: null,
+        triggerDistanceBeforeManeuver: 50,
+        utteranceId: uuid,
+      );
+      final s3 = SpokenInstruction(
+        text: 'Turn left',
+        ssml: null,
+        triggerDistanceBeforeManeuver: 50,
+        utteranceId: uuid,
+      );
 
       expect(s1, equals(s2));
       expect(s1.hashCode, equals(s2.hashCode));
@@ -272,9 +323,21 @@ void main() {
     });
 
     test('TripProgress equality', () {
-      const t1 = TripProgress(distanceToNextManeuver: 100, distanceRemaining: 500, durationRemaining: 300);
-      const t2 = TripProgress(distanceToNextManeuver: 100, distanceRemaining: 500, durationRemaining: 300);
-      const t3 = TripProgress(distanceToNextManeuver: 200, distanceRemaining: 500, durationRemaining: 300);
+      const t1 = TripProgress(
+        distanceToNextManeuver: 100,
+        distanceRemaining: 500,
+        durationRemaining: 300,
+      );
+      const t2 = TripProgress(
+        distanceToNextManeuver: 100,
+        distanceRemaining: 500,
+        durationRemaining: 300,
+      );
+      const t3 = TripProgress(
+        distanceToNextManeuver: 200,
+        distanceRemaining: 500,
+        durationRemaining: 300,
+      );
 
       expect(t1, equals(t2));
       expect(t1.hashCode, equals(t2.hashCode));
@@ -307,10 +370,22 @@ void main() {
     });
 
     test('VisualInstruction equality', () {
-      const c1 = VisualInstructionContent(text: 'Turn right', exitNumbers: const []);
-      const v1 = VisualInstruction(primaryContent: c1, triggerDistanceBeforeManeuver: 50);
-      const v2 = VisualInstruction(primaryContent: c1, triggerDistanceBeforeManeuver: 50);
-      const v3 = VisualInstruction(primaryContent: c1, triggerDistanceBeforeManeuver: 100);
+      const c1 = VisualInstructionContent(
+        text: 'Turn right',
+        exitNumbers: const [],
+      );
+      const v1 = VisualInstruction(
+        primaryContent: c1,
+        triggerDistanceBeforeManeuver: 50,
+      );
+      const v2 = VisualInstruction(
+        primaryContent: c1,
+        triggerDistanceBeforeManeuver: 50,
+      );
+      const v3 = VisualInstruction(
+        primaryContent: c1,
+        triggerDistanceBeforeManeuver: 100,
+      );
 
       expect(v1, equals(v2));
       expect(v1.hashCode, equals(v2.hashCode));
@@ -318,9 +393,18 @@ void main() {
     });
 
     test('VisualInstructionContent equality', () {
-      const v1 = VisualInstructionContent(text: 'Turn right', exitNumbers: const ['10A']);
-      const v2 = VisualInstructionContent(text: 'Turn right', exitNumbers: const ['10A']);
-      const v3 = VisualInstructionContent(text: 'Turn left', exitNumbers: const ['10A']);
+      const v1 = VisualInstructionContent(
+        text: 'Turn right',
+        exitNumbers: const ['10A'],
+      );
+      const v2 = VisualInstructionContent(
+        text: 'Turn right',
+        exitNumbers: const ['10A'],
+      );
+      const v3 = VisualInstructionContent(
+        text: 'Turn left',
+        exitNumbers: const ['10A'],
+      );
 
       expect(v1, equals(v2));
       expect(v1.hashCode, equals(v2.hashCode));
@@ -328,9 +412,18 @@ void main() {
     });
 
     test('Waypoint equality', () {
-      const w1 = Waypoint(coordinate: GeographicCoordinate(lat: 0, lng: 0), kind: WaypointKind.break_);
-      const w2 = Waypoint(coordinate: GeographicCoordinate(lat: 0, lng: 0), kind: WaypointKind.break_);
-      const w3 = Waypoint(coordinate: GeographicCoordinate(lat: 10, lng: 10), kind: WaypointKind.break_);
+      const w1 = Waypoint(
+        coordinate: GeographicCoordinate(lat: 0, lng: 0),
+        kind: WaypointKind.break_,
+      );
+      const w2 = Waypoint(
+        coordinate: GeographicCoordinate(lat: 0, lng: 0),
+        kind: WaypointKind.break_,
+      );
+      const w3 = Waypoint(
+        coordinate: GeographicCoordinate(lat: 10, lng: 10),
+        kind: WaypointKind.break_,
+      );
 
       expect(w1, equals(w2));
       expect(w1.hashCode, equals(w2.hashCode));

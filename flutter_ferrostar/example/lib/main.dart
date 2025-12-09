@@ -18,10 +18,7 @@ class MyApp extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 20),
-                _buildConfigTest(),
-              ],
+              children: [const SizedBox(height: 20), _buildConfigTest()],
             ),
           ),
         ),
@@ -34,11 +31,12 @@ class MyApp extends StatelessWidget {
       final config = FlutterNavigationControllerConfig(
         waypointAdvance: const WaypointAdvanceMode.waypointWithinRange(10.0),
         stepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
-        arrivalStepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
+        arrivalStepAdvanceCondition:
+            const SerializableStepAdvanceCondition.manual(),
         routeDeviationTracking: const FlutterRouteDeviationTracking.none(),
         snappedLocationCourseFiltering: CourseFiltering.snapToRoute,
       );
-      
+
       final location = FlutterUserLocation(
         coordinates: const GeographicCoordinate(lat: 37.7749, lng: -122.4194),
         horizontalAccuracy: 5.0,

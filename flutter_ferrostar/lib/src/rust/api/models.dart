@@ -82,7 +82,8 @@ class CourseOverGround {
           accuracy == other.accuracy;
 
   @override
-  String toString() => 'CourseOverGround(degrees: $degrees, accuracy: $accuracy)';
+  String toString() =>
+      'CourseOverGround(degrees: $degrees, accuracy: $accuracy)';
 }
 
 class FlutterNavigationControllerConfig {
