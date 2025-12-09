@@ -19,25 +19,6 @@ class MyApp extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Action: Call Rust `greet("Tom")`\nResult: `${greet(name: "Tom")}`',
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 20),
-                FutureBuilder<String>(
-                  future: createCoordinateString(lat: 37.7749, lng: -122.4194),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return Text(
-                        'Action: Call Rust `createCoordinateString`\nResult: `${snapshot.data}`',
-                        textAlign: TextAlign.center,
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    }
-                    return const CircularProgressIndicator();
-                  },
-                ),
                 const SizedBox(height: 20),
                 _buildConfigTest(),
               ],
