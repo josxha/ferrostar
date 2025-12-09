@@ -9,7 +9,9 @@ void main() {
     await RustLib.init();
   });
 
-  testWidgets('Full navigation lifecycle integration test', (WidgetTester tester) async {
+  testWidgets('Full navigation lifecycle integration test', (
+    WidgetTester tester,
+  ) async {
     // 1. Setup Route
     final route = Route(
       geometry: [
@@ -53,7 +55,8 @@ void main() {
     final config = FlutterNavigationControllerConfig(
       waypointAdvance: const WaypointAdvanceMode.waypointWithinRange(15.0),
       stepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
-      arrivalStepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
+      arrivalStepAdvanceCondition:
+          const SerializableStepAdvanceCondition.manual(),
       routeDeviationTracking: const FlutterRouteDeviationTracking.none(),
       snappedLocationCourseFiltering: CourseFiltering.snapToRoute,
     );
@@ -77,7 +80,7 @@ void main() {
 
     var state = await controller.getInitialState(location: initialLocation);
     var tripState = await state.tripState();
-    
+
     expect(tripState, isA<FlutterTripState_Navigating>());
 
     // 5. Update Location
@@ -93,7 +96,7 @@ void main() {
       location: newLocation,
       state: state,
     );
-    
+
     tripState = await state.tripState();
     expect(tripState, isA<FlutterTripState_Navigating>());
   });
