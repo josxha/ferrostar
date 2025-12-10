@@ -13,6 +13,10 @@ use chrono::{DateTime, Utc};
 use uuid::Uuid;
 
 #[flutter_rust_bridge::frb(mirror(GeographicCoordinate))]
+#[flutter_rust_bridge::frb(dart_code = "
+  @override
+  String toString() => 'GeographicCoordinate(lat: $lat, lng: $lng)';
+")]
 pub struct _GeographicCoordinate {
     pub lat: f64,
     pub lng: f64,
@@ -22,6 +26,7 @@ pub struct _GeographicCoordinate {
 pub struct _Waypoint {
     pub coordinate: GeographicCoordinate,
     pub kind: WaypointKind,
+    pub properties: Option<Vec<u8>>,
 }
 
 #[flutter_rust_bridge::frb(mirror(WaypointKind))]
@@ -235,6 +240,7 @@ pub enum _CourseFiltering {
 #[flutter_rust_bridge::frb(mirror(WaypointAdvanceMode))]
 pub enum _WaypointAdvanceMode {
     WaypointWithinRange(f64),
+    WaypointAlongAdvancingStep(f64),
 }
 
 pub enum FlutterRouteDeviationTracking {
@@ -270,8 +276,15 @@ pub enum _SerializableStepAdvanceCondition {
     DistanceFromStep {
         distance: u16,
         minimum_horizontal_accuracy: u16,
+        calculate_while_off_route: bool,
     },
     DistanceEntryExit {
+        distance_to_end_of_step: u16,
+        distance_after_end_step: u16,
+        minimum_horizontal_accuracy: u16,
+        has_reached_end_of_current_step: bool,
+    },
+    DistanceEntryAndSnappedExit {
         distance_to_end_of_step: u16,
         distance_after_end_step: u16,
         minimum_horizontal_accuracy: u16,
@@ -285,6 +298,10 @@ pub enum _SerializableStepAdvanceCondition {
     },
 }
 
+#[flutter_rust_bridge::frb(dart_code = "
+  @override
+  String toString() => 'FlutterNavigationControllerConfig(waypointAdvance: $waypointAdvance, stepAdvanceCondition: $stepAdvanceCondition, arrivalStepAdvanceCondition: $arrivalStepAdvanceCondition, routeDeviationTracking: $routeDeviationTracking, snappedLocationCourseFiltering: $snappedLocationCourseFiltering)';
+")]
 pub struct FlutterNavigationControllerConfig {
     pub waypoint_advance: WaypointAdvanceMode,
     pub step_advance_condition: SerializableStepAdvanceCondition,
@@ -309,6 +326,10 @@ impl From<FlutterNavigationControllerConfig> for NavigationControllerConfig {
 
 // Wrapper types for UserLocation and TripState because of SystemTime
 
+#[flutter_rust_bridge::frb(dart_code = "
+  @override
+  String toString() => 'FlutterUserLocation(coordinates: $coordinates, horizontalAccuracy: $horizontalAccuracy, courseOverGround: $courseOverGround, timestamp: $timestamp, speed: $speed)';
+")]
 pub struct FlutterUserLocation {
     pub coordinates: GeographicCoordinate,
     pub horizontal_accuracy: f64,

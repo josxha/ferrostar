@@ -1735,7 +1735,11 @@ mixin _$SerializableStepAdvanceCondition {
     required TResult Function() manual,
     required TResult Function(int distance, int minimumHorizontalAccuracy)
     distanceToEndOfStep,
-    required TResult Function(int distance, int minimumHorizontalAccuracy)
+    required TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )
     distanceFromStep,
     required TResult Function(
       int distanceToEndOfStep,
@@ -1744,6 +1748,13 @@ mixin _$SerializableStepAdvanceCondition {
       bool hasReachedEndOfCurrentStep,
     )
     distanceEntryExit,
+    required TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )
+    distanceEntryAndSnappedExit,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
     orAdvanceConditions,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
@@ -1754,7 +1765,11 @@ mixin _$SerializableStepAdvanceCondition {
     TResult? Function()? manual,
     TResult? Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult? Function(int distance, int minimumHorizontalAccuracy)?
+    TResult? Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult? Function(
       int distanceToEndOfStep,
@@ -1763,6 +1778,13 @@ mixin _$SerializableStepAdvanceCondition {
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult? Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
@@ -1773,7 +1795,11 @@ mixin _$SerializableStepAdvanceCondition {
     TResult Function()? manual,
     TResult Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult Function(int distance, int minimumHorizontalAccuracy)?
+    TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult Function(
       int distanceToEndOfStep,
@@ -1782,6 +1808,13 @@ mixin _$SerializableStepAdvanceCondition {
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
@@ -1805,6 +1838,10 @@ mixin _$SerializableStepAdvanceCondition {
     )
     distanceEntryExit,
     required TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )
+    distanceEntryAndSnappedExit,
+    required TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )
     orAdvanceConditions,
@@ -1825,6 +1862,10 @@ mixin _$SerializableStepAdvanceCondition {
     TResult? Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
     TResult? Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
+    TResult? Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
     orAdvanceConditions,
@@ -1844,6 +1885,10 @@ mixin _$SerializableStepAdvanceCondition {
     distanceFromStep,
     TResult Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
+    TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
     TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
@@ -1937,7 +1982,11 @@ class _$SerializableStepAdvanceCondition_ManualImpl
     required TResult Function() manual,
     required TResult Function(int distance, int minimumHorizontalAccuracy)
     distanceToEndOfStep,
-    required TResult Function(int distance, int minimumHorizontalAccuracy)
+    required TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )
     distanceFromStep,
     required TResult Function(
       int distanceToEndOfStep,
@@ -1946,6 +1995,13 @@ class _$SerializableStepAdvanceCondition_ManualImpl
       bool hasReachedEndOfCurrentStep,
     )
     distanceEntryExit,
+    required TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )
+    distanceEntryAndSnappedExit,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
     orAdvanceConditions,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
@@ -1960,7 +2016,11 @@ class _$SerializableStepAdvanceCondition_ManualImpl
     TResult? Function()? manual,
     TResult? Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult? Function(int distance, int minimumHorizontalAccuracy)?
+    TResult? Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult? Function(
       int distanceToEndOfStep,
@@ -1969,6 +2029,13 @@ class _$SerializableStepAdvanceCondition_ManualImpl
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult? Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
@@ -1983,7 +2050,11 @@ class _$SerializableStepAdvanceCondition_ManualImpl
     TResult Function()? manual,
     TResult Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult Function(int distance, int minimumHorizontalAccuracy)?
+    TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult Function(
       int distanceToEndOfStep,
@@ -1992,6 +2063,13 @@ class _$SerializableStepAdvanceCondition_ManualImpl
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
@@ -2022,6 +2100,10 @@ class _$SerializableStepAdvanceCondition_ManualImpl
     )
     distanceEntryExit,
     required TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )
+    distanceEntryAndSnappedExit,
+    required TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )
     orAdvanceConditions,
@@ -2046,6 +2128,10 @@ class _$SerializableStepAdvanceCondition_ManualImpl
     TResult? Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
     TResult? Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
+    TResult? Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
     orAdvanceConditions,
@@ -2069,6 +2155,10 @@ class _$SerializableStepAdvanceCondition_ManualImpl
     distanceFromStep,
     TResult Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
+    TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
     TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
@@ -2208,7 +2298,11 @@ class _$SerializableStepAdvanceCondition_DistanceToEndOfStepImpl
     required TResult Function() manual,
     required TResult Function(int distance, int minimumHorizontalAccuracy)
     distanceToEndOfStep,
-    required TResult Function(int distance, int minimumHorizontalAccuracy)
+    required TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )
     distanceFromStep,
     required TResult Function(
       int distanceToEndOfStep,
@@ -2217,6 +2311,13 @@ class _$SerializableStepAdvanceCondition_DistanceToEndOfStepImpl
       bool hasReachedEndOfCurrentStep,
     )
     distanceEntryExit,
+    required TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )
+    distanceEntryAndSnappedExit,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
     orAdvanceConditions,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
@@ -2231,7 +2332,11 @@ class _$SerializableStepAdvanceCondition_DistanceToEndOfStepImpl
     TResult? Function()? manual,
     TResult? Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult? Function(int distance, int minimumHorizontalAccuracy)?
+    TResult? Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult? Function(
       int distanceToEndOfStep,
@@ -2240,6 +2345,13 @@ class _$SerializableStepAdvanceCondition_DistanceToEndOfStepImpl
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult? Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
@@ -2254,7 +2366,11 @@ class _$SerializableStepAdvanceCondition_DistanceToEndOfStepImpl
     TResult Function()? manual,
     TResult Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult Function(int distance, int minimumHorizontalAccuracy)?
+    TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult Function(
       int distanceToEndOfStep,
@@ -2263,6 +2379,13 @@ class _$SerializableStepAdvanceCondition_DistanceToEndOfStepImpl
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
@@ -2293,6 +2416,10 @@ class _$SerializableStepAdvanceCondition_DistanceToEndOfStepImpl
     )
     distanceEntryExit,
     required TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )
+    distanceEntryAndSnappedExit,
+    required TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )
     orAdvanceConditions,
@@ -2317,6 +2444,10 @@ class _$SerializableStepAdvanceCondition_DistanceToEndOfStepImpl
     TResult? Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
     TResult? Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
+    TResult? Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
     orAdvanceConditions,
@@ -2340,6 +2471,10 @@ class _$SerializableStepAdvanceCondition_DistanceToEndOfStepImpl
     distanceFromStep,
     TResult Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
+    TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
     TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
@@ -2389,7 +2524,11 @@ abstract class _$$SerializableStepAdvanceCondition_DistanceFromStepImplCopyWith<
         $Res
       >;
   @useResult
-  $Res call({int distance, int minimumHorizontalAccuracy});
+  $Res call({
+    int distance,
+    int minimumHorizontalAccuracy,
+    bool calculateWhileOffRoute,
+  });
 }
 
 /// @nodoc
@@ -2416,6 +2555,7 @@ class __$$SerializableStepAdvanceCondition_DistanceFromStepImplCopyWithImpl<
   $Res call({
     Object? distance = null,
     Object? minimumHorizontalAccuracy = null,
+    Object? calculateWhileOffRoute = null,
   }) {
     return _then(
       _$SerializableStepAdvanceCondition_DistanceFromStepImpl(
@@ -2427,6 +2567,10 @@ class __$$SerializableStepAdvanceCondition_DistanceFromStepImplCopyWithImpl<
             ? _value.minimumHorizontalAccuracy
             : minimumHorizontalAccuracy // ignore: cast_nullable_to_non_nullable
                   as int,
+        calculateWhileOffRoute: null == calculateWhileOffRoute
+            ? _value.calculateWhileOffRoute
+            : calculateWhileOffRoute // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -2439,16 +2583,19 @@ class _$SerializableStepAdvanceCondition_DistanceFromStepImpl
   const _$SerializableStepAdvanceCondition_DistanceFromStepImpl({
     required this.distance,
     required this.minimumHorizontalAccuracy,
+    required this.calculateWhileOffRoute,
   }) : super._();
 
   @override
   final int distance;
   @override
   final int minimumHorizontalAccuracy;
+  @override
+  final bool calculateWhileOffRoute;
 
   @override
   String toString() {
-    return 'SerializableStepAdvanceCondition.distanceFromStep(distance: $distance, minimumHorizontalAccuracy: $minimumHorizontalAccuracy)';
+    return 'SerializableStepAdvanceCondition.distanceFromStep(distance: $distance, minimumHorizontalAccuracy: $minimumHorizontalAccuracy, calculateWhileOffRoute: $calculateWhileOffRoute)';
   }
 
   @override
@@ -2462,12 +2609,18 @@ class _$SerializableStepAdvanceCondition_DistanceFromStepImpl
                   other.minimumHorizontalAccuracy,
                   minimumHorizontalAccuracy,
                 ) ||
-                other.minimumHorizontalAccuracy == minimumHorizontalAccuracy));
+                other.minimumHorizontalAccuracy == minimumHorizontalAccuracy) &&
+            (identical(other.calculateWhileOffRoute, calculateWhileOffRoute) ||
+                other.calculateWhileOffRoute == calculateWhileOffRoute));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, distance, minimumHorizontalAccuracy);
+  int get hashCode => Object.hash(
+    runtimeType,
+    distance,
+    minimumHorizontalAccuracy,
+    calculateWhileOffRoute,
+  );
 
   /// Create a copy of SerializableStepAdvanceCondition
   /// with the given fields replaced by the non-null parameter values.
@@ -2488,7 +2641,11 @@ class _$SerializableStepAdvanceCondition_DistanceFromStepImpl
     required TResult Function() manual,
     required TResult Function(int distance, int minimumHorizontalAccuracy)
     distanceToEndOfStep,
-    required TResult Function(int distance, int minimumHorizontalAccuracy)
+    required TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )
     distanceFromStep,
     required TResult Function(
       int distanceToEndOfStep,
@@ -2497,12 +2654,23 @@ class _$SerializableStepAdvanceCondition_DistanceFromStepImpl
       bool hasReachedEndOfCurrentStep,
     )
     distanceEntryExit,
+    required TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )
+    distanceEntryAndSnappedExit,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
     orAdvanceConditions,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
     andAdvanceConditions,
   }) {
-    return distanceFromStep(distance, minimumHorizontalAccuracy);
+    return distanceFromStep(
+      distance,
+      minimumHorizontalAccuracy,
+      calculateWhileOffRoute,
+    );
   }
 
   @override
@@ -2511,7 +2679,11 @@ class _$SerializableStepAdvanceCondition_DistanceFromStepImpl
     TResult? Function()? manual,
     TResult? Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult? Function(int distance, int minimumHorizontalAccuracy)?
+    TResult? Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult? Function(
       int distanceToEndOfStep,
@@ -2520,12 +2692,23 @@ class _$SerializableStepAdvanceCondition_DistanceFromStepImpl
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult? Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
     andAdvanceConditions,
   }) {
-    return distanceFromStep?.call(distance, minimumHorizontalAccuracy);
+    return distanceFromStep?.call(
+      distance,
+      minimumHorizontalAccuracy,
+      calculateWhileOffRoute,
+    );
   }
 
   @override
@@ -2534,7 +2717,11 @@ class _$SerializableStepAdvanceCondition_DistanceFromStepImpl
     TResult Function()? manual,
     TResult Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult Function(int distance, int minimumHorizontalAccuracy)?
+    TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult Function(
       int distanceToEndOfStep,
@@ -2543,6 +2730,13 @@ class _$SerializableStepAdvanceCondition_DistanceFromStepImpl
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
@@ -2550,7 +2744,11 @@ class _$SerializableStepAdvanceCondition_DistanceFromStepImpl
     required TResult orElse(),
   }) {
     if (distanceFromStep != null) {
-      return distanceFromStep(distance, minimumHorizontalAccuracy);
+      return distanceFromStep(
+        distance,
+        minimumHorizontalAccuracy,
+        calculateWhileOffRoute,
+      );
     }
     return orElse();
   }
@@ -2572,6 +2770,10 @@ class _$SerializableStepAdvanceCondition_DistanceFromStepImpl
       SerializableStepAdvanceCondition_DistanceEntryExit value,
     )
     distanceEntryExit,
+    required TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )
+    distanceEntryAndSnappedExit,
     required TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )
@@ -2597,6 +2799,10 @@ class _$SerializableStepAdvanceCondition_DistanceFromStepImpl
     TResult? Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
     TResult? Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
+    TResult? Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
     orAdvanceConditions,
@@ -2621,6 +2827,10 @@ class _$SerializableStepAdvanceCondition_DistanceFromStepImpl
     TResult Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
     TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
+    TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
     orAdvanceConditions,
@@ -2642,11 +2852,13 @@ abstract class SerializableStepAdvanceCondition_DistanceFromStep
   const factory SerializableStepAdvanceCondition_DistanceFromStep({
     required final int distance,
     required final int minimumHorizontalAccuracy,
+    required final bool calculateWhileOffRoute,
   }) = _$SerializableStepAdvanceCondition_DistanceFromStepImpl;
   const SerializableStepAdvanceCondition_DistanceFromStep._() : super._();
 
   int get distance;
   int get minimumHorizontalAccuracy;
+  bool get calculateWhileOffRoute;
 
   /// Create a copy of SerializableStepAdvanceCondition
   /// with the given fields replaced by the non-null parameter values.
@@ -2805,7 +3017,11 @@ class _$SerializableStepAdvanceCondition_DistanceEntryExitImpl
     required TResult Function() manual,
     required TResult Function(int distance, int minimumHorizontalAccuracy)
     distanceToEndOfStep,
-    required TResult Function(int distance, int minimumHorizontalAccuracy)
+    required TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )
     distanceFromStep,
     required TResult Function(
       int distanceToEndOfStep,
@@ -2814,6 +3030,13 @@ class _$SerializableStepAdvanceCondition_DistanceEntryExitImpl
       bool hasReachedEndOfCurrentStep,
     )
     distanceEntryExit,
+    required TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )
+    distanceEntryAndSnappedExit,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
     orAdvanceConditions,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
@@ -2833,7 +3056,11 @@ class _$SerializableStepAdvanceCondition_DistanceEntryExitImpl
     TResult? Function()? manual,
     TResult? Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult? Function(int distance, int minimumHorizontalAccuracy)?
+    TResult? Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult? Function(
       int distanceToEndOfStep,
@@ -2842,6 +3069,13 @@ class _$SerializableStepAdvanceCondition_DistanceEntryExitImpl
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult? Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
@@ -2861,7 +3095,11 @@ class _$SerializableStepAdvanceCondition_DistanceEntryExitImpl
     TResult Function()? manual,
     TResult Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult Function(int distance, int minimumHorizontalAccuracy)?
+    TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult Function(
       int distanceToEndOfStep,
@@ -2870,6 +3108,13 @@ class _$SerializableStepAdvanceCondition_DistanceEntryExitImpl
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
@@ -2905,6 +3150,10 @@ class _$SerializableStepAdvanceCondition_DistanceEntryExitImpl
     )
     distanceEntryExit,
     required TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )
+    distanceEntryAndSnappedExit,
+    required TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )
     orAdvanceConditions,
@@ -2929,6 +3178,10 @@ class _$SerializableStepAdvanceCondition_DistanceEntryExitImpl
     TResult? Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
     TResult? Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
+    TResult? Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
     orAdvanceConditions,
@@ -2952,6 +3205,10 @@ class _$SerializableStepAdvanceCondition_DistanceEntryExitImpl
     distanceFromStep,
     TResult Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
+    TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
     TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
@@ -2989,6 +3246,393 @@ abstract class SerializableStepAdvanceCondition_DistanceEntryExit
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SerializableStepAdvanceCondition_DistanceEntryExitImplCopyWith<
     _$SerializableStepAdvanceCondition_DistanceEntryExitImpl
+  >
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImplCopyWith<
+  $Res
+> {
+  factory _$$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImplCopyWith(
+    _$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImpl value,
+    $Res Function(
+      _$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImpl,
+    )
+    then,
+  ) =
+      __$$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImplCopyWithImpl<
+        $Res
+      >;
+  @useResult
+  $Res call({
+    int distanceToEndOfStep,
+    int distanceAfterEndStep,
+    int minimumHorizontalAccuracy,
+    bool hasReachedEndOfCurrentStep,
+  });
+}
+
+/// @nodoc
+class __$$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImplCopyWithImpl<
+  $Res
+>
+    extends
+        _$SerializableStepAdvanceConditionCopyWithImpl<
+          $Res,
+          _$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImpl
+        >
+    implements
+        _$$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImplCopyWith<
+          $Res
+        > {
+  __$$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImplCopyWithImpl(
+    _$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImpl _value,
+    $Res Function(
+      _$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImpl,
+    )
+    _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of SerializableStepAdvanceCondition
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? distanceToEndOfStep = null,
+    Object? distanceAfterEndStep = null,
+    Object? minimumHorizontalAccuracy = null,
+    Object? hasReachedEndOfCurrentStep = null,
+  }) {
+    return _then(
+      _$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImpl(
+        distanceToEndOfStep: null == distanceToEndOfStep
+            ? _value.distanceToEndOfStep
+            : distanceToEndOfStep // ignore: cast_nullable_to_non_nullable
+                  as int,
+        distanceAfterEndStep: null == distanceAfterEndStep
+            ? _value.distanceAfterEndStep
+            : distanceAfterEndStep // ignore: cast_nullable_to_non_nullable
+                  as int,
+        minimumHorizontalAccuracy: null == minimumHorizontalAccuracy
+            ? _value.minimumHorizontalAccuracy
+            : minimumHorizontalAccuracy // ignore: cast_nullable_to_non_nullable
+                  as int,
+        hasReachedEndOfCurrentStep: null == hasReachedEndOfCurrentStep
+            ? _value.hasReachedEndOfCurrentStep
+            : hasReachedEndOfCurrentStep // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImpl
+    extends SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit {
+  const _$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImpl({
+    required this.distanceToEndOfStep,
+    required this.distanceAfterEndStep,
+    required this.minimumHorizontalAccuracy,
+    required this.hasReachedEndOfCurrentStep,
+  }) : super._();
+
+  @override
+  final int distanceToEndOfStep;
+  @override
+  final int distanceAfterEndStep;
+  @override
+  final int minimumHorizontalAccuracy;
+  @override
+  final bool hasReachedEndOfCurrentStep;
+
+  @override
+  String toString() {
+    return 'SerializableStepAdvanceCondition.distanceEntryAndSnappedExit(distanceToEndOfStep: $distanceToEndOfStep, distanceAfterEndStep: $distanceAfterEndStep, minimumHorizontalAccuracy: $minimumHorizontalAccuracy, hasReachedEndOfCurrentStep: $hasReachedEndOfCurrentStep)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other
+                is _$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImpl &&
+            (identical(other.distanceToEndOfStep, distanceToEndOfStep) ||
+                other.distanceToEndOfStep == distanceToEndOfStep) &&
+            (identical(other.distanceAfterEndStep, distanceAfterEndStep) ||
+                other.distanceAfterEndStep == distanceAfterEndStep) &&
+            (identical(
+                  other.minimumHorizontalAccuracy,
+                  minimumHorizontalAccuracy,
+                ) ||
+                other.minimumHorizontalAccuracy == minimumHorizontalAccuracy) &&
+            (identical(
+                  other.hasReachedEndOfCurrentStep,
+                  hasReachedEndOfCurrentStep,
+                ) ||
+                other.hasReachedEndOfCurrentStep ==
+                    hasReachedEndOfCurrentStep));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    distanceToEndOfStep,
+    distanceAfterEndStep,
+    minimumHorizontalAccuracy,
+    hasReachedEndOfCurrentStep,
+  );
+
+  /// Create a copy of SerializableStepAdvanceCondition
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImplCopyWith<
+    _$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImpl
+  >
+  get copyWith =>
+      __$$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImplCopyWithImpl<
+        _$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImpl
+      >(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() manual,
+    required TResult Function(int distance, int minimumHorizontalAccuracy)
+    distanceToEndOfStep,
+    required TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )
+    distanceFromStep,
+    required TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )
+    distanceEntryExit,
+    required TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )
+    distanceEntryAndSnappedExit,
+    required TResult Function(List<SerializableStepAdvanceCondition> conditions)
+    orAdvanceConditions,
+    required TResult Function(List<SerializableStepAdvanceCondition> conditions)
+    andAdvanceConditions,
+  }) {
+    return distanceEntryAndSnappedExit(
+      this.distanceToEndOfStep,
+      distanceAfterEndStep,
+      minimumHorizontalAccuracy,
+      hasReachedEndOfCurrentStep,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? manual,
+    TResult? Function(int distance, int minimumHorizontalAccuracy)?
+    distanceToEndOfStep,
+    TResult? Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
+    distanceFromStep,
+    TResult? Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryExit,
+    TResult? Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
+    TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
+    orAdvanceConditions,
+    TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
+    andAdvanceConditions,
+  }) {
+    return distanceEntryAndSnappedExit?.call(
+      this.distanceToEndOfStep,
+      distanceAfterEndStep,
+      minimumHorizontalAccuracy,
+      hasReachedEndOfCurrentStep,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? manual,
+    TResult Function(int distance, int minimumHorizontalAccuracy)?
+    distanceToEndOfStep,
+    TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
+    distanceFromStep,
+    TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryExit,
+    TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
+    TResult Function(List<SerializableStepAdvanceCondition> conditions)?
+    orAdvanceConditions,
+    TResult Function(List<SerializableStepAdvanceCondition> conditions)?
+    andAdvanceConditions,
+    required TResult orElse(),
+  }) {
+    if (distanceEntryAndSnappedExit != null) {
+      return distanceEntryAndSnappedExit(
+        this.distanceToEndOfStep,
+        distanceAfterEndStep,
+        minimumHorizontalAccuracy,
+        hasReachedEndOfCurrentStep,
+      );
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SerializableStepAdvanceCondition_Manual value)
+    manual,
+    required TResult Function(
+      SerializableStepAdvanceCondition_DistanceToEndOfStep value,
+    )
+    distanceToEndOfStep,
+    required TResult Function(
+      SerializableStepAdvanceCondition_DistanceFromStep value,
+    )
+    distanceFromStep,
+    required TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryExit value,
+    )
+    distanceEntryExit,
+    required TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )
+    distanceEntryAndSnappedExit,
+    required TResult Function(
+      SerializableStepAdvanceCondition_OrAdvanceConditions value,
+    )
+    orAdvanceConditions,
+    required TResult Function(
+      SerializableStepAdvanceCondition_AndAdvanceConditions value,
+    )
+    andAdvanceConditions,
+  }) {
+    return distanceEntryAndSnappedExit(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SerializableStepAdvanceCondition_Manual value)? manual,
+    TResult? Function(
+      SerializableStepAdvanceCondition_DistanceToEndOfStep value,
+    )?
+    distanceToEndOfStep,
+    TResult? Function(SerializableStepAdvanceCondition_DistanceFromStep value)?
+    distanceFromStep,
+    TResult? Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
+    distanceEntryExit,
+    TResult? Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
+    TResult? Function(
+      SerializableStepAdvanceCondition_OrAdvanceConditions value,
+    )?
+    orAdvanceConditions,
+    TResult? Function(
+      SerializableStepAdvanceCondition_AndAdvanceConditions value,
+    )?
+    andAdvanceConditions,
+  }) {
+    return distanceEntryAndSnappedExit?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SerializableStepAdvanceCondition_Manual value)? manual,
+    TResult Function(
+      SerializableStepAdvanceCondition_DistanceToEndOfStep value,
+    )?
+    distanceToEndOfStep,
+    TResult Function(SerializableStepAdvanceCondition_DistanceFromStep value)?
+    distanceFromStep,
+    TResult Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
+    distanceEntryExit,
+    TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
+    TResult Function(
+      SerializableStepAdvanceCondition_OrAdvanceConditions value,
+    )?
+    orAdvanceConditions,
+    TResult Function(
+      SerializableStepAdvanceCondition_AndAdvanceConditions value,
+    )?
+    andAdvanceConditions,
+    required TResult orElse(),
+  }) {
+    if (distanceEntryAndSnappedExit != null) {
+      return distanceEntryAndSnappedExit(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit
+    extends SerializableStepAdvanceCondition {
+  const factory SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit({
+    required final int distanceToEndOfStep,
+    required final int distanceAfterEndStep,
+    required final int minimumHorizontalAccuracy,
+    required final bool hasReachedEndOfCurrentStep,
+  }) = _$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImpl;
+  const SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit._()
+    : super._();
+
+  int get distanceToEndOfStep;
+  int get distanceAfterEndStep;
+  int get minimumHorizontalAccuracy;
+  bool get hasReachedEndOfCurrentStep;
+
+  /// Create a copy of SerializableStepAdvanceCondition
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImplCopyWith<
+    _$SerializableStepAdvanceCondition_DistanceEntryAndSnappedExitImpl
   >
   get copyWith => throw _privateConstructorUsedError;
 }
@@ -3103,7 +3747,11 @@ class _$SerializableStepAdvanceCondition_OrAdvanceConditionsImpl
     required TResult Function() manual,
     required TResult Function(int distance, int minimumHorizontalAccuracy)
     distanceToEndOfStep,
-    required TResult Function(int distance, int minimumHorizontalAccuracy)
+    required TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )
     distanceFromStep,
     required TResult Function(
       int distanceToEndOfStep,
@@ -3112,6 +3760,13 @@ class _$SerializableStepAdvanceCondition_OrAdvanceConditionsImpl
       bool hasReachedEndOfCurrentStep,
     )
     distanceEntryExit,
+    required TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )
+    distanceEntryAndSnappedExit,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
     orAdvanceConditions,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
@@ -3126,7 +3781,11 @@ class _$SerializableStepAdvanceCondition_OrAdvanceConditionsImpl
     TResult? Function()? manual,
     TResult? Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult? Function(int distance, int minimumHorizontalAccuracy)?
+    TResult? Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult? Function(
       int distanceToEndOfStep,
@@ -3135,6 +3794,13 @@ class _$SerializableStepAdvanceCondition_OrAdvanceConditionsImpl
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult? Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
@@ -3149,7 +3815,11 @@ class _$SerializableStepAdvanceCondition_OrAdvanceConditionsImpl
     TResult Function()? manual,
     TResult Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult Function(int distance, int minimumHorizontalAccuracy)?
+    TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult Function(
       int distanceToEndOfStep,
@@ -3158,6 +3828,13 @@ class _$SerializableStepAdvanceCondition_OrAdvanceConditionsImpl
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
@@ -3188,6 +3865,10 @@ class _$SerializableStepAdvanceCondition_OrAdvanceConditionsImpl
     )
     distanceEntryExit,
     required TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )
+    distanceEntryAndSnappedExit,
+    required TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )
     orAdvanceConditions,
@@ -3212,6 +3893,10 @@ class _$SerializableStepAdvanceCondition_OrAdvanceConditionsImpl
     TResult? Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
     TResult? Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
+    TResult? Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
     orAdvanceConditions,
@@ -3235,6 +3920,10 @@ class _$SerializableStepAdvanceCondition_OrAdvanceConditionsImpl
     distanceFromStep,
     TResult Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
+    TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
     TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
@@ -3380,7 +4069,11 @@ class _$SerializableStepAdvanceCondition_AndAdvanceConditionsImpl
     required TResult Function() manual,
     required TResult Function(int distance, int minimumHorizontalAccuracy)
     distanceToEndOfStep,
-    required TResult Function(int distance, int minimumHorizontalAccuracy)
+    required TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )
     distanceFromStep,
     required TResult Function(
       int distanceToEndOfStep,
@@ -3389,6 +4082,13 @@ class _$SerializableStepAdvanceCondition_AndAdvanceConditionsImpl
       bool hasReachedEndOfCurrentStep,
     )
     distanceEntryExit,
+    required TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )
+    distanceEntryAndSnappedExit,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
     orAdvanceConditions,
     required TResult Function(List<SerializableStepAdvanceCondition> conditions)
@@ -3403,7 +4103,11 @@ class _$SerializableStepAdvanceCondition_AndAdvanceConditionsImpl
     TResult? Function()? manual,
     TResult? Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult? Function(int distance, int minimumHorizontalAccuracy)?
+    TResult? Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult? Function(
       int distanceToEndOfStep,
@@ -3412,6 +4116,13 @@ class _$SerializableStepAdvanceCondition_AndAdvanceConditionsImpl
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult? Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult? Function(List<SerializableStepAdvanceCondition> conditions)?
@@ -3426,7 +4137,11 @@ class _$SerializableStepAdvanceCondition_AndAdvanceConditionsImpl
     TResult Function()? manual,
     TResult Function(int distance, int minimumHorizontalAccuracy)?
     distanceToEndOfStep,
-    TResult Function(int distance, int minimumHorizontalAccuracy)?
+    TResult Function(
+      int distance,
+      int minimumHorizontalAccuracy,
+      bool calculateWhileOffRoute,
+    )?
     distanceFromStep,
     TResult Function(
       int distanceToEndOfStep,
@@ -3435,6 +4150,13 @@ class _$SerializableStepAdvanceCondition_AndAdvanceConditionsImpl
       bool hasReachedEndOfCurrentStep,
     )?
     distanceEntryExit,
+    TResult Function(
+      int distanceToEndOfStep,
+      int distanceAfterEndStep,
+      int minimumHorizontalAccuracy,
+      bool hasReachedEndOfCurrentStep,
+    )?
+    distanceEntryAndSnappedExit,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
     orAdvanceConditions,
     TResult Function(List<SerializableStepAdvanceCondition> conditions)?
@@ -3465,6 +4187,10 @@ class _$SerializableStepAdvanceCondition_AndAdvanceConditionsImpl
     )
     distanceEntryExit,
     required TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )
+    distanceEntryAndSnappedExit,
+    required TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )
     orAdvanceConditions,
@@ -3489,6 +4215,10 @@ class _$SerializableStepAdvanceCondition_AndAdvanceConditionsImpl
     TResult? Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
     TResult? Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
+    TResult? Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
     orAdvanceConditions,
@@ -3512,6 +4242,10 @@ class _$SerializableStepAdvanceCondition_AndAdvanceConditionsImpl
     distanceFromStep,
     TResult Function(SerializableStepAdvanceCondition_DistanceEntryExit value)?
     distanceEntryExit,
+    TResult Function(
+      SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit value,
+    )?
+    distanceEntryAndSnappedExit,
     TResult Function(
       SerializableStepAdvanceCondition_OrAdvanceConditions value,
     )?
@@ -3553,30 +4287,41 @@ mixin _$WaypointAdvanceMode {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double field0) waypointWithinRange,
+    required TResult Function(double field0) waypointAlongAdvancingStep,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double field0)? waypointWithinRange,
+    TResult? Function(double field0)? waypointAlongAdvancingStep,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double field0)? waypointWithinRange,
+    TResult Function(double field0)? waypointAlongAdvancingStep,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(WaypointAdvanceMode_WaypointWithinRange value)
     waypointWithinRange,
+    required TResult Function(
+      WaypointAdvanceMode_WaypointAlongAdvancingStep value,
+    )
+    waypointAlongAdvancingStep,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(WaypointAdvanceMode_WaypointWithinRange value)?
     waypointWithinRange,
+    TResult? Function(WaypointAdvanceMode_WaypointAlongAdvancingStep value)?
+    waypointAlongAdvancingStep,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WaypointAdvanceMode_WaypointWithinRange value)?
     waypointWithinRange,
+    TResult Function(WaypointAdvanceMode_WaypointAlongAdvancingStep value)?
+    waypointAlongAdvancingStep,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 
@@ -3707,6 +4452,7 @@ class _$WaypointAdvanceMode_WaypointWithinRangeImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double field0) waypointWithinRange,
+    required TResult Function(double field0) waypointAlongAdvancingStep,
   }) {
     return waypointWithinRange(field0);
   }
@@ -3715,6 +4461,7 @@ class _$WaypointAdvanceMode_WaypointWithinRangeImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double field0)? waypointWithinRange,
+    TResult? Function(double field0)? waypointAlongAdvancingStep,
   }) {
     return waypointWithinRange?.call(field0);
   }
@@ -3723,6 +4470,7 @@ class _$WaypointAdvanceMode_WaypointWithinRangeImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double field0)? waypointWithinRange,
+    TResult Function(double field0)? waypointAlongAdvancingStep,
     required TResult orElse(),
   }) {
     if (waypointWithinRange != null) {
@@ -3736,6 +4484,10 @@ class _$WaypointAdvanceMode_WaypointWithinRangeImpl
   TResult map<TResult extends Object?>({
     required TResult Function(WaypointAdvanceMode_WaypointWithinRange value)
     waypointWithinRange,
+    required TResult Function(
+      WaypointAdvanceMode_WaypointAlongAdvancingStep value,
+    )
+    waypointAlongAdvancingStep,
   }) {
     return waypointWithinRange(this);
   }
@@ -3745,6 +4497,8 @@ class _$WaypointAdvanceMode_WaypointWithinRangeImpl
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(WaypointAdvanceMode_WaypointWithinRange value)?
     waypointWithinRange,
+    TResult? Function(WaypointAdvanceMode_WaypointAlongAdvancingStep value)?
+    waypointAlongAdvancingStep,
   }) {
     return waypointWithinRange?.call(this);
   }
@@ -3754,6 +4508,8 @@ class _$WaypointAdvanceMode_WaypointWithinRangeImpl
   TResult maybeMap<TResult extends Object?>({
     TResult Function(WaypointAdvanceMode_WaypointWithinRange value)?
     waypointWithinRange,
+    TResult Function(WaypointAdvanceMode_WaypointAlongAdvancingStep value)?
+    waypointAlongAdvancingStep,
     required TResult orElse(),
   }) {
     if (waypointWithinRange != null) {
@@ -3778,6 +4534,180 @@ abstract class WaypointAdvanceMode_WaypointWithinRange
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WaypointAdvanceMode_WaypointWithinRangeImplCopyWith<
     _$WaypointAdvanceMode_WaypointWithinRangeImpl
+  >
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$WaypointAdvanceMode_WaypointAlongAdvancingStepImplCopyWith<
+  $Res
+>
+    implements $WaypointAdvanceModeCopyWith<$Res> {
+  factory _$$WaypointAdvanceMode_WaypointAlongAdvancingStepImplCopyWith(
+    _$WaypointAdvanceMode_WaypointAlongAdvancingStepImpl value,
+    $Res Function(_$WaypointAdvanceMode_WaypointAlongAdvancingStepImpl) then,
+  ) = __$$WaypointAdvanceMode_WaypointAlongAdvancingStepImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({double field0});
+}
+
+/// @nodoc
+class __$$WaypointAdvanceMode_WaypointAlongAdvancingStepImplCopyWithImpl<$Res>
+    extends
+        _$WaypointAdvanceModeCopyWithImpl<
+          $Res,
+          _$WaypointAdvanceMode_WaypointAlongAdvancingStepImpl
+        >
+    implements
+        _$$WaypointAdvanceMode_WaypointAlongAdvancingStepImplCopyWith<$Res> {
+  __$$WaypointAdvanceMode_WaypointAlongAdvancingStepImplCopyWithImpl(
+    _$WaypointAdvanceMode_WaypointAlongAdvancingStepImpl _value,
+    $Res Function(_$WaypointAdvanceMode_WaypointAlongAdvancingStepImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of WaypointAdvanceMode
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? field0 = null}) {
+    return _then(
+      _$WaypointAdvanceMode_WaypointAlongAdvancingStepImpl(
+        null == field0
+            ? _value.field0
+            : field0 // ignore: cast_nullable_to_non_nullable
+                  as double,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$WaypointAdvanceMode_WaypointAlongAdvancingStepImpl
+    extends WaypointAdvanceMode_WaypointAlongAdvancingStep {
+  const _$WaypointAdvanceMode_WaypointAlongAdvancingStepImpl(this.field0)
+    : super._();
+
+  @override
+  final double field0;
+
+  @override
+  String toString() {
+    return 'WaypointAdvanceMode.waypointAlongAdvancingStep(field0: $field0)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WaypointAdvanceMode_WaypointAlongAdvancingStepImpl &&
+            (identical(other.field0, field0) || other.field0 == field0));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, field0);
+
+  /// Create a copy of WaypointAdvanceMode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WaypointAdvanceMode_WaypointAlongAdvancingStepImplCopyWith<
+    _$WaypointAdvanceMode_WaypointAlongAdvancingStepImpl
+  >
+  get copyWith =>
+      __$$WaypointAdvanceMode_WaypointAlongAdvancingStepImplCopyWithImpl<
+        _$WaypointAdvanceMode_WaypointAlongAdvancingStepImpl
+      >(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(double field0) waypointWithinRange,
+    required TResult Function(double field0) waypointAlongAdvancingStep,
+  }) {
+    return waypointAlongAdvancingStep(field0);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(double field0)? waypointWithinRange,
+    TResult? Function(double field0)? waypointAlongAdvancingStep,
+  }) {
+    return waypointAlongAdvancingStep?.call(field0);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(double field0)? waypointWithinRange,
+    TResult Function(double field0)? waypointAlongAdvancingStep,
+    required TResult orElse(),
+  }) {
+    if (waypointAlongAdvancingStep != null) {
+      return waypointAlongAdvancingStep(field0);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(WaypointAdvanceMode_WaypointWithinRange value)
+    waypointWithinRange,
+    required TResult Function(
+      WaypointAdvanceMode_WaypointAlongAdvancingStep value,
+    )
+    waypointAlongAdvancingStep,
+  }) {
+    return waypointAlongAdvancingStep(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(WaypointAdvanceMode_WaypointWithinRange value)?
+    waypointWithinRange,
+    TResult? Function(WaypointAdvanceMode_WaypointAlongAdvancingStep value)?
+    waypointAlongAdvancingStep,
+  }) {
+    return waypointAlongAdvancingStep?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(WaypointAdvanceMode_WaypointWithinRange value)?
+    waypointWithinRange,
+    TResult Function(WaypointAdvanceMode_WaypointAlongAdvancingStep value)?
+    waypointAlongAdvancingStep,
+    required TResult orElse(),
+  }) {
+    if (waypointAlongAdvancingStep != null) {
+      return waypointAlongAdvancingStep(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class WaypointAdvanceMode_WaypointAlongAdvancingStep
+    extends WaypointAdvanceMode {
+  const factory WaypointAdvanceMode_WaypointAlongAdvancingStep(
+    final double field0,
+  ) = _$WaypointAdvanceMode_WaypointAlongAdvancingStepImpl;
+  const WaypointAdvanceMode_WaypointAlongAdvancingStep._() : super._();
+
+  @override
+  double get field0;
+
+  /// Create a copy of WaypointAdvanceMode
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$WaypointAdvanceMode_WaypointAlongAdvancingStepImplCopyWith<
+    _$WaypointAdvanceMode_WaypointAlongAdvancingStepImpl
   >
   get copyWith => throw _privateConstructorUsedError;
 }

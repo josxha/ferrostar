@@ -1040,6 +1040,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Uint8List? dco_decode_opt_list_prim_u_8_strict(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_list_prim_u_8_strict(raw);
+  }
+
+  @protected
   Route dco_decode_route(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -1105,6 +1111,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         return SerializableStepAdvanceCondition_DistanceFromStep(
           distance: dco_decode_u_16(raw[1]),
           minimumHorizontalAccuracy: dco_decode_u_16(raw[2]),
+          calculateWhileOffRoute: dco_decode_bool(raw[3]),
         );
       case 3:
         return SerializableStepAdvanceCondition_DistanceEntryExit(
@@ -1114,12 +1121,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           hasReachedEndOfCurrentStep: dco_decode_bool(raw[4]),
         );
       case 4:
+        return SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit(
+          distanceToEndOfStep: dco_decode_u_16(raw[1]),
+          distanceAfterEndStep: dco_decode_u_16(raw[2]),
+          minimumHorizontalAccuracy: dco_decode_u_16(raw[3]),
+          hasReachedEndOfCurrentStep: dco_decode_bool(raw[4]),
+        );
+      case 5:
         return SerializableStepAdvanceCondition_OrAdvanceConditions(
           conditions: dco_decode_list_serializable_step_advance_condition(
             raw[1],
           ),
         );
-      case 5:
+      case 6:
         return SerializableStepAdvanceCondition_AndAdvanceConditions(
           conditions: dco_decode_list_serializable_step_advance_condition(
             raw[1],
@@ -1249,11 +1263,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Waypoint dco_decode_waypoint(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    if (arr.length != 3)
+      throw Exception('unexpected arr length: expect 3 but see ${arr.length}');
     return Waypoint(
       coordinate: dco_decode_geographic_coordinate(arr[0]),
       kind: dco_decode_waypoint_kind(arr[1]),
+      properties: dco_decode_opt_list_prim_u_8_strict(arr[2]),
     );
   }
 
@@ -1263,6 +1278,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     switch (raw[0]) {
       case 0:
         return WaypointAdvanceMode_WaypointWithinRange(dco_decode_f_64(raw[1]));
+      case 1:
+        return WaypointAdvanceMode_WaypointAlongAdvancingStep(
+          dco_decode_f_64(raw[1]),
+        );
       default:
         throw Exception("unreachable");
     }
@@ -2169,6 +2188,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  Uint8List? sse_decode_opt_list_prim_u_8_strict(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_list_prim_u_8_strict(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   Route sse_decode_route(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_geometry = sse_decode_list_geographic_coordinate(deserializer);
@@ -2253,9 +2283,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case 2:
         var var_distance = sse_decode_u_16(deserializer);
         var var_minimumHorizontalAccuracy = sse_decode_u_16(deserializer);
+        var var_calculateWhileOffRoute = sse_decode_bool(deserializer);
         return SerializableStepAdvanceCondition_DistanceFromStep(
           distance: var_distance,
           minimumHorizontalAccuracy: var_minimumHorizontalAccuracy,
+          calculateWhileOffRoute: var_calculateWhileOffRoute,
         );
       case 3:
         var var_distanceToEndOfStep = sse_decode_u_16(deserializer);
@@ -2269,12 +2301,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           hasReachedEndOfCurrentStep: var_hasReachedEndOfCurrentStep,
         );
       case 4:
+        var var_distanceToEndOfStep = sse_decode_u_16(deserializer);
+        var var_distanceAfterEndStep = sse_decode_u_16(deserializer);
+        var var_minimumHorizontalAccuracy = sse_decode_u_16(deserializer);
+        var var_hasReachedEndOfCurrentStep = sse_decode_bool(deserializer);
+        return SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit(
+          distanceToEndOfStep: var_distanceToEndOfStep,
+          distanceAfterEndStep: var_distanceAfterEndStep,
+          minimumHorizontalAccuracy: var_minimumHorizontalAccuracy,
+          hasReachedEndOfCurrentStep: var_hasReachedEndOfCurrentStep,
+        );
+      case 5:
         var var_conditions =
             sse_decode_list_serializable_step_advance_condition(deserializer);
         return SerializableStepAdvanceCondition_OrAdvanceConditions(
           conditions: var_conditions,
         );
-      case 5:
+      case 6:
         var var_conditions =
             sse_decode_list_serializable_step_advance_condition(deserializer);
         return SerializableStepAdvanceCondition_AndAdvanceConditions(
@@ -2421,7 +2464,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_coordinate = sse_decode_geographic_coordinate(deserializer);
     var var_kind = sse_decode_waypoint_kind(deserializer);
-    return Waypoint(coordinate: var_coordinate, kind: var_kind);
+    var var_properties = sse_decode_opt_list_prim_u_8_strict(deserializer);
+    return Waypoint(
+      coordinate: var_coordinate,
+      kind: var_kind,
+      properties: var_properties,
+    );
   }
 
   @protected
@@ -2435,6 +2483,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case 0:
         var var_field0 = sse_decode_f_64(deserializer);
         return WaypointAdvanceMode_WaypointWithinRange(var_field0);
+      case 1:
+        var var_field0 = sse_decode_f_64(deserializer);
+        return WaypointAdvanceMode_WaypointAlongAdvancingStep(var_field0);
       default:
         throw UnimplementedError('');
     }
@@ -3319,6 +3370,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_list_prim_u_8_strict(
+    Uint8List? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_list_prim_u_8_strict(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_route(Route self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_geographic_coordinate(self.geometry, serializer);
@@ -3379,10 +3443,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case SerializableStepAdvanceCondition_DistanceFromStep(
         distance: final distance,
         minimumHorizontalAccuracy: final minimumHorizontalAccuracy,
+        calculateWhileOffRoute: final calculateWhileOffRoute,
       ):
         sse_encode_i_32(2, serializer);
         sse_encode_u_16(distance, serializer);
         sse_encode_u_16(minimumHorizontalAccuracy, serializer);
+        sse_encode_bool(calculateWhileOffRoute, serializer);
       case SerializableStepAdvanceCondition_DistanceEntryExit(
         distanceToEndOfStep: final distanceToEndOfStep,
         distanceAfterEndStep: final distanceAfterEndStep,
@@ -3394,10 +3460,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_u_16(distanceAfterEndStep, serializer);
         sse_encode_u_16(minimumHorizontalAccuracy, serializer);
         sse_encode_bool(hasReachedEndOfCurrentStep, serializer);
+      case SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit(
+        distanceToEndOfStep: final distanceToEndOfStep,
+        distanceAfterEndStep: final distanceAfterEndStep,
+        minimumHorizontalAccuracy: final minimumHorizontalAccuracy,
+        hasReachedEndOfCurrentStep: final hasReachedEndOfCurrentStep,
+      ):
+        sse_encode_i_32(4, serializer);
+        sse_encode_u_16(distanceToEndOfStep, serializer);
+        sse_encode_u_16(distanceAfterEndStep, serializer);
+        sse_encode_u_16(minimumHorizontalAccuracy, serializer);
+        sse_encode_bool(hasReachedEndOfCurrentStep, serializer);
       case SerializableStepAdvanceCondition_OrAdvanceConditions(
         conditions: final conditions,
       ):
-        sse_encode_i_32(4, serializer);
+        sse_encode_i_32(5, serializer);
         sse_encode_list_serializable_step_advance_condition(
           conditions,
           serializer,
@@ -3405,7 +3482,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case SerializableStepAdvanceCondition_AndAdvanceConditions(
         conditions: final conditions,
       ):
-        sse_encode_i_32(5, serializer);
+        sse_encode_i_32(6, serializer);
         sse_encode_list_serializable_step_advance_condition(
           conditions,
           serializer,
@@ -3518,6 +3595,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_geographic_coordinate(self.coordinate, serializer);
     sse_encode_waypoint_kind(self.kind, serializer);
+    sse_encode_opt_list_prim_u_8_strict(self.properties, serializer);
   }
 
   @protected
@@ -3529,6 +3607,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     switch (self) {
       case WaypointAdvanceMode_WaypointWithinRange(field0: final field0):
         sse_encode_i_32(0, serializer);
+        sse_encode_f_64(field0, serializer);
+      case WaypointAdvanceMode_WaypointAlongAdvancingStep(field0: final field0):
+        sse_encode_i_32(1, serializer);
         sse_encode_f_64(field0, serializer);
     }
   }

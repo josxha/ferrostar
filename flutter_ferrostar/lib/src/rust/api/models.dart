@@ -38,9 +38,6 @@ class BoundingBox {
           runtimeType == other.runtimeType &&
           sw == other.sw &&
           ne == other.ne;
-
-  @override
-  String toString() => 'BoundingBox(sw: $sw, ne: $ne)';
 }
 
 class Congestion {
@@ -57,9 +54,6 @@ class Congestion {
       other is Congestion &&
           runtimeType == other.runtimeType &&
           value == other.value;
-
-  @override
-  String toString() => 'Congestion(value: $value)';
 }
 
 enum CourseFiltering { snapToRoute, raw }
@@ -80,10 +74,6 @@ class CourseOverGround {
           runtimeType == other.runtimeType &&
           degrees == other.degrees &&
           accuracy == other.accuracy;
-
-  @override
-  String toString() =>
-      'CourseOverGround(degrees: $degrees, accuracy: $accuracy)';
 }
 
 class FlutterNavigationControllerConfig {
@@ -100,6 +90,10 @@ class FlutterNavigationControllerConfig {
     required this.routeDeviationTracking,
     required this.snappedLocationCourseFiltering,
   });
+
+  @override
+  String toString() =>
+      'FlutterNavigationControllerConfig(waypointAdvance: $waypointAdvance, stepAdvanceCondition: $stepAdvanceCondition, arrivalStepAdvanceCondition: $arrivalStepAdvanceCondition, routeDeviationTracking: $routeDeviationTracking, snappedLocationCourseFiltering: $snappedLocationCourseFiltering)';
 
   @override
   int get hashCode =>
@@ -120,10 +114,6 @@ class FlutterNavigationControllerConfig {
           routeDeviationTracking == other.routeDeviationTracking &&
           snappedLocationCourseFiltering ==
               other.snappedLocationCourseFiltering;
-
-  @override
-  String toString() =>
-      'FlutterNavigationControllerConfig(waypointAdvance: $waypointAdvance, stepAdvanceCondition: $stepAdvanceCondition, arrivalStepAdvanceCondition: $arrivalStepAdvanceCondition, routeDeviationTracking: $routeDeviationTracking, snappedLocationCourseFiltering: $snappedLocationCourseFiltering)';
 }
 
 @freezed
@@ -180,6 +170,10 @@ class FlutterUserLocation {
   });
 
   @override
+  String toString() =>
+      'FlutterUserLocation(coordinates: $coordinates, horizontalAccuracy: $horizontalAccuracy, courseOverGround: $courseOverGround, timestamp: $timestamp, speed: $speed)';
+
+  @override
   int get hashCode =>
       coordinates.hashCode ^
       horizontalAccuracy.hashCode ^
@@ -197,10 +191,6 @@ class FlutterUserLocation {
           courseOverGround == other.courseOverGround &&
           timestamp == other.timestamp &&
           speed == other.speed;
-
-  @override
-  String toString() =>
-      'FlutterUserLocation(coordinates: $coordinates, horizontalAccuracy: $horizontalAccuracy, courseOverGround: $courseOverGround, timestamp: $timestamp, speed: $speed)';
 }
 
 class GeographicCoordinate {
@@ -208,6 +198,9 @@ class GeographicCoordinate {
   final double lng;
 
   const GeographicCoordinate({required this.lat, required this.lng});
+
+  @override
+  String toString() => 'GeographicCoordinate(lat: $lat, lng: $lng)';
 
   @override
   int get hashCode => lat.hashCode ^ lng.hashCode;
@@ -219,9 +212,6 @@ class GeographicCoordinate {
           runtimeType == other.runtimeType &&
           lat == other.lat &&
           lng == other.lng;
-
-  @override
-  String toString() => 'GeographicCoordinate(lat: $lat, lng: $lng)';
 }
 
 enum Impact { unknown, critical, major, minor, low }
@@ -315,10 +305,6 @@ class Incident {
           iso31661Alpha3 == other.iso31661Alpha3 &&
           affectedRoadNames == other.affectedRoadNames &&
           bbox == other.bbox;
-
-  @override
-  String toString() =>
-      'Incident(id: $id, incidentType: $incidentType, description: $description, longDescription: $longDescription, creationTime: $creationTime, startTime: $startTime, endTime: $endTime, impact: $impact, lanesBlocked: $lanesBlocked, congestion: $congestion, closed: $closed, geometryIndexStart: $geometryIndexStart, geometryIndexEnd: $geometryIndexEnd, subType: $subType, subTypeDescription: $subTypeDescription, iso31661Alpha2: $iso31661Alpha2, iso31661Alpha3: $iso31661Alpha3, affectedRoadNames: $affectedRoadNames, bbox: $bbox)';
 }
 
 enum IncidentType {
@@ -359,10 +345,6 @@ class LaneInfo {
           active == other.active &&
           directions == other.directions &&
           activeDirection == other.activeDirection;
-
-  @override
-  String toString() =>
-      'LaneInfo(active: $active, directions: $directions, activeDirection: $activeDirection)';
 }
 
 enum ManeuverModifier {
@@ -428,10 +410,6 @@ class Route {
           distance == other.distance &&
           waypoints == other.waypoints &&
           steps == other.steps;
-
-  @override
-  String toString() =>
-      'Route(geometry: $geometry, bbox: $bbox, distance: $distance, waypoints: $waypoints, steps: $steps)';
 }
 
 @freezed
@@ -497,10 +475,6 @@ class RouteStep {
           spokenInstructions == other.spokenInstructions &&
           annotations == other.annotations &&
           incidents == other.incidents;
-
-  @override
-  String toString() =>
-      'RouteStep(geometry: $geometry, distance: $distance, duration: $duration, roadName: $roadName, exits: $exits, instruction: $instruction, visualInstructions: $visualInstructions, spokenInstructions: $spokenInstructions, annotations: $annotations, incidents: $incidents)';
 }
 
 @freezed
@@ -517,6 +491,7 @@ sealed class SerializableStepAdvanceCondition
   const factory SerializableStepAdvanceCondition.distanceFromStep({
     required int distance,
     required int minimumHorizontalAccuracy,
+    required bool calculateWhileOffRoute,
   }) = SerializableStepAdvanceCondition_DistanceFromStep;
   const factory SerializableStepAdvanceCondition.distanceEntryExit({
     required int distanceToEndOfStep,
@@ -524,6 +499,12 @@ sealed class SerializableStepAdvanceCondition
     required int minimumHorizontalAccuracy,
     required bool hasReachedEndOfCurrentStep,
   }) = SerializableStepAdvanceCondition_DistanceEntryExit;
+  const factory SerializableStepAdvanceCondition.distanceEntryAndSnappedExit({
+    required int distanceToEndOfStep,
+    required int distanceAfterEndStep,
+    required int minimumHorizontalAccuracy,
+    required bool hasReachedEndOfCurrentStep,
+  }) = SerializableStepAdvanceCondition_DistanceEntryAndSnappedExit;
   const factory SerializableStepAdvanceCondition.orAdvanceConditions({
     required List<SerializableStepAdvanceCondition> conditions,
   }) = SerializableStepAdvanceCondition_OrAdvanceConditions;
@@ -548,9 +529,6 @@ class Speed {
           runtimeType == other.runtimeType &&
           value == other.value &&
           accuracy == other.accuracy;
-
-  @override
-  String toString() => 'Speed(value: $value, accuracy: $accuracy)';
 }
 
 class SpokenInstruction {
@@ -583,10 +561,6 @@ class SpokenInstruction {
           triggerDistanceBeforeManeuver ==
               other.triggerDistanceBeforeManeuver &&
           utteranceId == other.utteranceId;
-
-  @override
-  String toString() =>
-      'SpokenInstruction(text: $text, ssml: $ssml, triggerDistanceBeforeManeuver: $triggerDistanceBeforeManeuver, utteranceId: $utteranceId)';
 }
 
 class TripProgress {
@@ -614,10 +588,6 @@ class TripProgress {
           distanceToNextManeuver == other.distanceToNextManeuver &&
           distanceRemaining == other.distanceRemaining &&
           durationRemaining == other.durationRemaining;
-
-  @override
-  String toString() =>
-      'TripProgress(distanceToNextManeuver: $distanceToNextManeuver, distanceRemaining: $distanceRemaining, durationRemaining: $durationRemaining)';
 }
 
 class TripSummary {
@@ -649,10 +619,6 @@ class TripSummary {
           snappedDistanceTraveled == other.snappedDistanceTraveled &&
           startedAt == other.startedAt &&
           endedAt == other.endedAt;
-
-  @override
-  String toString() =>
-      'TripSummary(distanceTraveled: $distanceTraveled, snappedDistanceTraveled: $snappedDistanceTraveled, startedAt: $startedAt, endedAt: $endedAt)';
 }
 
 class VisualInstruction {
@@ -684,10 +650,6 @@ class VisualInstruction {
           secondaryContent == other.secondaryContent &&
           subContent == other.subContent &&
           triggerDistanceBeforeManeuver == other.triggerDistanceBeforeManeuver;
-
-  @override
-  String toString() =>
-      'VisualInstruction(primaryContent: $primaryContent, secondaryContent: $secondaryContent, subContent: $subContent, triggerDistanceBeforeManeuver: $triggerDistanceBeforeManeuver)';
 }
 
 class VisualInstructionContent {
@@ -727,20 +689,21 @@ class VisualInstructionContent {
           roundaboutExitDegrees == other.roundaboutExitDegrees &&
           laneInfo == other.laneInfo &&
           exitNumbers == other.exitNumbers;
-
-  @override
-  String toString() =>
-      'VisualInstructionContent(text: $text, maneuverType: $maneuverType, maneuverModifier: $maneuverModifier, roundaboutExitDegrees: $roundaboutExitDegrees, laneInfo: $laneInfo, exitNumbers: $exitNumbers)';
 }
 
 class Waypoint {
   final GeographicCoordinate coordinate;
   final WaypointKind kind;
+  final Uint8List? properties;
 
-  const Waypoint({required this.coordinate, required this.kind});
+  const Waypoint({
+    required this.coordinate,
+    required this.kind,
+    this.properties,
+  });
 
   @override
-  int get hashCode => coordinate.hashCode ^ kind.hashCode;
+  int get hashCode => coordinate.hashCode ^ kind.hashCode ^ properties.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -748,10 +711,8 @@ class Waypoint {
       other is Waypoint &&
           runtimeType == other.runtimeType &&
           coordinate == other.coordinate &&
-          kind == other.kind;
-
-  @override
-  String toString() => 'Waypoint(coordinate: $coordinate, kind: $kind)';
+          kind == other.kind &&
+          properties == other.properties;
 }
 
 @freezed
@@ -760,6 +721,8 @@ sealed class WaypointAdvanceMode with _$WaypointAdvanceMode {
 
   const factory WaypointAdvanceMode.waypointWithinRange(double field0) =
       WaypointAdvanceMode_WaypointWithinRange;
+  const factory WaypointAdvanceMode.waypointAlongAdvancingStep(double field0) =
+      WaypointAdvanceMode_WaypointAlongAdvancingStep;
 }
 
 enum WaypointKind { break_, via }

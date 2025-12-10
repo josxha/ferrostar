@@ -455,11 +455,24 @@ const _: fn() = || {
         crate::api::models::SerializableStepAdvanceCondition::DistanceFromStep {
             distance,
             minimum_horizontal_accuracy,
+            calculate_while_off_route,
         } => {
             let _: u16 = distance;
             let _: u16 = minimum_horizontal_accuracy;
+            let _: bool = calculate_while_off_route;
         }
         crate::api::models::SerializableStepAdvanceCondition::DistanceEntryExit {
+            distance_to_end_of_step,
+            distance_after_end_step,
+            minimum_horizontal_accuracy,
+            has_reached_end_of_current_step,
+        } => {
+            let _: u16 = distance_to_end_of_step;
+            let _: u16 = distance_after_end_step;
+            let _: u16 = minimum_horizontal_accuracy;
+            let _: bool = has_reached_end_of_current_step;
+        }
+        crate::api::models::SerializableStepAdvanceCondition::DistanceEntryAndSnappedExit {
             distance_to_end_of_step,
             distance_after_end_step,
             minimum_horizontal_accuracy,
@@ -529,9 +542,13 @@ const _: fn() = || {
         let Waypoint = None::<crate::api::models::Waypoint>.unwrap();
         let _: crate::api::models::GeographicCoordinate = Waypoint.coordinate;
         let _: crate::api::models::WaypointKind = Waypoint.kind;
+        let _: Option<Vec<u8>> = Waypoint.properties;
     }
     match None::<crate::api::models::WaypointAdvanceMode>.unwrap() {
         crate::api::models::WaypointAdvanceMode::WaypointWithinRange(field0) => {
+            let _: f64 = field0;
+        }
+        crate::api::models::WaypointAdvanceMode::WaypointAlongAdvancingStep(field0) => {
             let _: f64 = field0;
         }
     }
@@ -1353,6 +1370,17 @@ impl SseDecode for Option<Vec<crate::api::models::LaneInfo>> {
     }
 }
 
+impl SseDecode for Option<Vec<u8>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<Vec<u8>>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for crate::api::models::Route {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -1443,9 +1471,11 @@ impl SseDecode for crate::api::models::SerializableStepAdvanceCondition {
             2 => {
                 let mut var_distance = <u16>::sse_decode(deserializer);
                 let mut var_minimumHorizontalAccuracy = <u16>::sse_decode(deserializer);
+                let mut var_calculateWhileOffRoute = <bool>::sse_decode(deserializer);
                 return crate::api::models::SerializableStepAdvanceCondition::DistanceFromStep {
                     distance: var_distance,
                     minimum_horizontal_accuracy: var_minimumHorizontalAccuracy,
+                    calculate_while_off_route: var_calculateWhileOffRoute,
                 };
             }
             3 => {
@@ -1461,6 +1491,13 @@ impl SseDecode for crate::api::models::SerializableStepAdvanceCondition {
                 };
             }
             4 => {
+                let mut var_distanceToEndOfStep = <u16>::sse_decode(deserializer);
+                let mut var_distanceAfterEndStep = <u16>::sse_decode(deserializer);
+                let mut var_minimumHorizontalAccuracy = <u16>::sse_decode(deserializer);
+                let mut var_hasReachedEndOfCurrentStep = <bool>::sse_decode(deserializer);
+                return crate::api::models::SerializableStepAdvanceCondition::DistanceEntryAndSnappedExit{distance_to_end_of_step: var_distanceToEndOfStep, distance_after_end_step: var_distanceAfterEndStep, minimum_horizontal_accuracy: var_minimumHorizontalAccuracy, has_reached_end_of_current_step: var_hasReachedEndOfCurrentStep};
+            }
+            5 => {
                 let mut var_conditions =
                     <Vec<crate::api::models::SerializableStepAdvanceCondition>>::sse_decode(
                         deserializer,
@@ -1469,7 +1506,7 @@ impl SseDecode for crate::api::models::SerializableStepAdvanceCondition {
                     conditions: var_conditions,
                 };
             }
-            5 => {
+            6 => {
                 let mut var_conditions =
                     <Vec<crate::api::models::SerializableStepAdvanceCondition>>::sse_decode(
                         deserializer,
@@ -1622,9 +1659,11 @@ impl SseDecode for crate::api::models::Waypoint {
         let mut var_coordinate =
             <crate::api::models::GeographicCoordinate>::sse_decode(deserializer);
         let mut var_kind = <crate::api::models::WaypointKind>::sse_decode(deserializer);
+        let mut var_properties = <Option<Vec<u8>>>::sse_decode(deserializer);
         return crate::api::models::Waypoint {
             coordinate: var_coordinate,
             kind: var_kind,
+            properties: var_properties,
         };
     }
 }
@@ -1637,6 +1676,12 @@ impl SseDecode for crate::api::models::WaypointAdvanceMode {
             0 => {
                 let mut var_field0 = <f64>::sse_decode(deserializer);
                 return crate::api::models::WaypointAdvanceMode::WaypointWithinRange(var_field0);
+            }
+            1 => {
+                let mut var_field0 = <f64>::sse_decode(deserializer);
+                return crate::api::models::WaypointAdvanceMode::WaypointAlongAdvancingStep(
+                    var_field0,
+                );
             }
             _ => {
                 unimplemented!("");
@@ -2301,10 +2346,12 @@ impl flutter_rust_bridge::IntoDart
             crate::api::models::SerializableStepAdvanceCondition::DistanceFromStep {
                 distance,
                 minimum_horizontal_accuracy,
+                calculate_while_off_route,
             } => [
                 2.into_dart(),
                 distance.into_into_dart().into_dart(),
                 minimum_horizontal_accuracy.into_into_dart().into_dart(),
+                calculate_while_off_route.into_into_dart().into_dart(),
             ]
             .into_dart(),
             crate::api::models::SerializableStepAdvanceCondition::DistanceEntryExit {
@@ -2320,12 +2367,25 @@ impl flutter_rust_bridge::IntoDart
                 has_reached_end_of_current_step.into_into_dart().into_dart(),
             ]
             .into_dart(),
+            crate::api::models::SerializableStepAdvanceCondition::DistanceEntryAndSnappedExit {
+                distance_to_end_of_step,
+                distance_after_end_step,
+                minimum_horizontal_accuracy,
+                has_reached_end_of_current_step,
+            } => [
+                4.into_dart(),
+                distance_to_end_of_step.into_into_dart().into_dart(),
+                distance_after_end_step.into_into_dart().into_dart(),
+                minimum_horizontal_accuracy.into_into_dart().into_dart(),
+                has_reached_end_of_current_step.into_into_dart().into_dart(),
+            ]
+            .into_dart(),
             crate::api::models::SerializableStepAdvanceCondition::OrAdvanceConditions {
                 conditions,
-            } => [4.into_dart(), conditions.into_into_dart().into_dart()].into_dart(),
+            } => [5.into_dart(), conditions.into_into_dart().into_dart()].into_dart(),
             crate::api::models::SerializableStepAdvanceCondition::AndAdvanceConditions {
                 conditions,
-            } => [5.into_dart(), conditions.into_into_dart().into_dart()].into_dart(),
+            } => [6.into_dart(), conditions.into_into_dart().into_dart()].into_dart(),
             _ => {
                 unimplemented!("");
             }
@@ -2500,6 +2560,7 @@ impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::Waypoint> 
         [
             self.0.coordinate.into_into_dart().into_dart(),
             self.0.kind.into_into_dart().into_dart(),
+            self.0.properties.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -2521,6 +2582,9 @@ impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::WaypointAd
         match self.0 {
             crate::api::models::WaypointAdvanceMode::WaypointWithinRange(field0) => {
                 [0.into_dart(), field0.into_into_dart().into_dart()].into_dart()
+            }
+            crate::api::models::WaypointAdvanceMode::WaypointAlongAdvancingStep(field0) => {
+                [1.into_dart(), field0.into_into_dart().into_dart()].into_dart()
             }
             _ => {
                 unimplemented!("");
@@ -3273,6 +3337,16 @@ impl SseEncode for Option<Vec<crate::api::models::LaneInfo>> {
     }
 }
 
+impl SseEncode for Option<Vec<u8>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <Vec<u8>>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for crate::api::models::Route {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -3344,10 +3418,12 @@ impl SseEncode for crate::api::models::SerializableStepAdvanceCondition {
             crate::api::models::SerializableStepAdvanceCondition::DistanceFromStep {
                 distance,
                 minimum_horizontal_accuracy,
+                calculate_while_off_route,
             } => {
                 <i32>::sse_encode(2, serializer);
                 <u16>::sse_encode(distance, serializer);
                 <u16>::sse_encode(minimum_horizontal_accuracy, serializer);
+                <bool>::sse_encode(calculate_while_off_route, serializer);
             }
             crate::api::models::SerializableStepAdvanceCondition::DistanceEntryExit {
                 distance_to_end_of_step,
@@ -3361,10 +3437,22 @@ impl SseEncode for crate::api::models::SerializableStepAdvanceCondition {
                 <u16>::sse_encode(minimum_horizontal_accuracy, serializer);
                 <bool>::sse_encode(has_reached_end_of_current_step, serializer);
             }
+            crate::api::models::SerializableStepAdvanceCondition::DistanceEntryAndSnappedExit {
+                distance_to_end_of_step,
+                distance_after_end_step,
+                minimum_horizontal_accuracy,
+                has_reached_end_of_current_step,
+            } => {
+                <i32>::sse_encode(4, serializer);
+                <u16>::sse_encode(distance_to_end_of_step, serializer);
+                <u16>::sse_encode(distance_after_end_step, serializer);
+                <u16>::sse_encode(minimum_horizontal_accuracy, serializer);
+                <bool>::sse_encode(has_reached_end_of_current_step, serializer);
+            }
             crate::api::models::SerializableStepAdvanceCondition::OrAdvanceConditions {
                 conditions,
             } => {
-                <i32>::sse_encode(4, serializer);
+                <i32>::sse_encode(5, serializer);
                 <Vec<crate::api::models::SerializableStepAdvanceCondition>>::sse_encode(
                     conditions, serializer,
                 );
@@ -3372,7 +3460,7 @@ impl SseEncode for crate::api::models::SerializableStepAdvanceCondition {
             crate::api::models::SerializableStepAdvanceCondition::AndAdvanceConditions {
                 conditions,
             } => {
-                <i32>::sse_encode(5, serializer);
+                <i32>::sse_encode(6, serializer);
                 <Vec<crate::api::models::SerializableStepAdvanceCondition>>::sse_encode(
                     conditions, serializer,
                 );
@@ -3496,6 +3584,7 @@ impl SseEncode for crate::api::models::Waypoint {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <crate::api::models::GeographicCoordinate>::sse_encode(self.coordinate, serializer);
         <crate::api::models::WaypointKind>::sse_encode(self.kind, serializer);
+        <Option<Vec<u8>>>::sse_encode(self.properties, serializer);
     }
 }
 
@@ -3505,6 +3594,10 @@ impl SseEncode for crate::api::models::WaypointAdvanceMode {
         match self {
             crate::api::models::WaypointAdvanceMode::WaypointWithinRange(field0) => {
                 <i32>::sse_encode(0, serializer);
+                <f64>::sse_encode(field0, serializer);
+            }
+            crate::api::models::WaypointAdvanceMode::WaypointAlongAdvancingStep(field0) => {
+                <i32>::sse_encode(1, serializer);
                 <f64>::sse_encode(field0, serializer);
             }
             _ => {
