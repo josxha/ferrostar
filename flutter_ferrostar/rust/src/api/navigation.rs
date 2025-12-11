@@ -1,4 +1,4 @@
-use crate::api::models::{FlutterNavigationControllerConfig, FlutterTripState, FlutterUserLocation};
+use crate::api::models::{NavigationControllerConfig, TripState, UserLocation};
 use ferrostar::models::Route;
 use ferrostar::navigation_controller::{create_navigator, Navigator};
 use ferrostar::navigation_controller::models::NavState;
@@ -9,13 +9,13 @@ pub struct FlutterNavigationController {
 }
 
 impl FlutterNavigationController {
-    pub fn new(route: Route, config: FlutterNavigationControllerConfig) -> Self {
-        let inner = create_navigator(route, config.into(), false);
+    pub fn new(route: Route, config: NavigationControllerConfig) -> Self {
+        let inner = create_navigator(route, config, false);
         Self { inner }
     }
 
-    pub fn get_initial_state(&self, location: FlutterUserLocation) -> FlutterNavState {
-        let state = self.inner.get_initial_state(location.into());
+    pub fn get_initial_state(&self, location: UserLocation) -> FlutterNavState {
+        let state = self.inner.get_initial_state(location);
         FlutterNavState { inner: state }
     }
 
@@ -24,8 +24,8 @@ impl FlutterNavigationController {
         FlutterNavState { inner: new_state }
     }
 
-    pub fn update_user_location(&self, location: FlutterUserLocation, state: &FlutterNavState) -> FlutterNavState {
-        let new_state = self.inner.update_user_location(location.into(), state.inner.clone());
+    pub fn update_user_location(&self, location: UserLocation, state: &FlutterNavState) -> FlutterNavState {
+        let new_state = self.inner.update_user_location(location, state.inner.clone());
         FlutterNavState { inner: new_state }
     }
 }
@@ -36,7 +36,7 @@ pub struct FlutterNavState {
 }
 
 impl FlutterNavState {
-    pub fn trip_state(&self) -> FlutterTripState {
-        self.inner.trip_state().into()
+    pub fn trip_state(&self) -> TripState {
+        self.inner.trip_state()
     }
 }

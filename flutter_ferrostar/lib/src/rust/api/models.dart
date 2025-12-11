@@ -4,12 +4,79 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../frb_generated.dart';
+import 'navigation.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 import 'package:uuid/uuid.dart';
 part 'models.freezed.dart';
 
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `from`, `from`, `from`, `from`, `from`
+Future<UserLocation> createUserLocation({
+  required GeographicCoordinate coordinates,
+  required double horizontalAccuracy,
+  CourseOverGround? courseOverGround,
+  required DateTime timestamp,
+  Speed? speed,
+}) => RustLib.instance.api.crateApiModelsCreateUserLocation(
+  coordinates: coordinates,
+  horizontalAccuracy: horizontalAccuracy,
+  courseOverGround: courseOverGround,
+  timestamp: timestamp,
+  speed: speed,
+);
+
+Future<TripSummary> createTripSummary({
+  required double distanceTraveled,
+  required double snappedDistanceTraveled,
+  required DateTime startedAt,
+  DateTime? endedAt,
+}) => RustLib.instance.api.crateApiModelsCreateTripSummary(
+  distanceTraveled: distanceTraveled,
+  snappedDistanceTraveled: snappedDistanceTraveled,
+  startedAt: startedAt,
+  endedAt: endedAt,
+);
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<TripSummary>>
+abstract class TripSummary implements RustOpaqueInterface {
+  double get distanceTraveled;
+
+  SystemTime? get endedAt;
+
+  double get snappedDistanceTraveled;
+
+  SystemTime get startedAt;
+
+  set distanceTraveled(double distanceTraveled);
+
+  set endedAt(SystemTime? endedAt);
+
+  set snappedDistanceTraveled(double snappedDistanceTraveled);
+
+  set startedAt(SystemTime startedAt);
+}
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<UserLocation>>
+abstract class UserLocation implements RustOpaqueInterface {
+  GeographicCoordinate get coordinates;
+
+  CourseOverGround? get courseOverGround;
+
+  double get horizontalAccuracy;
+
+  Speed? get speed;
+
+  SystemTime get timestamp;
+
+  set coordinates(GeographicCoordinate coordinates);
+
+  set courseOverGround(CourseOverGround? courseOverGround);
+
+  set horizontalAccuracy(double horizontalAccuracy);
+
+  set speed(Speed? speed);
+
+  set timestamp(SystemTime timestamp);
+}
 
 enum BlockedLane {
   left,
@@ -76,131 +143,11 @@ class CourseOverGround {
           accuracy == other.accuracy;
 }
 
-class FlutterNavigationControllerConfig {
-  final WaypointAdvanceMode waypointAdvance;
-  final SerializableStepAdvanceCondition stepAdvanceCondition;
-  final SerializableStepAdvanceCondition arrivalStepAdvanceCondition;
-  final FlutterRouteDeviationTracking routeDeviationTracking;
-  final CourseFiltering snappedLocationCourseFiltering;
-
-  const FlutterNavigationControllerConfig({
-    required this.waypointAdvance,
-    required this.stepAdvanceCondition,
-    required this.arrivalStepAdvanceCondition,
-    required this.routeDeviationTracking,
-    required this.snappedLocationCourseFiltering,
-  });
-
-  @override
-  String toString() =>
-      'FlutterNavigationControllerConfig(waypointAdvance: $waypointAdvance, stepAdvanceCondition: $stepAdvanceCondition, arrivalStepAdvanceCondition: $arrivalStepAdvanceCondition, routeDeviationTracking: $routeDeviationTracking, snappedLocationCourseFiltering: $snappedLocationCourseFiltering)';
-
-  @override
-  int get hashCode =>
-      waypointAdvance.hashCode ^
-      stepAdvanceCondition.hashCode ^
-      arrivalStepAdvanceCondition.hashCode ^
-      routeDeviationTracking.hashCode ^
-      snappedLocationCourseFiltering.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FlutterNavigationControllerConfig &&
-          runtimeType == other.runtimeType &&
-          waypointAdvance == other.waypointAdvance &&
-          stepAdvanceCondition == other.stepAdvanceCondition &&
-          arrivalStepAdvanceCondition == other.arrivalStepAdvanceCondition &&
-          routeDeviationTracking == other.routeDeviationTracking &&
-          snappedLocationCourseFiltering ==
-              other.snappedLocationCourseFiltering;
-}
-
-@freezed
-sealed class FlutterRouteDeviationTracking
-    with _$FlutterRouteDeviationTracking {
-  const FlutterRouteDeviationTracking._();
-
-  const factory FlutterRouteDeviationTracking.none() =
-      FlutterRouteDeviationTracking_None;
-  const factory FlutterRouteDeviationTracking.staticThreshold({
-    required int minimumHorizontalAccuracy,
-    required double maxAcceptableDeviation,
-  }) = FlutterRouteDeviationTracking_StaticThreshold;
-}
-
-@freezed
-sealed class FlutterTripState with _$FlutterTripState {
-  const FlutterTripState._();
-
-  const factory FlutterTripState.idle({FlutterUserLocation? userLocation}) =
-      FlutterTripState_Idle;
-  const factory FlutterTripState.navigating({
-    BigInt? currentStepGeometryIndex,
-    required FlutterUserLocation userLocation,
-    required FlutterUserLocation snappedUserLocation,
-    required List<RouteStep> remainingSteps,
-    required List<Waypoint> remainingWaypoints,
-    required TripProgress progress,
-    required TripSummary summary,
-    required RouteDeviation deviation,
-    VisualInstruction? visualInstruction,
-    SpokenInstruction? spokenInstruction,
-    String? annotationJson,
-  }) = FlutterTripState_Navigating;
-  const factory FlutterTripState.complete({
-    required FlutterUserLocation userLocation,
-    required TripSummary summary,
-  }) = FlutterTripState_Complete;
-}
-
-class FlutterUserLocation {
-  final GeographicCoordinate coordinates;
-  final double horizontalAccuracy;
-  final CourseOverGround? courseOverGround;
-  final DateTime timestamp;
-  final Speed? speed;
-
-  const FlutterUserLocation({
-    required this.coordinates,
-    required this.horizontalAccuracy,
-    this.courseOverGround,
-    required this.timestamp,
-    this.speed,
-  });
-
-  @override
-  String toString() =>
-      'FlutterUserLocation(coordinates: $coordinates, horizontalAccuracy: $horizontalAccuracy, courseOverGround: $courseOverGround, timestamp: $timestamp, speed: $speed)';
-
-  @override
-  int get hashCode =>
-      coordinates.hashCode ^
-      horizontalAccuracy.hashCode ^
-      courseOverGround.hashCode ^
-      timestamp.hashCode ^
-      speed.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FlutterUserLocation &&
-          runtimeType == other.runtimeType &&
-          coordinates == other.coordinates &&
-          horizontalAccuracy == other.horizontalAccuracy &&
-          courseOverGround == other.courseOverGround &&
-          timestamp == other.timestamp &&
-          speed == other.speed;
-}
-
 class GeographicCoordinate {
   final double lat;
   final double lng;
 
   const GeographicCoordinate({required this.lat, required this.lng});
-
-  @override
-  String toString() => 'GeographicCoordinate(lat: $lat, lng: $lng)';
 
   @override
   int get hashCode => lat.hashCode ^ lng.hashCode;
@@ -377,6 +324,42 @@ enum ManeuverType {
   exitRotary,
 }
 
+class NavigationControllerConfig {
+  final WaypointAdvanceMode waypointAdvance;
+  final SerializableStepAdvanceCondition stepAdvanceCondition;
+  final SerializableStepAdvanceCondition arrivalStepAdvanceCondition;
+  final RouteDeviationTracking routeDeviationTracking;
+  final CourseFiltering snappedLocationCourseFiltering;
+
+  const NavigationControllerConfig({
+    required this.waypointAdvance,
+    required this.stepAdvanceCondition,
+    required this.arrivalStepAdvanceCondition,
+    required this.routeDeviationTracking,
+    required this.snappedLocationCourseFiltering,
+  });
+
+  @override
+  int get hashCode =>
+      waypointAdvance.hashCode ^
+      stepAdvanceCondition.hashCode ^
+      arrivalStepAdvanceCondition.hashCode ^
+      routeDeviationTracking.hashCode ^
+      snappedLocationCourseFiltering.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is NavigationControllerConfig &&
+          runtimeType == other.runtimeType &&
+          waypointAdvance == other.waypointAdvance &&
+          stepAdvanceCondition == other.stepAdvanceCondition &&
+          arrivalStepAdvanceCondition == other.arrivalStepAdvanceCondition &&
+          routeDeviationTracking == other.routeDeviationTracking &&
+          snappedLocationCourseFiltering ==
+              other.snappedLocationCourseFiltering;
+}
+
 class Route {
   final List<GeographicCoordinate> geometry;
   final BoundingBox bbox;
@@ -420,6 +403,17 @@ sealed class RouteDeviation with _$RouteDeviation {
   const factory RouteDeviation.offRoute({
     required double deviationFromRouteLine,
   }) = RouteDeviation_OffRoute;
+}
+
+@freezed
+sealed class RouteDeviationTracking with _$RouteDeviationTracking {
+  const RouteDeviationTracking._();
+
+  const factory RouteDeviationTracking.none() = RouteDeviationTracking_None;
+  const factory RouteDeviationTracking.staticThreshold({
+    required int minimumHorizontalAccuracy,
+    required double maxAcceptableDeviation,
+  }) = RouteDeviationTracking_StaticThreshold;
 }
 
 class RouteStep {
@@ -590,35 +584,28 @@ class TripProgress {
           durationRemaining == other.durationRemaining;
 }
 
-class TripSummary {
-  final double distanceTraveled;
-  final double snappedDistanceTraveled;
-  final DateTime startedAt;
-  final DateTime? endedAt;
+@freezed
+sealed class TripState with _$TripState {
+  const TripState._();
 
-  const TripSummary({
-    required this.distanceTraveled,
-    required this.snappedDistanceTraveled,
-    required this.startedAt,
-    this.endedAt,
-  });
-
-  @override
-  int get hashCode =>
-      distanceTraveled.hashCode ^
-      snappedDistanceTraveled.hashCode ^
-      startedAt.hashCode ^
-      endedAt.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is TripSummary &&
-          runtimeType == other.runtimeType &&
-          distanceTraveled == other.distanceTraveled &&
-          snappedDistanceTraveled == other.snappedDistanceTraveled &&
-          startedAt == other.startedAt &&
-          endedAt == other.endedAt;
+  const factory TripState.idle({UserLocation? userLocation}) = TripState_Idle;
+  const factory TripState.navigating({
+    BigInt? currentStepGeometryIndex,
+    required UserLocation userLocation,
+    required UserLocation snappedUserLocation,
+    required List<RouteStep> remainingSteps,
+    required List<Waypoint> remainingWaypoints,
+    required TripProgress progress,
+    required TripSummary summary,
+    required RouteDeviation deviation,
+    VisualInstruction? visualInstruction,
+    SpokenInstruction? spokenInstruction,
+    String? annotationJson,
+  }) = TripState_Navigating;
+  const factory TripState.complete({
+    required UserLocation userLocation,
+    required TripSummary summary,
+  }) = TripState_Complete;
 }
 
 class VisualInstruction {

@@ -2,9 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_ferrostar/flutter_ferrostar.dart';
 import 'package:flutter_ferrostar/src/rust/frb_generated.dart';
-import 'package:flutter_ferrostar/src/rust/api/navigation.dart';
-import 'package:flutter_ferrostar/src/rust/api/models.dart';
-import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 class MockRustLibApi extends Mock implements RustLibApi {}
 
@@ -16,10 +13,10 @@ class MockFlutterNavState extends Mock implements FlutterNavState {}
 // Fake classes for fallback
 class FakeRoute extends Fake implements Route {}
 
-class FakeFlutterNavigationControllerConfig extends Fake
-    implements FlutterNavigationControllerConfig {}
+class FakeNavigationControllerConfig extends Fake
+    implements NavigationControllerConfig {}
 
-class FakeFlutterUserLocation extends Fake implements FlutterUserLocation {}
+class FakeUserLocation extends Fake implements UserLocation {}
 
 class FakeFlutterNavState extends Fake implements FlutterNavState {}
 
@@ -31,8 +28,8 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(FakeRoute());
-    registerFallbackValue(FakeFlutterNavigationControllerConfig());
-    registerFallbackValue(FakeFlutterUserLocation());
+    registerFallbackValue(FakeNavigationControllerConfig());
+    registerFallbackValue(FakeUserLocation());
     registerFallbackValue(FakeFlutterNavState());
     registerFallbackValue(FakeFlutterNavigationController());
 
@@ -69,12 +66,12 @@ void main() {
         steps: const [],
         waypoints: const [],
       );
-      final config = FlutterNavigationControllerConfig(
+      final config = NavigationControllerConfig(
         waypointAdvance: const WaypointAdvanceMode.waypointWithinRange(15.0),
         stepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
         arrivalStepAdvanceCondition:
             const SerializableStepAdvanceCondition.manual(),
-        routeDeviationTracking: const FlutterRouteDeviationTracking.none(),
+        routeDeviationTracking: const RouteDeviationTracking.none(),
         snappedLocationCourseFiltering: CourseFiltering.snapToRoute,
       );
 
@@ -102,7 +99,7 @@ void main() {
 
     test('methods call mock implementation', () async {
       final controller = MockFlutterNavigationController();
-      final location = FlutterUserLocation(
+      final location = await createUserLocation(
         coordinates: const GeographicCoordinate(lat: 0, lng: 0),
         horizontalAccuracy: 0,
         timestamp: DateTime.now(),
@@ -131,10 +128,10 @@ void main() {
       final state = MockFlutterNavState();
       when(
         () => state.tripState(),
-      ).thenAnswer((_) async => const FlutterTripState.idle());
+      ).thenAnswer((_) async => const TripState.idle());
 
       final tripState = await state.tripState();
-      expect(tripState, isA<FlutterTripState_Idle>());
+      expect(tripState, isA<TripState_Idle>());
     });
   });
 }

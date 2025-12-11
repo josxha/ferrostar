@@ -27,7 +27,7 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   FlutterNavigationController? _controller;
   FlutterNavState? _navState;
-  FlutterTripState? _tripState;
+  TripState? _tripState;
 
   // Demo route geometry
   final List<LatLng> _routePoints = [
@@ -84,12 +84,12 @@ class _MapPageState extends State<MapPage> {
     );
 
     // 2. Create Config
-    final config = FlutterNavigationControllerConfig(
+    final config = NavigationControllerConfig(
       waypointAdvance: const WaypointAdvanceMode.waypointWithinRange(15.0),
       stepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
       arrivalStepAdvanceCondition:
           const SerializableStepAdvanceCondition.manual(),
-      routeDeviationTracking: const FlutterRouteDeviationTracking.none(),
+      routeDeviationTracking: const RouteDeviationTracking.none(),
       snappedLocationCourseFiltering: CourseFiltering.snapToRoute,
     );
 
@@ -100,7 +100,7 @@ class _MapPageState extends State<MapPage> {
     );
 
     // 4. Initial State
-    final initialLocation = FlutterUserLocation(
+    final initialLocation = await createUserLocation(
       coordinates: const GeographicCoordinate(lat: 37.7749, lng: -122.4194),
       horizontalAccuracy: 5.0,
       timestamp: DateTime.now(),
@@ -160,9 +160,9 @@ class _MapPageState extends State<MapPage> {
     GeographicCoordinate? location;
 
     final state = _tripState!;
-    if (state is FlutterTripState_Navigating) {
+    if (state is TripState_Navigating) {
       location = state.snappedUserLocation.coordinates;
-    } else if (state is FlutterTripState_Idle) {
+    } else if (state is TripState_Idle) {
       // Idle state might have a location if we passed one, but let's assume start
       location = const GeographicCoordinate(lat: 37.7749, lng: -122.4194);
     }
@@ -182,7 +182,7 @@ class _MapPageState extends State<MapPage> {
     if (_controller == null || _navState == null) return;
 
     // Simulate moving to the next point
-    final nextLocation = FlutterUserLocation(
+    final nextLocation = await createUserLocation(
       coordinates: const GeographicCoordinate(lat: 37.7750, lng: -122.4195),
       horizontalAccuracy: 5.0,
       timestamp: DateTime.now(),

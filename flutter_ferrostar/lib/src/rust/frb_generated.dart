@@ -68,7 +68,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.11.1';
 
   @override
-  int get rustContentHash => -1972125045;
+  int get rustContentHash => -1493282768;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -79,7 +79,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 }
 
 abstract class RustLibApi extends BaseApi {
-  Future<FlutterTripState> crateApiNavigationFlutterNavStateTripState({
+  Future<TripState> crateApiNavigationFlutterNavStateTripState({
     required FlutterNavState that,
   });
 
@@ -92,20 +92,116 @@ abstract class RustLibApi extends BaseApi {
   Future<FlutterNavState>
   crateApiNavigationFlutterNavigationControllerGetInitialState({
     required FlutterNavigationController that,
-    required FlutterUserLocation location,
+    required UserLocation location,
   });
 
   Future<FlutterNavigationController>
   crateApiNavigationFlutterNavigationControllerNew({
     required Route route,
-    required FlutterNavigationControllerConfig config,
+    required NavigationControllerConfig config,
   });
 
   Future<FlutterNavState>
   crateApiNavigationFlutterNavigationControllerUpdateUserLocation({
     required FlutterNavigationController that,
-    required FlutterUserLocation location,
+    required UserLocation location,
     required FlutterNavState state,
+  });
+
+  double crateApiModelsTripSummaryAutoAccessorGetDistanceTraveled({
+    required TripSummary that,
+  });
+
+  SystemTime? crateApiModelsTripSummaryAutoAccessorGetEndedAt({
+    required TripSummary that,
+  });
+
+  double crateApiModelsTripSummaryAutoAccessorGetSnappedDistanceTraveled({
+    required TripSummary that,
+  });
+
+  SystemTime crateApiModelsTripSummaryAutoAccessorGetStartedAt({
+    required TripSummary that,
+  });
+
+  void crateApiModelsTripSummaryAutoAccessorSetDistanceTraveled({
+    required TripSummary that,
+    required double distanceTraveled,
+  });
+
+  void crateApiModelsTripSummaryAutoAccessorSetEndedAt({
+    required TripSummary that,
+    SystemTime? endedAt,
+  });
+
+  void crateApiModelsTripSummaryAutoAccessorSetSnappedDistanceTraveled({
+    required TripSummary that,
+    required double snappedDistanceTraveled,
+  });
+
+  void crateApiModelsTripSummaryAutoAccessorSetStartedAt({
+    required TripSummary that,
+    required SystemTime startedAt,
+  });
+
+  GeographicCoordinate crateApiModelsUserLocationAutoAccessorGetCoordinates({
+    required UserLocation that,
+  });
+
+  CourseOverGround? crateApiModelsUserLocationAutoAccessorGetCourseOverGround({
+    required UserLocation that,
+  });
+
+  double crateApiModelsUserLocationAutoAccessorGetHorizontalAccuracy({
+    required UserLocation that,
+  });
+
+  Speed? crateApiModelsUserLocationAutoAccessorGetSpeed({
+    required UserLocation that,
+  });
+
+  SystemTime crateApiModelsUserLocationAutoAccessorGetTimestamp({
+    required UserLocation that,
+  });
+
+  void crateApiModelsUserLocationAutoAccessorSetCoordinates({
+    required UserLocation that,
+    required GeographicCoordinate coordinates,
+  });
+
+  void crateApiModelsUserLocationAutoAccessorSetCourseOverGround({
+    required UserLocation that,
+    CourseOverGround? courseOverGround,
+  });
+
+  void crateApiModelsUserLocationAutoAccessorSetHorizontalAccuracy({
+    required UserLocation that,
+    required double horizontalAccuracy,
+  });
+
+  void crateApiModelsUserLocationAutoAccessorSetSpeed({
+    required UserLocation that,
+    Speed? speed,
+  });
+
+  void crateApiModelsUserLocationAutoAccessorSetTimestamp({
+    required UserLocation that,
+    required SystemTime timestamp,
+  });
+
+  Future<TripSummary> crateApiModelsCreateTripSummary({
+    required double distanceTraveled,
+    required double snappedDistanceTraveled,
+    required DateTime startedAt,
+    DateTime? endedAt,
+  });
+
+  Future<UserLocation> crateApiModelsCreateUserLocation({
+    required GeographicCoordinate coordinates,
+    required double horizontalAccuracy,
+    CourseOverGround? courseOverGround,
+    required DateTime timestamp,
+    Speed? speed,
   });
 
   Future<void> crateApiSimpleInitApp();
@@ -127,6 +223,30 @@ abstract class RustLibApi extends BaseApi {
 
   CrossPlatformFinalizerArg
   get rust_arc_decrement_strong_count_FlutterNavigationControllerPtr;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_SystemTime;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_SystemTime;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_SystemTimePtr;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_TripSummary;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_TripSummary;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_TripSummaryPtr;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_UserLocation;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_UserLocation;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_UserLocationPtr;
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -138,7 +258,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
-  Future<FlutterTripState> crateApiNavigationFlutterNavStateTripState({
+  Future<TripState> crateApiNavigationFlutterNavStateTripState({
     required FlutterNavState that,
   }) {
     return handler.executeNormal(
@@ -157,7 +277,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_flutter_trip_state,
+          decodeSuccessData: sse_decode_trip_state,
           decodeErrorData: null,
         ),
         constMeta: kCrateApiNavigationFlutterNavStateTripStateConstMeta,
@@ -222,7 +342,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<FlutterNavState>
   crateApiNavigationFlutterNavigationControllerGetInitialState({
     required FlutterNavigationController that,
-    required FlutterUserLocation location,
+    required UserLocation location,
   }) {
     return handler.executeNormal(
       NormalTask(
@@ -232,7 +352,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          sse_encode_box_autoadd_flutter_user_location(location, serializer);
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            location,
+            serializer,
+          );
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -264,14 +387,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<FlutterNavigationController>
   crateApiNavigationFlutterNavigationControllerNew({
     required Route route,
-    required FlutterNavigationControllerConfig config,
+    required NavigationControllerConfig config,
   }) {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_route(route, serializer);
-          sse_encode_box_autoadd_flutter_navigation_controller_config(
+          sse_encode_box_autoadd_navigation_controller_config(
             config,
             serializer,
           );
@@ -305,7 +428,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Future<FlutterNavState>
   crateApiNavigationFlutterNavigationControllerUpdateUserLocation({
     required FlutterNavigationController that,
-    required FlutterUserLocation location,
+    required UserLocation location,
     required FlutterNavState state,
   }) {
     return handler.executeNormal(
@@ -316,7 +439,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          sse_encode_box_autoadd_flutter_user_location(location, serializer);
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            location,
+            serializer,
+          );
           sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
             state,
             serializer,
@@ -349,6 +475,728 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  double crateApiModelsTripSummaryAutoAccessorGetDistanceTraveled({
+    required TripSummary that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_f_64,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiModelsTripSummaryAutoAccessorGetDistanceTraveledConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsTripSummaryAutoAccessorGetDistanceTraveledConstMeta =>
+      const TaskConstMeta(
+        debugName: "TripSummary_auto_accessor_get_distance_traveled",
+        argNames: ["that"],
+      );
+
+  @override
+  SystemTime? crateApiModelsTripSummaryAutoAccessorGetEndedAt({
+    required TripSummary that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsTripSummaryAutoAccessorGetEndedAtConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiModelsTripSummaryAutoAccessorGetEndedAtConstMeta =>
+      const TaskConstMeta(
+        debugName: "TripSummary_auto_accessor_get_ended_at",
+        argNames: ["that"],
+      );
+
+  @override
+  double crateApiModelsTripSummaryAutoAccessorGetSnappedDistanceTraveled({
+    required TripSummary that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_f_64,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiModelsTripSummaryAutoAccessorGetSnappedDistanceTraveledConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsTripSummaryAutoAccessorGetSnappedDistanceTraveledConstMeta =>
+      const TaskConstMeta(
+        debugName: "TripSummary_auto_accessor_get_snapped_distance_traveled",
+        argNames: ["that"],
+      );
+
+  @override
+  SystemTime crateApiModelsTripSummaryAutoAccessorGetStartedAt({
+    required TripSummary that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 9)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsTripSummaryAutoAccessorGetStartedAtConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsTripSummaryAutoAccessorGetStartedAtConstMeta =>
+      const TaskConstMeta(
+        debugName: "TripSummary_auto_accessor_get_started_at",
+        argNames: ["that"],
+      );
+
+  @override
+  void crateApiModelsTripSummaryAutoAccessorSetDistanceTraveled({
+    required TripSummary that,
+    required double distanceTraveled,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+            that,
+            serializer,
+          );
+          sse_encode_f_64(distanceTraveled, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiModelsTripSummaryAutoAccessorSetDistanceTraveledConstMeta,
+        argValues: [that, distanceTraveled],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsTripSummaryAutoAccessorSetDistanceTraveledConstMeta =>
+      const TaskConstMeta(
+        debugName: "TripSummary_auto_accessor_set_distance_traveled",
+        argNames: ["that", "distanceTraveled"],
+      );
+
+  @override
+  void crateApiModelsTripSummaryAutoAccessorSetEndedAt({
+    required TripSummary that,
+    SystemTime? endedAt,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+            that,
+            serializer,
+          );
+          sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+            endedAt,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsTripSummaryAutoAccessorSetEndedAtConstMeta,
+        argValues: [that, endedAt],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiModelsTripSummaryAutoAccessorSetEndedAtConstMeta =>
+      const TaskConstMeta(
+        debugName: "TripSummary_auto_accessor_set_ended_at",
+        argNames: ["that", "endedAt"],
+      );
+
+  @override
+  void crateApiModelsTripSummaryAutoAccessorSetSnappedDistanceTraveled({
+    required TripSummary that,
+    required double snappedDistanceTraveled,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+            that,
+            serializer,
+          );
+          sse_encode_f_64(snappedDistanceTraveled, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiModelsTripSummaryAutoAccessorSetSnappedDistanceTraveledConstMeta,
+        argValues: [that, snappedDistanceTraveled],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsTripSummaryAutoAccessorSetSnappedDistanceTraveledConstMeta =>
+      const TaskConstMeta(
+        debugName: "TripSummary_auto_accessor_set_snapped_distance_traveled",
+        argNames: ["that", "snappedDistanceTraveled"],
+      );
+
+  @override
+  void crateApiModelsTripSummaryAutoAccessorSetStartedAt({
+    required TripSummary that,
+    required SystemTime startedAt,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+            startedAt,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsTripSummaryAutoAccessorSetStartedAtConstMeta,
+        argValues: [that, startedAt],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsTripSummaryAutoAccessorSetStartedAtConstMeta =>
+      const TaskConstMeta(
+        debugName: "TripSummary_auto_accessor_set_started_at",
+        argNames: ["that", "startedAt"],
+      );
+
+  @override
+  GeographicCoordinate crateApiModelsUserLocationAutoAccessorGetCoordinates({
+    required UserLocation that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_geographic_coordinate,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiModelsUserLocationAutoAccessorGetCoordinatesConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsUserLocationAutoAccessorGetCoordinatesConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_get_coordinates",
+        argNames: ["that"],
+      );
+
+  @override
+  CourseOverGround? crateApiModelsUserLocationAutoAccessorGetCourseOverGround({
+    required UserLocation that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 15)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_course_over_ground,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiModelsUserLocationAutoAccessorGetCourseOverGroundConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsUserLocationAutoAccessorGetCourseOverGroundConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_get_course_over_ground",
+        argNames: ["that"],
+      );
+
+  @override
+  double crateApiModelsUserLocationAutoAccessorGetHorizontalAccuracy({
+    required UserLocation that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_f_64,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiModelsUserLocationAutoAccessorGetHorizontalAccuracyConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsUserLocationAutoAccessorGetHorizontalAccuracyConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_get_horizontal_accuracy",
+        argNames: ["that"],
+      );
+
+  @override
+  Speed? crateApiModelsUserLocationAutoAccessorGetSpeed({
+    required UserLocation that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 17)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_opt_box_autoadd_speed,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsUserLocationAutoAccessorGetSpeedConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiModelsUserLocationAutoAccessorGetSpeedConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_get_speed",
+        argNames: ["that"],
+      );
+
+  @override
+  SystemTime crateApiModelsUserLocationAutoAccessorGetTimestamp({
+    required UserLocation that,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 18)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsUserLocationAutoAccessorGetTimestampConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsUserLocationAutoAccessorGetTimestampConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_get_timestamp",
+        argNames: ["that"],
+      );
+
+  @override
+  void crateApiModelsUserLocationAutoAccessorSetCoordinates({
+    required UserLocation that,
+    required GeographicCoordinate coordinates,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that,
+            serializer,
+          );
+          sse_encode_geographic_coordinate(coordinates, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 19)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiModelsUserLocationAutoAccessorSetCoordinatesConstMeta,
+        argValues: [that, coordinates],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsUserLocationAutoAccessorSetCoordinatesConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_set_coordinates",
+        argNames: ["that", "coordinates"],
+      );
+
+  @override
+  void crateApiModelsUserLocationAutoAccessorSetCourseOverGround({
+    required UserLocation that,
+    CourseOverGround? courseOverGround,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that,
+            serializer,
+          );
+          sse_encode_opt_box_autoadd_course_over_ground(
+            courseOverGround,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 20)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiModelsUserLocationAutoAccessorSetCourseOverGroundConstMeta,
+        argValues: [that, courseOverGround],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsUserLocationAutoAccessorSetCourseOverGroundConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_set_course_over_ground",
+        argNames: ["that", "courseOverGround"],
+      );
+
+  @override
+  void crateApiModelsUserLocationAutoAccessorSetHorizontalAccuracy({
+    required UserLocation that,
+    required double horizontalAccuracy,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that,
+            serializer,
+          );
+          sse_encode_f_64(horizontalAccuracy, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 21)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiModelsUserLocationAutoAccessorSetHorizontalAccuracyConstMeta,
+        argValues: [that, horizontalAccuracy],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsUserLocationAutoAccessorSetHorizontalAccuracyConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_set_horizontal_accuracy",
+        argNames: ["that", "horizontalAccuracy"],
+      );
+
+  @override
+  void crateApiModelsUserLocationAutoAccessorSetSpeed({
+    required UserLocation that,
+    Speed? speed,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that,
+            serializer,
+          );
+          sse_encode_opt_box_autoadd_speed(speed, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 22)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsUserLocationAutoAccessorSetSpeedConstMeta,
+        argValues: [that, speed],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiModelsUserLocationAutoAccessorSetSpeedConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_set_speed",
+        argNames: ["that", "speed"],
+      );
+
+  @override
+  void crateApiModelsUserLocationAutoAccessorSetTimestamp({
+    required UserLocation that,
+    required SystemTime timestamp,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+            timestamp,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 23)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsUserLocationAutoAccessorSetTimestampConstMeta,
+        argValues: [that, timestamp],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsUserLocationAutoAccessorSetTimestampConstMeta =>
+      const TaskConstMeta(
+        debugName: "UserLocation_auto_accessor_set_timestamp",
+        argNames: ["that", "timestamp"],
+      );
+
+  @override
+  Future<TripSummary> crateApiModelsCreateTripSummary({
+    required double distanceTraveled,
+    required double snappedDistanceTraveled,
+    required DateTime startedAt,
+    DateTime? endedAt,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_f_64(distanceTraveled, serializer);
+          sse_encode_f_64(snappedDistanceTraveled, serializer);
+          sse_encode_Chrono_Utc(startedAt, serializer);
+          sse_encode_opt_box_autoadd_Chrono_Utc(endedAt, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 24,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsCreateTripSummaryConstMeta,
+        argValues: [
+          distanceTraveled,
+          snappedDistanceTraveled,
+          startedAt,
+          endedAt,
+        ],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiModelsCreateTripSummaryConstMeta =>
+      const TaskConstMeta(
+        debugName: "create_trip_summary",
+        argNames: [
+          "distanceTraveled",
+          "snappedDistanceTraveled",
+          "startedAt",
+          "endedAt",
+        ],
+      );
+
+  @override
+  Future<UserLocation> crateApiModelsCreateUserLocation({
+    required GeographicCoordinate coordinates,
+    required double horizontalAccuracy,
+    CourseOverGround? courseOverGround,
+    required DateTime timestamp,
+    Speed? speed,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_geographic_coordinate(coordinates, serializer);
+          sse_encode_f_64(horizontalAccuracy, serializer);
+          sse_encode_opt_box_autoadd_course_over_ground(
+            courseOverGround,
+            serializer,
+          );
+          sse_encode_Chrono_Utc(timestamp, serializer);
+          sse_encode_opt_box_autoadd_speed(speed, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 25,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsCreateUserLocationConstMeta,
+        argValues: [
+          coordinates,
+          horizontalAccuracy,
+          courseOverGround,
+          timestamp,
+          speed,
+        ],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiModelsCreateUserLocationConstMeta =>
+      const TaskConstMeta(
+        debugName: "create_user_location",
+        argNames: [
+          "coordinates",
+          "horizontalAccuracy",
+          "courseOverGround",
+          "timestamp",
+          "speed",
+        ],
+      );
+
+  @override
   Future<void> crateApiSimpleInitApp() {
     return handler.executeNormal(
       NormalTask(
@@ -357,7 +1205,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 6,
+            funcId: 26,
             port: port_,
           );
         },
@@ -391,6 +1239,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   get rust_arc_decrement_strong_count_FlutterNavigationController => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController;
 
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_SystemTime => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_SystemTime => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_TripSummary => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_TripSummary => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_UserLocation => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_UserLocation => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation;
+
   @protected
   FlutterNavState
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
@@ -412,6 +1284,51 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  SystemTime
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return SystemTimeImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  TripSummary
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return TripSummaryImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  UserLocation
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return UserLocationImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  TripSummary
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return TripSummaryImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  UserLocation
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return UserLocationImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
   FlutterNavState
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
     dynamic raw,
@@ -429,6 +1346,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return FlutterNavigationControllerImpl.frbInternalDcoDecode(
       raw as List<dynamic>,
     );
+  }
+
+  @protected
+  TripSummary
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return TripSummaryImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  UserLocation
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return UserLocationImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -455,6 +1390,33 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return FlutterNavigationControllerImpl.frbInternalDcoDecode(
       raw as List<dynamic>,
     );
+  }
+
+  @protected
+  SystemTime
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return SystemTimeImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  TripSummary
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return TripSummaryImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  UserLocation
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return UserLocationImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -490,6 +1452,28 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return BoundingBox(
       sw: dco_decode_geographic_coordinate(arr[0]),
       ne: dco_decode_geographic_coordinate(arr[1]),
+    );
+  }
+
+  @protected
+  SystemTime
+  dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+      raw,
+    );
+  }
+
+  @protected
+  UserLocation
+  dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+      raw,
     );
   }
 
@@ -530,18 +1514,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FlutterNavigationControllerConfig
-  dco_decode_box_autoadd_flutter_navigation_controller_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_flutter_navigation_controller_config(raw);
-  }
-
-  @protected
-  FlutterUserLocation dco_decode_box_autoadd_flutter_user_location(
+  GeographicCoordinate dco_decode_box_autoadd_geographic_coordinate(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_flutter_user_location(raw);
+    return dco_decode_geographic_coordinate(raw);
   }
 
   @protected
@@ -560,6 +1537,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ManeuverType dco_decode_box_autoadd_maneuver_type(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_maneuver_type(raw);
+  }
+
+  @protected
+  NavigationControllerConfig
+  dco_decode_box_autoadd_navigation_controller_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_navigation_controller_config(raw);
   }
 
   @protected
@@ -590,12 +1574,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TripProgress dco_decode_box_autoadd_trip_progress(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_trip_progress(raw);
-  }
-
-  @protected
-  TripSummary dco_decode_box_autoadd_trip_summary(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_trip_summary(raw);
   }
 
   @protected
@@ -655,100 +1633,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   double dco_decode_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as double;
-  }
-
-  @protected
-  FlutterNavigationControllerConfig
-  dco_decode_flutter_navigation_controller_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 5)
-      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
-    return FlutterNavigationControllerConfig(
-      waypointAdvance: dco_decode_waypoint_advance_mode(arr[0]),
-      stepAdvanceCondition: dco_decode_serializable_step_advance_condition(
-        arr[1],
-      ),
-      arrivalStepAdvanceCondition:
-          dco_decode_serializable_step_advance_condition(arr[2]),
-      routeDeviationTracking: dco_decode_flutter_route_deviation_tracking(
-        arr[3],
-      ),
-      snappedLocationCourseFiltering: dco_decode_course_filtering(arr[4]),
-    );
-  }
-
-  @protected
-  FlutterRouteDeviationTracking dco_decode_flutter_route_deviation_tracking(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    switch (raw[0]) {
-      case 0:
-        return FlutterRouteDeviationTracking_None();
-      case 1:
-        return FlutterRouteDeviationTracking_StaticThreshold(
-          minimumHorizontalAccuracy: dco_decode_u_16(raw[1]),
-          maxAcceptableDeviation: dco_decode_f_64(raw[2]),
-        );
-      default:
-        throw Exception("unreachable");
-    }
-  }
-
-  @protected
-  FlutterTripState dco_decode_flutter_trip_state(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    switch (raw[0]) {
-      case 0:
-        return FlutterTripState_Idle(
-          userLocation: dco_decode_opt_box_autoadd_flutter_user_location(
-            raw[1],
-          ),
-        );
-      case 1:
-        return FlutterTripState_Navigating(
-          currentStepGeometryIndex: dco_decode_opt_box_autoadd_u_64(raw[1]),
-          userLocation: dco_decode_box_autoadd_flutter_user_location(raw[2]),
-          snappedUserLocation: dco_decode_box_autoadd_flutter_user_location(
-            raw[3],
-          ),
-          remainingSteps: dco_decode_list_route_step(raw[4]),
-          remainingWaypoints: dco_decode_list_waypoint(raw[5]),
-          progress: dco_decode_box_autoadd_trip_progress(raw[6]),
-          summary: dco_decode_box_autoadd_trip_summary(raw[7]),
-          deviation: dco_decode_box_autoadd_route_deviation(raw[8]),
-          visualInstruction: dco_decode_opt_box_autoadd_visual_instruction(
-            raw[9],
-          ),
-          spokenInstruction: dco_decode_opt_box_autoadd_spoken_instruction(
-            raw[10],
-          ),
-          annotationJson: dco_decode_opt_String(raw[11]),
-        );
-      case 2:
-        return FlutterTripState_Complete(
-          userLocation: dco_decode_box_autoadd_flutter_user_location(raw[1]),
-          summary: dco_decode_box_autoadd_trip_summary(raw[2]),
-        );
-      default:
-        throw Exception("unreachable");
-    }
-  }
-
-  @protected
-  FlutterUserLocation dco_decode_flutter_user_location(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 5)
-      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
-    return FlutterUserLocation(
-      coordinates: dco_decode_geographic_coordinate(arr[0]),
-      horizontalAccuracy: dco_decode_f_64(arr[1]),
-      courseOverGround: dco_decode_opt_box_autoadd_course_over_ground(arr[2]),
-      timestamp: dco_decode_Chrono_Utc(arr[3]),
-      speed: dco_decode_opt_box_autoadd_speed(arr[4]),
-    );
   }
 
   @protected
@@ -915,9 +1799,55 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  NavigationControllerConfig dco_decode_navigation_controller_config(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return NavigationControllerConfig(
+      waypointAdvance: dco_decode_waypoint_advance_mode(arr[0]),
+      stepAdvanceCondition: dco_decode_serializable_step_advance_condition(
+        arr[1],
+      ),
+      arrivalStepAdvanceCondition:
+          dco_decode_serializable_step_advance_condition(arr[2]),
+      routeDeviationTracking: dco_decode_route_deviation_tracking(arr[3]),
+      snappedLocationCourseFiltering: dco_decode_course_filtering(arr[4]),
+    );
+  }
+
+  @protected
   String? dco_decode_opt_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_String(raw);
+  }
+
+  @protected
+  SystemTime?
+  dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+            raw,
+          );
+  }
+
+  @protected
+  UserLocation?
+  dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            raw,
+          );
   }
 
   @protected
@@ -954,16 +1884,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   double? dco_decode_opt_box_autoadd_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_f_64(raw);
-  }
-
-  @protected
-  FlutterUserLocation? dco_decode_opt_box_autoadd_flutter_user_location(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null
-        ? null
-        : dco_decode_box_autoadd_flutter_user_location(raw);
   }
 
   @protected
@@ -1069,6 +1989,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case 1:
         return RouteDeviation_OffRoute(
           deviationFromRouteLine: dco_decode_f_64(raw[1]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  RouteDeviationTracking dco_decode_route_deviation_tracking(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return RouteDeviationTracking_None();
+      case 1:
+        return RouteDeviationTracking_StaticThreshold(
+          minimumHorizontalAccuracy: dco_decode_u_16(raw[1]),
+          maxAcceptableDeviation: dco_decode_f_64(raw[2]),
         );
       default:
         throw Exception("unreachable");
@@ -1184,17 +2120,57 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TripSummary dco_decode_trip_summary(dynamic raw) {
+  TripState dco_decode_trip_state(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 4)
-      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
-    return TripSummary(
-      distanceTraveled: dco_decode_f_64(arr[0]),
-      snappedDistanceTraveled: dco_decode_f_64(arr[1]),
-      startedAt: dco_decode_Chrono_Utc(arr[2]),
-      endedAt: dco_decode_opt_box_autoadd_Chrono_Utc(arr[3]),
-    );
+    switch (raw[0]) {
+      case 0:
+        return TripState_Idle(
+          userLocation:
+              dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+                raw[1],
+              ),
+        );
+      case 1:
+        return TripState_Navigating(
+          currentStepGeometryIndex: dco_decode_opt_box_autoadd_u_64(raw[1]),
+          userLocation:
+              dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+                raw[2],
+              ),
+          snappedUserLocation:
+              dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+                raw[3],
+              ),
+          remainingSteps: dco_decode_list_route_step(raw[4]),
+          remainingWaypoints: dco_decode_list_waypoint(raw[5]),
+          progress: dco_decode_box_autoadd_trip_progress(raw[6]),
+          summary:
+              dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+                raw[7],
+              ),
+          deviation: dco_decode_box_autoadd_route_deviation(raw[8]),
+          visualInstruction: dco_decode_opt_box_autoadd_visual_instruction(
+            raw[9],
+          ),
+          spokenInstruction: dco_decode_opt_box_autoadd_spoken_instruction(
+            raw[10],
+          ),
+          annotationJson: dco_decode_opt_String(raw[11]),
+        );
+      case 2:
+        return TripState_Complete(
+          userLocation:
+              dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+                raw[1],
+              ),
+          summary:
+              dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+                raw[2],
+              ),
+        );
+      default:
+        throw Exception("unreachable");
+    }
   }
 
   @protected
@@ -1318,6 +2294,66 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  SystemTime
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return SystemTimeImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  TripSummary
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return TripSummaryImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  UserLocation
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return UserLocationImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  TripSummary
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return TripSummaryImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  UserLocation
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return UserLocationImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
   FlutterNavState
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
     SseDeserializer deserializer,
@@ -1336,6 +2372,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return FlutterNavigationControllerImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  TripSummary
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return TripSummaryImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  UserLocation
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return UserLocationImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -1367,6 +2427,42 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return FlutterNavigationControllerImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  SystemTime
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return SystemTimeImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  TripSummary
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return TripSummaryImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  UserLocation
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return UserLocationImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -1405,6 +2501,28 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_sw = sse_decode_geographic_coordinate(deserializer);
     var var_ne = sse_decode_geographic_coordinate(deserializer);
     return BoundingBox(sw: var_sw, ne: var_ne);
+  }
+
+  @protected
+  SystemTime
+  sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+      deserializer,
+    ));
+  }
+
+  @protected
+  UserLocation
+  sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+      deserializer,
+    ));
   }
 
   @protected
@@ -1448,20 +2566,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FlutterNavigationControllerConfig
-  sse_decode_box_autoadd_flutter_navigation_controller_config(
+  GeographicCoordinate sse_decode_box_autoadd_geographic_coordinate(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_flutter_navigation_controller_config(deserializer));
-  }
-
-  @protected
-  FlutterUserLocation sse_decode_box_autoadd_flutter_user_location(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_flutter_user_location(deserializer));
+    return (sse_decode_geographic_coordinate(deserializer));
   }
 
   @protected
@@ -1484,6 +2593,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_maneuver_type(deserializer));
+  }
+
+  @protected
+  NavigationControllerConfig
+  sse_decode_box_autoadd_navigation_controller_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_navigation_controller_config(deserializer));
   }
 
   @protected
@@ -1520,14 +2638,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_trip_progress(deserializer));
-  }
-
-  @protected
-  TripSummary sse_decode_box_autoadd_trip_summary(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_trip_summary(deserializer));
   }
 
   @protected
@@ -1584,133 +2694,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   double sse_decode_f_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getFloat64();
-  }
-
-  @protected
-  FlutterNavigationControllerConfig
-  sse_decode_flutter_navigation_controller_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_waypointAdvance = sse_decode_waypoint_advance_mode(deserializer);
-    var var_stepAdvanceCondition =
-        sse_decode_serializable_step_advance_condition(deserializer);
-    var var_arrivalStepAdvanceCondition =
-        sse_decode_serializable_step_advance_condition(deserializer);
-    var var_routeDeviationTracking =
-        sse_decode_flutter_route_deviation_tracking(deserializer);
-    var var_snappedLocationCourseFiltering = sse_decode_course_filtering(
-      deserializer,
-    );
-    return FlutterNavigationControllerConfig(
-      waypointAdvance: var_waypointAdvance,
-      stepAdvanceCondition: var_stepAdvanceCondition,
-      arrivalStepAdvanceCondition: var_arrivalStepAdvanceCondition,
-      routeDeviationTracking: var_routeDeviationTracking,
-      snappedLocationCourseFiltering: var_snappedLocationCourseFiltering,
-    );
-  }
-
-  @protected
-  FlutterRouteDeviationTracking sse_decode_flutter_route_deviation_tracking(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var tag_ = sse_decode_i_32(deserializer);
-    switch (tag_) {
-      case 0:
-        return FlutterRouteDeviationTracking_None();
-      case 1:
-        var var_minimumHorizontalAccuracy = sse_decode_u_16(deserializer);
-        var var_maxAcceptableDeviation = sse_decode_f_64(deserializer);
-        return FlutterRouteDeviationTracking_StaticThreshold(
-          minimumHorizontalAccuracy: var_minimumHorizontalAccuracy,
-          maxAcceptableDeviation: var_maxAcceptableDeviation,
-        );
-      default:
-        throw UnimplementedError('');
-    }
-  }
-
-  @protected
-  FlutterTripState sse_decode_flutter_trip_state(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var tag_ = sse_decode_i_32(deserializer);
-    switch (tag_) {
-      case 0:
-        var var_userLocation = sse_decode_opt_box_autoadd_flutter_user_location(
-          deserializer,
-        );
-        return FlutterTripState_Idle(userLocation: var_userLocation);
-      case 1:
-        var var_currentStepGeometryIndex = sse_decode_opt_box_autoadd_u_64(
-          deserializer,
-        );
-        var var_userLocation = sse_decode_box_autoadd_flutter_user_location(
-          deserializer,
-        );
-        var var_snappedUserLocation =
-            sse_decode_box_autoadd_flutter_user_location(deserializer);
-        var var_remainingSteps = sse_decode_list_route_step(deserializer);
-        var var_remainingWaypoints = sse_decode_list_waypoint(deserializer);
-        var var_progress = sse_decode_box_autoadd_trip_progress(deserializer);
-        var var_summary = sse_decode_box_autoadd_trip_summary(deserializer);
-        var var_deviation = sse_decode_box_autoadd_route_deviation(
-          deserializer,
-        );
-        var var_visualInstruction =
-            sse_decode_opt_box_autoadd_visual_instruction(deserializer);
-        var var_spokenInstruction =
-            sse_decode_opt_box_autoadd_spoken_instruction(deserializer);
-        var var_annotationJson = sse_decode_opt_String(deserializer);
-        return FlutterTripState_Navigating(
-          currentStepGeometryIndex: var_currentStepGeometryIndex,
-          userLocation: var_userLocation,
-          snappedUserLocation: var_snappedUserLocation,
-          remainingSteps: var_remainingSteps,
-          remainingWaypoints: var_remainingWaypoints,
-          progress: var_progress,
-          summary: var_summary,
-          deviation: var_deviation,
-          visualInstruction: var_visualInstruction,
-          spokenInstruction: var_spokenInstruction,
-          annotationJson: var_annotationJson,
-        );
-      case 2:
-        var var_userLocation = sse_decode_box_autoadd_flutter_user_location(
-          deserializer,
-        );
-        var var_summary = sse_decode_box_autoadd_trip_summary(deserializer);
-        return FlutterTripState_Complete(
-          userLocation: var_userLocation,
-          summary: var_summary,
-        );
-      default:
-        throw UnimplementedError('');
-    }
-  }
-
-  @protected
-  FlutterUserLocation sse_decode_flutter_user_location(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_coordinates = sse_decode_geographic_coordinate(deserializer);
-    var var_horizontalAccuracy = sse_decode_f_64(deserializer);
-    var var_courseOverGround = sse_decode_opt_box_autoadd_course_over_ground(
-      deserializer,
-    );
-    var var_timestamp = sse_decode_Chrono_Utc(deserializer);
-    var var_speed = sse_decode_opt_box_autoadd_speed(deserializer);
-    return FlutterUserLocation(
-      coordinates: var_coordinates,
-      horizontalAccuracy: var_horizontalAccuracy,
-      courseOverGround: var_courseOverGround,
-      timestamp: var_timestamp,
-      speed: var_speed,
-    );
   }
 
   @protected
@@ -1958,11 +2941,68 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  NavigationControllerConfig sse_decode_navigation_controller_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_waypointAdvance = sse_decode_waypoint_advance_mode(deserializer);
+    var var_stepAdvanceCondition =
+        sse_decode_serializable_step_advance_condition(deserializer);
+    var var_arrivalStepAdvanceCondition =
+        sse_decode_serializable_step_advance_condition(deserializer);
+    var var_routeDeviationTracking = sse_decode_route_deviation_tracking(
+      deserializer,
+    );
+    var var_snappedLocationCourseFiltering = sse_decode_course_filtering(
+      deserializer,
+    );
+    return NavigationControllerConfig(
+      waypointAdvance: var_waypointAdvance,
+      stepAdvanceCondition: var_stepAdvanceCondition,
+      arrivalStepAdvanceCondition: var_arrivalStepAdvanceCondition,
+      routeDeviationTracking: var_routeDeviationTracking,
+      snappedLocationCourseFiltering: var_snappedLocationCourseFiltering,
+    );
+  }
+
+  @protected
   String? sse_decode_opt_String(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_String(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  SystemTime?
+  sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+        deserializer,
+      ));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  UserLocation?
+  sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+        deserializer,
+      ));
     } else {
       return null;
     }
@@ -2037,19 +3077,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_f_64(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
-  FlutterUserLocation? sse_decode_opt_box_autoadd_flutter_user_location(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_flutter_user_location(deserializer));
     } else {
       return null;
     }
@@ -2234,6 +3261,28 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  RouteDeviationTracking sse_decode_route_deviation_tracking(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        return RouteDeviationTracking_None();
+      case 1:
+        var var_minimumHorizontalAccuracy = sse_decode_u_16(deserializer);
+        var var_maxAcceptableDeviation = sse_decode_f_64(deserializer);
+        return RouteDeviationTracking_StaticThreshold(
+          minimumHorizontalAccuracy: var_minimumHorizontalAccuracy,
+          maxAcceptableDeviation: var_maxAcceptableDeviation,
+        );
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
   RouteStep sse_decode_route_step(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_geometry = sse_decode_list_geographic_coordinate(deserializer);
@@ -2367,18 +3416,73 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TripSummary sse_decode_trip_summary(SseDeserializer deserializer) {
+  TripState sse_decode_trip_state(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_distanceTraveled = sse_decode_f_64(deserializer);
-    var var_snappedDistanceTraveled = sse_decode_f_64(deserializer);
-    var var_startedAt = sse_decode_Chrono_Utc(deserializer);
-    var var_endedAt = sse_decode_opt_box_autoadd_Chrono_Utc(deserializer);
-    return TripSummary(
-      distanceTraveled: var_distanceTraveled,
-      snappedDistanceTraveled: var_snappedDistanceTraveled,
-      startedAt: var_startedAt,
-      endedAt: var_endedAt,
-    );
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_userLocation =
+            sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+              deserializer,
+            );
+        return TripState_Idle(userLocation: var_userLocation);
+      case 1:
+        var var_currentStepGeometryIndex = sse_decode_opt_box_autoadd_u_64(
+          deserializer,
+        );
+        var var_userLocation =
+            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+              deserializer,
+            );
+        var var_snappedUserLocation =
+            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+              deserializer,
+            );
+        var var_remainingSteps = sse_decode_list_route_step(deserializer);
+        var var_remainingWaypoints = sse_decode_list_waypoint(deserializer);
+        var var_progress = sse_decode_box_autoadd_trip_progress(deserializer);
+        var var_summary =
+            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+              deserializer,
+            );
+        var var_deviation = sse_decode_box_autoadd_route_deviation(
+          deserializer,
+        );
+        var var_visualInstruction =
+            sse_decode_opt_box_autoadd_visual_instruction(deserializer);
+        var var_spokenInstruction =
+            sse_decode_opt_box_autoadd_spoken_instruction(deserializer);
+        var var_annotationJson = sse_decode_opt_String(deserializer);
+        return TripState_Navigating(
+          currentStepGeometryIndex: var_currentStepGeometryIndex,
+          userLocation: var_userLocation,
+          snappedUserLocation: var_snappedUserLocation,
+          remainingSteps: var_remainingSteps,
+          remainingWaypoints: var_remainingWaypoints,
+          progress: var_progress,
+          summary: var_summary,
+          deviation: var_deviation,
+          visualInstruction: var_visualInstruction,
+          spokenInstruction: var_spokenInstruction,
+          annotationJson: var_annotationJson,
+        );
+      case 2:
+        var var_userLocation =
+            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+              deserializer,
+            );
+        var var_summary =
+            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+              deserializer,
+            );
+        return TripState_Complete(
+          userLocation: var_userLocation,
+          summary: var_summary,
+        );
+      default:
+        throw UnimplementedError('');
+    }
   }
 
   @protected
@@ -2528,6 +3632,71 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SystemTime self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as SystemTimeImpl).frbInternalSseEncode(move: true),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    TripSummary self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as TripSummaryImpl).frbInternalSseEncode(move: true),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    UserLocation self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as UserLocationImpl).frbInternalSseEncode(move: true),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    TripSummary self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as TripSummaryImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    UserLocation self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as UserLocationImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
     FlutterNavState self,
     SseSerializer serializer,
@@ -2550,6 +3719,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       (self as FlutterNavigationControllerImpl).frbInternalSseEncode(
         move: false,
       ),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    TripSummary self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as TripSummaryImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    UserLocation self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as UserLocationImpl).frbInternalSseEncode(move: false),
       serializer,
     );
   }
@@ -2592,6 +3787,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SystemTime self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as SystemTimeImpl).frbInternalSseEncode(move: null),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    TripSummary self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as TripSummaryImpl).frbInternalSseEncode(move: null),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    UserLocation self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as UserLocationImpl).frbInternalSseEncode(move: null),
+      serializer,
+    );
+  }
+
+  @protected
   void sse_encode_String(String self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_prim_u_8_strict(utf8.encoder.convert(self), serializer);
@@ -2620,6 +3854,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_geographic_coordinate(self.sw, serializer);
     sse_encode_geographic_coordinate(self.ne, serializer);
+  }
+
+  @protected
+  void
+  sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SystemTime self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+      self,
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    UserLocation self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+      self,
+      serializer,
+    );
   }
 
   @protected
@@ -2671,21 +3931,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_flutter_navigation_controller_config(
-    FlutterNavigationControllerConfig self,
+  void sse_encode_box_autoadd_geographic_coordinate(
+    GeographicCoordinate self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_flutter_navigation_controller_config(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_flutter_user_location(
-    FlutterUserLocation self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_flutter_user_location(self, serializer);
+    sse_encode_geographic_coordinate(self, serializer);
   }
 
   @protected
@@ -2710,6 +3961,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_maneuver_type(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_navigation_controller_config(
+    NavigationControllerConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_navigation_controller_config(self, serializer);
   }
 
   @protected
@@ -2749,15 +4009,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_trip_progress(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_trip_summary(
-    TripSummary self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_trip_summary(self, serializer);
   }
 
   @protected
@@ -2819,123 +4070,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_f_64(double self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putFloat64(self);
-  }
-
-  @protected
-  void sse_encode_flutter_navigation_controller_config(
-    FlutterNavigationControllerConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_waypoint_advance_mode(self.waypointAdvance, serializer);
-    sse_encode_serializable_step_advance_condition(
-      self.stepAdvanceCondition,
-      serializer,
-    );
-    sse_encode_serializable_step_advance_condition(
-      self.arrivalStepAdvanceCondition,
-      serializer,
-    );
-    sse_encode_flutter_route_deviation_tracking(
-      self.routeDeviationTracking,
-      serializer,
-    );
-    sse_encode_course_filtering(
-      self.snappedLocationCourseFiltering,
-      serializer,
-    );
-  }
-
-  @protected
-  void sse_encode_flutter_route_deviation_tracking(
-    FlutterRouteDeviationTracking self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    switch (self) {
-      case FlutterRouteDeviationTracking_None():
-        sse_encode_i_32(0, serializer);
-      case FlutterRouteDeviationTracking_StaticThreshold(
-        minimumHorizontalAccuracy: final minimumHorizontalAccuracy,
-        maxAcceptableDeviation: final maxAcceptableDeviation,
-      ):
-        sse_encode_i_32(1, serializer);
-        sse_encode_u_16(minimumHorizontalAccuracy, serializer);
-        sse_encode_f_64(maxAcceptableDeviation, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_flutter_trip_state(
-    FlutterTripState self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    switch (self) {
-      case FlutterTripState_Idle(userLocation: final userLocation):
-        sse_encode_i_32(0, serializer);
-        sse_encode_opt_box_autoadd_flutter_user_location(
-          userLocation,
-          serializer,
-        );
-      case FlutterTripState_Navigating(
-        currentStepGeometryIndex: final currentStepGeometryIndex,
-        userLocation: final userLocation,
-        snappedUserLocation: final snappedUserLocation,
-        remainingSteps: final remainingSteps,
-        remainingWaypoints: final remainingWaypoints,
-        progress: final progress,
-        summary: final summary,
-        deviation: final deviation,
-        visualInstruction: final visualInstruction,
-        spokenInstruction: final spokenInstruction,
-        annotationJson: final annotationJson,
-      ):
-        sse_encode_i_32(1, serializer);
-        sse_encode_opt_box_autoadd_u_64(currentStepGeometryIndex, serializer);
-        sse_encode_box_autoadd_flutter_user_location(userLocation, serializer);
-        sse_encode_box_autoadd_flutter_user_location(
-          snappedUserLocation,
-          serializer,
-        );
-        sse_encode_list_route_step(remainingSteps, serializer);
-        sse_encode_list_waypoint(remainingWaypoints, serializer);
-        sse_encode_box_autoadd_trip_progress(progress, serializer);
-        sse_encode_box_autoadd_trip_summary(summary, serializer);
-        sse_encode_box_autoadd_route_deviation(deviation, serializer);
-        sse_encode_opt_box_autoadd_visual_instruction(
-          visualInstruction,
-          serializer,
-        );
-        sse_encode_opt_box_autoadd_spoken_instruction(
-          spokenInstruction,
-          serializer,
-        );
-        sse_encode_opt_String(annotationJson, serializer);
-      case FlutterTripState_Complete(
-        userLocation: final userLocation,
-        summary: final summary,
-      ):
-        sse_encode_i_32(2, serializer);
-        sse_encode_box_autoadd_flutter_user_location(userLocation, serializer);
-        sse_encode_box_autoadd_trip_summary(summary, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_flutter_user_location(
-    FlutterUserLocation self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_geographic_coordinate(self.coordinates, serializer);
-    sse_encode_f_64(self.horizontalAccuracy, serializer);
-    sse_encode_opt_box_autoadd_course_over_ground(
-      self.courseOverGround,
-      serializer,
-    );
-    sse_encode_Chrono_Utc(self.timestamp, serializer);
-    sse_encode_opt_box_autoadd_speed(self.speed, serializer);
   }
 
   @protected
@@ -3141,12 +4275,71 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_navigation_controller_config(
+    NavigationControllerConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_waypoint_advance_mode(self.waypointAdvance, serializer);
+    sse_encode_serializable_step_advance_condition(
+      self.stepAdvanceCondition,
+      serializer,
+    );
+    sse_encode_serializable_step_advance_condition(
+      self.arrivalStepAdvanceCondition,
+      serializer,
+    );
+    sse_encode_route_deviation_tracking(
+      self.routeDeviationTracking,
+      serializer,
+    );
+    sse_encode_course_filtering(
+      self.snappedLocationCourseFiltering,
+      serializer,
+    );
+  }
+
+  @protected
   void sse_encode_opt_String(String? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_String(self, serializer);
+    }
+  }
+
+  @protected
+  void
+  sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SystemTime? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+        self,
+        serializer,
+      );
+    }
+  }
+
+  @protected
+  void
+  sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    UserLocation? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+        self,
+        serializer,
+      );
     }
   }
 
@@ -3219,19 +4412,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_f_64(self, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_opt_box_autoadd_flutter_user_location(
-    FlutterUserLocation? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_flutter_user_location(self, serializer);
     }
   }
 
@@ -3410,6 +4590,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_route_deviation_tracking(
+    RouteDeviationTracking self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case RouteDeviationTracking_None():
+        sse_encode_i_32(0, serializer);
+      case RouteDeviationTracking_StaticThreshold(
+        minimumHorizontalAccuracy: final minimumHorizontalAccuracy,
+        maxAcceptableDeviation: final maxAcceptableDeviation,
+      ):
+        sse_encode_i_32(1, serializer);
+        sse_encode_u_16(minimumHorizontalAccuracy, serializer);
+        sse_encode_f_64(maxAcceptableDeviation, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_route_step(RouteStep self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_geographic_coordinate(self.geometry, serializer);
@@ -3518,12 +4717,69 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_trip_summary(TripSummary self, SseSerializer serializer) {
+  void sse_encode_trip_state(TripState self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_f_64(self.distanceTraveled, serializer);
-    sse_encode_f_64(self.snappedDistanceTraveled, serializer);
-    sse_encode_Chrono_Utc(self.startedAt, serializer);
-    sse_encode_opt_box_autoadd_Chrono_Utc(self.endedAt, serializer);
+    switch (self) {
+      case TripState_Idle(userLocation: final userLocation):
+        sse_encode_i_32(0, serializer);
+        sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          userLocation,
+          serializer,
+        );
+      case TripState_Navigating(
+        currentStepGeometryIndex: final currentStepGeometryIndex,
+        userLocation: final userLocation,
+        snappedUserLocation: final snappedUserLocation,
+        remainingSteps: final remainingSteps,
+        remainingWaypoints: final remainingWaypoints,
+        progress: final progress,
+        summary: final summary,
+        deviation: final deviation,
+        visualInstruction: final visualInstruction,
+        spokenInstruction: final spokenInstruction,
+        annotationJson: final annotationJson,
+      ):
+        sse_encode_i_32(1, serializer);
+        sse_encode_opt_box_autoadd_u_64(currentStepGeometryIndex, serializer);
+        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          userLocation,
+          serializer,
+        );
+        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          snappedUserLocation,
+          serializer,
+        );
+        sse_encode_list_route_step(remainingSteps, serializer);
+        sse_encode_list_waypoint(remainingWaypoints, serializer);
+        sse_encode_box_autoadd_trip_progress(progress, serializer);
+        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+          summary,
+          serializer,
+        );
+        sse_encode_box_autoadd_route_deviation(deviation, serializer);
+        sse_encode_opt_box_autoadd_visual_instruction(
+          visualInstruction,
+          serializer,
+        );
+        sse_encode_opt_box_autoadd_spoken_instruction(
+          spokenInstruction,
+          serializer,
+        );
+        sse_encode_opt_String(annotationJson, serializer);
+      case TripState_Complete(
+        userLocation: final userLocation,
+        summary: final summary,
+      ):
+        sse_encode_i_32(2, serializer);
+        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+          userLocation,
+          serializer,
+        );
+        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+          summary,
+          serializer,
+        );
+    }
   }
 
   @protected
@@ -3640,7 +4896,7 @@ class FlutterNavStateImpl extends RustOpaque implements FlutterNavState {
         RustLib.instance.api.rust_arc_decrement_strong_count_FlutterNavStatePtr,
   );
 
-  Future<FlutterTripState> tripState() => RustLib.instance.api
+  Future<TripState> tripState() => RustLib.instance.api
       .crateApiNavigationFlutterNavStateTripState(that: this);
 }
 
@@ -3679,21 +4935,164 @@ class FlutterNavigationControllerImpl extends RustOpaque
             state: state,
           );
 
-  Future<FlutterNavState> getInitialState({
-    required FlutterUserLocation location,
-  }) => RustLib.instance.api
-      .crateApiNavigationFlutterNavigationControllerGetInitialState(
-        that: this,
-        location: location,
-      );
+  Future<FlutterNavState> getInitialState({required UserLocation location}) =>
+      RustLib.instance.api
+          .crateApiNavigationFlutterNavigationControllerGetInitialState(
+            that: this,
+            location: location,
+          );
 
   Future<FlutterNavState> updateUserLocation({
-    required FlutterUserLocation location,
+    required UserLocation location,
     required FlutterNavState state,
   }) => RustLib.instance.api
       .crateApiNavigationFlutterNavigationControllerUpdateUserLocation(
         that: this,
         location: location,
         state: state,
+      );
+}
+
+@sealed
+class SystemTimeImpl extends RustOpaque implements SystemTime {
+  // Not to be used by end users
+  SystemTimeImpl.frbInternalDcoDecode(List<dynamic> wire)
+    : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  SystemTimeImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+    : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_SystemTime,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_SystemTime,
+    rustArcDecrementStrongCountPtr:
+        RustLib.instance.api.rust_arc_decrement_strong_count_SystemTimePtr,
+  );
+}
+
+@sealed
+class TripSummaryImpl extends RustOpaque implements TripSummary {
+  // Not to be used by end users
+  TripSummaryImpl.frbInternalDcoDecode(List<dynamic> wire)
+    : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  TripSummaryImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+    : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_TripSummary,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_TripSummary,
+    rustArcDecrementStrongCountPtr:
+        RustLib.instance.api.rust_arc_decrement_strong_count_TripSummaryPtr,
+  );
+
+  double get distanceTraveled => RustLib.instance.api
+      .crateApiModelsTripSummaryAutoAccessorGetDistanceTraveled(that: this);
+
+  SystemTime? get endedAt => RustLib.instance.api
+      .crateApiModelsTripSummaryAutoAccessorGetEndedAt(that: this);
+
+  double get snappedDistanceTraveled => RustLib.instance.api
+      .crateApiModelsTripSummaryAutoAccessorGetSnappedDistanceTraveled(
+        that: this,
+      );
+
+  SystemTime get startedAt => RustLib.instance.api
+      .crateApiModelsTripSummaryAutoAccessorGetStartedAt(that: this);
+
+  set distanceTraveled(double distanceTraveled) => RustLib.instance.api
+      .crateApiModelsTripSummaryAutoAccessorSetDistanceTraveled(
+        that: this,
+        distanceTraveled: distanceTraveled,
+      );
+
+  set endedAt(SystemTime? endedAt) =>
+      RustLib.instance.api.crateApiModelsTripSummaryAutoAccessorSetEndedAt(
+        that: this,
+        endedAt: endedAt,
+      );
+
+  set snappedDistanceTraveled(double snappedDistanceTraveled) => RustLib
+      .instance
+      .api
+      .crateApiModelsTripSummaryAutoAccessorSetSnappedDistanceTraveled(
+        that: this,
+        snappedDistanceTraveled: snappedDistanceTraveled,
+      );
+
+  set startedAt(SystemTime startedAt) =>
+      RustLib.instance.api.crateApiModelsTripSummaryAutoAccessorSetStartedAt(
+        that: this,
+        startedAt: startedAt,
+      );
+}
+
+@sealed
+class UserLocationImpl extends RustOpaque implements UserLocation {
+  // Not to be used by end users
+  UserLocationImpl.frbInternalDcoDecode(List<dynamic> wire)
+    : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  UserLocationImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+    : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_UserLocation,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_UserLocation,
+    rustArcDecrementStrongCountPtr:
+        RustLib.instance.api.rust_arc_decrement_strong_count_UserLocationPtr,
+  );
+
+  GeographicCoordinate get coordinates => RustLib.instance.api
+      .crateApiModelsUserLocationAutoAccessorGetCoordinates(that: this);
+
+  CourseOverGround? get courseOverGround => RustLib.instance.api
+      .crateApiModelsUserLocationAutoAccessorGetCourseOverGround(that: this);
+
+  double get horizontalAccuracy => RustLib.instance.api
+      .crateApiModelsUserLocationAutoAccessorGetHorizontalAccuracy(that: this);
+
+  Speed? get speed => RustLib.instance.api
+      .crateApiModelsUserLocationAutoAccessorGetSpeed(that: this);
+
+  SystemTime get timestamp => RustLib.instance.api
+      .crateApiModelsUserLocationAutoAccessorGetTimestamp(that: this);
+
+  set coordinates(GeographicCoordinate coordinates) =>
+      RustLib.instance.api.crateApiModelsUserLocationAutoAccessorSetCoordinates(
+        that: this,
+        coordinates: coordinates,
+      );
+
+  set courseOverGround(CourseOverGround? courseOverGround) => RustLib
+      .instance
+      .api
+      .crateApiModelsUserLocationAutoAccessorSetCourseOverGround(
+        that: this,
+        courseOverGround: courseOverGround,
+      );
+
+  set horizontalAccuracy(double horizontalAccuracy) => RustLib.instance.api
+      .crateApiModelsUserLocationAutoAccessorSetHorizontalAccuracy(
+        that: this,
+        horizontalAccuracy: horizontalAccuracy,
+      );
+
+  set speed(Speed? speed) => RustLib.instance.api
+      .crateApiModelsUserLocationAutoAccessorSetSpeed(that: this, speed: speed);
+
+  set timestamp(SystemTime timestamp) =>
+      RustLib.instance.api.crateApiModelsUserLocationAutoAccessorSetTimestamp(
+        that: this,
+        timestamp: timestamp,
       );
 }

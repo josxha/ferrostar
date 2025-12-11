@@ -52,12 +52,12 @@ void main() {
     );
 
     // 2. Setup Config
-    final config = FlutterNavigationControllerConfig(
+    final config = NavigationControllerConfig(
       waypointAdvance: const WaypointAdvanceMode.waypointWithinRange(15.0),
       stepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
       arrivalStepAdvanceCondition:
           const SerializableStepAdvanceCondition.manual(),
-      routeDeviationTracking: const FlutterRouteDeviationTracking.none(),
+      routeDeviationTracking: const RouteDeviationTracking.none(),
       snappedLocationCourseFiltering: CourseFiltering.snapToRoute,
     );
 
@@ -70,7 +70,7 @@ void main() {
     expect(controller, isNotNull);
 
     // 4. Get Initial State
-    final initialLocation = FlutterUserLocation(
+    final initialLocation = await createUserLocation(
       coordinates: const GeographicCoordinate(lat: 37.7749, lng: -122.4194),
       horizontalAccuracy: 5.0,
       timestamp: DateTime.now(),
@@ -81,10 +81,10 @@ void main() {
     var state = await controller.getInitialState(location: initialLocation);
     var tripState = await state.tripState();
 
-    expect(tripState, isA<FlutterTripState_Navigating>());
+    expect(tripState, isA<TripState_Navigating>());
 
     // 5. Update Location
-    final newLocation = FlutterUserLocation(
+    final newLocation = await createUserLocation(
       coordinates: const GeographicCoordinate(lat: 37.77495, lng: -122.41945),
       horizontalAccuracy: 5.0,
       timestamp: DateTime.now(),
@@ -98,6 +98,6 @@ void main() {
     );
 
     tripState = await state.tripState();
-    expect(tripState, isA<FlutterTripState_Navigating>());
+    expect(tripState, isA<TripState_Navigating>());
   });
 }

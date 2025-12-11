@@ -30,6 +30,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   get rust_arc_decrement_strong_count_FlutterNavigationControllerPtr => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController;
 
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_SystemTimePtr => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_TripSummaryPtr => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_UserLocationPtr => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation;
+
   @protected
   FlutterNavState
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
@@ -43,6 +55,36 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  SystemTime
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    dynamic raw,
+  );
+
+  @protected
+  TripSummary
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    dynamic raw,
+  );
+
+  @protected
+  UserLocation
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    dynamic raw,
+  );
+
+  @protected
+  TripSummary
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    dynamic raw,
+  );
+
+  @protected
+  UserLocation
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    dynamic raw,
+  );
+
+  @protected
   FlutterNavState
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
     dynamic raw,
@@ -51,6 +93,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   FlutterNavigationController
   dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    dynamic raw,
+  );
+
+  @protected
+  TripSummary
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    dynamic raw,
+  );
+
+  @protected
+  UserLocation
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
     dynamic raw,
   );
 
@@ -70,6 +124,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  SystemTime
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    dynamic raw,
+  );
+
+  @protected
+  TripSummary
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    dynamic raw,
+  );
+
+  @protected
+  UserLocation
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    dynamic raw,
+  );
+
+  @protected
   String dco_decode_String(dynamic raw);
 
   @protected
@@ -83,6 +155,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   BoundingBox dco_decode_bounding_box(dynamic raw);
+
+  @protected
+  SystemTime
+  dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    dynamic raw,
+  );
+
+  @protected
+  UserLocation
+  dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    dynamic raw,
+  );
 
   @protected
   DateTime dco_decode_box_autoadd_Chrono_Utc(dynamic raw);
@@ -103,11 +187,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double dco_decode_box_autoadd_f_64(dynamic raw);
 
   @protected
-  FlutterNavigationControllerConfig
-  dco_decode_box_autoadd_flutter_navigation_controller_config(dynamic raw);
-
-  @protected
-  FlutterUserLocation dco_decode_box_autoadd_flutter_user_location(dynamic raw);
+  GeographicCoordinate dco_decode_box_autoadd_geographic_coordinate(
+    dynamic raw,
+  );
 
   @protected
   Impact dco_decode_box_autoadd_impact(dynamic raw);
@@ -117,6 +199,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ManeuverType dco_decode_box_autoadd_maneuver_type(dynamic raw);
+
+  @protected
+  NavigationControllerConfig
+  dco_decode_box_autoadd_navigation_controller_config(dynamic raw);
 
   @protected
   Route dco_decode_box_autoadd_route(dynamic raw);
@@ -132,9 +218,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   TripProgress dco_decode_box_autoadd_trip_progress(dynamic raw);
-
-  @protected
-  TripSummary dco_decode_box_autoadd_trip_summary(dynamic raw);
 
   @protected
   int dco_decode_box_autoadd_u_16(dynamic raw);
@@ -161,21 +244,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   double dco_decode_f_64(dynamic raw);
-
-  @protected
-  FlutterNavigationControllerConfig
-  dco_decode_flutter_navigation_controller_config(dynamic raw);
-
-  @protected
-  FlutterRouteDeviationTracking dco_decode_flutter_route_deviation_tracking(
-    dynamic raw,
-  );
-
-  @protected
-  FlutterTripState dco_decode_flutter_trip_state(dynamic raw);
-
-  @protected
-  FlutterUserLocation dco_decode_flutter_user_location(dynamic raw);
 
   @protected
   GeographicCoordinate dco_decode_geographic_coordinate(dynamic raw);
@@ -239,7 +307,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   ManeuverType dco_decode_maneuver_type(dynamic raw);
 
   @protected
+  NavigationControllerConfig dco_decode_navigation_controller_config(
+    dynamic raw,
+  );
+
+  @protected
   String? dco_decode_opt_String(dynamic raw);
+
+  @protected
+  SystemTime?
+  dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    dynamic raw,
+  );
+
+  @protected
+  UserLocation?
+  dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    dynamic raw,
+  );
 
   @protected
   DateTime? dco_decode_opt_box_autoadd_Chrono_Utc(dynamic raw);
@@ -258,11 +343,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   double? dco_decode_opt_box_autoadd_f_64(dynamic raw);
-
-  @protected
-  FlutterUserLocation? dco_decode_opt_box_autoadd_flutter_user_location(
-    dynamic raw,
-  );
 
   @protected
   Impact? dco_decode_opt_box_autoadd_impact(dynamic raw);
@@ -308,6 +388,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   RouteDeviation dco_decode_route_deviation(dynamic raw);
 
   @protected
+  RouteDeviationTracking dco_decode_route_deviation_tracking(dynamic raw);
+
+  @protected
   RouteStep dco_decode_route_step(dynamic raw);
 
   @protected
@@ -324,7 +407,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   TripProgress dco_decode_trip_progress(dynamic raw);
 
   @protected
-  TripSummary dco_decode_trip_summary(dynamic raw);
+  TripState dco_decode_trip_state(dynamic raw);
 
   @protected
   int dco_decode_u_16(dynamic raw);
@@ -369,6 +452,36 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  SystemTime
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  TripSummary
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  UserLocation
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  TripSummary
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  UserLocation
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   FlutterNavState
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
     SseDeserializer deserializer,
@@ -377,6 +490,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   FlutterNavigationController
   sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  TripSummary
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  UserLocation
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
     SseDeserializer deserializer,
   );
 
@@ -396,6 +521,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  SystemTime
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  TripSummary
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  UserLocation
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   String sse_decode_String(SseDeserializer deserializer);
 
   @protected
@@ -409,6 +552,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   BoundingBox sse_decode_bounding_box(SseDeserializer deserializer);
+
+  @protected
+  SystemTime
+  sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  UserLocation
+  sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    SseDeserializer deserializer,
+  );
 
   @protected
   DateTime sse_decode_box_autoadd_Chrono_Utc(SseDeserializer deserializer);
@@ -431,13 +586,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double sse_decode_box_autoadd_f_64(SseDeserializer deserializer);
 
   @protected
-  FlutterNavigationControllerConfig
-  sse_decode_box_autoadd_flutter_navigation_controller_config(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  FlutterUserLocation sse_decode_box_autoadd_flutter_user_location(
+  GeographicCoordinate sse_decode_box_autoadd_geographic_coordinate(
     SseDeserializer deserializer,
   );
 
@@ -451,6 +600,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   ManeuverType sse_decode_box_autoadd_maneuver_type(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  NavigationControllerConfig
+  sse_decode_box_autoadd_navigation_controller_config(
     SseDeserializer deserializer,
   );
 
@@ -474,9 +629,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   TripProgress sse_decode_box_autoadd_trip_progress(
     SseDeserializer deserializer,
   );
-
-  @protected
-  TripSummary sse_decode_box_autoadd_trip_summary(SseDeserializer deserializer);
 
   @protected
   int sse_decode_box_autoadd_u_16(SseDeserializer deserializer);
@@ -505,23 +657,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   double sse_decode_f_64(SseDeserializer deserializer);
-
-  @protected
-  FlutterNavigationControllerConfig
-  sse_decode_flutter_navigation_controller_config(SseDeserializer deserializer);
-
-  @protected
-  FlutterRouteDeviationTracking sse_decode_flutter_route_deviation_tracking(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  FlutterTripState sse_decode_flutter_trip_state(SseDeserializer deserializer);
-
-  @protected
-  FlutterUserLocation sse_decode_flutter_user_location(
-    SseDeserializer deserializer,
-  );
 
   @protected
   GeographicCoordinate sse_decode_geographic_coordinate(
@@ -595,7 +730,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   ManeuverType sse_decode_maneuver_type(SseDeserializer deserializer);
 
   @protected
+  NavigationControllerConfig sse_decode_navigation_controller_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   String? sse_decode_opt_String(SseDeserializer deserializer);
+
+  @protected
+  SystemTime?
+  sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  UserLocation?
+  sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    SseDeserializer deserializer,
+  );
 
   @protected
   DateTime? sse_decode_opt_box_autoadd_Chrono_Utc(SseDeserializer deserializer);
@@ -620,11 +772,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer);
-
-  @protected
-  FlutterUserLocation? sse_decode_opt_box_autoadd_flutter_user_location(
-    SseDeserializer deserializer,
-  );
 
   @protected
   Impact? sse_decode_opt_box_autoadd_impact(SseDeserializer deserializer);
@@ -680,6 +827,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   RouteDeviation sse_decode_route_deviation(SseDeserializer deserializer);
 
   @protected
+  RouteDeviationTracking sse_decode_route_deviation_tracking(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   RouteStep sse_decode_route_step(SseDeserializer deserializer);
 
   @protected
@@ -696,7 +848,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   TripProgress sse_decode_trip_progress(SseDeserializer deserializer);
 
   @protected
-  TripSummary sse_decode_trip_summary(SseDeserializer deserializer);
+  TripState sse_decode_trip_state(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_16(SseDeserializer deserializer);
@@ -748,6 +900,41 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SystemTime self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    TripSummary self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    UserLocation self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    TripSummary self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    UserLocation self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
     FlutterNavState self,
     SseSerializer serializer,
@@ -757,6 +944,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void
   sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
     FlutterNavigationController self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    TripSummary self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    UserLocation self,
     SseSerializer serializer,
   );
 
@@ -778,6 +979,27 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SystemTime self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    TripSummary self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    UserLocation self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_String(String self, SseSerializer serializer);
 
   @protected
@@ -791,6 +1013,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_bounding_box(BoundingBox self, SseSerializer serializer);
+
+  @protected
+  void
+  sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SystemTime self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    UserLocation self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_box_autoadd_Chrono_Utc(
@@ -823,14 +1059,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer);
 
   @protected
-  void sse_encode_box_autoadd_flutter_navigation_controller_config(
-    FlutterNavigationControllerConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_box_autoadd_flutter_user_location(
-    FlutterUserLocation self,
+  void sse_encode_box_autoadd_geographic_coordinate(
+    GeographicCoordinate self,
     SseSerializer serializer,
   );
 
@@ -846,6 +1076,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_maneuver_type(
     ManeuverType self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_navigation_controller_config(
+    NavigationControllerConfig self,
     SseSerializer serializer,
   );
 
@@ -870,12 +1106,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_box_autoadd_trip_progress(
     TripProgress self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_box_autoadd_trip_summary(
-    TripSummary self,
     SseSerializer serializer,
   );
 
@@ -914,30 +1144,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_f_64(double self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_flutter_navigation_controller_config(
-    FlutterNavigationControllerConfig self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_flutter_route_deviation_tracking(
-    FlutterRouteDeviationTracking self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_flutter_trip_state(
-    FlutterTripState self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void sse_encode_flutter_user_location(
-    FlutterUserLocation self,
-    SseSerializer serializer,
-  );
 
   @protected
   void sse_encode_geographic_coordinate(
@@ -1027,7 +1233,27 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_maneuver_type(ManeuverType self, SseSerializer serializer);
 
   @protected
+  void sse_encode_navigation_controller_config(
+    NavigationControllerConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_String(String? self, SseSerializer serializer);
+
+  @protected
+  void
+  sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    SystemTime? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
+  sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    UserLocation? self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_opt_box_autoadd_Chrono_Utc(
@@ -1058,12 +1284,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_opt_box_autoadd_flutter_user_location(
-    FlutterUserLocation? self,
-    SseSerializer serializer,
-  );
 
   @protected
   void sse_encode_opt_box_autoadd_impact(
@@ -1135,6 +1355,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_route_deviation_tracking(
+    RouteDeviationTracking self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_route_step(RouteStep self, SseSerializer serializer);
 
   @protected
@@ -1156,7 +1382,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_trip_progress(TripProgress self, SseSerializer serializer);
 
   @protected
-  void sse_encode_trip_summary(TripSummary self, SseSerializer serializer);
+  void sse_encode_trip_state(TripState self, SseSerializer serializer);
 
   @protected
   void sse_encode_u_16(int self, SseSerializer serializer);
@@ -1234,6 +1460,54 @@ class RustLibWire implements BaseWire {
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
         ptr,
       );
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+        ptr,
+      );
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+        ptr,
+      );
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+        ptr,
+      );
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+        ptr,
+      );
+
+  void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+        ptr,
+      );
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+        ptr,
+      );
 }
 
 @JS('wasm_bindgen')
@@ -1259,6 +1533,36 @@ extension type RustLibWasmModule._(JSObject _) implements JSObject {
 
   external void
   rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
+    int ptr,
+  );
+
+  external void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    int ptr,
+  );
+
+  external void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+    int ptr,
+  );
+
+  external void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    int ptr,
+  );
+
+  external void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+    int ptr,
+  );
+
+  external void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+    int ptr,
+  );
+
+  external void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
     int ptr,
   );
 }

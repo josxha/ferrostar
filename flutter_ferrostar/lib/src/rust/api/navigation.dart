@@ -10,28 +10,29 @@ import 'package:uuid/uuid.dart';
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>>
 abstract class FlutterNavState implements RustOpaqueInterface {
-  Future<FlutterTripState> tripState();
+  Future<TripState> tripState();
 }
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavigationController>>
 abstract class FlutterNavigationController implements RustOpaqueInterface {
   Future<FlutterNavState> advanceToNextStep({required FlutterNavState state});
 
-  Future<FlutterNavState> getInitialState({
-    required FlutterUserLocation location,
-  });
+  Future<FlutterNavState> getInitialState({required UserLocation location});
 
   // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
   static Future<FlutterNavigationController> newInstance({
     required Route route,
-    required FlutterNavigationControllerConfig config,
+    required NavigationControllerConfig config,
   }) => RustLib.instance.api.crateApiNavigationFlutterNavigationControllerNew(
     route: route,
     config: config,
   );
 
   Future<FlutterNavState> updateUserLocation({
-    required FlutterUserLocation location,
+    required UserLocation location,
     required FlutterNavState state,
   });
 }
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SystemTime>>
+abstract class SystemTime implements RustOpaqueInterface {}

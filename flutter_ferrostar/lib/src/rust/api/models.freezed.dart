@@ -16,1402 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
-mixin _$FlutterRouteDeviationTracking {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() none,
-    required TResult Function(
-      int minimumHorizontalAccuracy,
-      double maxAcceptableDeviation,
-    )
-    staticThreshold,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? none,
-    TResult? Function(
-      int minimumHorizontalAccuracy,
-      double maxAcceptableDeviation,
-    )?
-    staticThreshold,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? none,
-    TResult Function(
-      int minimumHorizontalAccuracy,
-      double maxAcceptableDeviation,
-    )?
-    staticThreshold,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(FlutterRouteDeviationTracking_None value) none,
-    required TResult Function(
-      FlutterRouteDeviationTracking_StaticThreshold value,
-    )
-    staticThreshold,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FlutterRouteDeviationTracking_None value)? none,
-    TResult? Function(FlutterRouteDeviationTracking_StaticThreshold value)?
-    staticThreshold,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(FlutterRouteDeviationTracking_None value)? none,
-    TResult Function(FlutterRouteDeviationTracking_StaticThreshold value)?
-    staticThreshold,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $FlutterRouteDeviationTrackingCopyWith<$Res> {
-  factory $FlutterRouteDeviationTrackingCopyWith(
-    FlutterRouteDeviationTracking value,
-    $Res Function(FlutterRouteDeviationTracking) then,
-  ) =
-      _$FlutterRouteDeviationTrackingCopyWithImpl<
-        $Res,
-        FlutterRouteDeviationTracking
-      >;
-}
-
-/// @nodoc
-class _$FlutterRouteDeviationTrackingCopyWithImpl<
-  $Res,
-  $Val extends FlutterRouteDeviationTracking
->
-    implements $FlutterRouteDeviationTrackingCopyWith<$Res> {
-  _$FlutterRouteDeviationTrackingCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of FlutterRouteDeviationTracking
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$FlutterRouteDeviationTracking_NoneImplCopyWith<$Res> {
-  factory _$$FlutterRouteDeviationTracking_NoneImplCopyWith(
-    _$FlutterRouteDeviationTracking_NoneImpl value,
-    $Res Function(_$FlutterRouteDeviationTracking_NoneImpl) then,
-  ) = __$$FlutterRouteDeviationTracking_NoneImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$FlutterRouteDeviationTracking_NoneImplCopyWithImpl<$Res>
-    extends
-        _$FlutterRouteDeviationTrackingCopyWithImpl<
-          $Res,
-          _$FlutterRouteDeviationTracking_NoneImpl
-        >
-    implements _$$FlutterRouteDeviationTracking_NoneImplCopyWith<$Res> {
-  __$$FlutterRouteDeviationTracking_NoneImplCopyWithImpl(
-    _$FlutterRouteDeviationTracking_NoneImpl _value,
-    $Res Function(_$FlutterRouteDeviationTracking_NoneImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of FlutterRouteDeviationTracking
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$FlutterRouteDeviationTracking_NoneImpl
-    extends FlutterRouteDeviationTracking_None {
-  const _$FlutterRouteDeviationTracking_NoneImpl() : super._();
-
-  @override
-  String toString() {
-    return 'FlutterRouteDeviationTracking.none()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FlutterRouteDeviationTracking_NoneImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() none,
-    required TResult Function(
-      int minimumHorizontalAccuracy,
-      double maxAcceptableDeviation,
-    )
-    staticThreshold,
-  }) {
-    return none();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? none,
-    TResult? Function(
-      int minimumHorizontalAccuracy,
-      double maxAcceptableDeviation,
-    )?
-    staticThreshold,
-  }) {
-    return none?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? none,
-    TResult Function(
-      int minimumHorizontalAccuracy,
-      double maxAcceptableDeviation,
-    )?
-    staticThreshold,
-    required TResult orElse(),
-  }) {
-    if (none != null) {
-      return none();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(FlutterRouteDeviationTracking_None value) none,
-    required TResult Function(
-      FlutterRouteDeviationTracking_StaticThreshold value,
-    )
-    staticThreshold,
-  }) {
-    return none(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FlutterRouteDeviationTracking_None value)? none,
-    TResult? Function(FlutterRouteDeviationTracking_StaticThreshold value)?
-    staticThreshold,
-  }) {
-    return none?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(FlutterRouteDeviationTracking_None value)? none,
-    TResult Function(FlutterRouteDeviationTracking_StaticThreshold value)?
-    staticThreshold,
-    required TResult orElse(),
-  }) {
-    if (none != null) {
-      return none(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class FlutterRouteDeviationTracking_None
-    extends FlutterRouteDeviationTracking {
-  const factory FlutterRouteDeviationTracking_None() =
-      _$FlutterRouteDeviationTracking_NoneImpl;
-  const FlutterRouteDeviationTracking_None._() : super._();
-}
-
-/// @nodoc
-abstract class _$$FlutterRouteDeviationTracking_StaticThresholdImplCopyWith<
-  $Res
-> {
-  factory _$$FlutterRouteDeviationTracking_StaticThresholdImplCopyWith(
-    _$FlutterRouteDeviationTracking_StaticThresholdImpl value,
-    $Res Function(_$FlutterRouteDeviationTracking_StaticThresholdImpl) then,
-  ) = __$$FlutterRouteDeviationTracking_StaticThresholdImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int minimumHorizontalAccuracy, double maxAcceptableDeviation});
-}
-
-/// @nodoc
-class __$$FlutterRouteDeviationTracking_StaticThresholdImplCopyWithImpl<$Res>
-    extends
-        _$FlutterRouteDeviationTrackingCopyWithImpl<
-          $Res,
-          _$FlutterRouteDeviationTracking_StaticThresholdImpl
-        >
-    implements
-        _$$FlutterRouteDeviationTracking_StaticThresholdImplCopyWith<$Res> {
-  __$$FlutterRouteDeviationTracking_StaticThresholdImplCopyWithImpl(
-    _$FlutterRouteDeviationTracking_StaticThresholdImpl _value,
-    $Res Function(_$FlutterRouteDeviationTracking_StaticThresholdImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of FlutterRouteDeviationTracking
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? minimumHorizontalAccuracy = null,
-    Object? maxAcceptableDeviation = null,
-  }) {
-    return _then(
-      _$FlutterRouteDeviationTracking_StaticThresholdImpl(
-        minimumHorizontalAccuracy: null == minimumHorizontalAccuracy
-            ? _value.minimumHorizontalAccuracy
-            : minimumHorizontalAccuracy // ignore: cast_nullable_to_non_nullable
-                  as int,
-        maxAcceptableDeviation: null == maxAcceptableDeviation
-            ? _value.maxAcceptableDeviation
-            : maxAcceptableDeviation // ignore: cast_nullable_to_non_nullable
-                  as double,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-class _$FlutterRouteDeviationTracking_StaticThresholdImpl
-    extends FlutterRouteDeviationTracking_StaticThreshold {
-  const _$FlutterRouteDeviationTracking_StaticThresholdImpl({
-    required this.minimumHorizontalAccuracy,
-    required this.maxAcceptableDeviation,
-  }) : super._();
-
-  @override
-  final int minimumHorizontalAccuracy;
-  @override
-  final double maxAcceptableDeviation;
-
-  @override
-  String toString() {
-    return 'FlutterRouteDeviationTracking.staticThreshold(minimumHorizontalAccuracy: $minimumHorizontalAccuracy, maxAcceptableDeviation: $maxAcceptableDeviation)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FlutterRouteDeviationTracking_StaticThresholdImpl &&
-            (identical(
-                  other.minimumHorizontalAccuracy,
-                  minimumHorizontalAccuracy,
-                ) ||
-                other.minimumHorizontalAccuracy == minimumHorizontalAccuracy) &&
-            (identical(other.maxAcceptableDeviation, maxAcceptableDeviation) ||
-                other.maxAcceptableDeviation == maxAcceptableDeviation));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    minimumHorizontalAccuracy,
-    maxAcceptableDeviation,
-  );
-
-  /// Create a copy of FlutterRouteDeviationTracking
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FlutterRouteDeviationTracking_StaticThresholdImplCopyWith<
-    _$FlutterRouteDeviationTracking_StaticThresholdImpl
-  >
-  get copyWith =>
-      __$$FlutterRouteDeviationTracking_StaticThresholdImplCopyWithImpl<
-        _$FlutterRouteDeviationTracking_StaticThresholdImpl
-      >(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() none,
-    required TResult Function(
-      int minimumHorizontalAccuracy,
-      double maxAcceptableDeviation,
-    )
-    staticThreshold,
-  }) {
-    return staticThreshold(minimumHorizontalAccuracy, maxAcceptableDeviation);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? none,
-    TResult? Function(
-      int minimumHorizontalAccuracy,
-      double maxAcceptableDeviation,
-    )?
-    staticThreshold,
-  }) {
-    return staticThreshold?.call(
-      minimumHorizontalAccuracy,
-      maxAcceptableDeviation,
-    );
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? none,
-    TResult Function(
-      int minimumHorizontalAccuracy,
-      double maxAcceptableDeviation,
-    )?
-    staticThreshold,
-    required TResult orElse(),
-  }) {
-    if (staticThreshold != null) {
-      return staticThreshold(minimumHorizontalAccuracy, maxAcceptableDeviation);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(FlutterRouteDeviationTracking_None value) none,
-    required TResult Function(
-      FlutterRouteDeviationTracking_StaticThreshold value,
-    )
-    staticThreshold,
-  }) {
-    return staticThreshold(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FlutterRouteDeviationTracking_None value)? none,
-    TResult? Function(FlutterRouteDeviationTracking_StaticThreshold value)?
-    staticThreshold,
-  }) {
-    return staticThreshold?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(FlutterRouteDeviationTracking_None value)? none,
-    TResult Function(FlutterRouteDeviationTracking_StaticThreshold value)?
-    staticThreshold,
-    required TResult orElse(),
-  }) {
-    if (staticThreshold != null) {
-      return staticThreshold(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class FlutterRouteDeviationTracking_StaticThreshold
-    extends FlutterRouteDeviationTracking {
-  const factory FlutterRouteDeviationTracking_StaticThreshold({
-    required final int minimumHorizontalAccuracy,
-    required final double maxAcceptableDeviation,
-  }) = _$FlutterRouteDeviationTracking_StaticThresholdImpl;
-  const FlutterRouteDeviationTracking_StaticThreshold._() : super._();
-
-  int get minimumHorizontalAccuracy;
-  double get maxAcceptableDeviation;
-
-  /// Create a copy of FlutterRouteDeviationTracking
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FlutterRouteDeviationTracking_StaticThresholdImplCopyWith<
-    _$FlutterRouteDeviationTracking_StaticThresholdImpl
-  >
-  get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$FlutterTripState {
-  FlutterUserLocation? get userLocation => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(FlutterUserLocation? userLocation) idle,
-    required TResult Function(
-      BigInt? currentStepGeometryIndex,
-      FlutterUserLocation userLocation,
-      FlutterUserLocation snappedUserLocation,
-      List<RouteStep> remainingSteps,
-      List<Waypoint> remainingWaypoints,
-      TripProgress progress,
-      TripSummary summary,
-      RouteDeviation deviation,
-      VisualInstruction? visualInstruction,
-      SpokenInstruction? spokenInstruction,
-      String? annotationJson,
-    )
-    navigating,
-    required TResult Function(
-      FlutterUserLocation userLocation,
-      TripSummary summary,
-    )
-    complete,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(FlutterUserLocation? userLocation)? idle,
-    TResult? Function(
-      BigInt? currentStepGeometryIndex,
-      FlutterUserLocation userLocation,
-      FlutterUserLocation snappedUserLocation,
-      List<RouteStep> remainingSteps,
-      List<Waypoint> remainingWaypoints,
-      TripProgress progress,
-      TripSummary summary,
-      RouteDeviation deviation,
-      VisualInstruction? visualInstruction,
-      SpokenInstruction? spokenInstruction,
-      String? annotationJson,
-    )?
-    navigating,
-    TResult? Function(FlutterUserLocation userLocation, TripSummary summary)?
-    complete,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(FlutterUserLocation? userLocation)? idle,
-    TResult Function(
-      BigInt? currentStepGeometryIndex,
-      FlutterUserLocation userLocation,
-      FlutterUserLocation snappedUserLocation,
-      List<RouteStep> remainingSteps,
-      List<Waypoint> remainingWaypoints,
-      TripProgress progress,
-      TripSummary summary,
-      RouteDeviation deviation,
-      VisualInstruction? visualInstruction,
-      SpokenInstruction? spokenInstruction,
-      String? annotationJson,
-    )?
-    navigating,
-    TResult Function(FlutterUserLocation userLocation, TripSummary summary)?
-    complete,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(FlutterTripState_Idle value) idle,
-    required TResult Function(FlutterTripState_Navigating value) navigating,
-    required TResult Function(FlutterTripState_Complete value) complete,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FlutterTripState_Idle value)? idle,
-    TResult? Function(FlutterTripState_Navigating value)? navigating,
-    TResult? Function(FlutterTripState_Complete value)? complete,
-  }) => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(FlutterTripState_Idle value)? idle,
-    TResult Function(FlutterTripState_Navigating value)? navigating,
-    TResult Function(FlutterTripState_Complete value)? complete,
-    required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
-
-  /// Create a copy of FlutterTripState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $FlutterTripStateCopyWith<FlutterTripState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $FlutterTripStateCopyWith<$Res> {
-  factory $FlutterTripStateCopyWith(
-    FlutterTripState value,
-    $Res Function(FlutterTripState) then,
-  ) = _$FlutterTripStateCopyWithImpl<$Res, FlutterTripState>;
-  @useResult
-  $Res call({FlutterUserLocation userLocation});
-}
-
-/// @nodoc
-class _$FlutterTripStateCopyWithImpl<$Res, $Val extends FlutterTripState>
-    implements $FlutterTripStateCopyWith<$Res> {
-  _$FlutterTripStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of FlutterTripState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? userLocation = null}) {
-    return _then(
-      _value.copyWith(
-            userLocation: null == userLocation
-                ? _value.userLocation!
-                : userLocation // ignore: cast_nullable_to_non_nullable
-                      as FlutterUserLocation,
-          )
-          as $Val,
-    );
-  }
-}
-
-/// @nodoc
-abstract class _$$FlutterTripState_IdleImplCopyWith<$Res>
-    implements $FlutterTripStateCopyWith<$Res> {
-  factory _$$FlutterTripState_IdleImplCopyWith(
-    _$FlutterTripState_IdleImpl value,
-    $Res Function(_$FlutterTripState_IdleImpl) then,
-  ) = __$$FlutterTripState_IdleImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({FlutterUserLocation? userLocation});
-}
-
-/// @nodoc
-class __$$FlutterTripState_IdleImplCopyWithImpl<$Res>
-    extends _$FlutterTripStateCopyWithImpl<$Res, _$FlutterTripState_IdleImpl>
-    implements _$$FlutterTripState_IdleImplCopyWith<$Res> {
-  __$$FlutterTripState_IdleImplCopyWithImpl(
-    _$FlutterTripState_IdleImpl _value,
-    $Res Function(_$FlutterTripState_IdleImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of FlutterTripState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? userLocation = freezed}) {
-    return _then(
-      _$FlutterTripState_IdleImpl(
-        userLocation: freezed == userLocation
-            ? _value.userLocation
-            : userLocation // ignore: cast_nullable_to_non_nullable
-                  as FlutterUserLocation?,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-class _$FlutterTripState_IdleImpl extends FlutterTripState_Idle {
-  const _$FlutterTripState_IdleImpl({this.userLocation}) : super._();
-
-  @override
-  final FlutterUserLocation? userLocation;
-
-  @override
-  String toString() {
-    return 'FlutterTripState.idle(userLocation: $userLocation)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FlutterTripState_IdleImpl &&
-            (identical(other.userLocation, userLocation) ||
-                other.userLocation == userLocation));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, userLocation);
-
-  /// Create a copy of FlutterTripState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FlutterTripState_IdleImplCopyWith<_$FlutterTripState_IdleImpl>
-  get copyWith =>
-      __$$FlutterTripState_IdleImplCopyWithImpl<_$FlutterTripState_IdleImpl>(
-        this,
-        _$identity,
-      );
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(FlutterUserLocation? userLocation) idle,
-    required TResult Function(
-      BigInt? currentStepGeometryIndex,
-      FlutterUserLocation userLocation,
-      FlutterUserLocation snappedUserLocation,
-      List<RouteStep> remainingSteps,
-      List<Waypoint> remainingWaypoints,
-      TripProgress progress,
-      TripSummary summary,
-      RouteDeviation deviation,
-      VisualInstruction? visualInstruction,
-      SpokenInstruction? spokenInstruction,
-      String? annotationJson,
-    )
-    navigating,
-    required TResult Function(
-      FlutterUserLocation userLocation,
-      TripSummary summary,
-    )
-    complete,
-  }) {
-    return idle(userLocation);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(FlutterUserLocation? userLocation)? idle,
-    TResult? Function(
-      BigInt? currentStepGeometryIndex,
-      FlutterUserLocation userLocation,
-      FlutterUserLocation snappedUserLocation,
-      List<RouteStep> remainingSteps,
-      List<Waypoint> remainingWaypoints,
-      TripProgress progress,
-      TripSummary summary,
-      RouteDeviation deviation,
-      VisualInstruction? visualInstruction,
-      SpokenInstruction? spokenInstruction,
-      String? annotationJson,
-    )?
-    navigating,
-    TResult? Function(FlutterUserLocation userLocation, TripSummary summary)?
-    complete,
-  }) {
-    return idle?.call(userLocation);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(FlutterUserLocation? userLocation)? idle,
-    TResult Function(
-      BigInt? currentStepGeometryIndex,
-      FlutterUserLocation userLocation,
-      FlutterUserLocation snappedUserLocation,
-      List<RouteStep> remainingSteps,
-      List<Waypoint> remainingWaypoints,
-      TripProgress progress,
-      TripSummary summary,
-      RouteDeviation deviation,
-      VisualInstruction? visualInstruction,
-      SpokenInstruction? spokenInstruction,
-      String? annotationJson,
-    )?
-    navigating,
-    TResult Function(FlutterUserLocation userLocation, TripSummary summary)?
-    complete,
-    required TResult orElse(),
-  }) {
-    if (idle != null) {
-      return idle(userLocation);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(FlutterTripState_Idle value) idle,
-    required TResult Function(FlutterTripState_Navigating value) navigating,
-    required TResult Function(FlutterTripState_Complete value) complete,
-  }) {
-    return idle(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FlutterTripState_Idle value)? idle,
-    TResult? Function(FlutterTripState_Navigating value)? navigating,
-    TResult? Function(FlutterTripState_Complete value)? complete,
-  }) {
-    return idle?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(FlutterTripState_Idle value)? idle,
-    TResult Function(FlutterTripState_Navigating value)? navigating,
-    TResult Function(FlutterTripState_Complete value)? complete,
-    required TResult orElse(),
-  }) {
-    if (idle != null) {
-      return idle(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class FlutterTripState_Idle extends FlutterTripState {
-  const factory FlutterTripState_Idle({
-    final FlutterUserLocation? userLocation,
-  }) = _$FlutterTripState_IdleImpl;
-  const FlutterTripState_Idle._() : super._();
-
-  @override
-  FlutterUserLocation? get userLocation;
-
-  /// Create a copy of FlutterTripState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FlutterTripState_IdleImplCopyWith<_$FlutterTripState_IdleImpl>
-  get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$FlutterTripState_NavigatingImplCopyWith<$Res>
-    implements $FlutterTripStateCopyWith<$Res> {
-  factory _$$FlutterTripState_NavigatingImplCopyWith(
-    _$FlutterTripState_NavigatingImpl value,
-    $Res Function(_$FlutterTripState_NavigatingImpl) then,
-  ) = __$$FlutterTripState_NavigatingImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    BigInt? currentStepGeometryIndex,
-    FlutterUserLocation userLocation,
-    FlutterUserLocation snappedUserLocation,
-    List<RouteStep> remainingSteps,
-    List<Waypoint> remainingWaypoints,
-    TripProgress progress,
-    TripSummary summary,
-    RouteDeviation deviation,
-    VisualInstruction? visualInstruction,
-    SpokenInstruction? spokenInstruction,
-    String? annotationJson,
-  });
-
-  $RouteDeviationCopyWith<$Res> get deviation;
-}
-
-/// @nodoc
-class __$$FlutterTripState_NavigatingImplCopyWithImpl<$Res>
-    extends
-        _$FlutterTripStateCopyWithImpl<$Res, _$FlutterTripState_NavigatingImpl>
-    implements _$$FlutterTripState_NavigatingImplCopyWith<$Res> {
-  __$$FlutterTripState_NavigatingImplCopyWithImpl(
-    _$FlutterTripState_NavigatingImpl _value,
-    $Res Function(_$FlutterTripState_NavigatingImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of FlutterTripState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? currentStepGeometryIndex = freezed,
-    Object? userLocation = null,
-    Object? snappedUserLocation = null,
-    Object? remainingSteps = null,
-    Object? remainingWaypoints = null,
-    Object? progress = null,
-    Object? summary = null,
-    Object? deviation = null,
-    Object? visualInstruction = freezed,
-    Object? spokenInstruction = freezed,
-    Object? annotationJson = freezed,
-  }) {
-    return _then(
-      _$FlutterTripState_NavigatingImpl(
-        currentStepGeometryIndex: freezed == currentStepGeometryIndex
-            ? _value.currentStepGeometryIndex
-            : currentStepGeometryIndex // ignore: cast_nullable_to_non_nullable
-                  as BigInt?,
-        userLocation: null == userLocation
-            ? _value.userLocation
-            : userLocation // ignore: cast_nullable_to_non_nullable
-                  as FlutterUserLocation,
-        snappedUserLocation: null == snappedUserLocation
-            ? _value.snappedUserLocation
-            : snappedUserLocation // ignore: cast_nullable_to_non_nullable
-                  as FlutterUserLocation,
-        remainingSteps: null == remainingSteps
-            ? _value._remainingSteps
-            : remainingSteps // ignore: cast_nullable_to_non_nullable
-                  as List<RouteStep>,
-        remainingWaypoints: null == remainingWaypoints
-            ? _value._remainingWaypoints
-            : remainingWaypoints // ignore: cast_nullable_to_non_nullable
-                  as List<Waypoint>,
-        progress: null == progress
-            ? _value.progress
-            : progress // ignore: cast_nullable_to_non_nullable
-                  as TripProgress,
-        summary: null == summary
-            ? _value.summary
-            : summary // ignore: cast_nullable_to_non_nullable
-                  as TripSummary,
-        deviation: null == deviation
-            ? _value.deviation
-            : deviation // ignore: cast_nullable_to_non_nullable
-                  as RouteDeviation,
-        visualInstruction: freezed == visualInstruction
-            ? _value.visualInstruction
-            : visualInstruction // ignore: cast_nullable_to_non_nullable
-                  as VisualInstruction?,
-        spokenInstruction: freezed == spokenInstruction
-            ? _value.spokenInstruction
-            : spokenInstruction // ignore: cast_nullable_to_non_nullable
-                  as SpokenInstruction?,
-        annotationJson: freezed == annotationJson
-            ? _value.annotationJson
-            : annotationJson // ignore: cast_nullable_to_non_nullable
-                  as String?,
-      ),
-    );
-  }
-
-  /// Create a copy of FlutterTripState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $RouteDeviationCopyWith<$Res> get deviation {
-    return $RouteDeviationCopyWith<$Res>(_value.deviation, (value) {
-      return _then(_value.copyWith(deviation: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$FlutterTripState_NavigatingImpl extends FlutterTripState_Navigating {
-  const _$FlutterTripState_NavigatingImpl({
-    this.currentStepGeometryIndex,
-    required this.userLocation,
-    required this.snappedUserLocation,
-    required final List<RouteStep> remainingSteps,
-    required final List<Waypoint> remainingWaypoints,
-    required this.progress,
-    required this.summary,
-    required this.deviation,
-    this.visualInstruction,
-    this.spokenInstruction,
-    this.annotationJson,
-  }) : _remainingSteps = remainingSteps,
-       _remainingWaypoints = remainingWaypoints,
-       super._();
-
-  @override
-  final BigInt? currentStepGeometryIndex;
-  @override
-  final FlutterUserLocation userLocation;
-  @override
-  final FlutterUserLocation snappedUserLocation;
-  final List<RouteStep> _remainingSteps;
-  @override
-  List<RouteStep> get remainingSteps {
-    if (_remainingSteps is EqualUnmodifiableListView) return _remainingSteps;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_remainingSteps);
-  }
-
-  final List<Waypoint> _remainingWaypoints;
-  @override
-  List<Waypoint> get remainingWaypoints {
-    if (_remainingWaypoints is EqualUnmodifiableListView)
-      return _remainingWaypoints;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_remainingWaypoints);
-  }
-
-  @override
-  final TripProgress progress;
-  @override
-  final TripSummary summary;
-  @override
-  final RouteDeviation deviation;
-  @override
-  final VisualInstruction? visualInstruction;
-  @override
-  final SpokenInstruction? spokenInstruction;
-  @override
-  final String? annotationJson;
-
-  @override
-  String toString() {
-    return 'FlutterTripState.navigating(currentStepGeometryIndex: $currentStepGeometryIndex, userLocation: $userLocation, snappedUserLocation: $snappedUserLocation, remainingSteps: $remainingSteps, remainingWaypoints: $remainingWaypoints, progress: $progress, summary: $summary, deviation: $deviation, visualInstruction: $visualInstruction, spokenInstruction: $spokenInstruction, annotationJson: $annotationJson)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FlutterTripState_NavigatingImpl &&
-            (identical(
-                  other.currentStepGeometryIndex,
-                  currentStepGeometryIndex,
-                ) ||
-                other.currentStepGeometryIndex == currentStepGeometryIndex) &&
-            (identical(other.userLocation, userLocation) ||
-                other.userLocation == userLocation) &&
-            (identical(other.snappedUserLocation, snappedUserLocation) ||
-                other.snappedUserLocation == snappedUserLocation) &&
-            const DeepCollectionEquality().equals(
-              other._remainingSteps,
-              _remainingSteps,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._remainingWaypoints,
-              _remainingWaypoints,
-            ) &&
-            (identical(other.progress, progress) ||
-                other.progress == progress) &&
-            (identical(other.summary, summary) || other.summary == summary) &&
-            (identical(other.deviation, deviation) ||
-                other.deviation == deviation) &&
-            (identical(other.visualInstruction, visualInstruction) ||
-                other.visualInstruction == visualInstruction) &&
-            (identical(other.spokenInstruction, spokenInstruction) ||
-                other.spokenInstruction == spokenInstruction) &&
-            (identical(other.annotationJson, annotationJson) ||
-                other.annotationJson == annotationJson));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    currentStepGeometryIndex,
-    userLocation,
-    snappedUserLocation,
-    const DeepCollectionEquality().hash(_remainingSteps),
-    const DeepCollectionEquality().hash(_remainingWaypoints),
-    progress,
-    summary,
-    deviation,
-    visualInstruction,
-    spokenInstruction,
-    annotationJson,
-  );
-
-  /// Create a copy of FlutterTripState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FlutterTripState_NavigatingImplCopyWith<_$FlutterTripState_NavigatingImpl>
-  get copyWith =>
-      __$$FlutterTripState_NavigatingImplCopyWithImpl<
-        _$FlutterTripState_NavigatingImpl
-      >(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(FlutterUserLocation? userLocation) idle,
-    required TResult Function(
-      BigInt? currentStepGeometryIndex,
-      FlutterUserLocation userLocation,
-      FlutterUserLocation snappedUserLocation,
-      List<RouteStep> remainingSteps,
-      List<Waypoint> remainingWaypoints,
-      TripProgress progress,
-      TripSummary summary,
-      RouteDeviation deviation,
-      VisualInstruction? visualInstruction,
-      SpokenInstruction? spokenInstruction,
-      String? annotationJson,
-    )
-    navigating,
-    required TResult Function(
-      FlutterUserLocation userLocation,
-      TripSummary summary,
-    )
-    complete,
-  }) {
-    return navigating(
-      currentStepGeometryIndex,
-      userLocation,
-      snappedUserLocation,
-      remainingSteps,
-      remainingWaypoints,
-      progress,
-      summary,
-      deviation,
-      visualInstruction,
-      spokenInstruction,
-      annotationJson,
-    );
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(FlutterUserLocation? userLocation)? idle,
-    TResult? Function(
-      BigInt? currentStepGeometryIndex,
-      FlutterUserLocation userLocation,
-      FlutterUserLocation snappedUserLocation,
-      List<RouteStep> remainingSteps,
-      List<Waypoint> remainingWaypoints,
-      TripProgress progress,
-      TripSummary summary,
-      RouteDeviation deviation,
-      VisualInstruction? visualInstruction,
-      SpokenInstruction? spokenInstruction,
-      String? annotationJson,
-    )?
-    navigating,
-    TResult? Function(FlutterUserLocation userLocation, TripSummary summary)?
-    complete,
-  }) {
-    return navigating?.call(
-      currentStepGeometryIndex,
-      userLocation,
-      snappedUserLocation,
-      remainingSteps,
-      remainingWaypoints,
-      progress,
-      summary,
-      deviation,
-      visualInstruction,
-      spokenInstruction,
-      annotationJson,
-    );
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(FlutterUserLocation? userLocation)? idle,
-    TResult Function(
-      BigInt? currentStepGeometryIndex,
-      FlutterUserLocation userLocation,
-      FlutterUserLocation snappedUserLocation,
-      List<RouteStep> remainingSteps,
-      List<Waypoint> remainingWaypoints,
-      TripProgress progress,
-      TripSummary summary,
-      RouteDeviation deviation,
-      VisualInstruction? visualInstruction,
-      SpokenInstruction? spokenInstruction,
-      String? annotationJson,
-    )?
-    navigating,
-    TResult Function(FlutterUserLocation userLocation, TripSummary summary)?
-    complete,
-    required TResult orElse(),
-  }) {
-    if (navigating != null) {
-      return navigating(
-        currentStepGeometryIndex,
-        userLocation,
-        snappedUserLocation,
-        remainingSteps,
-        remainingWaypoints,
-        progress,
-        summary,
-        deviation,
-        visualInstruction,
-        spokenInstruction,
-        annotationJson,
-      );
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(FlutterTripState_Idle value) idle,
-    required TResult Function(FlutterTripState_Navigating value) navigating,
-    required TResult Function(FlutterTripState_Complete value) complete,
-  }) {
-    return navigating(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FlutterTripState_Idle value)? idle,
-    TResult? Function(FlutterTripState_Navigating value)? navigating,
-    TResult? Function(FlutterTripState_Complete value)? complete,
-  }) {
-    return navigating?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(FlutterTripState_Idle value)? idle,
-    TResult Function(FlutterTripState_Navigating value)? navigating,
-    TResult Function(FlutterTripState_Complete value)? complete,
-    required TResult orElse(),
-  }) {
-    if (navigating != null) {
-      return navigating(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class FlutterTripState_Navigating extends FlutterTripState {
-  const factory FlutterTripState_Navigating({
-    final BigInt? currentStepGeometryIndex,
-    required final FlutterUserLocation userLocation,
-    required final FlutterUserLocation snappedUserLocation,
-    required final List<RouteStep> remainingSteps,
-    required final List<Waypoint> remainingWaypoints,
-    required final TripProgress progress,
-    required final TripSummary summary,
-    required final RouteDeviation deviation,
-    final VisualInstruction? visualInstruction,
-    final SpokenInstruction? spokenInstruction,
-    final String? annotationJson,
-  }) = _$FlutterTripState_NavigatingImpl;
-  const FlutterTripState_Navigating._() : super._();
-
-  BigInt? get currentStepGeometryIndex;
-  @override
-  FlutterUserLocation get userLocation;
-  FlutterUserLocation get snappedUserLocation;
-  List<RouteStep> get remainingSteps;
-  List<Waypoint> get remainingWaypoints;
-  TripProgress get progress;
-  TripSummary get summary;
-  RouteDeviation get deviation;
-  VisualInstruction? get visualInstruction;
-  SpokenInstruction? get spokenInstruction;
-  String? get annotationJson;
-
-  /// Create a copy of FlutterTripState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FlutterTripState_NavigatingImplCopyWith<_$FlutterTripState_NavigatingImpl>
-  get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$FlutterTripState_CompleteImplCopyWith<$Res>
-    implements $FlutterTripStateCopyWith<$Res> {
-  factory _$$FlutterTripState_CompleteImplCopyWith(
-    _$FlutterTripState_CompleteImpl value,
-    $Res Function(_$FlutterTripState_CompleteImpl) then,
-  ) = __$$FlutterTripState_CompleteImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({FlutterUserLocation userLocation, TripSummary summary});
-}
-
-/// @nodoc
-class __$$FlutterTripState_CompleteImplCopyWithImpl<$Res>
-    extends
-        _$FlutterTripStateCopyWithImpl<$Res, _$FlutterTripState_CompleteImpl>
-    implements _$$FlutterTripState_CompleteImplCopyWith<$Res> {
-  __$$FlutterTripState_CompleteImplCopyWithImpl(
-    _$FlutterTripState_CompleteImpl _value,
-    $Res Function(_$FlutterTripState_CompleteImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of FlutterTripState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({Object? userLocation = null, Object? summary = null}) {
-    return _then(
-      _$FlutterTripState_CompleteImpl(
-        userLocation: null == userLocation
-            ? _value.userLocation
-            : userLocation // ignore: cast_nullable_to_non_nullable
-                  as FlutterUserLocation,
-        summary: null == summary
-            ? _value.summary
-            : summary // ignore: cast_nullable_to_non_nullable
-                  as TripSummary,
-      ),
-    );
-  }
-}
-
-/// @nodoc
-
-class _$FlutterTripState_CompleteImpl extends FlutterTripState_Complete {
-  const _$FlutterTripState_CompleteImpl({
-    required this.userLocation,
-    required this.summary,
-  }) : super._();
-
-  @override
-  final FlutterUserLocation userLocation;
-  @override
-  final TripSummary summary;
-
-  @override
-  String toString() {
-    return 'FlutterTripState.complete(userLocation: $userLocation, summary: $summary)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FlutterTripState_CompleteImpl &&
-            (identical(other.userLocation, userLocation) ||
-                other.userLocation == userLocation) &&
-            (identical(other.summary, summary) || other.summary == summary));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, userLocation, summary);
-
-  /// Create a copy of FlutterTripState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FlutterTripState_CompleteImplCopyWith<_$FlutterTripState_CompleteImpl>
-  get copyWith =>
-      __$$FlutterTripState_CompleteImplCopyWithImpl<
-        _$FlutterTripState_CompleteImpl
-      >(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(FlutterUserLocation? userLocation) idle,
-    required TResult Function(
-      BigInt? currentStepGeometryIndex,
-      FlutterUserLocation userLocation,
-      FlutterUserLocation snappedUserLocation,
-      List<RouteStep> remainingSteps,
-      List<Waypoint> remainingWaypoints,
-      TripProgress progress,
-      TripSummary summary,
-      RouteDeviation deviation,
-      VisualInstruction? visualInstruction,
-      SpokenInstruction? spokenInstruction,
-      String? annotationJson,
-    )
-    navigating,
-    required TResult Function(
-      FlutterUserLocation userLocation,
-      TripSummary summary,
-    )
-    complete,
-  }) {
-    return complete(userLocation, summary);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(FlutterUserLocation? userLocation)? idle,
-    TResult? Function(
-      BigInt? currentStepGeometryIndex,
-      FlutterUserLocation userLocation,
-      FlutterUserLocation snappedUserLocation,
-      List<RouteStep> remainingSteps,
-      List<Waypoint> remainingWaypoints,
-      TripProgress progress,
-      TripSummary summary,
-      RouteDeviation deviation,
-      VisualInstruction? visualInstruction,
-      SpokenInstruction? spokenInstruction,
-      String? annotationJson,
-    )?
-    navigating,
-    TResult? Function(FlutterUserLocation userLocation, TripSummary summary)?
-    complete,
-  }) {
-    return complete?.call(userLocation, summary);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(FlutterUserLocation? userLocation)? idle,
-    TResult Function(
-      BigInt? currentStepGeometryIndex,
-      FlutterUserLocation userLocation,
-      FlutterUserLocation snappedUserLocation,
-      List<RouteStep> remainingSteps,
-      List<Waypoint> remainingWaypoints,
-      TripProgress progress,
-      TripSummary summary,
-      RouteDeviation deviation,
-      VisualInstruction? visualInstruction,
-      SpokenInstruction? spokenInstruction,
-      String? annotationJson,
-    )?
-    navigating,
-    TResult Function(FlutterUserLocation userLocation, TripSummary summary)?
-    complete,
-    required TResult orElse(),
-  }) {
-    if (complete != null) {
-      return complete(userLocation, summary);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(FlutterTripState_Idle value) idle,
-    required TResult Function(FlutterTripState_Navigating value) navigating,
-    required TResult Function(FlutterTripState_Complete value) complete,
-  }) {
-    return complete(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FlutterTripState_Idle value)? idle,
-    TResult? Function(FlutterTripState_Navigating value)? navigating,
-    TResult? Function(FlutterTripState_Complete value)? complete,
-  }) {
-    return complete?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(FlutterTripState_Idle value)? idle,
-    TResult Function(FlutterTripState_Navigating value)? navigating,
-    TResult Function(FlutterTripState_Complete value)? complete,
-    required TResult orElse(),
-  }) {
-    if (complete != null) {
-      return complete(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class FlutterTripState_Complete extends FlutterTripState {
-  const factory FlutterTripState_Complete({
-    required final FlutterUserLocation userLocation,
-    required final TripSummary summary,
-  }) = _$FlutterTripState_CompleteImpl;
-  const FlutterTripState_Complete._() : super._();
-
-  @override
-  FlutterUserLocation get userLocation;
-  TripSummary get summary;
-
-  /// Create a copy of FlutterTripState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FlutterTripState_CompleteImplCopyWith<_$FlutterTripState_CompleteImpl>
-  get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 mixin _$RouteDeviation {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -1725,6 +329,411 @@ abstract class RouteDeviation_OffRoute extends RouteDeviation {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RouteDeviation_OffRouteImplCopyWith<_$RouteDeviation_OffRouteImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$RouteDeviationTracking {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() none,
+    required TResult Function(
+      int minimumHorizontalAccuracy,
+      double maxAcceptableDeviation,
+    )
+    staticThreshold,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? none,
+    TResult? Function(
+      int minimumHorizontalAccuracy,
+      double maxAcceptableDeviation,
+    )?
+    staticThreshold,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function(
+      int minimumHorizontalAccuracy,
+      double maxAcceptableDeviation,
+    )?
+    staticThreshold,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(RouteDeviationTracking_None value) none,
+    required TResult Function(RouteDeviationTracking_StaticThreshold value)
+    staticThreshold,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(RouteDeviationTracking_None value)? none,
+    TResult? Function(RouteDeviationTracking_StaticThreshold value)?
+    staticThreshold,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RouteDeviationTracking_None value)? none,
+    TResult Function(RouteDeviationTracking_StaticThreshold value)?
+    staticThreshold,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RouteDeviationTrackingCopyWith<$Res> {
+  factory $RouteDeviationTrackingCopyWith(
+    RouteDeviationTracking value,
+    $Res Function(RouteDeviationTracking) then,
+  ) = _$RouteDeviationTrackingCopyWithImpl<$Res, RouteDeviationTracking>;
+}
+
+/// @nodoc
+class _$RouteDeviationTrackingCopyWithImpl<
+  $Res,
+  $Val extends RouteDeviationTracking
+>
+    implements $RouteDeviationTrackingCopyWith<$Res> {
+  _$RouteDeviationTrackingCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of RouteDeviationTracking
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$RouteDeviationTracking_NoneImplCopyWith<$Res> {
+  factory _$$RouteDeviationTracking_NoneImplCopyWith(
+    _$RouteDeviationTracking_NoneImpl value,
+    $Res Function(_$RouteDeviationTracking_NoneImpl) then,
+  ) = __$$RouteDeviationTracking_NoneImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RouteDeviationTracking_NoneImplCopyWithImpl<$Res>
+    extends
+        _$RouteDeviationTrackingCopyWithImpl<
+          $Res,
+          _$RouteDeviationTracking_NoneImpl
+        >
+    implements _$$RouteDeviationTracking_NoneImplCopyWith<$Res> {
+  __$$RouteDeviationTracking_NoneImplCopyWithImpl(
+    _$RouteDeviationTracking_NoneImpl _value,
+    $Res Function(_$RouteDeviationTracking_NoneImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RouteDeviationTracking
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$RouteDeviationTracking_NoneImpl extends RouteDeviationTracking_None {
+  const _$RouteDeviationTracking_NoneImpl() : super._();
+
+  @override
+  String toString() {
+    return 'RouteDeviationTracking.none()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RouteDeviationTracking_NoneImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() none,
+    required TResult Function(
+      int minimumHorizontalAccuracy,
+      double maxAcceptableDeviation,
+    )
+    staticThreshold,
+  }) {
+    return none();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? none,
+    TResult? Function(
+      int minimumHorizontalAccuracy,
+      double maxAcceptableDeviation,
+    )?
+    staticThreshold,
+  }) {
+    return none?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function(
+      int minimumHorizontalAccuracy,
+      double maxAcceptableDeviation,
+    )?
+    staticThreshold,
+    required TResult orElse(),
+  }) {
+    if (none != null) {
+      return none();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(RouteDeviationTracking_None value) none,
+    required TResult Function(RouteDeviationTracking_StaticThreshold value)
+    staticThreshold,
+  }) {
+    return none(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(RouteDeviationTracking_None value)? none,
+    TResult? Function(RouteDeviationTracking_StaticThreshold value)?
+    staticThreshold,
+  }) {
+    return none?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RouteDeviationTracking_None value)? none,
+    TResult Function(RouteDeviationTracking_StaticThreshold value)?
+    staticThreshold,
+    required TResult orElse(),
+  }) {
+    if (none != null) {
+      return none(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RouteDeviationTracking_None extends RouteDeviationTracking {
+  const factory RouteDeviationTracking_None() =
+      _$RouteDeviationTracking_NoneImpl;
+  const RouteDeviationTracking_None._() : super._();
+}
+
+/// @nodoc
+abstract class _$$RouteDeviationTracking_StaticThresholdImplCopyWith<$Res> {
+  factory _$$RouteDeviationTracking_StaticThresholdImplCopyWith(
+    _$RouteDeviationTracking_StaticThresholdImpl value,
+    $Res Function(_$RouteDeviationTracking_StaticThresholdImpl) then,
+  ) = __$$RouteDeviationTracking_StaticThresholdImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int minimumHorizontalAccuracy, double maxAcceptableDeviation});
+}
+
+/// @nodoc
+class __$$RouteDeviationTracking_StaticThresholdImplCopyWithImpl<$Res>
+    extends
+        _$RouteDeviationTrackingCopyWithImpl<
+          $Res,
+          _$RouteDeviationTracking_StaticThresholdImpl
+        >
+    implements _$$RouteDeviationTracking_StaticThresholdImplCopyWith<$Res> {
+  __$$RouteDeviationTracking_StaticThresholdImplCopyWithImpl(
+    _$RouteDeviationTracking_StaticThresholdImpl _value,
+    $Res Function(_$RouteDeviationTracking_StaticThresholdImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RouteDeviationTracking
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? minimumHorizontalAccuracy = null,
+    Object? maxAcceptableDeviation = null,
+  }) {
+    return _then(
+      _$RouteDeviationTracking_StaticThresholdImpl(
+        minimumHorizontalAccuracy: null == minimumHorizontalAccuracy
+            ? _value.minimumHorizontalAccuracy
+            : minimumHorizontalAccuracy // ignore: cast_nullable_to_non_nullable
+                  as int,
+        maxAcceptableDeviation: null == maxAcceptableDeviation
+            ? _value.maxAcceptableDeviation
+            : maxAcceptableDeviation // ignore: cast_nullable_to_non_nullable
+                  as double,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$RouteDeviationTracking_StaticThresholdImpl
+    extends RouteDeviationTracking_StaticThreshold {
+  const _$RouteDeviationTracking_StaticThresholdImpl({
+    required this.minimumHorizontalAccuracy,
+    required this.maxAcceptableDeviation,
+  }) : super._();
+
+  @override
+  final int minimumHorizontalAccuracy;
+  @override
+  final double maxAcceptableDeviation;
+
+  @override
+  String toString() {
+    return 'RouteDeviationTracking.staticThreshold(minimumHorizontalAccuracy: $minimumHorizontalAccuracy, maxAcceptableDeviation: $maxAcceptableDeviation)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RouteDeviationTracking_StaticThresholdImpl &&
+            (identical(
+                  other.minimumHorizontalAccuracy,
+                  minimumHorizontalAccuracy,
+                ) ||
+                other.minimumHorizontalAccuracy == minimumHorizontalAccuracy) &&
+            (identical(other.maxAcceptableDeviation, maxAcceptableDeviation) ||
+                other.maxAcceptableDeviation == maxAcceptableDeviation));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    minimumHorizontalAccuracy,
+    maxAcceptableDeviation,
+  );
+
+  /// Create a copy of RouteDeviationTracking
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RouteDeviationTracking_StaticThresholdImplCopyWith<
+    _$RouteDeviationTracking_StaticThresholdImpl
+  >
+  get copyWith =>
+      __$$RouteDeviationTracking_StaticThresholdImplCopyWithImpl<
+        _$RouteDeviationTracking_StaticThresholdImpl
+      >(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() none,
+    required TResult Function(
+      int minimumHorizontalAccuracy,
+      double maxAcceptableDeviation,
+    )
+    staticThreshold,
+  }) {
+    return staticThreshold(minimumHorizontalAccuracy, maxAcceptableDeviation);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? none,
+    TResult? Function(
+      int minimumHorizontalAccuracy,
+      double maxAcceptableDeviation,
+    )?
+    staticThreshold,
+  }) {
+    return staticThreshold?.call(
+      minimumHorizontalAccuracy,
+      maxAcceptableDeviation,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function(
+      int minimumHorizontalAccuracy,
+      double maxAcceptableDeviation,
+    )?
+    staticThreshold,
+    required TResult orElse(),
+  }) {
+    if (staticThreshold != null) {
+      return staticThreshold(minimumHorizontalAccuracy, maxAcceptableDeviation);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(RouteDeviationTracking_None value) none,
+    required TResult Function(RouteDeviationTracking_StaticThreshold value)
+    staticThreshold,
+  }) {
+    return staticThreshold(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(RouteDeviationTracking_None value)? none,
+    TResult? Function(RouteDeviationTracking_StaticThreshold value)?
+    staticThreshold,
+  }) {
+    return staticThreshold?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RouteDeviationTracking_None value)? none,
+    TResult Function(RouteDeviationTracking_StaticThreshold value)?
+    staticThreshold,
+    required TResult orElse(),
+  }) {
+    if (staticThreshold != null) {
+      return staticThreshold(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RouteDeviationTracking_StaticThreshold
+    extends RouteDeviationTracking {
+  const factory RouteDeviationTracking_StaticThreshold({
+    required final int minimumHorizontalAccuracy,
+    required final double maxAcceptableDeviation,
+  }) = _$RouteDeviationTracking_StaticThresholdImpl;
+  const RouteDeviationTracking_StaticThreshold._() : super._();
+
+  int get minimumHorizontalAccuracy;
+  double get maxAcceptableDeviation;
+
+  /// Create a copy of RouteDeviationTracking
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RouteDeviationTracking_StaticThresholdImplCopyWith<
+    _$RouteDeviationTracking_StaticThresholdImpl
+  >
   get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -4279,6 +3288,957 @@ abstract class SerializableStepAdvanceCondition_AndAdvanceConditions
     _$SerializableStepAdvanceCondition_AndAdvanceConditionsImpl
   >
   get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$TripState {
+  UserLocation? get userLocation => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(UserLocation? userLocation) idle,
+    required TResult Function(
+      BigInt? currentStepGeometryIndex,
+      UserLocation userLocation,
+      UserLocation snappedUserLocation,
+      List<RouteStep> remainingSteps,
+      List<Waypoint> remainingWaypoints,
+      TripProgress progress,
+      TripSummary summary,
+      RouteDeviation deviation,
+      VisualInstruction? visualInstruction,
+      SpokenInstruction? spokenInstruction,
+      String? annotationJson,
+    )
+    navigating,
+    required TResult Function(UserLocation userLocation, TripSummary summary)
+    complete,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserLocation? userLocation)? idle,
+    TResult? Function(
+      BigInt? currentStepGeometryIndex,
+      UserLocation userLocation,
+      UserLocation snappedUserLocation,
+      List<RouteStep> remainingSteps,
+      List<Waypoint> remainingWaypoints,
+      TripProgress progress,
+      TripSummary summary,
+      RouteDeviation deviation,
+      VisualInstruction? visualInstruction,
+      SpokenInstruction? spokenInstruction,
+      String? annotationJson,
+    )?
+    navigating,
+    TResult? Function(UserLocation userLocation, TripSummary summary)? complete,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserLocation? userLocation)? idle,
+    TResult Function(
+      BigInt? currentStepGeometryIndex,
+      UserLocation userLocation,
+      UserLocation snappedUserLocation,
+      List<RouteStep> remainingSteps,
+      List<Waypoint> remainingWaypoints,
+      TripProgress progress,
+      TripSummary summary,
+      RouteDeviation deviation,
+      VisualInstruction? visualInstruction,
+      SpokenInstruction? spokenInstruction,
+      String? annotationJson,
+    )?
+    navigating,
+    TResult Function(UserLocation userLocation, TripSummary summary)? complete,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TripState_Idle value) idle,
+    required TResult Function(TripState_Navigating value) navigating,
+    required TResult Function(TripState_Complete value) complete,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TripState_Idle value)? idle,
+    TResult? Function(TripState_Navigating value)? navigating,
+    TResult? Function(TripState_Complete value)? complete,
+  }) => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TripState_Idle value)? idle,
+    TResult Function(TripState_Navigating value)? navigating,
+    TResult Function(TripState_Complete value)? complete,
+    required TResult orElse(),
+  }) => throw _privateConstructorUsedError;
+
+  /// Create a copy of TripState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $TripStateCopyWith<TripState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TripStateCopyWith<$Res> {
+  factory $TripStateCopyWith(TripState value, $Res Function(TripState) then) =
+      _$TripStateCopyWithImpl<$Res, TripState>;
+  @useResult
+  $Res call({UserLocation userLocation});
+}
+
+/// @nodoc
+class _$TripStateCopyWithImpl<$Res, $Val extends TripState>
+    implements $TripStateCopyWith<$Res> {
+  _$TripStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of TripState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? userLocation = null}) {
+    return _then(
+      _value.copyWith(
+            userLocation: null == userLocation
+                ? _value.userLocation!
+                : userLocation // ignore: cast_nullable_to_non_nullable
+                      as UserLocation,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$TripState_IdleImplCopyWith<$Res>
+    implements $TripStateCopyWith<$Res> {
+  factory _$$TripState_IdleImplCopyWith(
+    _$TripState_IdleImpl value,
+    $Res Function(_$TripState_IdleImpl) then,
+  ) = __$$TripState_IdleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({UserLocation? userLocation});
+}
+
+/// @nodoc
+class __$$TripState_IdleImplCopyWithImpl<$Res>
+    extends _$TripStateCopyWithImpl<$Res, _$TripState_IdleImpl>
+    implements _$$TripState_IdleImplCopyWith<$Res> {
+  __$$TripState_IdleImplCopyWithImpl(
+    _$TripState_IdleImpl _value,
+    $Res Function(_$TripState_IdleImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of TripState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? userLocation = freezed}) {
+    return _then(
+      _$TripState_IdleImpl(
+        userLocation: freezed == userLocation
+            ? _value.userLocation
+            : userLocation // ignore: cast_nullable_to_non_nullable
+                  as UserLocation?,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$TripState_IdleImpl extends TripState_Idle {
+  const _$TripState_IdleImpl({this.userLocation}) : super._();
+
+  @override
+  final UserLocation? userLocation;
+
+  @override
+  String toString() {
+    return 'TripState.idle(userLocation: $userLocation)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TripState_IdleImpl &&
+            (identical(other.userLocation, userLocation) ||
+                other.userLocation == userLocation));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userLocation);
+
+  /// Create a copy of TripState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TripState_IdleImplCopyWith<_$TripState_IdleImpl> get copyWith =>
+      __$$TripState_IdleImplCopyWithImpl<_$TripState_IdleImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(UserLocation? userLocation) idle,
+    required TResult Function(
+      BigInt? currentStepGeometryIndex,
+      UserLocation userLocation,
+      UserLocation snappedUserLocation,
+      List<RouteStep> remainingSteps,
+      List<Waypoint> remainingWaypoints,
+      TripProgress progress,
+      TripSummary summary,
+      RouteDeviation deviation,
+      VisualInstruction? visualInstruction,
+      SpokenInstruction? spokenInstruction,
+      String? annotationJson,
+    )
+    navigating,
+    required TResult Function(UserLocation userLocation, TripSummary summary)
+    complete,
+  }) {
+    return idle(userLocation);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserLocation? userLocation)? idle,
+    TResult? Function(
+      BigInt? currentStepGeometryIndex,
+      UserLocation userLocation,
+      UserLocation snappedUserLocation,
+      List<RouteStep> remainingSteps,
+      List<Waypoint> remainingWaypoints,
+      TripProgress progress,
+      TripSummary summary,
+      RouteDeviation deviation,
+      VisualInstruction? visualInstruction,
+      SpokenInstruction? spokenInstruction,
+      String? annotationJson,
+    )?
+    navigating,
+    TResult? Function(UserLocation userLocation, TripSummary summary)? complete,
+  }) {
+    return idle?.call(userLocation);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserLocation? userLocation)? idle,
+    TResult Function(
+      BigInt? currentStepGeometryIndex,
+      UserLocation userLocation,
+      UserLocation snappedUserLocation,
+      List<RouteStep> remainingSteps,
+      List<Waypoint> remainingWaypoints,
+      TripProgress progress,
+      TripSummary summary,
+      RouteDeviation deviation,
+      VisualInstruction? visualInstruction,
+      SpokenInstruction? spokenInstruction,
+      String? annotationJson,
+    )?
+    navigating,
+    TResult Function(UserLocation userLocation, TripSummary summary)? complete,
+    required TResult orElse(),
+  }) {
+    if (idle != null) {
+      return idle(userLocation);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TripState_Idle value) idle,
+    required TResult Function(TripState_Navigating value) navigating,
+    required TResult Function(TripState_Complete value) complete,
+  }) {
+    return idle(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TripState_Idle value)? idle,
+    TResult? Function(TripState_Navigating value)? navigating,
+    TResult? Function(TripState_Complete value)? complete,
+  }) {
+    return idle?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TripState_Idle value)? idle,
+    TResult Function(TripState_Navigating value)? navigating,
+    TResult Function(TripState_Complete value)? complete,
+    required TResult orElse(),
+  }) {
+    if (idle != null) {
+      return idle(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TripState_Idle extends TripState {
+  const factory TripState_Idle({final UserLocation? userLocation}) =
+      _$TripState_IdleImpl;
+  const TripState_Idle._() : super._();
+
+  @override
+  UserLocation? get userLocation;
+
+  /// Create a copy of TripState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TripState_IdleImplCopyWith<_$TripState_IdleImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TripState_NavigatingImplCopyWith<$Res>
+    implements $TripStateCopyWith<$Res> {
+  factory _$$TripState_NavigatingImplCopyWith(
+    _$TripState_NavigatingImpl value,
+    $Res Function(_$TripState_NavigatingImpl) then,
+  ) = __$$TripState_NavigatingImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    BigInt? currentStepGeometryIndex,
+    UserLocation userLocation,
+    UserLocation snappedUserLocation,
+    List<RouteStep> remainingSteps,
+    List<Waypoint> remainingWaypoints,
+    TripProgress progress,
+    TripSummary summary,
+    RouteDeviation deviation,
+    VisualInstruction? visualInstruction,
+    SpokenInstruction? spokenInstruction,
+    String? annotationJson,
+  });
+
+  $RouteDeviationCopyWith<$Res> get deviation;
+}
+
+/// @nodoc
+class __$$TripState_NavigatingImplCopyWithImpl<$Res>
+    extends _$TripStateCopyWithImpl<$Res, _$TripState_NavigatingImpl>
+    implements _$$TripState_NavigatingImplCopyWith<$Res> {
+  __$$TripState_NavigatingImplCopyWithImpl(
+    _$TripState_NavigatingImpl _value,
+    $Res Function(_$TripState_NavigatingImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of TripState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? currentStepGeometryIndex = freezed,
+    Object? userLocation = null,
+    Object? snappedUserLocation = null,
+    Object? remainingSteps = null,
+    Object? remainingWaypoints = null,
+    Object? progress = null,
+    Object? summary = null,
+    Object? deviation = null,
+    Object? visualInstruction = freezed,
+    Object? spokenInstruction = freezed,
+    Object? annotationJson = freezed,
+  }) {
+    return _then(
+      _$TripState_NavigatingImpl(
+        currentStepGeometryIndex: freezed == currentStepGeometryIndex
+            ? _value.currentStepGeometryIndex
+            : currentStepGeometryIndex // ignore: cast_nullable_to_non_nullable
+                  as BigInt?,
+        userLocation: null == userLocation
+            ? _value.userLocation
+            : userLocation // ignore: cast_nullable_to_non_nullable
+                  as UserLocation,
+        snappedUserLocation: null == snappedUserLocation
+            ? _value.snappedUserLocation
+            : snappedUserLocation // ignore: cast_nullable_to_non_nullable
+                  as UserLocation,
+        remainingSteps: null == remainingSteps
+            ? _value._remainingSteps
+            : remainingSteps // ignore: cast_nullable_to_non_nullable
+                  as List<RouteStep>,
+        remainingWaypoints: null == remainingWaypoints
+            ? _value._remainingWaypoints
+            : remainingWaypoints // ignore: cast_nullable_to_non_nullable
+                  as List<Waypoint>,
+        progress: null == progress
+            ? _value.progress
+            : progress // ignore: cast_nullable_to_non_nullable
+                  as TripProgress,
+        summary: null == summary
+            ? _value.summary
+            : summary // ignore: cast_nullable_to_non_nullable
+                  as TripSummary,
+        deviation: null == deviation
+            ? _value.deviation
+            : deviation // ignore: cast_nullable_to_non_nullable
+                  as RouteDeviation,
+        visualInstruction: freezed == visualInstruction
+            ? _value.visualInstruction
+            : visualInstruction // ignore: cast_nullable_to_non_nullable
+                  as VisualInstruction?,
+        spokenInstruction: freezed == spokenInstruction
+            ? _value.spokenInstruction
+            : spokenInstruction // ignore: cast_nullable_to_non_nullable
+                  as SpokenInstruction?,
+        annotationJson: freezed == annotationJson
+            ? _value.annotationJson
+            : annotationJson // ignore: cast_nullable_to_non_nullable
+                  as String?,
+      ),
+    );
+  }
+
+  /// Create a copy of TripState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RouteDeviationCopyWith<$Res> get deviation {
+    return $RouteDeviationCopyWith<$Res>(_value.deviation, (value) {
+      return _then(_value.copyWith(deviation: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$TripState_NavigatingImpl extends TripState_Navigating {
+  const _$TripState_NavigatingImpl({
+    this.currentStepGeometryIndex,
+    required this.userLocation,
+    required this.snappedUserLocation,
+    required final List<RouteStep> remainingSteps,
+    required final List<Waypoint> remainingWaypoints,
+    required this.progress,
+    required this.summary,
+    required this.deviation,
+    this.visualInstruction,
+    this.spokenInstruction,
+    this.annotationJson,
+  }) : _remainingSteps = remainingSteps,
+       _remainingWaypoints = remainingWaypoints,
+       super._();
+
+  @override
+  final BigInt? currentStepGeometryIndex;
+  @override
+  final UserLocation userLocation;
+  @override
+  final UserLocation snappedUserLocation;
+  final List<RouteStep> _remainingSteps;
+  @override
+  List<RouteStep> get remainingSteps {
+    if (_remainingSteps is EqualUnmodifiableListView) return _remainingSteps;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_remainingSteps);
+  }
+
+  final List<Waypoint> _remainingWaypoints;
+  @override
+  List<Waypoint> get remainingWaypoints {
+    if (_remainingWaypoints is EqualUnmodifiableListView)
+      return _remainingWaypoints;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_remainingWaypoints);
+  }
+
+  @override
+  final TripProgress progress;
+  @override
+  final TripSummary summary;
+  @override
+  final RouteDeviation deviation;
+  @override
+  final VisualInstruction? visualInstruction;
+  @override
+  final SpokenInstruction? spokenInstruction;
+  @override
+  final String? annotationJson;
+
+  @override
+  String toString() {
+    return 'TripState.navigating(currentStepGeometryIndex: $currentStepGeometryIndex, userLocation: $userLocation, snappedUserLocation: $snappedUserLocation, remainingSteps: $remainingSteps, remainingWaypoints: $remainingWaypoints, progress: $progress, summary: $summary, deviation: $deviation, visualInstruction: $visualInstruction, spokenInstruction: $spokenInstruction, annotationJson: $annotationJson)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TripState_NavigatingImpl &&
+            (identical(
+                  other.currentStepGeometryIndex,
+                  currentStepGeometryIndex,
+                ) ||
+                other.currentStepGeometryIndex == currentStepGeometryIndex) &&
+            (identical(other.userLocation, userLocation) ||
+                other.userLocation == userLocation) &&
+            (identical(other.snappedUserLocation, snappedUserLocation) ||
+                other.snappedUserLocation == snappedUserLocation) &&
+            const DeepCollectionEquality().equals(
+              other._remainingSteps,
+              _remainingSteps,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._remainingWaypoints,
+              _remainingWaypoints,
+            ) &&
+            (identical(other.progress, progress) ||
+                other.progress == progress) &&
+            (identical(other.summary, summary) || other.summary == summary) &&
+            (identical(other.deviation, deviation) ||
+                other.deviation == deviation) &&
+            (identical(other.visualInstruction, visualInstruction) ||
+                other.visualInstruction == visualInstruction) &&
+            (identical(other.spokenInstruction, spokenInstruction) ||
+                other.spokenInstruction == spokenInstruction) &&
+            (identical(other.annotationJson, annotationJson) ||
+                other.annotationJson == annotationJson));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    currentStepGeometryIndex,
+    userLocation,
+    snappedUserLocation,
+    const DeepCollectionEquality().hash(_remainingSteps),
+    const DeepCollectionEquality().hash(_remainingWaypoints),
+    progress,
+    summary,
+    deviation,
+    visualInstruction,
+    spokenInstruction,
+    annotationJson,
+  );
+
+  /// Create a copy of TripState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TripState_NavigatingImplCopyWith<_$TripState_NavigatingImpl>
+  get copyWith =>
+      __$$TripState_NavigatingImplCopyWithImpl<_$TripState_NavigatingImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(UserLocation? userLocation) idle,
+    required TResult Function(
+      BigInt? currentStepGeometryIndex,
+      UserLocation userLocation,
+      UserLocation snappedUserLocation,
+      List<RouteStep> remainingSteps,
+      List<Waypoint> remainingWaypoints,
+      TripProgress progress,
+      TripSummary summary,
+      RouteDeviation deviation,
+      VisualInstruction? visualInstruction,
+      SpokenInstruction? spokenInstruction,
+      String? annotationJson,
+    )
+    navigating,
+    required TResult Function(UserLocation userLocation, TripSummary summary)
+    complete,
+  }) {
+    return navigating(
+      currentStepGeometryIndex,
+      userLocation,
+      snappedUserLocation,
+      remainingSteps,
+      remainingWaypoints,
+      progress,
+      summary,
+      deviation,
+      visualInstruction,
+      spokenInstruction,
+      annotationJson,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserLocation? userLocation)? idle,
+    TResult? Function(
+      BigInt? currentStepGeometryIndex,
+      UserLocation userLocation,
+      UserLocation snappedUserLocation,
+      List<RouteStep> remainingSteps,
+      List<Waypoint> remainingWaypoints,
+      TripProgress progress,
+      TripSummary summary,
+      RouteDeviation deviation,
+      VisualInstruction? visualInstruction,
+      SpokenInstruction? spokenInstruction,
+      String? annotationJson,
+    )?
+    navigating,
+    TResult? Function(UserLocation userLocation, TripSummary summary)? complete,
+  }) {
+    return navigating?.call(
+      currentStepGeometryIndex,
+      userLocation,
+      snappedUserLocation,
+      remainingSteps,
+      remainingWaypoints,
+      progress,
+      summary,
+      deviation,
+      visualInstruction,
+      spokenInstruction,
+      annotationJson,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserLocation? userLocation)? idle,
+    TResult Function(
+      BigInt? currentStepGeometryIndex,
+      UserLocation userLocation,
+      UserLocation snappedUserLocation,
+      List<RouteStep> remainingSteps,
+      List<Waypoint> remainingWaypoints,
+      TripProgress progress,
+      TripSummary summary,
+      RouteDeviation deviation,
+      VisualInstruction? visualInstruction,
+      SpokenInstruction? spokenInstruction,
+      String? annotationJson,
+    )?
+    navigating,
+    TResult Function(UserLocation userLocation, TripSummary summary)? complete,
+    required TResult orElse(),
+  }) {
+    if (navigating != null) {
+      return navigating(
+        currentStepGeometryIndex,
+        userLocation,
+        snappedUserLocation,
+        remainingSteps,
+        remainingWaypoints,
+        progress,
+        summary,
+        deviation,
+        visualInstruction,
+        spokenInstruction,
+        annotationJson,
+      );
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TripState_Idle value) idle,
+    required TResult Function(TripState_Navigating value) navigating,
+    required TResult Function(TripState_Complete value) complete,
+  }) {
+    return navigating(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TripState_Idle value)? idle,
+    TResult? Function(TripState_Navigating value)? navigating,
+    TResult? Function(TripState_Complete value)? complete,
+  }) {
+    return navigating?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TripState_Idle value)? idle,
+    TResult Function(TripState_Navigating value)? navigating,
+    TResult Function(TripState_Complete value)? complete,
+    required TResult orElse(),
+  }) {
+    if (navigating != null) {
+      return navigating(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TripState_Navigating extends TripState {
+  const factory TripState_Navigating({
+    final BigInt? currentStepGeometryIndex,
+    required final UserLocation userLocation,
+    required final UserLocation snappedUserLocation,
+    required final List<RouteStep> remainingSteps,
+    required final List<Waypoint> remainingWaypoints,
+    required final TripProgress progress,
+    required final TripSummary summary,
+    required final RouteDeviation deviation,
+    final VisualInstruction? visualInstruction,
+    final SpokenInstruction? spokenInstruction,
+    final String? annotationJson,
+  }) = _$TripState_NavigatingImpl;
+  const TripState_Navigating._() : super._();
+
+  BigInt? get currentStepGeometryIndex;
+  @override
+  UserLocation get userLocation;
+  UserLocation get snappedUserLocation;
+  List<RouteStep> get remainingSteps;
+  List<Waypoint> get remainingWaypoints;
+  TripProgress get progress;
+  TripSummary get summary;
+  RouteDeviation get deviation;
+  VisualInstruction? get visualInstruction;
+  SpokenInstruction? get spokenInstruction;
+  String? get annotationJson;
+
+  /// Create a copy of TripState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TripState_NavigatingImplCopyWith<_$TripState_NavigatingImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TripState_CompleteImplCopyWith<$Res>
+    implements $TripStateCopyWith<$Res> {
+  factory _$$TripState_CompleteImplCopyWith(
+    _$TripState_CompleteImpl value,
+    $Res Function(_$TripState_CompleteImpl) then,
+  ) = __$$TripState_CompleteImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({UserLocation userLocation, TripSummary summary});
+}
+
+/// @nodoc
+class __$$TripState_CompleteImplCopyWithImpl<$Res>
+    extends _$TripStateCopyWithImpl<$Res, _$TripState_CompleteImpl>
+    implements _$$TripState_CompleteImplCopyWith<$Res> {
+  __$$TripState_CompleteImplCopyWithImpl(
+    _$TripState_CompleteImpl _value,
+    $Res Function(_$TripState_CompleteImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of TripState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? userLocation = null, Object? summary = null}) {
+    return _then(
+      _$TripState_CompleteImpl(
+        userLocation: null == userLocation
+            ? _value.userLocation
+            : userLocation // ignore: cast_nullable_to_non_nullable
+                  as UserLocation,
+        summary: null == summary
+            ? _value.summary
+            : summary // ignore: cast_nullable_to_non_nullable
+                  as TripSummary,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$TripState_CompleteImpl extends TripState_Complete {
+  const _$TripState_CompleteImpl({
+    required this.userLocation,
+    required this.summary,
+  }) : super._();
+
+  @override
+  final UserLocation userLocation;
+  @override
+  final TripSummary summary;
+
+  @override
+  String toString() {
+    return 'TripState.complete(userLocation: $userLocation, summary: $summary)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TripState_CompleteImpl &&
+            (identical(other.userLocation, userLocation) ||
+                other.userLocation == userLocation) &&
+            (identical(other.summary, summary) || other.summary == summary));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userLocation, summary);
+
+  /// Create a copy of TripState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TripState_CompleteImplCopyWith<_$TripState_CompleteImpl> get copyWith =>
+      __$$TripState_CompleteImplCopyWithImpl<_$TripState_CompleteImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(UserLocation? userLocation) idle,
+    required TResult Function(
+      BigInt? currentStepGeometryIndex,
+      UserLocation userLocation,
+      UserLocation snappedUserLocation,
+      List<RouteStep> remainingSteps,
+      List<Waypoint> remainingWaypoints,
+      TripProgress progress,
+      TripSummary summary,
+      RouteDeviation deviation,
+      VisualInstruction? visualInstruction,
+      SpokenInstruction? spokenInstruction,
+      String? annotationJson,
+    )
+    navigating,
+    required TResult Function(UserLocation userLocation, TripSummary summary)
+    complete,
+  }) {
+    return complete(userLocation, summary);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserLocation? userLocation)? idle,
+    TResult? Function(
+      BigInt? currentStepGeometryIndex,
+      UserLocation userLocation,
+      UserLocation snappedUserLocation,
+      List<RouteStep> remainingSteps,
+      List<Waypoint> remainingWaypoints,
+      TripProgress progress,
+      TripSummary summary,
+      RouteDeviation deviation,
+      VisualInstruction? visualInstruction,
+      SpokenInstruction? spokenInstruction,
+      String? annotationJson,
+    )?
+    navigating,
+    TResult? Function(UserLocation userLocation, TripSummary summary)? complete,
+  }) {
+    return complete?.call(userLocation, summary);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserLocation? userLocation)? idle,
+    TResult Function(
+      BigInt? currentStepGeometryIndex,
+      UserLocation userLocation,
+      UserLocation snappedUserLocation,
+      List<RouteStep> remainingSteps,
+      List<Waypoint> remainingWaypoints,
+      TripProgress progress,
+      TripSummary summary,
+      RouteDeviation deviation,
+      VisualInstruction? visualInstruction,
+      SpokenInstruction? spokenInstruction,
+      String? annotationJson,
+    )?
+    navigating,
+    TResult Function(UserLocation userLocation, TripSummary summary)? complete,
+    required TResult orElse(),
+  }) {
+    if (complete != null) {
+      return complete(userLocation, summary);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TripState_Idle value) idle,
+    required TResult Function(TripState_Navigating value) navigating,
+    required TResult Function(TripState_Complete value) complete,
+  }) {
+    return complete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TripState_Idle value)? idle,
+    TResult? Function(TripState_Navigating value)? navigating,
+    TResult? Function(TripState_Complete value)? complete,
+  }) {
+    return complete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TripState_Idle value)? idle,
+    TResult Function(TripState_Navigating value)? navigating,
+    TResult Function(TripState_Complete value)? complete,
+    required TResult orElse(),
+  }) {
+    if (complete != null) {
+      return complete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TripState_Complete extends TripState {
+  const factory TripState_Complete({
+    required final UserLocation userLocation,
+    required final TripSummary summary,
+  }) = _$TripState_CompleteImpl;
+  const TripState_Complete._() : super._();
+
+  @override
+  UserLocation get userLocation;
+  TripSummary get summary;
+
+  /// Create a copy of TripState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TripState_CompleteImplCopyWith<_$TripState_CompleteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
