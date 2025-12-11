@@ -18,31 +18,34 @@ Future<List<Route>> parseOsrmResponse({
   polylinePrecision: polylinePrecision,
 );
 
-Future<FlutterRouteRequest> getValhallaRequest({
-  required String baseUrl,
-  required String apiKey,
-  required UserLocation userLocation,
-  required List<Waypoint> waypoints,
-  required String costing,
-}) => RustLib.instance.api.crateApiRoutingGetValhallaRequest(
-  baseUrl: baseUrl,
-  apiKey: apiKey,
-  userLocation: userLocation,
-  waypoints: waypoints,
-  costing: costing,
-);
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ValhallaHttpRequestGenerator>>
+abstract class ValhallaHttpRequestGenerator implements RustOpaqueInterface {
+  Future<FerrostarRouteRequest> generateRequest({
+    required UserLocation userLocation,
+    required List<Waypoint> waypoints,
+  });
+
+  // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
+  static Future<ValhallaHttpRequestGenerator> newInstance({
+    required String endpointUrl,
+    required String profile,
+  }) => RustLib.instance.api.crateApiRoutingValhallaHttpRequestGeneratorNew(
+    endpointUrl: endpointUrl,
+    profile: profile,
+  );
+}
 
 @freezed
-sealed class FlutterRouteRequest with _$FlutterRouteRequest {
-  const FlutterRouteRequest._();
+sealed class FerrostarRouteRequest with _$FerrostarRouteRequest {
+  const FerrostarRouteRequest._();
 
-  const factory FlutterRouteRequest.httpPost({
+  const factory FerrostarRouteRequest.httpPost({
     required String url,
     required Map<String, String> headers,
     required Uint8List body,
-  }) = FlutterRouteRequest_HttpPost;
-  const factory FlutterRouteRequest.httpGet({
+  }) = FerrostarRouteRequest_HttpPost;
+  const factory FerrostarRouteRequest.httpGet({
     required String url,
     required Map<String, String> headers,
-  }) = FlutterRouteRequest_HttpGet;
+  }) = FerrostarRouteRequest_HttpGet;
 }

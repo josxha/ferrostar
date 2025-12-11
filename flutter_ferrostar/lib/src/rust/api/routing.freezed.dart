@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 );
 
 /// @nodoc
-mixin _$FlutterRouteRequest {
+mixin _$FerrostarRouteRequest {
   String get url => throw _privateConstructorUsedError;
   Map<String, String> get headers => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,49 +44,52 @@ mixin _$FlutterRouteRequest {
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FlutterRouteRequest_HttpPost value) httpPost,
-    required TResult Function(FlutterRouteRequest_HttpGet value) httpGet,
+    required TResult Function(FerrostarRouteRequest_HttpPost value) httpPost,
+    required TResult Function(FerrostarRouteRequest_HttpGet value) httpGet,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FlutterRouteRequest_HttpPost value)? httpPost,
-    TResult? Function(FlutterRouteRequest_HttpGet value)? httpGet,
+    TResult? Function(FerrostarRouteRequest_HttpPost value)? httpPost,
+    TResult? Function(FerrostarRouteRequest_HttpGet value)? httpGet,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FlutterRouteRequest_HttpPost value)? httpPost,
-    TResult Function(FlutterRouteRequest_HttpGet value)? httpGet,
+    TResult Function(FerrostarRouteRequest_HttpPost value)? httpPost,
+    TResult Function(FerrostarRouteRequest_HttpGet value)? httpGet,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 
-  /// Create a copy of FlutterRouteRequest
+  /// Create a copy of FerrostarRouteRequest
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $FlutterRouteRequestCopyWith<FlutterRouteRequest> get copyWith =>
+  $FerrostarRouteRequestCopyWith<FerrostarRouteRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FlutterRouteRequestCopyWith<$Res> {
-  factory $FlutterRouteRequestCopyWith(
-    FlutterRouteRequest value,
-    $Res Function(FlutterRouteRequest) then,
-  ) = _$FlutterRouteRequestCopyWithImpl<$Res, FlutterRouteRequest>;
+abstract class $FerrostarRouteRequestCopyWith<$Res> {
+  factory $FerrostarRouteRequestCopyWith(
+    FerrostarRouteRequest value,
+    $Res Function(FerrostarRouteRequest) then,
+  ) = _$FerrostarRouteRequestCopyWithImpl<$Res, FerrostarRouteRequest>;
   @useResult
   $Res call({String url, Map<String, String> headers});
 }
 
 /// @nodoc
-class _$FlutterRouteRequestCopyWithImpl<$Res, $Val extends FlutterRouteRequest>
-    implements $FlutterRouteRequestCopyWith<$Res> {
-  _$FlutterRouteRequestCopyWithImpl(this._value, this._then);
+class _$FerrostarRouteRequestCopyWithImpl<
+  $Res,
+  $Val extends FerrostarRouteRequest
+>
+    implements $FerrostarRouteRequestCopyWith<$Res> {
+  _$FerrostarRouteRequestCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of FlutterRouteRequest
+  /// Create a copy of FerrostarRouteRequest
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -108,37 +111,37 @@ class _$FlutterRouteRequestCopyWithImpl<$Res, $Val extends FlutterRouteRequest>
 }
 
 /// @nodoc
-abstract class _$$FlutterRouteRequest_HttpPostImplCopyWith<$Res>
-    implements $FlutterRouteRequestCopyWith<$Res> {
-  factory _$$FlutterRouteRequest_HttpPostImplCopyWith(
-    _$FlutterRouteRequest_HttpPostImpl value,
-    $Res Function(_$FlutterRouteRequest_HttpPostImpl) then,
-  ) = __$$FlutterRouteRequest_HttpPostImplCopyWithImpl<$Res>;
+abstract class _$$FerrostarRouteRequest_HttpPostImplCopyWith<$Res>
+    implements $FerrostarRouteRequestCopyWith<$Res> {
+  factory _$$FerrostarRouteRequest_HttpPostImplCopyWith(
+    _$FerrostarRouteRequest_HttpPostImpl value,
+    $Res Function(_$FerrostarRouteRequest_HttpPostImpl) then,
+  ) = __$$FerrostarRouteRequest_HttpPostImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String url, Map<String, String> headers, Uint8List body});
 }
 
 /// @nodoc
-class __$$FlutterRouteRequest_HttpPostImplCopyWithImpl<$Res>
+class __$$FerrostarRouteRequest_HttpPostImplCopyWithImpl<$Res>
     extends
-        _$FlutterRouteRequestCopyWithImpl<
+        _$FerrostarRouteRequestCopyWithImpl<
           $Res,
-          _$FlutterRouteRequest_HttpPostImpl
+          _$FerrostarRouteRequest_HttpPostImpl
         >
-    implements _$$FlutterRouteRequest_HttpPostImplCopyWith<$Res> {
-  __$$FlutterRouteRequest_HttpPostImplCopyWithImpl(
-    _$FlutterRouteRequest_HttpPostImpl _value,
-    $Res Function(_$FlutterRouteRequest_HttpPostImpl) _then,
+    implements _$$FerrostarRouteRequest_HttpPostImplCopyWith<$Res> {
+  __$$FerrostarRouteRequest_HttpPostImplCopyWithImpl(
+    _$FerrostarRouteRequest_HttpPostImpl _value,
+    $Res Function(_$FerrostarRouteRequest_HttpPostImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of FlutterRouteRequest
+  /// Create a copy of FerrostarRouteRequest
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({Object? url = null, Object? headers = null, Object? body = null}) {
     return _then(
-      _$FlutterRouteRequest_HttpPostImpl(
+      _$FerrostarRouteRequest_HttpPostImpl(
         url: null == url
             ? _value.url
             : url // ignore: cast_nullable_to_non_nullable
@@ -158,8 +161,9 @@ class __$$FlutterRouteRequest_HttpPostImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FlutterRouteRequest_HttpPostImpl extends FlutterRouteRequest_HttpPost {
-  const _$FlutterRouteRequest_HttpPostImpl({
+class _$FerrostarRouteRequest_HttpPostImpl
+    extends FerrostarRouteRequest_HttpPost {
+  const _$FerrostarRouteRequest_HttpPostImpl({
     required this.url,
     required final Map<String, String> headers,
     required this.body,
@@ -181,14 +185,14 @@ class _$FlutterRouteRequest_HttpPostImpl extends FlutterRouteRequest_HttpPost {
 
   @override
   String toString() {
-    return 'FlutterRouteRequest.httpPost(url: $url, headers: $headers, body: $body)';
+    return 'FerrostarRouteRequest.httpPost(url: $url, headers: $headers, body: $body)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FlutterRouteRequest_HttpPostImpl &&
+            other is _$FerrostarRouteRequest_HttpPostImpl &&
             (identical(other.url, url) || other.url == url) &&
             const DeepCollectionEquality().equals(other._headers, _headers) &&
             const DeepCollectionEquality().equals(other.body, body));
@@ -202,17 +206,17 @@ class _$FlutterRouteRequest_HttpPostImpl extends FlutterRouteRequest_HttpPost {
     const DeepCollectionEquality().hash(body),
   );
 
-  /// Create a copy of FlutterRouteRequest
+  /// Create a copy of FerrostarRouteRequest
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FlutterRouteRequest_HttpPostImplCopyWith<
-    _$FlutterRouteRequest_HttpPostImpl
+  _$$FerrostarRouteRequest_HttpPostImplCopyWith<
+    _$FerrostarRouteRequest_HttpPostImpl
   >
   get copyWith =>
-      __$$FlutterRouteRequest_HttpPostImplCopyWithImpl<
-        _$FlutterRouteRequest_HttpPostImpl
+      __$$FerrostarRouteRequest_HttpPostImplCopyWithImpl<
+        _$FerrostarRouteRequest_HttpPostImpl
       >(this, _$identity);
 
   @override
@@ -256,8 +260,8 @@ class _$FlutterRouteRequest_HttpPostImpl extends FlutterRouteRequest_HttpPost {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FlutterRouteRequest_HttpPost value) httpPost,
-    required TResult Function(FlutterRouteRequest_HttpGet value) httpGet,
+    required TResult Function(FerrostarRouteRequest_HttpPost value) httpPost,
+    required TResult Function(FerrostarRouteRequest_HttpGet value) httpGet,
   }) {
     return httpPost(this);
   }
@@ -265,8 +269,8 @@ class _$FlutterRouteRequest_HttpPostImpl extends FlutterRouteRequest_HttpPost {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FlutterRouteRequest_HttpPost value)? httpPost,
-    TResult? Function(FlutterRouteRequest_HttpGet value)? httpGet,
+    TResult? Function(FerrostarRouteRequest_HttpPost value)? httpPost,
+    TResult? Function(FerrostarRouteRequest_HttpGet value)? httpGet,
   }) {
     return httpPost?.call(this);
   }
@@ -274,8 +278,8 @@ class _$FlutterRouteRequest_HttpPostImpl extends FlutterRouteRequest_HttpPost {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FlutterRouteRequest_HttpPost value)? httpPost,
-    TResult Function(FlutterRouteRequest_HttpGet value)? httpGet,
+    TResult Function(FerrostarRouteRequest_HttpPost value)? httpPost,
+    TResult Function(FerrostarRouteRequest_HttpGet value)? httpGet,
     required TResult orElse(),
   }) {
     if (httpPost != null) {
@@ -285,13 +289,13 @@ class _$FlutterRouteRequest_HttpPostImpl extends FlutterRouteRequest_HttpPost {
   }
 }
 
-abstract class FlutterRouteRequest_HttpPost extends FlutterRouteRequest {
-  const factory FlutterRouteRequest_HttpPost({
+abstract class FerrostarRouteRequest_HttpPost extends FerrostarRouteRequest {
+  const factory FerrostarRouteRequest_HttpPost({
     required final String url,
     required final Map<String, String> headers,
     required final Uint8List body,
-  }) = _$FlutterRouteRequest_HttpPostImpl;
-  const FlutterRouteRequest_HttpPost._() : super._();
+  }) = _$FerrostarRouteRequest_HttpPostImpl;
+  const FerrostarRouteRequest_HttpPost._() : super._();
 
   @override
   String get url;
@@ -299,48 +303,48 @@ abstract class FlutterRouteRequest_HttpPost extends FlutterRouteRequest {
   Map<String, String> get headers;
   Uint8List get body;
 
-  /// Create a copy of FlutterRouteRequest
+  /// Create a copy of FerrostarRouteRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FlutterRouteRequest_HttpPostImplCopyWith<
-    _$FlutterRouteRequest_HttpPostImpl
+  _$$FerrostarRouteRequest_HttpPostImplCopyWith<
+    _$FerrostarRouteRequest_HttpPostImpl
   >
   get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FlutterRouteRequest_HttpGetImplCopyWith<$Res>
-    implements $FlutterRouteRequestCopyWith<$Res> {
-  factory _$$FlutterRouteRequest_HttpGetImplCopyWith(
-    _$FlutterRouteRequest_HttpGetImpl value,
-    $Res Function(_$FlutterRouteRequest_HttpGetImpl) then,
-  ) = __$$FlutterRouteRequest_HttpGetImplCopyWithImpl<$Res>;
+abstract class _$$FerrostarRouteRequest_HttpGetImplCopyWith<$Res>
+    implements $FerrostarRouteRequestCopyWith<$Res> {
+  factory _$$FerrostarRouteRequest_HttpGetImplCopyWith(
+    _$FerrostarRouteRequest_HttpGetImpl value,
+    $Res Function(_$FerrostarRouteRequest_HttpGetImpl) then,
+  ) = __$$FerrostarRouteRequest_HttpGetImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String url, Map<String, String> headers});
 }
 
 /// @nodoc
-class __$$FlutterRouteRequest_HttpGetImplCopyWithImpl<$Res>
+class __$$FerrostarRouteRequest_HttpGetImplCopyWithImpl<$Res>
     extends
-        _$FlutterRouteRequestCopyWithImpl<
+        _$FerrostarRouteRequestCopyWithImpl<
           $Res,
-          _$FlutterRouteRequest_HttpGetImpl
+          _$FerrostarRouteRequest_HttpGetImpl
         >
-    implements _$$FlutterRouteRequest_HttpGetImplCopyWith<$Res> {
-  __$$FlutterRouteRequest_HttpGetImplCopyWithImpl(
-    _$FlutterRouteRequest_HttpGetImpl _value,
-    $Res Function(_$FlutterRouteRequest_HttpGetImpl) _then,
+    implements _$$FerrostarRouteRequest_HttpGetImplCopyWith<$Res> {
+  __$$FerrostarRouteRequest_HttpGetImplCopyWithImpl(
+    _$FerrostarRouteRequest_HttpGetImpl _value,
+    $Res Function(_$FerrostarRouteRequest_HttpGetImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of FlutterRouteRequest
+  /// Create a copy of FerrostarRouteRequest
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({Object? url = null, Object? headers = null}) {
     return _then(
-      _$FlutterRouteRequest_HttpGetImpl(
+      _$FerrostarRouteRequest_HttpGetImpl(
         url: null == url
             ? _value.url
             : url // ignore: cast_nullable_to_non_nullable
@@ -356,8 +360,9 @@ class __$$FlutterRouteRequest_HttpGetImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FlutterRouteRequest_HttpGetImpl extends FlutterRouteRequest_HttpGet {
-  const _$FlutterRouteRequest_HttpGetImpl({
+class _$FerrostarRouteRequest_HttpGetImpl
+    extends FerrostarRouteRequest_HttpGet {
+  const _$FerrostarRouteRequest_HttpGetImpl({
     required this.url,
     required final Map<String, String> headers,
   }) : _headers = headers,
@@ -375,14 +380,14 @@ class _$FlutterRouteRequest_HttpGetImpl extends FlutterRouteRequest_HttpGet {
 
   @override
   String toString() {
-    return 'FlutterRouteRequest.httpGet(url: $url, headers: $headers)';
+    return 'FerrostarRouteRequest.httpGet(url: $url, headers: $headers)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FlutterRouteRequest_HttpGetImpl &&
+            other is _$FerrostarRouteRequest_HttpGetImpl &&
             (identical(other.url, url) || other.url == url) &&
             const DeepCollectionEquality().equals(other._headers, _headers));
   }
@@ -394,15 +399,17 @@ class _$FlutterRouteRequest_HttpGetImpl extends FlutterRouteRequest_HttpGet {
     const DeepCollectionEquality().hash(_headers),
   );
 
-  /// Create a copy of FlutterRouteRequest
+  /// Create a copy of FerrostarRouteRequest
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FlutterRouteRequest_HttpGetImplCopyWith<_$FlutterRouteRequest_HttpGetImpl>
+  _$$FerrostarRouteRequest_HttpGetImplCopyWith<
+    _$FerrostarRouteRequest_HttpGetImpl
+  >
   get copyWith =>
-      __$$FlutterRouteRequest_HttpGetImplCopyWithImpl<
-        _$FlutterRouteRequest_HttpGetImpl
+      __$$FerrostarRouteRequest_HttpGetImplCopyWithImpl<
+        _$FerrostarRouteRequest_HttpGetImpl
       >(this, _$identity);
 
   @override
@@ -446,8 +453,8 @@ class _$FlutterRouteRequest_HttpGetImpl extends FlutterRouteRequest_HttpGet {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(FlutterRouteRequest_HttpPost value) httpPost,
-    required TResult Function(FlutterRouteRequest_HttpGet value) httpGet,
+    required TResult Function(FerrostarRouteRequest_HttpPost value) httpPost,
+    required TResult Function(FerrostarRouteRequest_HttpGet value) httpGet,
   }) {
     return httpGet(this);
   }
@@ -455,8 +462,8 @@ class _$FlutterRouteRequest_HttpGetImpl extends FlutterRouteRequest_HttpGet {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FlutterRouteRequest_HttpPost value)? httpPost,
-    TResult? Function(FlutterRouteRequest_HttpGet value)? httpGet,
+    TResult? Function(FerrostarRouteRequest_HttpPost value)? httpPost,
+    TResult? Function(FerrostarRouteRequest_HttpGet value)? httpGet,
   }) {
     return httpGet?.call(this);
   }
@@ -464,8 +471,8 @@ class _$FlutterRouteRequest_HttpGetImpl extends FlutterRouteRequest_HttpGet {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(FlutterRouteRequest_HttpPost value)? httpPost,
-    TResult Function(FlutterRouteRequest_HttpGet value)? httpGet,
+    TResult Function(FerrostarRouteRequest_HttpPost value)? httpPost,
+    TResult Function(FerrostarRouteRequest_HttpGet value)? httpGet,
     required TResult orElse(),
   }) {
     if (httpGet != null) {
@@ -475,22 +482,24 @@ class _$FlutterRouteRequest_HttpGetImpl extends FlutterRouteRequest_HttpGet {
   }
 }
 
-abstract class FlutterRouteRequest_HttpGet extends FlutterRouteRequest {
-  const factory FlutterRouteRequest_HttpGet({
+abstract class FerrostarRouteRequest_HttpGet extends FerrostarRouteRequest {
+  const factory FerrostarRouteRequest_HttpGet({
     required final String url,
     required final Map<String, String> headers,
-  }) = _$FlutterRouteRequest_HttpGetImpl;
-  const FlutterRouteRequest_HttpGet._() : super._();
+  }) = _$FerrostarRouteRequest_HttpGetImpl;
+  const FerrostarRouteRequest_HttpGet._() : super._();
 
   @override
   String get url;
   @override
   Map<String, String> get headers;
 
-  /// Create a copy of FlutterRouteRequest
+  /// Create a copy of FerrostarRouteRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FlutterRouteRequest_HttpGetImplCopyWith<_$FlutterRouteRequest_HttpGetImpl>
+  _$$FerrostarRouteRequest_HttpGetImplCopyWith<
+    _$FerrostarRouteRequest_HttpGetImpl
+  >
   get copyWith => throw _privateConstructorUsedError;
 }

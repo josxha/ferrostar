@@ -27,6 +27,7 @@
 
 use crate::api::models::*;
 use crate::api::navigation::*;
+use crate::api::routing::*;
 use crate::*;
 use flutter_rust_bridge::for_generated::byteorder::{NativeEndian, ReadBytesExt, WriteBytesExt};
 use flutter_rust_bridge::for_generated::{transform_result_dco, Lifetimeable, Lockable};
@@ -40,7 +41,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.11.1";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1985198445;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 331825969;
 
 // Section: executor
 
@@ -1219,6 +1220,103 @@ fn wire__crate__api__models__UserLocation_auto_accessor_set_speed_impl(
         },
     )
 }
+fn wire__crate__api__routing__ValhallaHttpRequestGenerator_generate_request_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ValhallaHttpRequestGenerator_generate_request",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<
+                    ValhallaHttpRequestGenerator,
+                >,
+            >>::sse_decode(&mut deserializer);
+            let api_user_location = <UserLocation>::sse_decode(&mut deserializer);
+            let api_waypoints = <Vec<crate::api::models::Waypoint>>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, String>((move || {
+                    let mut api_that_guard = None;
+                    let decode_indices_ =
+                        flutter_rust_bridge::for_generated::lockable_compute_decode_order(vec![
+                            flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                &api_that, 0, false,
+                            ),
+                        ]);
+                    for i in decode_indices_ {
+                        match i {
+                            0 => api_that_guard = Some(api_that.lockable_decode_sync_ref()),
+                            _ => unreachable!(),
+                        }
+                    }
+                    let api_that_guard = api_that_guard.unwrap();
+                    let output_ok =
+                        crate::api::routing::ValhallaHttpRequestGenerator::generate_request(
+                            &*api_that_guard,
+                            api_user_location,
+                            api_waypoints,
+                        )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__api__routing__ValhallaHttpRequestGenerator_new_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ValhallaHttpRequestGenerator_new",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_endpoint_url = <String>::sse_decode(&mut deserializer);
+            let api_profile = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::api::routing::ValhallaHttpRequestGenerator::new(
+                            api_endpoint_url,
+                            api_profile,
+                        ),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
 fn wire__crate__api__models__create_navigation_controller_config_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -1391,49 +1489,6 @@ fn wire__crate__api__models__create_user_location_impl(
         },
     )
 }
-fn wire__crate__api__routing__get_valhalla_request_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "get_valhalla_request",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_base_url = <String>::sse_decode(&mut deserializer);
-            let api_api_key = <String>::sse_decode(&mut deserializer);
-            let api_user_location = <UserLocation>::sse_decode(&mut deserializer);
-            let api_waypoints = <Vec<crate::api::models::Waypoint>>::sse_decode(&mut deserializer);
-            let api_costing = <String>::sse_decode(&mut deserializer);
-            deserializer.end();
-            move |context| {
-                transform_result_sse::<_, String>((move || {
-                    let output_ok = crate::api::routing::get_valhalla_request(
-                        api_base_url,
-                        api_api_key,
-                        api_user_location,
-                        api_waypoints,
-                        api_costing,
-                    )?;
-                    Ok(output_ok)
-                })())
-            }
-        },
-    )
-}
 fn wire__crate__api__simple__init_app_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -1523,6 +1578,17 @@ const _: fn() = || {
         let CourseOverGround = None::<crate::api::models::CourseOverGround>.unwrap();
         let _: u16 = CourseOverGround.degrees;
         let _: Option<u16> = CourseOverGround.accuracy;
+    }
+    match None::<crate::api::routing::FerrostarRouteRequest>.unwrap() {
+        crate::api::routing::FerrostarRouteRequest::HttpPost { url, headers, body } => {
+            let _: String = url;
+            let _: std::collections::HashMap<String, String> = headers;
+            let _: Vec<u8> = body;
+        }
+        crate::api::routing::FerrostarRouteRequest::HttpGet { url, headers } => {
+            let _: String = url;
+            let _: std::collections::HashMap<String, String> = headers;
+        }
     }
     {
         let GeographicCoordinate = None::<crate::api::models::GeographicCoordinate>.unwrap();
@@ -1751,6 +1817,9 @@ flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
 flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
     flutter_rust_bridge::for_generated::RustAutoOpaqueInner<UserLocation>
 );
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ValhallaHttpRequestGenerator>
+);
 
 // Section: dart2rust
 
@@ -1799,6 +1868,16 @@ impl SseDecode for UserLocation {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <RustOpaqueMoi<
             flutter_rust_bridge::for_generated::RustAutoOpaqueInner<UserLocation>,
+        >>::sse_decode(deserializer);
+        return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
+    }
+}
+
+impl SseDecode for ValhallaHttpRequestGenerator {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ValhallaHttpRequestGenerator>,
         >>::sse_decode(deserializer);
         return flutter_rust_bridge::for_generated::rust_auto_opaque_decode_owned(inner);
     }
@@ -1873,6 +1952,18 @@ impl SseDecode
 
 impl SseDecode
     for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<UserLocation>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode
+    for RustOpaqueMoi<
+        flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ValhallaHttpRequestGenerator>,
+    >
 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -1973,7 +2064,7 @@ impl SseDecode for f64 {
     }
 }
 
-impl SseDecode for crate::api::routing::FlutterRouteRequest {
+impl SseDecode for crate::api::routing::FerrostarRouteRequest {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut tag_ = <i32>::sse_decode(deserializer);
@@ -1983,7 +2074,7 @@ impl SseDecode for crate::api::routing::FlutterRouteRequest {
                 let mut var_headers =
                     <std::collections::HashMap<String, String>>::sse_decode(deserializer);
                 let mut var_body = <Vec<u8>>::sse_decode(deserializer);
-                return crate::api::routing::FlutterRouteRequest::HttpPost {
+                return crate::api::routing::FerrostarRouteRequest::HttpPost {
                     url: var_url,
                     headers: var_headers,
                     body: var_body,
@@ -1993,7 +2084,7 @@ impl SseDecode for crate::api::routing::FlutterRouteRequest {
                 let mut var_url = <String>::sse_decode(deserializer);
                 let mut var_headers =
                     <std::collections::HashMap<String, String>>::sse_decode(deserializer);
-                return crate::api::routing::FlutterRouteRequest::HttpGet {
+                return crate::api::routing::FerrostarRouteRequest::HttpGet {
                     url: var_url,
                     headers: var_headers,
                 };
@@ -3002,32 +3093,41 @@ fn pde_ffi_dispatcher_primary_impl(
             rust_vec_len,
             data_len,
         ),
-        24 => wire__crate__api__models__create_navigation_controller_config_impl(
+        24 => wire__crate__api__routing__ValhallaHttpRequestGenerator_generate_request_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        25 => wire__crate__api__models__create_route_deviation_tracking_none_impl(
+        25 => wire__crate__api__routing__ValhallaHttpRequestGenerator_new_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        26 => wire__crate__api__models__create_route_deviation_tracking_static_threshold_impl(
+        26 => wire__crate__api__models__create_navigation_controller_config_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        27 => {
+        27 => wire__crate__api__models__create_route_deviation_tracking_none_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        28 => wire__crate__api__models__create_route_deviation_tracking_static_threshold_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        29 => {
             wire__crate__api__models__create_user_location_impl(port, ptr, rust_vec_len, data_len)
         }
-        28 => {
-            wire__crate__api__routing__get_valhalla_request_impl(port, ptr, rust_vec_len, data_len)
-        }
-        29 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-        30 => {
+        30 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        31 => {
             wire__crate__api__routing__parse_osrm_response_impl(port, ptr, rust_vec_len, data_len)
         }
         _ => unreachable!(),
@@ -3157,6 +3257,26 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<UserLocation>> for UserLocatio
 }
 
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<ValhallaHttpRequestGenerator> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<ValhallaHttpRequestGenerator>
+{
+}
+
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<ValhallaHttpRequestGenerator>>
+    for ValhallaHttpRequestGenerator
+{
+    fn into_into_dart(self) -> FrbWrapper<ValhallaHttpRequestGenerator> {
+        self.into()
+    }
+}
+
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::BlockedLane> {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         match self.0 {
@@ -3264,17 +3384,17 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::CourseOver
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::api::routing::FlutterRouteRequest {
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::routing::FerrostarRouteRequest> {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        match self {
-            crate::api::routing::FlutterRouteRequest::HttpPost { url, headers, body } => [
+        match self.0 {
+            crate::api::routing::FerrostarRouteRequest::HttpPost { url, headers, body } => [
                 0.into_dart(),
                 url.into_into_dart().into_dart(),
                 headers.into_into_dart().into_dart(),
                 body.into_into_dart().into_dart(),
             ]
             .into_dart(),
-            crate::api::routing::FlutterRouteRequest::HttpGet { url, headers } => [
+            crate::api::routing::FerrostarRouteRequest::HttpGet { url, headers } => [
                 1.into_dart(),
                 url.into_into_dart().into_dart(),
                 headers.into_into_dart().into_dart(),
@@ -3287,14 +3407,14 @@ impl flutter_rust_bridge::IntoDart for crate::api::routing::FlutterRouteRequest 
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::api::routing::FlutterRouteRequest
+    for FrbWrapper<crate::api::routing::FerrostarRouteRequest>
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::api::routing::FlutterRouteRequest>
-    for crate::api::routing::FlutterRouteRequest
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::routing::FerrostarRouteRequest>>
+    for crate::api::routing::FerrostarRouteRequest
 {
-    fn into_into_dart(self) -> crate::api::routing::FlutterRouteRequest {
-        self
+    fn into_into_dart(self) -> FrbWrapper<crate::api::routing::FerrostarRouteRequest> {
+        self.into()
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -3987,6 +4107,18 @@ impl SseEncode for UserLocation {
     }
 }
 
+impl SseEncode for ValhallaHttpRequestGenerator {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ValhallaHttpRequestGenerator>,
+        >>::sse_encode(
+            flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self),
+            serializer,
+        );
+    }
+}
+
 impl SseEncode for chrono::DateTime<chrono::Utc> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -4053,6 +4185,19 @@ impl SseEncode
 
 impl SseEncode
     for RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<UserLocation>>
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode
+    for RustOpaqueMoi<
+        flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ValhallaHttpRequestGenerator>,
+    >
 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -4151,17 +4296,17 @@ impl SseEncode for f64 {
     }
 }
 
-impl SseEncode for crate::api::routing::FlutterRouteRequest {
+impl SseEncode for crate::api::routing::FerrostarRouteRequest {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         match self {
-            crate::api::routing::FlutterRouteRequest::HttpPost { url, headers, body } => {
+            crate::api::routing::FerrostarRouteRequest::HttpPost { url, headers, body } => {
                 <i32>::sse_encode(0, serializer);
                 <String>::sse_encode(url, serializer);
                 <std::collections::HashMap<String, String>>::sse_encode(headers, serializer);
                 <Vec<u8>>::sse_encode(body, serializer);
             }
-            crate::api::routing::FlutterRouteRequest::HttpGet { url, headers } => {
+            crate::api::routing::FerrostarRouteRequest::HttpGet { url, headers } => {
                 <i32>::sse_encode(1, serializer);
                 <String>::sse_encode(url, serializer);
                 <std::collections::HashMap<String, String>>::sse_encode(headers, serializer);
@@ -5012,6 +5157,7 @@ mod io {
     use super::*;
     use crate::api::models::*;
     use crate::api::navigation::*;
+    use crate::api::routing::*;
     use crate::*;
     use flutter_rust_bridge::for_generated::byteorder::{
         NativeEndian, ReadBytesExt, WriteBytesExt,
@@ -5096,6 +5242,24 @@ mod io {
     ) {
         MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<UserLocation>>::decrement_strong_count(ptr as _);
     }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_flutter_ferrostar_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ValhallaHttpRequestGenerator>,
+        >::increment_strong_count(ptr as _);
+    }
+
+    #[unsafe(no_mangle)]
+    pub extern "C" fn frbgen_flutter_ferrostar_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ValhallaHttpRequestGenerator>,
+        >::decrement_strong_count(ptr as _);
+    }
 }
 #[cfg(not(target_family = "wasm"))]
 pub use io::*;
@@ -5111,6 +5275,7 @@ mod web {
     use super::*;
     use crate::api::models::*;
     use crate::api::navigation::*;
+    use crate::api::routing::*;
     use crate::*;
     use flutter_rust_bridge::for_generated::byteorder::{
         NativeEndian, ReadBytesExt, WriteBytesExt,
@@ -5196,6 +5361,24 @@ mod web {
         ptr: *const std::ffi::c_void,
     ) {
         MoiArc::<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<UserLocation>>::decrement_strong_count(ptr as _);
+    }
+
+    #[wasm_bindgen]
+    pub fn rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ValhallaHttpRequestGenerator>,
+        >::increment_strong_count(ptr as _);
+    }
+
+    #[wasm_bindgen]
+    pub fn rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+        ptr: *const std::ffi::c_void,
+    ) {
+        MoiArc::<
+            flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ValhallaHttpRequestGenerator>,
+        >::decrement_strong_count(ptr as _);
     }
 }
 #[cfg(target_family = "wasm")]

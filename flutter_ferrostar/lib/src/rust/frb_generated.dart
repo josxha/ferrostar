@@ -70,7 +70,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.11.1';
 
   @override
-  int get rustContentHash => 1985198445;
+  int get rustContentHash => 331825969;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -200,6 +200,19 @@ abstract class RustLibApi extends BaseApi {
     Speed? speed,
   });
 
+  Future<FerrostarRouteRequest>
+  crateApiRoutingValhallaHttpRequestGeneratorGenerateRequest({
+    required ValhallaHttpRequestGenerator that,
+    required UserLocation userLocation,
+    required List<Waypoint> waypoints,
+  });
+
+  Future<ValhallaHttpRequestGenerator>
+  crateApiRoutingValhallaHttpRequestGeneratorNew({
+    required String endpointUrl,
+    required String profile,
+  });
+
   Future<NavigationControllerConfig>
   crateApiModelsCreateNavigationControllerConfig({
     required WaypointAdvanceMode waypointAdvance,
@@ -224,14 +237,6 @@ abstract class RustLibApi extends BaseApi {
     CourseOverGround? courseOverGround,
     required DateTime timestamp,
     Speed? speed,
-  });
-
-  Future<FlutterRouteRequest> crateApiRoutingGetValhallaRequest({
-    required String baseUrl,
-    required String apiKey,
-    required UserLocation userLocation,
-    required List<Waypoint> waypoints,
-    required String costing,
   });
 
   Future<void> crateApiSimpleInitApp();
@@ -284,6 +289,15 @@ abstract class RustLibApi extends BaseApi {
   get rust_arc_decrement_strong_count_UserLocation;
 
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_UserLocationPtr;
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_ValhallaHttpRequestGenerator;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_ValhallaHttpRequestGenerator;
+
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_ValhallaHttpRequestGeneratorPtr;
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -1155,6 +1169,89 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<FerrostarRouteRequest>
+  crateApiRoutingValhallaHttpRequestGeneratorGenerateRequest({
+    required ValhallaHttpRequestGenerator that,
+    required UserLocation userLocation,
+    required List<Waypoint> waypoints,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            userLocation,
+            serializer,
+          );
+          sse_encode_list_waypoint(waypoints, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 24,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_ferrostar_route_request,
+          decodeErrorData: sse_decode_String,
+        ),
+        constMeta:
+            kCrateApiRoutingValhallaHttpRequestGeneratorGenerateRequestConstMeta,
+        argValues: [that, userLocation, waypoints],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiRoutingValhallaHttpRequestGeneratorGenerateRequestConstMeta =>
+      const TaskConstMeta(
+        debugName: "ValhallaHttpRequestGenerator_generate_request",
+        argNames: ["that", "userLocation", "waypoints"],
+      );
+
+  @override
+  Future<ValhallaHttpRequestGenerator>
+  crateApiRoutingValhallaHttpRequestGeneratorNew({
+    required String endpointUrl,
+    required String profile,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(endpointUrl, serializer);
+          sse_encode_String(profile, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 25,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiRoutingValhallaHttpRequestGeneratorNewConstMeta,
+        argValues: [endpointUrl, profile],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiRoutingValhallaHttpRequestGeneratorNewConstMeta =>
+      const TaskConstMeta(
+        debugName: "ValhallaHttpRequestGenerator_new",
+        argNames: ["endpointUrl", "profile"],
+      );
+
+  @override
   Future<NavigationControllerConfig>
   crateApiModelsCreateNavigationControllerConfig({
     required WaypointAdvanceMode waypointAdvance,
@@ -1190,7 +1287,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 24,
+            funcId: 26,
             port: port_,
           );
         },
@@ -1234,7 +1331,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 25,
+            funcId: 27,
             port: port_,
           );
         },
@@ -1271,7 +1368,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 26,
+            funcId: 28,
             port: port_,
           );
         },
@@ -1318,7 +1415,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 27,
+            funcId: 29,
             port: port_,
           );
         },
@@ -1353,50 +1450,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<FlutterRouteRequest> crateApiRoutingGetValhallaRequest({
-    required String baseUrl,
-    required String apiKey,
-    required UserLocation userLocation,
-    required List<Waypoint> waypoints,
-    required String costing,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_String(baseUrl, serializer);
-          sse_encode_String(apiKey, serializer);
-          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
-            userLocation,
-            serializer,
-          );
-          sse_encode_list_waypoint(waypoints, serializer);
-          sse_encode_String(costing, serializer);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 28,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_flutter_route_request,
-          decodeErrorData: sse_decode_String,
-        ),
-        constMeta: kCrateApiRoutingGetValhallaRequestConstMeta,
-        argValues: [baseUrl, apiKey, userLocation, waypoints, costing],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateApiRoutingGetValhallaRequestConstMeta =>
-      const TaskConstMeta(
-        debugName: "get_valhalla_request",
-        argNames: ["baseUrl", "apiKey", "userLocation", "waypoints", "costing"],
-      );
-
-  @override
   Future<void> crateApiSimpleInitApp() {
     return handler.executeNormal(
       NormalTask(
@@ -1405,7 +1458,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 29,
+            funcId: 30,
             port: port_,
           );
         },
@@ -1437,7 +1490,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 30,
+            funcId: 31,
             port: port_,
           );
         },
@@ -1498,6 +1551,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   get rust_arc_decrement_strong_count_UserLocation => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation;
 
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_ValhallaHttpRequestGenerator => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_ValhallaHttpRequestGenerator => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator;
+
   @protected
   FlutterNavState
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
@@ -1547,6 +1608,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return UserLocationImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  ValhallaHttpRequestGenerator
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ValhallaHttpRequestGeneratorImpl.frbInternalDcoDecode(
+      raw as List<dynamic>,
+    );
   }
 
   @protected
@@ -1607,6 +1679,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return UserLocationImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  ValhallaHttpRequestGenerator
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ValhallaHttpRequestGeneratorImpl.frbInternalDcoDecode(
+      raw as List<dynamic>,
+    );
   }
 
   @protected
@@ -1674,6 +1757,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return UserLocationImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  ValhallaHttpRequestGenerator
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ValhallaHttpRequestGeneratorImpl.frbInternalDcoDecode(
+      raw as List<dynamic>,
+    );
   }
 
   @protected
@@ -1896,17 +1990,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FlutterRouteRequest dco_decode_flutter_route_request(dynamic raw) {
+  FerrostarRouteRequest dco_decode_ferrostar_route_request(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
       case 0:
-        return FlutterRouteRequest_HttpPost(
+        return FerrostarRouteRequest_HttpPost(
           url: dco_decode_String(raw[1]),
           headers: dco_decode_Map_String_String_None(raw[2]),
           body: dco_decode_list_prim_u_8_strict(raw[3]),
         );
       case 1:
-        return FlutterRouteRequest_HttpGet(
+        return FerrostarRouteRequest_HttpGet(
           url: dco_decode_String(raw[1]),
           headers: dco_decode_Map_String_String_None(raw[2]),
         );
@@ -2603,6 +2697,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  ValhallaHttpRequestGenerator
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return ValhallaHttpRequestGeneratorImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
   NavigationControllerConfig
   sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
     SseDeserializer deserializer,
@@ -2669,6 +2775,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return UserLocationImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  ValhallaHttpRequestGenerator
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return ValhallaHttpRequestGeneratorImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -2745,6 +2863,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return UserLocationImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
+  }
+
+  @protected
+  ValhallaHttpRequestGenerator
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return ValhallaHttpRequestGeneratorImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -2984,7 +3114,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FlutterRouteRequest sse_decode_flutter_route_request(
+  FerrostarRouteRequest sse_decode_ferrostar_route_request(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -2995,7 +3125,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         var var_url = sse_decode_String(deserializer);
         var var_headers = sse_decode_Map_String_String_None(deserializer);
         var var_body = sse_decode_list_prim_u_8_strict(deserializer);
-        return FlutterRouteRequest_HttpPost(
+        return FerrostarRouteRequest_HttpPost(
           url: var_url,
           headers: var_headers,
           body: var_body,
@@ -3003,7 +3133,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       case 1:
         var var_url = sse_decode_String(deserializer);
         var var_headers = sse_decode_Map_String_String_None(deserializer);
-        return FlutterRouteRequest_HttpGet(url: var_url, headers: var_headers);
+        return FerrostarRouteRequest_HttpGet(
+          url: var_url,
+          headers: var_headers,
+        );
       default:
         throw UnimplementedError('');
     }
@@ -3979,6 +4112,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+    ValhallaHttpRequestGenerator self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as ValhallaHttpRequestGeneratorImpl).frbInternalSseEncode(
+        move: true,
+      ),
+      serializer,
+    );
+  }
+
+  @protected
+  void
   sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
     NavigationControllerConfig self,
     SseSerializer serializer,
@@ -4057,6 +4205,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
       (self as UserLocationImpl).frbInternalSseEncode(move: false),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+    ValhallaHttpRequestGenerator self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as ValhallaHttpRequestGeneratorImpl).frbInternalSseEncode(
+        move: false,
+      ),
       serializer,
     );
   }
@@ -4145,6 +4308,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
       (self as UserLocationImpl).frbInternalSseEncode(move: null),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
+    ValhallaHttpRequestGenerator self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as ValhallaHttpRequestGeneratorImpl).frbInternalSseEncode(
+        move: null,
+      ),
       serializer,
     );
   }
@@ -4402,13 +4580,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_flutter_route_request(
-    FlutterRouteRequest self,
+  void sse_encode_ferrostar_route_request(
+    FerrostarRouteRequest self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     switch (self) {
-      case FlutterRouteRequest_HttpPost(
+      case FerrostarRouteRequest_HttpPost(
         url: final url,
         headers: final headers,
         body: final body,
@@ -4417,7 +4595,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_String(url, serializer);
         sse_encode_Map_String_String_None(headers, serializer);
         sse_encode_list_prim_u_8_strict(body, serializer);
-      case FlutterRouteRequest_HttpGet(url: final url, headers: final headers):
+      case FerrostarRouteRequest_HttpGet(
+        url: final url,
+        headers: final headers,
+      ):
         sse_encode_i_32(1, serializer);
         sse_encode_String(url, serializer);
         sse_encode_Map_String_String_None(headers, serializer);
@@ -5476,4 +5657,43 @@ class UserLocationImpl extends RustOpaque implements UserLocation {
 
   set speed(Speed? speed) => RustLib.instance.api
       .crateApiModelsUserLocationAutoAccessorSetSpeed(that: this, speed: speed);
+}
+
+@sealed
+class ValhallaHttpRequestGeneratorImpl extends RustOpaque
+    implements ValhallaHttpRequestGenerator {
+  // Not to be used by end users
+  ValhallaHttpRequestGeneratorImpl.frbInternalDcoDecode(List<dynamic> wire)
+    : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  ValhallaHttpRequestGeneratorImpl.frbInternalSseDecode(
+    BigInt ptr,
+    int externalSizeOnNative,
+  ) : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount: RustLib
+        .instance
+        .api
+        .rust_arc_increment_strong_count_ValhallaHttpRequestGenerator,
+    rustArcDecrementStrongCount: RustLib
+        .instance
+        .api
+        .rust_arc_decrement_strong_count_ValhallaHttpRequestGenerator,
+    rustArcDecrementStrongCountPtr: RustLib
+        .instance
+        .api
+        .rust_arc_decrement_strong_count_ValhallaHttpRequestGeneratorPtr,
+  );
+
+  Future<FerrostarRouteRequest> generateRequest({
+    required UserLocation userLocation,
+    required List<Waypoint> waypoints,
+  }) => RustLib.instance.api
+      .crateApiRoutingValhallaHttpRequestGeneratorGenerateRequest(
+        that: this,
+        userLocation: userLocation,
+        waypoints: waypoints,
+      );
 }
