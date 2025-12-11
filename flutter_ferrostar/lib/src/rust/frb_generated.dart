@@ -5,6 +5,7 @@
 
 import 'api/models.dart';
 import 'api/navigation.dart';
+import 'api/routing.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'frb_generated.dart';
@@ -69,7 +70,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.11.1';
 
   @override
-  int get rustContentHash => -498118132;
+  int get rustContentHash => 1985198445;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -225,7 +226,20 @@ abstract class RustLibApi extends BaseApi {
     Speed? speed,
   });
 
+  Future<FlutterRouteRequest> crateApiRoutingGetValhallaRequest({
+    required String baseUrl,
+    required String apiKey,
+    required UserLocation userLocation,
+    required List<Waypoint> waypoints,
+    required String costing,
+  });
+
   Future<void> crateApiSimpleInitApp();
+
+  Future<List<Route>> crateApiRoutingParseOsrmResponse({
+    required List<int> response,
+    required int polylinePrecision,
+  });
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_FlutterNavState;
@@ -1339,6 +1353,50 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<FlutterRouteRequest> crateApiRoutingGetValhallaRequest({
+    required String baseUrl,
+    required String apiKey,
+    required UserLocation userLocation,
+    required List<Waypoint> waypoints,
+    required String costing,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(baseUrl, serializer);
+          sse_encode_String(apiKey, serializer);
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            userLocation,
+            serializer,
+          );
+          sse_encode_list_waypoint(waypoints, serializer);
+          sse_encode_String(costing, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 28,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_flutter_route_request,
+          decodeErrorData: sse_decode_String,
+        ),
+        constMeta: kCrateApiRoutingGetValhallaRequestConstMeta,
+        argValues: [baseUrl, apiKey, userLocation, waypoints, costing],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiRoutingGetValhallaRequestConstMeta =>
+      const TaskConstMeta(
+        debugName: "get_valhalla_request",
+        argNames: ["baseUrl", "apiKey", "userLocation", "waypoints", "costing"],
+      );
+
+  @override
   Future<void> crateApiSimpleInitApp() {
     return handler.executeNormal(
       NormalTask(
@@ -1347,7 +1405,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 28,
+            funcId: 29,
             port: port_,
           );
         },
@@ -1364,6 +1422,41 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   TaskConstMeta get kCrateApiSimpleInitAppConstMeta =>
       const TaskConstMeta(debugName: "init_app", argNames: []);
+
+  @override
+  Future<List<Route>> crateApiRoutingParseOsrmResponse({
+    required List<int> response,
+    required int polylinePrecision,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_prim_u_8_loose(response, serializer);
+          sse_encode_u_32(polylinePrecision, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 30,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_route,
+          decodeErrorData: sse_decode_String,
+        ),
+        constMeta: kCrateApiRoutingParseOsrmResponseConstMeta,
+        argValues: [response, polylinePrecision],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiRoutingParseOsrmResponseConstMeta =>
+      const TaskConstMeta(
+        debugName: "parse_osrm_response",
+        argNames: ["response", "polylinePrecision"],
+      );
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_FlutterNavState => wire
@@ -1520,6 +1613,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   DateTime dco_decode_Chrono_Utc(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dcoDecodeTimestamp(ts: dco_decode_i_64(raw).toInt(), isUtc: true);
+  }
+
+  @protected
+  Map<String, String> dco_decode_Map_String_String_None(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Map.fromEntries(
+      dco_decode_list_record_string_string(
+        raw,
+      ).map((e) => MapEntry(e.$1, e.$2)),
+    );
   }
 
   @protected
@@ -1793,6 +1896,26 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  FlutterRouteRequest dco_decode_flutter_route_request(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return FlutterRouteRequest_HttpPost(
+          url: dco_decode_String(raw[1]),
+          headers: dco_decode_Map_String_String_None(raw[2]),
+          body: dco_decode_list_prim_u_8_strict(raw[3]),
+        );
+      case 1:
+        return FlutterRouteRequest_HttpGet(
+          url: dco_decode_String(raw[1]),
+          headers: dco_decode_Map_String_String_None(raw[2]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
   GeographicCoordinate dco_decode_geographic_coordinate(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -1905,9 +2028,27 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<int> dco_decode_list_prim_u_8_loose(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as List<int>;
+  }
+
+  @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as Uint8List;
+  }
+
+  @protected
+  List<(String, String)> dco_decode_list_record_string_string(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_record_string_string).toList();
+  }
+
+  @protected
+  List<Route> dco_decode_list_route(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_route).toList();
   }
 
   @protected
@@ -2087,6 +2228,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   Uint8List? dco_decode_opt_list_prim_u_8_strict(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_list_prim_u_8_strict(raw);
+  }
+
+  @protected
+  (String, String) dco_decode_record_string_string(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (dco_decode_String(arr[0]), dco_decode_String(arr[1]));
   }
 
   @protected
@@ -2291,6 +2442,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   int dco_decode_u_16(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
+  int dco_decode_u_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as int;
   }
@@ -2522,6 +2679,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_i_64(deserializer);
     return DateTime.fromMicrosecondsSinceEpoch(inner.toInt(), isUtc: true);
+  }
+
+  @protected
+  Map<String, String> sse_decode_Map_String_String_None(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_list_record_string_string(deserializer);
+    return Map.fromEntries(inner.map((e) => MapEntry(e.$1, e.$2)));
   }
 
   @protected
@@ -2818,6 +2984,32 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  FlutterRouteRequest sse_decode_flutter_route_request(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_url = sse_decode_String(deserializer);
+        var var_headers = sse_decode_Map_String_String_None(deserializer);
+        var var_body = sse_decode_list_prim_u_8_strict(deserializer);
+        return FlutterRouteRequest_HttpPost(
+          url: var_url,
+          headers: var_headers,
+          body: var_body,
+        );
+      case 1:
+        var var_url = sse_decode_String(deserializer);
+        var var_headers = sse_decode_Map_String_String_None(deserializer);
+        return FlutterRouteRequest_HttpGet(url: var_url, headers: var_headers);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
   GeographicCoordinate sse_decode_geographic_coordinate(
     SseDeserializer deserializer,
   ) {
@@ -2974,10 +3166,43 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<int> sse_decode_list_prim_u_8_loose(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var len_ = sse_decode_i_32(deserializer);
+    return deserializer.buffer.getUint8List(len_);
+  }
+
+  @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var len_ = sse_decode_i_32(deserializer);
     return deserializer.buffer.getUint8List(len_);
+  }
+
+  @protected
+  List<(String, String)> sse_decode_list_record_string_string(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <(String, String)>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_record_string_string(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<Route> sse_decode_list_route(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <Route>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_route(deserializer));
+    }
+    return ans_;
   }
 
   @protected
@@ -3306,6 +3531,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  (String, String) sse_decode_record_string_string(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_field0 = sse_decode_String(deserializer);
+    var var_field1 = sse_decode_String(deserializer);
+    return (var_field0, var_field1);
+  }
+
+  @protected
   Route sse_decode_route(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_geometry = sse_decode_list_geographic_coordinate(deserializer);
@@ -3556,6 +3791,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   int sse_decode_u_16(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getUint16();
+  }
+
+  @protected
+  int sse_decode_u_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint32();
   }
 
   @protected
@@ -3825,6 +4066,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_64(
       PlatformInt64Util.from(self.microsecondsSinceEpoch),
+      serializer,
+    );
+  }
+
+  @protected
+  void sse_encode_Map_String_String_None(
+    Map<String, String> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_record_string_string(
+      self.entries.map((e) => (e.key, e.value)).toList(),
       serializer,
     );
   }
@@ -4149,6 +4402,29 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_flutter_route_request(
+    FlutterRouteRequest self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case FlutterRouteRequest_HttpPost(
+        url: final url,
+        headers: final headers,
+        body: final body,
+      ):
+        sse_encode_i_32(0, serializer);
+        sse_encode_String(url, serializer);
+        sse_encode_Map_String_String_None(headers, serializer);
+        sse_encode_list_prim_u_8_strict(body, serializer);
+      case FlutterRouteRequest_HttpGet(url: final url, headers: final headers):
+        sse_encode_i_32(1, serializer);
+        sse_encode_String(url, serializer);
+        sse_encode_Map_String_String_None(headers, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_geographic_coordinate(
     GeographicCoordinate self,
     SseSerializer serializer,
@@ -4269,6 +4545,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_prim_u_8_loose(
+    List<int> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    serializer.buffer.putUint8List(
+      self is Uint8List ? self : Uint8List.fromList(self),
+    );
+  }
+
+  @protected
   void sse_encode_list_prim_u_8_strict(
     Uint8List self,
     SseSerializer serializer,
@@ -4276,6 +4564,27 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     serializer.buffer.putUint8List(self);
+  }
+
+  @protected
+  void sse_encode_list_record_string_string(
+    List<(String, String)> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_record_string_string(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_route(List<Route> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_route(item, serializer);
+    }
   }
 
   @protected
@@ -4597,6 +4906,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_record_string_string(
+    (String, String) self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.$1, serializer);
+    sse_encode_String(self.$2, serializer);
+  }
+
+  @protected
   void sse_encode_route(Route self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_geographic_coordinate(self.geometry, serializer);
@@ -4804,6 +5123,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_u_16(int self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putUint16(self);
+  }
+
+  @protected
+  void sse_encode_u_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint32(self);
   }
 
   @protected

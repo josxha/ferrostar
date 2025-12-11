@@ -39,37 +39,6 @@ void main() {
       expect(c1, isNot(equals(c3)));
     });
 
-    // test('NavigationControllerConfig equality', () {
-    //   final c1 = NavigationControllerConfig(
-    //     waypointAdvance: const WaypointAdvanceMode.waypointWithinRange(15.0),
-    //     stepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
-    //     arrivalStepAdvanceCondition:
-    //         const SerializableStepAdvanceCondition.manual(),
-    //     routeDeviationTracking: const RouteDeviationTracking.none(),
-    //     snappedLocationCourseFiltering: CourseFiltering.snapToRoute,
-    //   );
-    //   final c2 = NavigationControllerConfig(
-    //     waypointAdvance: const WaypointAdvanceMode.waypointWithinRange(15.0),
-    //     stepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
-    //     arrivalStepAdvanceCondition:
-    //         const SerializableStepAdvanceCondition.manual(),
-    //     routeDeviationTracking: const RouteDeviationTracking.none(),
-    //     snappedLocationCourseFiltering: CourseFiltering.snapToRoute,
-    //   );
-    //   final c3 = NavigationControllerConfig(
-    //     waypointAdvance: const WaypointAdvanceMode.waypointWithinRange(20.0),
-    //     stepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
-    //     arrivalStepAdvanceCondition:
-    //         const SerializableStepAdvanceCondition.manual(),
-    //     routeDeviationTracking: const RouteDeviationTracking.none(),
-    //     snappedLocationCourseFiltering: CourseFiltering.snapToRoute,
-    //   );
-
-    //   expect(c1, equals(c2));
-    //   expect(c1.hashCode, equals(c2.hashCode));
-    //   expect(c1, isNot(equals(c3)));
-    // });
-
     test('GeographicCoordinate equality', () {
       const g1 = GeographicCoordinate(lat: 10, lng: 10);
       const g2 = GeographicCoordinate(lat: 10, lng: 10);

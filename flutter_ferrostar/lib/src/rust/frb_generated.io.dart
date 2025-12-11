@@ -5,6 +5,7 @@
 
 import 'api/models.dart';
 import 'api/navigation.dart';
+import 'api/routing.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi' as ffi;
@@ -109,6 +110,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DateTime dco_decode_Chrono_Utc(dynamic raw);
+
+  @protected
+  Map<String, String> dco_decode_Map_String_String_None(dynamic raw);
 
   @protected
   FlutterNavState
@@ -245,6 +249,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double dco_decode_f_64(dynamic raw);
 
   @protected
+  FlutterRouteRequest dco_decode_flutter_route_request(dynamic raw);
+
+  @protected
   GeographicCoordinate dco_decode_geographic_coordinate(dynamic raw);
 
   @protected
@@ -281,7 +288,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<LaneInfo> dco_decode_list_lane_info(dynamic raw);
 
   @protected
+  List<int> dco_decode_list_prim_u_8_loose(dynamic raw);
+
+  @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
+
+  @protected
+  List<(String, String)> dco_decode_list_record_string_string(dynamic raw);
+
+  @protected
+  List<Route> dco_decode_list_route(dynamic raw);
 
   @protected
   List<RouteStep> dco_decode_list_route_step(dynamic raw);
@@ -370,6 +386,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Uint8List? dco_decode_opt_list_prim_u_8_strict(dynamic raw);
 
   @protected
+  (String, String) dco_decode_record_string_string(dynamic raw);
+
+  @protected
   Route dco_decode_route(dynamic raw);
 
   @protected
@@ -399,6 +418,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   int dco_decode_u_16(dynamic raw);
+
+  @protected
+  int dco_decode_u_32(dynamic raw);
 
   @protected
   BigInt dco_decode_u_64(dynamic raw);
@@ -495,6 +517,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   DateTime sse_decode_Chrono_Utc(SseDeserializer deserializer);
+
+  @protected
+  Map<String, String> sse_decode_Map_String_String_None(
+    SseDeserializer deserializer,
+  );
 
   @protected
   FlutterNavState
@@ -649,6 +676,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   double sse_decode_f_64(SseDeserializer deserializer);
 
   @protected
+  FlutterRouteRequest sse_decode_flutter_route_request(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   GeographicCoordinate sse_decode_geographic_coordinate(
     SseDeserializer deserializer,
   );
@@ -689,7 +721,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<LaneInfo> sse_decode_list_lane_info(SseDeserializer deserializer);
 
   @protected
+  List<int> sse_decode_list_prim_u_8_loose(SseDeserializer deserializer);
+
+  @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
+
+  @protected
+  List<(String, String)> sse_decode_list_record_string_string(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  List<Route> sse_decode_list_route(SseDeserializer deserializer);
 
   @protected
   List<RouteStep> sse_decode_list_route_step(SseDeserializer deserializer);
@@ -800,6 +843,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Uint8List? sse_decode_opt_list_prim_u_8_strict(SseDeserializer deserializer);
 
   @protected
+  (String, String) sse_decode_record_string_string(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   Route sse_decode_route(SseDeserializer deserializer);
 
   @protected
@@ -829,6 +877,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   int sse_decode_u_16(SseDeserializer deserializer);
+
+  @protected
+  int sse_decode_u_32(SseDeserializer deserializer);
 
   @protected
   BigInt sse_decode_u_64(SseDeserializer deserializer);
@@ -940,6 +991,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_Chrono_Utc(DateTime self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_Map_String_String_None(
+    Map<String, String> self,
+    SseSerializer serializer,
+  );
 
   @protected
   void
@@ -1128,6 +1185,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_f_64(double self, SseSerializer serializer);
 
   @protected
+  void sse_encode_flutter_route_request(
+    FlutterRouteRequest self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_geographic_coordinate(
     GeographicCoordinate self,
     SseSerializer serializer,
@@ -1173,10 +1236,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_list_lane_info(List<LaneInfo> self, SseSerializer serializer);
 
   @protected
+  void sse_encode_list_prim_u_8_loose(List<int> self, SseSerializer serializer);
+
+  @protected
   void sse_encode_list_prim_u_8_strict(
     Uint8List self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_list_record_string_string(
+    List<(String, String)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_route(List<Route> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_route_step(
@@ -1315,6 +1390,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_record_string_string(
+    (String, String) self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_route(Route self, SseSerializer serializer);
 
   @protected
@@ -1352,6 +1433,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_u_16(int self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_u_32(int self, SseSerializer serializer);
 
   @protected
   void sse_encode_u_64(BigInt self, SseSerializer serializer);
