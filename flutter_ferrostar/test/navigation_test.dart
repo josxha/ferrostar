@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_ferrostar/flutter_ferrostar.dart';
 import 'package:flutter_ferrostar/src/rust/frb_generated.dart';
+import 'package:flutter_ferrostar/src/rust/lib.dart';
 
 class MockRustLibApi extends Mock implements RustLibApi {}
 
@@ -23,6 +24,8 @@ class FakeFlutterNavState extends Fake implements FlutterNavState {}
 class FakeFlutterNavigationController extends Fake
     implements FlutterNavigationController {}
 
+class FakeRouteDeviationTracking extends Fake implements RouteDeviationTracking {}
+
 void main() {
   final mockApi = MockRustLibApi();
 
@@ -32,12 +35,39 @@ void main() {
     registerFallbackValue(FakeUserLocation());
     registerFallbackValue(FakeFlutterNavState());
     registerFallbackValue(FakeFlutterNavigationController());
+    registerFallbackValue(FakeRouteDeviationTracking());
+    registerFallbackValue(WaypointAdvanceMode.waypointWithinRange(15.0));
+    registerFallbackValue(const SerializableStepAdvanceCondition.manual());
+    registerFallbackValue(CourseFiltering.snapToRoute);
+    registerFallbackValue(const GeographicCoordinate(lat: 0, lng: 0));
+    registerFallbackValue(DateTime.now());
+    registerFallbackValue(const Speed(value: 0));
+    registerFallbackValue(const CourseOverGround(degrees: 0));
 
     RustLib.initMock(api: mockApi);
   });
 
   setUp(() {
     reset(mockApi);
+
+    when(() => mockApi.crateApiModelsCreateRouteDeviationTrackingNone())
+        .thenAnswer((_) async => FakeRouteDeviationTracking());
+
+    when(() => mockApi.crateApiModelsCreateNavigationControllerConfig(
+          waypointAdvance: any(named: 'waypointAdvance'),
+          stepAdvanceCondition: any(named: 'stepAdvanceCondition'),
+          arrivalStepAdvanceCondition: any(named: 'arrivalStepAdvanceCondition'),
+          routeDeviationTracking: any(named: 'routeDeviationTracking'),
+          snappedLocationCourseFiltering: any(named: 'snappedLocationCourseFiltering'),
+        )).thenAnswer((_) async => FakeNavigationControllerConfig());
+
+    when(() => mockApi.crateApiModelsCreateUserLocation(
+          coordinates: any(named: 'coordinates'),
+          horizontalAccuracy: any(named: 'horizontalAccuracy'),
+          courseOverGround: any(named: 'courseOverGround'),
+          timestamp: any(named: 'timestamp'),
+          speed: any(named: 'speed'),
+        )).thenAnswer((_) async => FakeUserLocation());
 
     // Stub the ARC functions to prevent crashes if they are accessed
     when(
@@ -66,12 +96,12 @@ void main() {
         steps: const [],
         waypoints: const [],
       );
-      final config = NavigationControllerConfig(
+      final config = await createNavigationControllerConfig(
         waypointAdvance: const WaypointAdvanceMode.waypointWithinRange(15.0),
         stepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
         arrivalStepAdvanceCondition:
             const SerializableStepAdvanceCondition.manual(),
-        routeDeviationTracking: const RouteDeviationTracking.none(),
+        routeDeviationTracking: await createRouteDeviationTrackingNone(),
         snappedLocationCourseFiltering: CourseFiltering.snapToRoute,
       );
 

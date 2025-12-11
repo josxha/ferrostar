@@ -33,6 +33,3 @@ abstract class FlutterNavigationController implements RustOpaqueInterface {
     required FlutterNavState state,
   });
 }
-
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<SystemTime>>
-abstract class SystemTime implements RustOpaqueInterface {}

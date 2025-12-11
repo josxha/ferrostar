@@ -10,6 +10,7 @@ import 'dart:convert';
 import 'frb_generated.dart';
 import 'frb_generated.io.dart'
     if (dart.library.js_interop) 'frb_generated.web.dart';
+import 'lib.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:uuid/uuid.dart';
 
@@ -68,7 +69,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.11.1';
 
   @override
-  int get rustContentHash => -1493282768;
+  int get rustContentHash => -498118132;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -108,40 +109,58 @@ abstract class RustLibApi extends BaseApi {
     required FlutterNavState state,
   });
 
-  double crateApiModelsTripSummaryAutoAccessorGetDistanceTraveled({
-    required TripSummary that,
+  SerializableStepAdvanceCondition
+  crateApiModelsNavigationControllerConfigAutoAccessorGetArrivalStepAdvanceCondition({
+    required NavigationControllerConfig that,
   });
 
-  SystemTime? crateApiModelsTripSummaryAutoAccessorGetEndedAt({
-    required TripSummary that,
+  RouteDeviationTracking
+  crateApiModelsNavigationControllerConfigAutoAccessorGetRouteDeviationTracking({
+    required NavigationControllerConfig that,
   });
 
-  double crateApiModelsTripSummaryAutoAccessorGetSnappedDistanceTraveled({
-    required TripSummary that,
+  CourseFiltering
+  crateApiModelsNavigationControllerConfigAutoAccessorGetSnappedLocationCourseFiltering({
+    required NavigationControllerConfig that,
   });
 
-  SystemTime crateApiModelsTripSummaryAutoAccessorGetStartedAt({
-    required TripSummary that,
+  SerializableStepAdvanceCondition
+  crateApiModelsNavigationControllerConfigAutoAccessorGetStepAdvanceCondition({
+    required NavigationControllerConfig that,
   });
 
-  void crateApiModelsTripSummaryAutoAccessorSetDistanceTraveled({
-    required TripSummary that,
-    required double distanceTraveled,
+  WaypointAdvanceMode
+  crateApiModelsNavigationControllerConfigAutoAccessorGetWaypointAdvance({
+    required NavigationControllerConfig that,
   });
 
-  void crateApiModelsTripSummaryAutoAccessorSetEndedAt({
-    required TripSummary that,
-    SystemTime? endedAt,
+  void
+  crateApiModelsNavigationControllerConfigAutoAccessorSetArrivalStepAdvanceCondition({
+    required NavigationControllerConfig that,
+    required SerializableStepAdvanceCondition arrivalStepAdvanceCondition,
   });
 
-  void crateApiModelsTripSummaryAutoAccessorSetSnappedDistanceTraveled({
-    required TripSummary that,
-    required double snappedDistanceTraveled,
+  void
+  crateApiModelsNavigationControllerConfigAutoAccessorSetRouteDeviationTracking({
+    required NavigationControllerConfig that,
+    required RouteDeviationTracking routeDeviationTracking,
   });
 
-  void crateApiModelsTripSummaryAutoAccessorSetStartedAt({
-    required TripSummary that,
-    required SystemTime startedAt,
+  void
+  crateApiModelsNavigationControllerConfigAutoAccessorSetSnappedLocationCourseFiltering({
+    required NavigationControllerConfig that,
+    required CourseFiltering snappedLocationCourseFiltering,
+  });
+
+  void
+  crateApiModelsNavigationControllerConfigAutoAccessorSetStepAdvanceCondition({
+    required NavigationControllerConfig that,
+    required SerializableStepAdvanceCondition stepAdvanceCondition,
+  });
+
+  void crateApiModelsNavigationControllerConfigAutoAccessorSetWaypointAdvance({
+    required NavigationControllerConfig that,
+    required WaypointAdvanceMode waypointAdvance,
   });
 
   GeographicCoordinate crateApiModelsUserLocationAutoAccessorGetCoordinates({
@@ -157,10 +176,6 @@ abstract class RustLibApi extends BaseApi {
   });
 
   Speed? crateApiModelsUserLocationAutoAccessorGetSpeed({
-    required UserLocation that,
-  });
-
-  SystemTime crateApiModelsUserLocationAutoAccessorGetTimestamp({
     required UserLocation that,
   });
 
@@ -184,16 +199,22 @@ abstract class RustLibApi extends BaseApi {
     Speed? speed,
   });
 
-  void crateApiModelsUserLocationAutoAccessorSetTimestamp({
-    required UserLocation that,
-    required SystemTime timestamp,
+  Future<NavigationControllerConfig>
+  crateApiModelsCreateNavigationControllerConfig({
+    required WaypointAdvanceMode waypointAdvance,
+    required SerializableStepAdvanceCondition stepAdvanceCondition,
+    required SerializableStepAdvanceCondition arrivalStepAdvanceCondition,
+    required RouteDeviationTracking routeDeviationTracking,
+    required CourseFiltering snappedLocationCourseFiltering,
   });
 
-  Future<TripSummary> crateApiModelsCreateTripSummary({
-    required double distanceTraveled,
-    required double snappedDistanceTraveled,
-    required DateTime startedAt,
-    DateTime? endedAt,
+  Future<RouteDeviationTracking>
+  crateApiModelsCreateRouteDeviationTrackingNone();
+
+  Future<RouteDeviationTracking>
+  crateApiModelsCreateRouteDeviationTrackingStaticThreshold({
+    required int minimumHorizontalAccuracy,
+    required double maxAcceptableDeviation,
   });
 
   Future<UserLocation> crateApiModelsCreateUserLocation({
@@ -225,20 +246,22 @@ abstract class RustLibApi extends BaseApi {
   get rust_arc_decrement_strong_count_FlutterNavigationControllerPtr;
 
   RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_SystemTime;
+  get rust_arc_increment_strong_count_NavigationControllerConfig;
 
   RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_SystemTime;
+  get rust_arc_decrement_strong_count_NavigationControllerConfig;
 
-  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_SystemTimePtr;
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_NavigationControllerConfigPtr;
 
   RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_TripSummary;
+  get rust_arc_increment_strong_count_RouteDeviationTracking;
 
   RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_TripSummary;
+  get rust_arc_decrement_strong_count_RouteDeviationTracking;
 
-  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_TripSummaryPtr;
+  CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_RouteDeviationTrackingPtr;
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_UserLocation;
@@ -394,7 +417,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_route(route, serializer);
-          sse_encode_box_autoadd_navigation_controller_config(
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
             config,
             serializer,
           );
@@ -475,25 +498,26 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  double crateApiModelsTripSummaryAutoAccessorGetDistanceTraveled({
-    required TripSummary that,
+  SerializableStepAdvanceCondition
+  crateApiModelsNavigationControllerConfigAutoAccessorGetArrivalStepAdvanceCondition({
+    required NavigationControllerConfig that,
   }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
             that,
             serializer,
           );
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_f_64,
+          decodeSuccessData: sse_decode_serializable_step_advance_condition,
           decodeErrorData: null,
         ),
         constMeta:
-            kCrateApiModelsTripSummaryAutoAccessorGetDistanceTraveledConstMeta,
+            kCrateApiModelsNavigationControllerConfigAutoAccessorGetArrivalStepAdvanceConditionConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
@@ -501,21 +525,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   TaskConstMeta
-  get kCrateApiModelsTripSummaryAutoAccessorGetDistanceTraveledConstMeta =>
+  get kCrateApiModelsNavigationControllerConfigAutoAccessorGetArrivalStepAdvanceConditionConstMeta =>
       const TaskConstMeta(
-        debugName: "TripSummary_auto_accessor_get_distance_traveled",
+        debugName:
+            "NavigationControllerConfig_auto_accessor_get_arrival_step_advance_condition",
         argNames: ["that"],
       );
 
   @override
-  SystemTime? crateApiModelsTripSummaryAutoAccessorGetEndedAt({
-    required TripSummary that,
+  RouteDeviationTracking
+  crateApiModelsNavigationControllerConfigAutoAccessorGetRouteDeviationTracking({
+    required NavigationControllerConfig that,
   }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
             that,
             serializer,
           );
@@ -523,42 +549,46 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         },
         codec: SseCodec(
           decodeSuccessData:
-              sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime,
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteDeviationTracking,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiModelsTripSummaryAutoAccessorGetEndedAtConstMeta,
+        constMeta:
+            kCrateApiModelsNavigationControllerConfigAutoAccessorGetRouteDeviationTrackingConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiModelsTripSummaryAutoAccessorGetEndedAtConstMeta =>
+  TaskConstMeta
+  get kCrateApiModelsNavigationControllerConfigAutoAccessorGetRouteDeviationTrackingConstMeta =>
       const TaskConstMeta(
-        debugName: "TripSummary_auto_accessor_get_ended_at",
+        debugName:
+            "NavigationControllerConfig_auto_accessor_get_route_deviation_tracking",
         argNames: ["that"],
       );
 
   @override
-  double crateApiModelsTripSummaryAutoAccessorGetSnappedDistanceTraveled({
-    required TripSummary that,
+  CourseFiltering
+  crateApiModelsNavigationControllerConfigAutoAccessorGetSnappedLocationCourseFiltering({
+    required NavigationControllerConfig that,
   }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
             that,
             serializer,
           );
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_f_64,
+          decodeSuccessData: sse_decode_course_filtering,
           decodeErrorData: null,
         ),
         constMeta:
-            kCrateApiModelsTripSummaryAutoAccessorGetSnappedDistanceTraveledConstMeta,
+            kCrateApiModelsNavigationControllerConfigAutoAccessorGetSnappedLocationCourseFilteringConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
@@ -566,32 +596,34 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   TaskConstMeta
-  get kCrateApiModelsTripSummaryAutoAccessorGetSnappedDistanceTraveledConstMeta =>
+  get kCrateApiModelsNavigationControllerConfigAutoAccessorGetSnappedLocationCourseFilteringConstMeta =>
       const TaskConstMeta(
-        debugName: "TripSummary_auto_accessor_get_snapped_distance_traveled",
+        debugName:
+            "NavigationControllerConfig_auto_accessor_get_snapped_location_course_filtering",
         argNames: ["that"],
       );
 
   @override
-  SystemTime crateApiModelsTripSummaryAutoAccessorGetStartedAt({
-    required TripSummary that,
+  SerializableStepAdvanceCondition
+  crateApiModelsNavigationControllerConfigAutoAccessorGetStepAdvanceCondition({
+    required NavigationControllerConfig that,
   }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
             that,
             serializer,
           );
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 9)!;
         },
         codec: SseCodec(
-          decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime,
+          decodeSuccessData: sse_decode_serializable_step_advance_condition,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiModelsTripSummaryAutoAccessorGetStartedAtConstMeta,
+        constMeta:
+            kCrateApiModelsNavigationControllerConfigAutoAccessorGetStepAdvanceConditionConstMeta,
         argValues: [that],
         apiImpl: this,
       ),
@@ -599,62 +631,64 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   TaskConstMeta
-  get kCrateApiModelsTripSummaryAutoAccessorGetStartedAtConstMeta =>
+  get kCrateApiModelsNavigationControllerConfigAutoAccessorGetStepAdvanceConditionConstMeta =>
       const TaskConstMeta(
-        debugName: "TripSummary_auto_accessor_get_started_at",
+        debugName:
+            "NavigationControllerConfig_auto_accessor_get_step_advance_condition",
         argNames: ["that"],
       );
 
   @override
-  void crateApiModelsTripSummaryAutoAccessorSetDistanceTraveled({
-    required TripSummary that,
-    required double distanceTraveled,
+  WaypointAdvanceMode
+  crateApiModelsNavigationControllerConfigAutoAccessorGetWaypointAdvance({
+    required NavigationControllerConfig that,
   }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
             that,
             serializer,
           );
-          sse_encode_f_64(distanceTraveled, serializer);
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10)!;
         },
         codec: SseCodec(
-          decodeSuccessData: sse_decode_unit,
+          decodeSuccessData: sse_decode_waypoint_advance_mode,
           decodeErrorData: null,
         ),
         constMeta:
-            kCrateApiModelsTripSummaryAutoAccessorSetDistanceTraveledConstMeta,
-        argValues: [that, distanceTraveled],
+            kCrateApiModelsNavigationControllerConfigAutoAccessorGetWaypointAdvanceConstMeta,
+        argValues: [that],
         apiImpl: this,
       ),
     );
   }
 
   TaskConstMeta
-  get kCrateApiModelsTripSummaryAutoAccessorSetDistanceTraveledConstMeta =>
+  get kCrateApiModelsNavigationControllerConfigAutoAccessorGetWaypointAdvanceConstMeta =>
       const TaskConstMeta(
-        debugName: "TripSummary_auto_accessor_set_distance_traveled",
-        argNames: ["that", "distanceTraveled"],
+        debugName:
+            "NavigationControllerConfig_auto_accessor_get_waypoint_advance",
+        argNames: ["that"],
       );
 
   @override
-  void crateApiModelsTripSummaryAutoAccessorSetEndedAt({
-    required TripSummary that,
-    SystemTime? endedAt,
+  void
+  crateApiModelsNavigationControllerConfigAutoAccessorSetArrivalStepAdvanceCondition({
+    required NavigationControllerConfig that,
+    required SerializableStepAdvanceCondition arrivalStepAdvanceCondition,
   }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
             that,
             serializer,
           );
-          sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-            endedAt,
+          sse_encode_serializable_step_advance_condition(
+            arrivalStepAdvanceCondition,
             serializer,
           );
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11)!;
@@ -663,33 +697,40 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_unit,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiModelsTripSummaryAutoAccessorSetEndedAtConstMeta,
-        argValues: [that, endedAt],
+        constMeta:
+            kCrateApiModelsNavigationControllerConfigAutoAccessorSetArrivalStepAdvanceConditionConstMeta,
+        argValues: [that, arrivalStepAdvanceCondition],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiModelsTripSummaryAutoAccessorSetEndedAtConstMeta =>
+  TaskConstMeta
+  get kCrateApiModelsNavigationControllerConfigAutoAccessorSetArrivalStepAdvanceConditionConstMeta =>
       const TaskConstMeta(
-        debugName: "TripSummary_auto_accessor_set_ended_at",
-        argNames: ["that", "endedAt"],
+        debugName:
+            "NavigationControllerConfig_auto_accessor_set_arrival_step_advance_condition",
+        argNames: ["that", "arrivalStepAdvanceCondition"],
       );
 
   @override
-  void crateApiModelsTripSummaryAutoAccessorSetSnappedDistanceTraveled({
-    required TripSummary that,
-    required double snappedDistanceTraveled,
+  void
+  crateApiModelsNavigationControllerConfigAutoAccessorSetRouteDeviationTracking({
+    required NavigationControllerConfig that,
+    required RouteDeviationTracking routeDeviationTracking,
   }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
             that,
             serializer,
           );
-          sse_encode_f_64(snappedDistanceTraveled, serializer);
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteDeviationTracking(
+            routeDeviationTracking,
+            serializer,
+          );
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
         },
         codec: SseCodec(
@@ -697,35 +738,37 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: null,
         ),
         constMeta:
-            kCrateApiModelsTripSummaryAutoAccessorSetSnappedDistanceTraveledConstMeta,
-        argValues: [that, snappedDistanceTraveled],
+            kCrateApiModelsNavigationControllerConfigAutoAccessorSetRouteDeviationTrackingConstMeta,
+        argValues: [that, routeDeviationTracking],
         apiImpl: this,
       ),
     );
   }
 
   TaskConstMeta
-  get kCrateApiModelsTripSummaryAutoAccessorSetSnappedDistanceTraveledConstMeta =>
+  get kCrateApiModelsNavigationControllerConfigAutoAccessorSetRouteDeviationTrackingConstMeta =>
       const TaskConstMeta(
-        debugName: "TripSummary_auto_accessor_set_snapped_distance_traveled",
-        argNames: ["that", "snappedDistanceTraveled"],
+        debugName:
+            "NavigationControllerConfig_auto_accessor_set_route_deviation_tracking",
+        argNames: ["that", "routeDeviationTracking"],
       );
 
   @override
-  void crateApiModelsTripSummaryAutoAccessorSetStartedAt({
-    required TripSummary that,
-    required SystemTime startedAt,
+  void
+  crateApiModelsNavigationControllerConfigAutoAccessorSetSnappedLocationCourseFiltering({
+    required NavigationControllerConfig that,
+    required CourseFiltering snappedLocationCourseFiltering,
   }) {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
             that,
             serializer,
           );
-          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-            startedAt,
+          sse_encode_course_filtering(
+            snappedLocationCourseFiltering,
             serializer,
           );
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
@@ -734,18 +777,96 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_unit,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiModelsTripSummaryAutoAccessorSetStartedAtConstMeta,
-        argValues: [that, startedAt],
+        constMeta:
+            kCrateApiModelsNavigationControllerConfigAutoAccessorSetSnappedLocationCourseFilteringConstMeta,
+        argValues: [that, snappedLocationCourseFiltering],
         apiImpl: this,
       ),
     );
   }
 
   TaskConstMeta
-  get kCrateApiModelsTripSummaryAutoAccessorSetStartedAtConstMeta =>
+  get kCrateApiModelsNavigationControllerConfigAutoAccessorSetSnappedLocationCourseFilteringConstMeta =>
       const TaskConstMeta(
-        debugName: "TripSummary_auto_accessor_set_started_at",
-        argNames: ["that", "startedAt"],
+        debugName:
+            "NavigationControllerConfig_auto_accessor_set_snapped_location_course_filtering",
+        argNames: ["that", "snappedLocationCourseFiltering"],
+      );
+
+  @override
+  void
+  crateApiModelsNavigationControllerConfigAutoAccessorSetStepAdvanceCondition({
+    required NavigationControllerConfig that,
+    required SerializableStepAdvanceCondition stepAdvanceCondition,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
+            that,
+            serializer,
+          );
+          sse_encode_serializable_step_advance_condition(
+            stepAdvanceCondition,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiModelsNavigationControllerConfigAutoAccessorSetStepAdvanceConditionConstMeta,
+        argValues: [that, stepAdvanceCondition],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsNavigationControllerConfigAutoAccessorSetStepAdvanceConditionConstMeta =>
+      const TaskConstMeta(
+        debugName:
+            "NavigationControllerConfig_auto_accessor_set_step_advance_condition",
+        argNames: ["that", "stepAdvanceCondition"],
+      );
+
+  @override
+  void crateApiModelsNavigationControllerConfigAutoAccessorSetWaypointAdvance({
+    required NavigationControllerConfig that,
+    required WaypointAdvanceMode waypointAdvance,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
+            that,
+            serializer,
+          );
+          sse_encode_waypoint_advance_mode(waypointAdvance, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 15)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiModelsNavigationControllerConfigAutoAccessorSetWaypointAdvanceConstMeta,
+        argValues: [that, waypointAdvance],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsNavigationControllerConfigAutoAccessorSetWaypointAdvanceConstMeta =>
+      const TaskConstMeta(
+        debugName:
+            "NavigationControllerConfig_auto_accessor_set_waypoint_advance",
+        argNames: ["that", "waypointAdvance"],
       );
 
   @override
@@ -760,7 +881,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_geographic_coordinate,
@@ -793,7 +914,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 15)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 17)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_course_over_ground,
@@ -826,7 +947,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 18)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_f_64,
@@ -859,7 +980,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 17)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 19)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_opt_box_autoadd_speed,
@@ -879,39 +1000,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  SystemTime crateApiModelsUserLocationAutoAccessorGetTimestamp({
-    required UserLocation that,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
-            that,
-            serializer,
-          );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 18)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateApiModelsUserLocationAutoAccessorGetTimestampConstMeta,
-        argValues: [that],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateApiModelsUserLocationAutoAccessorGetTimestampConstMeta =>
-      const TaskConstMeta(
-        debugName: "UserLocation_auto_accessor_get_timestamp",
-        argNames: ["that"],
-      );
-
-  @override
   void crateApiModelsUserLocationAutoAccessorSetCoordinates({
     required UserLocation that,
     required GeographicCoordinate coordinates,
@@ -925,7 +1013,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_geographic_coordinate(coordinates, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 19)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 20)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -963,7 +1051,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             courseOverGround,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 20)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 21)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -998,7 +1086,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_f_64(horizontalAccuracy, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 21)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 22)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -1033,7 +1121,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_opt_box_autoadd_speed(speed, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 22)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 23)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_unit,
@@ -1053,57 +1141,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  void crateApiModelsUserLocationAutoAccessorSetTimestamp({
-    required UserLocation that,
-    required SystemTime timestamp,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
-            that,
-            serializer,
-          );
-          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-            timestamp,
-            serializer,
-          );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 23)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData: sse_decode_unit,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateApiModelsUserLocationAutoAccessorSetTimestampConstMeta,
-        argValues: [that, timestamp],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateApiModelsUserLocationAutoAccessorSetTimestampConstMeta =>
-      const TaskConstMeta(
-        debugName: "UserLocation_auto_accessor_set_timestamp",
-        argNames: ["that", "timestamp"],
-      );
-
-  @override
-  Future<TripSummary> crateApiModelsCreateTripSummary({
-    required double distanceTraveled,
-    required double snappedDistanceTraveled,
-    required DateTime startedAt,
-    DateTime? endedAt,
+  Future<NavigationControllerConfig>
+  crateApiModelsCreateNavigationControllerConfig({
+    required WaypointAdvanceMode waypointAdvance,
+    required SerializableStepAdvanceCondition stepAdvanceCondition,
+    required SerializableStepAdvanceCondition arrivalStepAdvanceCondition,
+    required RouteDeviationTracking routeDeviationTracking,
+    required CourseFiltering snappedLocationCourseFiltering,
   }) {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_f_64(distanceTraveled, serializer);
-          sse_encode_f_64(snappedDistanceTraveled, serializer);
-          sse_encode_Chrono_Utc(startedAt, serializer);
-          sse_encode_opt_box_autoadd_Chrono_Utc(endedAt, serializer);
+          sse_encode_box_autoadd_waypoint_advance_mode(
+            waypointAdvance,
+            serializer,
+          );
+          sse_encode_box_autoadd_serializable_step_advance_condition(
+            stepAdvanceCondition,
+            serializer,
+          );
+          sse_encode_box_autoadd_serializable_step_advance_condition(
+            arrivalStepAdvanceCondition,
+            serializer,
+          );
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteDeviationTracking(
+            routeDeviationTracking,
+            serializer,
+          );
+          sse_encode_course_filtering(
+            snappedLocationCourseFiltering,
+            serializer,
+          );
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -1113,30 +1182,103 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         },
         codec: SseCodec(
           decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary,
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiModelsCreateTripSummaryConstMeta,
+        constMeta: kCrateApiModelsCreateNavigationControllerConfigConstMeta,
         argValues: [
-          distanceTraveled,
-          snappedDistanceTraveled,
-          startedAt,
-          endedAt,
+          waypointAdvance,
+          stepAdvanceCondition,
+          arrivalStepAdvanceCondition,
+          routeDeviationTracking,
+          snappedLocationCourseFiltering,
         ],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiModelsCreateTripSummaryConstMeta =>
+  TaskConstMeta get kCrateApiModelsCreateNavigationControllerConfigConstMeta =>
       const TaskConstMeta(
-        debugName: "create_trip_summary",
+        debugName: "create_navigation_controller_config",
         argNames: [
-          "distanceTraveled",
-          "snappedDistanceTraveled",
-          "startedAt",
-          "endedAt",
+          "waypointAdvance",
+          "stepAdvanceCondition",
+          "arrivalStepAdvanceCondition",
+          "routeDeviationTracking",
+          "snappedLocationCourseFiltering",
         ],
+      );
+
+  @override
+  Future<RouteDeviationTracking>
+  crateApiModelsCreateRouteDeviationTrackingNone() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 25,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteDeviationTracking,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiModelsCreateRouteDeviationTrackingNoneConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiModelsCreateRouteDeviationTrackingNoneConstMeta =>
+      const TaskConstMeta(
+        debugName: "create_route_deviation_tracking_none",
+        argNames: [],
+      );
+
+  @override
+  Future<RouteDeviationTracking>
+  crateApiModelsCreateRouteDeviationTrackingStaticThreshold({
+    required int minimumHorizontalAccuracy,
+    required double maxAcceptableDeviation,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_u_16(minimumHorizontalAccuracy, serializer);
+          sse_encode_f_64(maxAcceptableDeviation, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 26,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteDeviationTracking,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiModelsCreateRouteDeviationTrackingStaticThresholdConstMeta,
+        argValues: [minimumHorizontalAccuracy, maxAcceptableDeviation],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiModelsCreateRouteDeviationTrackingStaticThresholdConstMeta =>
+      const TaskConstMeta(
+        debugName: "create_route_deviation_tracking_static_threshold",
+        argNames: ["minimumHorizontalAccuracy", "maxAcceptableDeviation"],
       );
 
   @override
@@ -1162,7 +1304,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 25,
+            funcId: 27,
             port: port_,
           );
         },
@@ -1205,7 +1347,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 26,
+            funcId: 28,
             port: port_,
           );
         },
@@ -1240,20 +1382,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController;
 
   RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_SystemTime => wire
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime;
+  get rust_arc_increment_strong_count_NavigationControllerConfig => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig;
 
   RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_SystemTime => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime;
+  get rust_arc_decrement_strong_count_NavigationControllerConfig => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig;
 
   RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_TripSummary => wire
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary;
+  get rust_arc_increment_strong_count_RouteDeviationTracking => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteDeviationTracking;
 
   RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_TripSummary => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary;
+  get rust_arc_decrement_strong_count_RouteDeviationTracking => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteDeviationTracking;
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_UserLocation => wire
@@ -1284,21 +1426,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  SystemTime
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+  NavigationControllerConfig
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return SystemTimeImpl.frbInternalDcoDecode(raw as List<dynamic>);
+    return NavigationControllerConfigImpl.frbInternalDcoDecode(
+      raw as List<dynamic>,
+    );
   }
 
   @protected
-  TripSummary
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+  RouteDeviationTracking
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteDeviationTracking(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return TripSummaryImpl.frbInternalDcoDecode(raw as List<dynamic>);
+    return RouteDeviationTrackingImpl.frbInternalDcoDecode(
+      raw as List<dynamic>,
+    );
   }
 
   @protected
@@ -1311,12 +1457,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TripSummary
-  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+  NavigationControllerConfig
+  dco_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return TripSummaryImpl.frbInternalDcoDecode(raw as List<dynamic>);
+    return NavigationControllerConfigImpl.frbInternalDcoDecode(
+      raw as List<dynamic>,
+    );
   }
 
   @protected
@@ -1349,12 +1497,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TripSummary
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+  NavigationControllerConfig
+  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return TripSummaryImpl.frbInternalDcoDecode(raw as List<dynamic>);
+    return NavigationControllerConfigImpl.frbInternalDcoDecode(
+      raw as List<dynamic>,
+    );
   }
 
   @protected
@@ -1393,21 +1543,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  SystemTime
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+  NavigationControllerConfig
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return SystemTimeImpl.frbInternalDcoDecode(raw as List<dynamic>);
+    return NavigationControllerConfigImpl.frbInternalDcoDecode(
+      raw as List<dynamic>,
+    );
   }
 
   @protected
-  TripSummary
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+  RouteDeviationTracking
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteDeviationTracking(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return TripSummaryImpl.frbInternalDcoDecode(raw as List<dynamic>);
+    return RouteDeviationTrackingImpl.frbInternalDcoDecode(
+      raw as List<dynamic>,
+    );
   }
 
   @protected
@@ -1452,17 +1606,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return BoundingBox(
       sw: dco_decode_geographic_coordinate(arr[0]),
       ne: dco_decode_geographic_coordinate(arr[1]),
-    );
-  }
-
-  @protected
-  SystemTime
-  dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-      raw,
     );
   }
 
@@ -1540,13 +1683,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  NavigationControllerConfig
-  dco_decode_box_autoadd_navigation_controller_config(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_navigation_controller_config(raw);
-  }
-
-  @protected
   Route dco_decode_box_autoadd_route(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_route(raw);
@@ -1556,6 +1692,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   RouteDeviation dco_decode_box_autoadd_route_deviation(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_route_deviation(raw);
+  }
+
+  @protected
+  SerializableStepAdvanceCondition
+  dco_decode_box_autoadd_serializable_step_advance_condition(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_serializable_step_advance_condition(raw);
   }
 
   @protected
@@ -1574,6 +1717,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TripProgress dco_decode_box_autoadd_trip_progress(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_trip_progress(raw);
+  }
+
+  @protected
+  TripSummary dco_decode_box_autoadd_trip_summary(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_trip_summary(raw);
   }
 
   @protected
@@ -1600,6 +1749,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_visual_instruction_content(raw);
+  }
+
+  @protected
+  WaypointAdvanceMode dco_decode_box_autoadd_waypoint_advance_mode(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_waypoint_advance_mode(raw);
   }
 
   @protected
@@ -1799,42 +1956,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  NavigationControllerConfig dco_decode_navigation_controller_config(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 5)
-      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
-    return NavigationControllerConfig(
-      waypointAdvance: dco_decode_waypoint_advance_mode(arr[0]),
-      stepAdvanceCondition: dco_decode_serializable_step_advance_condition(
-        arr[1],
-      ),
-      arrivalStepAdvanceCondition:
-          dco_decode_serializable_step_advance_condition(arr[2]),
-      routeDeviationTracking: dco_decode_route_deviation_tracking(arr[3]),
-      snappedLocationCourseFiltering: dco_decode_course_filtering(arr[4]),
-    );
-  }
-
-  @protected
   String? dco_decode_opt_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_String(raw);
-  }
-
-  @protected
-  SystemTime?
-  dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw == null
-        ? null
-        : dco_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-            raw,
-          );
   }
 
   @protected
@@ -1996,22 +2120,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  RouteDeviationTracking dco_decode_route_deviation_tracking(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    switch (raw[0]) {
-      case 0:
-        return RouteDeviationTracking_None();
-      case 1:
-        return RouteDeviationTracking_StaticThreshold(
-          minimumHorizontalAccuracy: dco_decode_u_16(raw[1]),
-          maxAcceptableDeviation: dco_decode_f_64(raw[2]),
-        );
-      default:
-        throw Exception("unreachable");
-    }
-  }
-
-  @protected
   RouteStep dco_decode_route_step(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -2144,10 +2252,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           remainingSteps: dco_decode_list_route_step(raw[4]),
           remainingWaypoints: dco_decode_list_waypoint(raw[5]),
           progress: dco_decode_box_autoadd_trip_progress(raw[6]),
-          summary:
-              dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
-                raw[7],
-              ),
+          summary: dco_decode_box_autoadd_trip_summary(raw[7]),
           deviation: dco_decode_box_autoadd_route_deviation(raw[8]),
           visualInstruction: dco_decode_opt_box_autoadd_visual_instruction(
             raw[9],
@@ -2163,14 +2268,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
               dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
                 raw[1],
               ),
-          summary:
-              dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
-                raw[2],
-              ),
+          summary: dco_decode_box_autoadd_trip_summary(raw[2]),
         );
       default:
         throw Exception("unreachable");
     }
+  }
+
+  @protected
+  TripSummary dco_decode_trip_summary(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return TripSummary(
+      distanceTraveled: dco_decode_f_64(arr[0]),
+      snappedDistanceTraveled: dco_decode_f_64(arr[1]),
+      startedAt: dco_decode_Chrono_Utc(arr[2]),
+      endedAt: dco_decode_opt_box_autoadd_Chrono_Utc(arr[3]),
+    );
   }
 
   @protected
@@ -2294,24 +2410,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  SystemTime
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+  NavigationControllerConfig
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return SystemTimeImpl.frbInternalSseDecode(
+    return NavigationControllerConfigImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
   }
 
   @protected
-  TripSummary
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+  RouteDeviationTracking
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteDeviationTracking(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return TripSummaryImpl.frbInternalSseDecode(
+    return RouteDeviationTrackingImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -2330,12 +2446,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TripSummary
-  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+  NavigationControllerConfig
+  sse_decode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return TripSummaryImpl.frbInternalSseDecode(
+    return NavigationControllerConfigImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -2378,12 +2494,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  TripSummary
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+  NavigationControllerConfig
+  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return TripSummaryImpl.frbInternalSseDecode(
+    return NavigationControllerConfigImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -2433,24 +2549,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  SystemTime
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
+  NavigationControllerConfig
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return SystemTimeImpl.frbInternalSseDecode(
+    return NavigationControllerConfigImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
   }
 
   @protected
-  TripSummary
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
+  RouteDeviationTracking
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteDeviationTracking(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return TripSummaryImpl.frbInternalSseDecode(
+    return RouteDeviationTrackingImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -2501,17 +2617,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_sw = sse_decode_geographic_coordinate(deserializer);
     var var_ne = sse_decode_geographic_coordinate(deserializer);
     return BoundingBox(sw: var_sw, ne: var_ne);
-  }
-
-  @protected
-  SystemTime
-  sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-      deserializer,
-    ));
   }
 
   @protected
@@ -2596,15 +2701,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  NavigationControllerConfig
-  sse_decode_box_autoadd_navigation_controller_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_navigation_controller_config(deserializer));
-  }
-
-  @protected
   Route sse_decode_box_autoadd_route(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_route(deserializer));
@@ -2616,6 +2712,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_route_deviation(deserializer));
+  }
+
+  @protected
+  SerializableStepAdvanceCondition
+  sse_decode_box_autoadd_serializable_step_advance_condition(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_serializable_step_advance_condition(deserializer));
   }
 
   @protected
@@ -2638,6 +2743,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_trip_progress(deserializer));
+  }
+
+  @protected
+  TripSummary sse_decode_box_autoadd_trip_summary(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_trip_summary(deserializer));
   }
 
   @protected
@@ -2666,6 +2779,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_visual_instruction_content(deserializer));
+  }
+
+  @protected
+  WaypointAdvanceMode sse_decode_box_autoadd_waypoint_advance_mode(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_waypoint_advance_mode(deserializer));
   }
 
   @protected
@@ -2941,52 +3062,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  NavigationControllerConfig sse_decode_navigation_controller_config(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_waypointAdvance = sse_decode_waypoint_advance_mode(deserializer);
-    var var_stepAdvanceCondition =
-        sse_decode_serializable_step_advance_condition(deserializer);
-    var var_arrivalStepAdvanceCondition =
-        sse_decode_serializable_step_advance_condition(deserializer);
-    var var_routeDeviationTracking = sse_decode_route_deviation_tracking(
-      deserializer,
-    );
-    var var_snappedLocationCourseFiltering = sse_decode_course_filtering(
-      deserializer,
-    );
-    return NavigationControllerConfig(
-      waypointAdvance: var_waypointAdvance,
-      stepAdvanceCondition: var_stepAdvanceCondition,
-      arrivalStepAdvanceCondition: var_arrivalStepAdvanceCondition,
-      routeDeviationTracking: var_routeDeviationTracking,
-      snappedLocationCourseFiltering: var_snappedLocationCourseFiltering,
-    );
-  }
-
-  @protected
   String? sse_decode_opt_String(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_String(deserializer));
-    } else {
-      return null;
-    }
-  }
-
-  @protected
-  SystemTime?
-  sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    if (sse_decode_bool(deserializer)) {
-      return (sse_decode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-        deserializer,
-      ));
     } else {
       return null;
     }
@@ -3261,28 +3341,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  RouteDeviationTracking sse_decode_route_deviation_tracking(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var tag_ = sse_decode_i_32(deserializer);
-    switch (tag_) {
-      case 0:
-        return RouteDeviationTracking_None();
-      case 1:
-        var var_minimumHorizontalAccuracy = sse_decode_u_16(deserializer);
-        var var_maxAcceptableDeviation = sse_decode_f_64(deserializer);
-        return RouteDeviationTracking_StaticThreshold(
-          minimumHorizontalAccuracy: var_minimumHorizontalAccuracy,
-          maxAcceptableDeviation: var_maxAcceptableDeviation,
-        );
-      default:
-        throw UnimplementedError('');
-    }
-  }
-
-  @protected
   RouteStep sse_decode_route_step(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_geometry = sse_decode_list_geographic_coordinate(deserializer);
@@ -3442,10 +3500,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         var var_remainingSteps = sse_decode_list_route_step(deserializer);
         var var_remainingWaypoints = sse_decode_list_waypoint(deserializer);
         var var_progress = sse_decode_box_autoadd_trip_progress(deserializer);
-        var var_summary =
-            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
-              deserializer,
-            );
+        var var_summary = sse_decode_box_autoadd_trip_summary(deserializer);
         var var_deviation = sse_decode_box_autoadd_route_deviation(
           deserializer,
         );
@@ -3472,10 +3527,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
               deserializer,
             );
-        var var_summary =
-            sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
-              deserializer,
-            );
+        var var_summary = sse_decode_box_autoadd_trip_summary(deserializer);
         return TripState_Complete(
           userLocation: var_userLocation,
           summary: var_summary,
@@ -3483,6 +3535,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw UnimplementedError('');
     }
+  }
+
+  @protected
+  TripSummary sse_decode_trip_summary(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_distanceTraveled = sse_decode_f_64(deserializer);
+    var var_snappedDistanceTraveled = sse_decode_f_64(deserializer);
+    var var_startedAt = sse_decode_Chrono_Utc(deserializer);
+    var var_endedAt = sse_decode_opt_box_autoadd_Chrono_Utc(deserializer);
+    return TripSummary(
+      distanceTraveled: var_distanceTraveled,
+      snappedDistanceTraveled: var_snappedDistanceTraveled,
+      startedAt: var_startedAt,
+      endedAt: var_endedAt,
+    );
   }
 
   @protected
@@ -3632,26 +3699,26 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-    SystemTime self,
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
+    NavigationControllerConfig self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
-      (self as SystemTimeImpl).frbInternalSseEncode(move: true),
+      (self as NavigationControllerConfigImpl).frbInternalSseEncode(move: true),
       serializer,
     );
   }
 
   @protected
   void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
-    TripSummary self,
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteDeviationTracking(
+    RouteDeviationTracking self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
-      (self as TripSummaryImpl).frbInternalSseEncode(move: true),
+      (self as RouteDeviationTrackingImpl).frbInternalSseEncode(move: true),
       serializer,
     );
   }
@@ -3671,13 +3738,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
-    TripSummary self,
+  sse_encode_Auto_RefMut_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
+    NavigationControllerConfig self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
-      (self as TripSummaryImpl).frbInternalSseEncode(move: false),
+      (self as NavigationControllerConfigImpl).frbInternalSseEncode(
+        move: false,
+      ),
       serializer,
     );
   }
@@ -3725,13 +3794,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
-    TripSummary self,
+  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
+    NavigationControllerConfig self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
-      (self as TripSummaryImpl).frbInternalSseEncode(move: false),
+      (self as NavigationControllerConfigImpl).frbInternalSseEncode(
+        move: false,
+      ),
       serializer,
     );
   }
@@ -3788,26 +3859,26 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-    SystemTime self,
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
+    NavigationControllerConfig self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
-      (self as SystemTimeImpl).frbInternalSseEncode(move: null),
+      (self as NavigationControllerConfigImpl).frbInternalSseEncode(move: null),
       serializer,
     );
   }
 
   @protected
   void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
-    TripSummary self,
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteDeviationTracking(
+    RouteDeviationTracking self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
-      (self as TripSummaryImpl).frbInternalSseEncode(move: null),
+      (self as RouteDeviationTrackingImpl).frbInternalSseEncode(move: null),
       serializer,
     );
   }
@@ -3854,19 +3925,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_geographic_coordinate(self.sw, serializer);
     sse_encode_geographic_coordinate(self.ne, serializer);
-  }
-
-  @protected
-  void
-  sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-    SystemTime self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-      self,
-      serializer,
-    );
   }
 
   @protected
@@ -3964,15 +4022,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_navigation_controller_config(
-    NavigationControllerConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_navigation_controller_config(self, serializer);
-  }
-
-  @protected
   void sse_encode_box_autoadd_route(Route self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_route(self, serializer);
@@ -3985,6 +4034,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_route_deviation(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_serializable_step_advance_condition(
+    SerializableStepAdvanceCondition self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_serializable_step_advance_condition(self, serializer);
   }
 
   @protected
@@ -4009,6 +4067,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_trip_progress(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_trip_summary(
+    TripSummary self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_trip_summary(self, serializer);
   }
 
   @protected
@@ -4039,6 +4106,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_visual_instruction_content(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_waypoint_advance_mode(
+    WaypointAdvanceMode self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_waypoint_advance_mode(self, serializer);
   }
 
   @protected
@@ -4275,54 +4351,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_navigation_controller_config(
-    NavigationControllerConfig self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_waypoint_advance_mode(self.waypointAdvance, serializer);
-    sse_encode_serializable_step_advance_condition(
-      self.stepAdvanceCondition,
-      serializer,
-    );
-    sse_encode_serializable_step_advance_condition(
-      self.arrivalStepAdvanceCondition,
-      serializer,
-    );
-    sse_encode_route_deviation_tracking(
-      self.routeDeviationTracking,
-      serializer,
-    );
-    sse_encode_course_filtering(
-      self.snappedLocationCourseFiltering,
-      serializer,
-    );
-  }
-
-  @protected
   void sse_encode_opt_String(String? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_String(self, serializer);
-    }
-  }
-
-  @protected
-  void
-  sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-    SystemTime? self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    sse_encode_bool(self != null, serializer);
-    if (self != null) {
-      sse_encode_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerSystemTime(
-        self,
-        serializer,
-      );
     }
   }
 
@@ -4590,25 +4624,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_route_deviation_tracking(
-    RouteDeviationTracking self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    switch (self) {
-      case RouteDeviationTracking_None():
-        sse_encode_i_32(0, serializer);
-      case RouteDeviationTracking_StaticThreshold(
-        minimumHorizontalAccuracy: final minimumHorizontalAccuracy,
-        maxAcceptableDeviation: final maxAcceptableDeviation,
-      ):
-        sse_encode_i_32(1, serializer);
-        sse_encode_u_16(minimumHorizontalAccuracy, serializer);
-        sse_encode_f_64(maxAcceptableDeviation, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_route_step(RouteStep self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_geographic_coordinate(self.geometry, serializer);
@@ -4752,10 +4767,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_list_route_step(remainingSteps, serializer);
         sse_encode_list_waypoint(remainingWaypoints, serializer);
         sse_encode_box_autoadd_trip_progress(progress, serializer);
-        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
-          summary,
-          serializer,
-        );
+        sse_encode_box_autoadd_trip_summary(summary, serializer);
         sse_encode_box_autoadd_route_deviation(deviation, serializer);
         sse_encode_opt_box_autoadd_visual_instruction(
           visualInstruction,
@@ -4775,11 +4787,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           userLocation,
           serializer,
         );
-        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripSummary(
-          summary,
-          serializer,
-        );
+        sse_encode_box_autoadd_trip_summary(summary, serializer);
     }
+  }
+
+  @protected
+  void sse_encode_trip_summary(TripSummary self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self.distanceTraveled, serializer);
+    sse_encode_f_64(self.snappedDistanceTraveled, serializer);
+    sse_encode_Chrono_Utc(self.startedAt, serializer);
+    sse_encode_opt_box_autoadd_Chrono_Utc(self.endedAt, serializer);
   }
 
   @protected
@@ -4954,83 +4972,130 @@ class FlutterNavigationControllerImpl extends RustOpaque
 }
 
 @sealed
-class SystemTimeImpl extends RustOpaque implements SystemTime {
+class NavigationControllerConfigImpl extends RustOpaque
+    implements NavigationControllerConfig {
   // Not to be used by end users
-  SystemTimeImpl.frbInternalDcoDecode(List<dynamic> wire)
+  NavigationControllerConfigImpl.frbInternalDcoDecode(List<dynamic> wire)
     : super.frbInternalDcoDecode(wire, _kStaticData);
 
   // Not to be used by end users
-  SystemTimeImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
-    : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+  NavigationControllerConfigImpl.frbInternalSseDecode(
+    BigInt ptr,
+    int externalSizeOnNative,
+  ) : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount:
-        RustLib.instance.api.rust_arc_increment_strong_count_SystemTime,
-    rustArcDecrementStrongCount:
-        RustLib.instance.api.rust_arc_decrement_strong_count_SystemTime,
-    rustArcDecrementStrongCountPtr:
-        RustLib.instance.api.rust_arc_decrement_strong_count_SystemTimePtr,
+    rustArcIncrementStrongCount: RustLib
+        .instance
+        .api
+        .rust_arc_increment_strong_count_NavigationControllerConfig,
+    rustArcDecrementStrongCount: RustLib
+        .instance
+        .api
+        .rust_arc_decrement_strong_count_NavigationControllerConfig,
+    rustArcDecrementStrongCountPtr: RustLib
+        .instance
+        .api
+        .rust_arc_decrement_strong_count_NavigationControllerConfigPtr,
   );
+
+  SerializableStepAdvanceCondition get arrivalStepAdvanceCondition => RustLib
+      .instance
+      .api
+      .crateApiModelsNavigationControllerConfigAutoAccessorGetArrivalStepAdvanceCondition(
+        that: this,
+      );
+
+  RouteDeviationTracking get routeDeviationTracking => RustLib.instance.api
+      .crateApiModelsNavigationControllerConfigAutoAccessorGetRouteDeviationTracking(
+        that: this,
+      );
+
+  CourseFiltering get snappedLocationCourseFiltering => RustLib.instance.api
+      .crateApiModelsNavigationControllerConfigAutoAccessorGetSnappedLocationCourseFiltering(
+        that: this,
+      );
+
+  SerializableStepAdvanceCondition get stepAdvanceCondition => RustLib
+      .instance
+      .api
+      .crateApiModelsNavigationControllerConfigAutoAccessorGetStepAdvanceCondition(
+        that: this,
+      );
+
+  WaypointAdvanceMode get waypointAdvance => RustLib.instance.api
+      .crateApiModelsNavigationControllerConfigAutoAccessorGetWaypointAdvance(
+        that: this,
+      );
+
+  set arrivalStepAdvanceCondition(
+    SerializableStepAdvanceCondition arrivalStepAdvanceCondition,
+  ) => RustLib.instance.api
+      .crateApiModelsNavigationControllerConfigAutoAccessorSetArrivalStepAdvanceCondition(
+        that: this,
+        arrivalStepAdvanceCondition: arrivalStepAdvanceCondition,
+      );
+
+  set routeDeviationTracking(
+    RouteDeviationTracking routeDeviationTracking,
+  ) => RustLib.instance.api
+      .crateApiModelsNavigationControllerConfigAutoAccessorSetRouteDeviationTracking(
+        that: this,
+        routeDeviationTracking: routeDeviationTracking,
+      );
+
+  set snappedLocationCourseFiltering(
+    CourseFiltering snappedLocationCourseFiltering,
+  ) => RustLib.instance.api
+      .crateApiModelsNavigationControllerConfigAutoAccessorSetSnappedLocationCourseFiltering(
+        that: this,
+        snappedLocationCourseFiltering: snappedLocationCourseFiltering,
+      );
+
+  set stepAdvanceCondition(
+    SerializableStepAdvanceCondition stepAdvanceCondition,
+  ) => RustLib.instance.api
+      .crateApiModelsNavigationControllerConfigAutoAccessorSetStepAdvanceCondition(
+        that: this,
+        stepAdvanceCondition: stepAdvanceCondition,
+      );
+
+  set waypointAdvance(WaypointAdvanceMode waypointAdvance) => RustLib
+      .instance
+      .api
+      .crateApiModelsNavigationControllerConfigAutoAccessorSetWaypointAdvance(
+        that: this,
+        waypointAdvance: waypointAdvance,
+      );
 }
 
 @sealed
-class TripSummaryImpl extends RustOpaque implements TripSummary {
+class RouteDeviationTrackingImpl extends RustOpaque
+    implements RouteDeviationTracking {
   // Not to be used by end users
-  TripSummaryImpl.frbInternalDcoDecode(List<dynamic> wire)
+  RouteDeviationTrackingImpl.frbInternalDcoDecode(List<dynamic> wire)
     : super.frbInternalDcoDecode(wire, _kStaticData);
 
   // Not to be used by end users
-  TripSummaryImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
-    : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+  RouteDeviationTrackingImpl.frbInternalSseDecode(
+    BigInt ptr,
+    int externalSizeOnNative,
+  ) : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount:
-        RustLib.instance.api.rust_arc_increment_strong_count_TripSummary,
-    rustArcDecrementStrongCount:
-        RustLib.instance.api.rust_arc_decrement_strong_count_TripSummary,
-    rustArcDecrementStrongCountPtr:
-        RustLib.instance.api.rust_arc_decrement_strong_count_TripSummaryPtr,
+    rustArcIncrementStrongCount: RustLib
+        .instance
+        .api
+        .rust_arc_increment_strong_count_RouteDeviationTracking,
+    rustArcDecrementStrongCount: RustLib
+        .instance
+        .api
+        .rust_arc_decrement_strong_count_RouteDeviationTracking,
+    rustArcDecrementStrongCountPtr: RustLib
+        .instance
+        .api
+        .rust_arc_decrement_strong_count_RouteDeviationTrackingPtr,
   );
-
-  double get distanceTraveled => RustLib.instance.api
-      .crateApiModelsTripSummaryAutoAccessorGetDistanceTraveled(that: this);
-
-  SystemTime? get endedAt => RustLib.instance.api
-      .crateApiModelsTripSummaryAutoAccessorGetEndedAt(that: this);
-
-  double get snappedDistanceTraveled => RustLib.instance.api
-      .crateApiModelsTripSummaryAutoAccessorGetSnappedDistanceTraveled(
-        that: this,
-      );
-
-  SystemTime get startedAt => RustLib.instance.api
-      .crateApiModelsTripSummaryAutoAccessorGetStartedAt(that: this);
-
-  set distanceTraveled(double distanceTraveled) => RustLib.instance.api
-      .crateApiModelsTripSummaryAutoAccessorSetDistanceTraveled(
-        that: this,
-        distanceTraveled: distanceTraveled,
-      );
-
-  set endedAt(SystemTime? endedAt) =>
-      RustLib.instance.api.crateApiModelsTripSummaryAutoAccessorSetEndedAt(
-        that: this,
-        endedAt: endedAt,
-      );
-
-  set snappedDistanceTraveled(double snappedDistanceTraveled) => RustLib
-      .instance
-      .api
-      .crateApiModelsTripSummaryAutoAccessorSetSnappedDistanceTraveled(
-        that: this,
-        snappedDistanceTraveled: snappedDistanceTraveled,
-      );
-
-  set startedAt(SystemTime startedAt) =>
-      RustLib.instance.api.crateApiModelsTripSummaryAutoAccessorSetStartedAt(
-        that: this,
-        startedAt: startedAt,
-      );
 }
 
 @sealed
@@ -5064,9 +5129,6 @@ class UserLocationImpl extends RustOpaque implements UserLocation {
   Speed? get speed => RustLib.instance.api
       .crateApiModelsUserLocationAutoAccessorGetSpeed(that: this);
 
-  SystemTime get timestamp => RustLib.instance.api
-      .crateApiModelsUserLocationAutoAccessorGetTimestamp(that: this);
-
   set coordinates(GeographicCoordinate coordinates) =>
       RustLib.instance.api.crateApiModelsUserLocationAutoAccessorSetCoordinates(
         that: this,
@@ -5089,10 +5151,4 @@ class UserLocationImpl extends RustOpaque implements UserLocation {
 
   set speed(Speed? speed) => RustLib.instance.api
       .crateApiModelsUserLocationAutoAccessorSetSpeed(that: this, speed: speed);
-
-  set timestamp(SystemTime timestamp) =>
-      RustLib.instance.api.crateApiModelsUserLocationAutoAccessorSetTimestamp(
-        that: this,
-        timestamp: timestamp,
-      );
 }

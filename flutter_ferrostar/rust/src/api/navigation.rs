@@ -10,7 +10,7 @@ pub struct FlutterNavigationController {
 
 impl FlutterNavigationController {
     pub fn new(route: Route, config: NavigationControllerConfig) -> Self {
-        let inner = create_navigator(route, config, false);
+        let inner = create_navigator(route, config.into(), false);
         Self { inner }
     }
 

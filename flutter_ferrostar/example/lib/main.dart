@@ -84,12 +84,12 @@ class _MapPageState extends State<MapPage> {
     );
 
     // 2. Create Config
-    final config = NavigationControllerConfig(
+    final config = await createNavigationControllerConfig(
       waypointAdvance: const WaypointAdvanceMode.waypointWithinRange(15.0),
       stepAdvanceCondition: const SerializableStepAdvanceCondition.manual(),
       arrivalStepAdvanceCondition:
           const SerializableStepAdvanceCondition.manual(),
-      routeDeviationTracking: const RouteDeviationTracking.none(),
+      routeDeviationTracking: await createRouteDeviationTrackingNone(),
       snappedLocationCourseFiltering: CourseFiltering.snapToRoute,
     );
 
@@ -167,8 +167,9 @@ class _MapPageState extends State<MapPage> {
       location = const GeographicCoordinate(lat: 37.7749, lng: -122.4194);
     }
 
-    if (location == null)
+    if (location == null) {
       return const Marker(point: LatLng(0, 0), child: SizedBox());
+    }
 
     return Marker(
       point: LatLng(location.lat, location.lng),

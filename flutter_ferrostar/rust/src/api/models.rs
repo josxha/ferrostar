@@ -5,13 +5,14 @@ pub use ferrostar::models::{
     UserLocation
 };
 pub use ferrostar::navigation_controller::models::{
-    TripProgress, TripState, TripSummary, CourseFiltering, WaypointAdvanceMode, NavigationControllerConfig
+    TripProgress, TripState, TripSummary, CourseFiltering, WaypointAdvanceMode
 };
 pub use ferrostar::deviation_detection::{RouteDeviation, RouteDeviationTracking};
 pub use ferrostar::navigation_controller::step_advance::SerializableStepAdvanceCondition;
 use chrono::{DateTime, Utc};
 use uuid::Uuid;
 use std::time::SystemTime;
+use flutter_rust_bridge::frb;
 
 #[flutter_rust_bridge::frb(mirror(GeographicCoordinate))]
 pub struct _GeographicCoordinate {
@@ -238,15 +239,6 @@ pub enum _WaypointAdvanceMode {
     WaypointAlongAdvancingStep(f64),
 }
 
-#[flutter_rust_bridge::frb(mirror(RouteDeviationTracking))]
-pub enum _RouteDeviationTracking {
-    None,
-    StaticThreshold {
-        minimum_horizontal_accuracy: u16,
-        max_acceptable_deviation: f64,
-    },
-}
-
 #[flutter_rust_bridge::frb(mirror(SerializableStepAdvanceCondition))]
 pub enum _SerializableStepAdvanceCondition {
     Manual,
@@ -279,8 +271,7 @@ pub enum _SerializableStepAdvanceCondition {
     },
 }
 
-#[flutter_rust_bridge::frb(mirror(NavigationControllerConfig))]
-pub struct _NavigationControllerConfig {
+pub struct NavigationControllerConfig {
     pub waypoint_advance: WaypointAdvanceMode,
     pub step_advance_condition: SerializableStepAdvanceCondition,
     pub arrival_step_advance_condition: SerializableStepAdvanceCondition,
@@ -288,13 +279,55 @@ pub struct _NavigationControllerConfig {
     pub snapped_location_course_filtering: CourseFiltering,
 }
 
+impl From<NavigationControllerConfig> for ferrostar::navigation_controller::models::NavigationControllerConfig {
+    fn from(config: NavigationControllerConfig) -> Self {
+        ferrostar::navigation_controller::models::NavigationControllerConfig {
+            waypoint_advance: config.waypoint_advance,
+            step_advance_condition: config.step_advance_condition.into(),
+            arrival_step_advance_condition: config.arrival_step_advance_condition.into(),
+            route_deviation_tracking: config.route_deviation_tracking,
+            snapped_location_course_filtering: config.snapped_location_course_filtering,
+        }
+    }
+}
+
+pub fn create_navigation_controller_config(
+    waypoint_advance: WaypointAdvanceMode,
+    step_advance_condition: SerializableStepAdvanceCondition,
+    arrival_step_advance_condition: SerializableStepAdvanceCondition,
+    route_deviation_tracking: RouteDeviationTracking,
+    snapped_location_course_filtering: CourseFiltering,
+) -> NavigationControllerConfig {
+    NavigationControllerConfig {
+        waypoint_advance,
+        step_advance_condition,
+        arrival_step_advance_condition,
+        route_deviation_tracking,
+        snapped_location_course_filtering,
+    }
+}
+
+pub fn create_route_deviation_tracking_none() -> RouteDeviationTracking {
+    RouteDeviationTracking::None
+}
+
+pub fn create_route_deviation_tracking_static_threshold(
+    minimum_horizontal_accuracy: u16,
+    max_acceptable_deviation: f64,
+) -> RouteDeviationTracking {
+    RouteDeviationTracking::StaticThreshold {
+        minimum_horizontal_accuracy,
+        max_acceptable_deviation,
+    }
+}
+
 #[flutter_rust_bridge::frb(mirror(UserLocation))]
 pub struct _UserLocation {
     pub coordinates: GeographicCoordinate,
     pub horizontal_accuracy: f64,
     pub course_over_ground: Option<CourseOverGround>,
-    #[frb(opaque)]
-    pub timestamp: SystemTime,
+    #[frb(ignore)]
+    pub timestamp: std::time::SystemTime,
     pub speed: Option<Speed>,
 }
 
@@ -314,7 +347,6 @@ pub enum _TripState {
         remaining_steps: Vec<RouteStep>,
         remaining_waypoints: Vec<Waypoint>,
         progress: TripProgress,
-        #[frb(opaque)]
         summary: TripSummary,
         deviation: RouteDeviation,
         visual_instruction: Option<VisualInstruction>,
@@ -324,7 +356,6 @@ pub enum _TripState {
     Complete {
         #[frb(opaque)]
         user_location: UserLocation,
-        #[frb(opaque)]
         summary: TripSummary,
     },
 }
@@ -342,19 +373,5 @@ pub fn create_user_location(
         course_over_ground,
         timestamp: timestamp.into(),
         speed,
-    }
-}
-
-pub fn create_trip_summary(
-    distance_traveled: f64,
-    snapped_distance_traveled: f64,
-    started_at: DateTime<Utc>,
-    ended_at: Option<DateTime<Utc>>,
-) -> TripSummary {
-    TripSummary {
-        distance_traveled,
-        snapped_distance_traveled,
-        started_at: started_at.into(),
-        ended_at: ended_at.map(|t| t.into()),
     }
 }

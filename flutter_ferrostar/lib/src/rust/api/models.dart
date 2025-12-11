@@ -4,11 +4,39 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../frb_generated.dart';
-import 'navigation.dart';
+import '../lib.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 import 'package:uuid/uuid.dart';
 part 'models.freezed.dart';
+
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `from`
+
+Future<NavigationControllerConfig> createNavigationControllerConfig({
+  required WaypointAdvanceMode waypointAdvance,
+  required SerializableStepAdvanceCondition stepAdvanceCondition,
+  required SerializableStepAdvanceCondition arrivalStepAdvanceCondition,
+  required RouteDeviationTracking routeDeviationTracking,
+  required CourseFiltering snappedLocationCourseFiltering,
+}) => RustLib.instance.api.crateApiModelsCreateNavigationControllerConfig(
+  waypointAdvance: waypointAdvance,
+  stepAdvanceCondition: stepAdvanceCondition,
+  arrivalStepAdvanceCondition: arrivalStepAdvanceCondition,
+  routeDeviationTracking: routeDeviationTracking,
+  snappedLocationCourseFiltering: snappedLocationCourseFiltering,
+);
+
+Future<RouteDeviationTracking> createRouteDeviationTrackingNone() =>
+    RustLib.instance.api.crateApiModelsCreateRouteDeviationTrackingNone();
+
+Future<RouteDeviationTracking> createRouteDeviationTrackingStaticThreshold({
+  required int minimumHorizontalAccuracy,
+  required double maxAcceptableDeviation,
+}) => RustLib.instance.api
+    .crateApiModelsCreateRouteDeviationTrackingStaticThreshold(
+      minimumHorizontalAccuracy: minimumHorizontalAccuracy,
+      maxAcceptableDeviation: maxAcceptableDeviation,
+    );
 
 Future<UserLocation> createUserLocation({
   required GeographicCoordinate coordinates,
@@ -24,35 +52,33 @@ Future<UserLocation> createUserLocation({
   speed: speed,
 );
 
-Future<TripSummary> createTripSummary({
-  required double distanceTraveled,
-  required double snappedDistanceTraveled,
-  required DateTime startedAt,
-  DateTime? endedAt,
-}) => RustLib.instance.api.crateApiModelsCreateTripSummary(
-  distanceTraveled: distanceTraveled,
-  snappedDistanceTraveled: snappedDistanceTraveled,
-  startedAt: startedAt,
-  endedAt: endedAt,
-);
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<NavigationControllerConfig>>
+abstract class NavigationControllerConfig implements RustOpaqueInterface {
+  SerializableStepAdvanceCondition get arrivalStepAdvanceCondition;
 
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<TripSummary>>
-abstract class TripSummary implements RustOpaqueInterface {
-  double get distanceTraveled;
+  RouteDeviationTracking get routeDeviationTracking;
 
-  SystemTime? get endedAt;
+  CourseFiltering get snappedLocationCourseFiltering;
 
-  double get snappedDistanceTraveled;
+  SerializableStepAdvanceCondition get stepAdvanceCondition;
 
-  SystemTime get startedAt;
+  WaypointAdvanceMode get waypointAdvance;
 
-  set distanceTraveled(double distanceTraveled);
+  set arrivalStepAdvanceCondition(
+    SerializableStepAdvanceCondition arrivalStepAdvanceCondition,
+  );
 
-  set endedAt(SystemTime? endedAt);
+  set routeDeviationTracking(RouteDeviationTracking routeDeviationTracking);
 
-  set snappedDistanceTraveled(double snappedDistanceTraveled);
+  set snappedLocationCourseFiltering(
+    CourseFiltering snappedLocationCourseFiltering,
+  );
 
-  set startedAt(SystemTime startedAt);
+  set stepAdvanceCondition(
+    SerializableStepAdvanceCondition stepAdvanceCondition,
+  );
+
+  set waypointAdvance(WaypointAdvanceMode waypointAdvance);
 }
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<UserLocation>>
@@ -65,8 +91,6 @@ abstract class UserLocation implements RustOpaqueInterface {
 
   Speed? get speed;
 
-  SystemTime get timestamp;
-
   set coordinates(GeographicCoordinate coordinates);
 
   set courseOverGround(CourseOverGround? courseOverGround);
@@ -74,8 +98,6 @@ abstract class UserLocation implements RustOpaqueInterface {
   set horizontalAccuracy(double horizontalAccuracy);
 
   set speed(Speed? speed);
-
-  set timestamp(SystemTime timestamp);
 }
 
 enum BlockedLane {
@@ -324,42 +346,6 @@ enum ManeuverType {
   exitRotary,
 }
 
-class NavigationControllerConfig {
-  final WaypointAdvanceMode waypointAdvance;
-  final SerializableStepAdvanceCondition stepAdvanceCondition;
-  final SerializableStepAdvanceCondition arrivalStepAdvanceCondition;
-  final RouteDeviationTracking routeDeviationTracking;
-  final CourseFiltering snappedLocationCourseFiltering;
-
-  const NavigationControllerConfig({
-    required this.waypointAdvance,
-    required this.stepAdvanceCondition,
-    required this.arrivalStepAdvanceCondition,
-    required this.routeDeviationTracking,
-    required this.snappedLocationCourseFiltering,
-  });
-
-  @override
-  int get hashCode =>
-      waypointAdvance.hashCode ^
-      stepAdvanceCondition.hashCode ^
-      arrivalStepAdvanceCondition.hashCode ^
-      routeDeviationTracking.hashCode ^
-      snappedLocationCourseFiltering.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is NavigationControllerConfig &&
-          runtimeType == other.runtimeType &&
-          waypointAdvance == other.waypointAdvance &&
-          stepAdvanceCondition == other.stepAdvanceCondition &&
-          arrivalStepAdvanceCondition == other.arrivalStepAdvanceCondition &&
-          routeDeviationTracking == other.routeDeviationTracking &&
-          snappedLocationCourseFiltering ==
-              other.snappedLocationCourseFiltering;
-}
-
 class Route {
   final List<GeographicCoordinate> geometry;
   final BoundingBox bbox;
@@ -403,17 +389,6 @@ sealed class RouteDeviation with _$RouteDeviation {
   const factory RouteDeviation.offRoute({
     required double deviationFromRouteLine,
   }) = RouteDeviation_OffRoute;
-}
-
-@freezed
-sealed class RouteDeviationTracking with _$RouteDeviationTracking {
-  const RouteDeviationTracking._();
-
-  const factory RouteDeviationTracking.none() = RouteDeviationTracking_None;
-  const factory RouteDeviationTracking.staticThreshold({
-    required int minimumHorizontalAccuracy,
-    required double maxAcceptableDeviation,
-  }) = RouteDeviationTracking_StaticThreshold;
 }
 
 class RouteStep {
@@ -606,6 +581,37 @@ sealed class TripState with _$TripState {
     required UserLocation userLocation,
     required TripSummary summary,
   }) = TripState_Complete;
+}
+
+class TripSummary {
+  final double distanceTraveled;
+  final double snappedDistanceTraveled;
+  final DateTime startedAt;
+  final DateTime? endedAt;
+
+  const TripSummary({
+    required this.distanceTraveled,
+    required this.snappedDistanceTraveled,
+    required this.startedAt,
+    this.endedAt,
+  });
+
+  @override
+  int get hashCode =>
+      distanceTraveled.hashCode ^
+      snappedDistanceTraveled.hashCode ^
+      startedAt.hashCode ^
+      endedAt.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TripSummary &&
+          runtimeType == other.runtimeType &&
+          distanceTraveled == other.distanceTraveled &&
+          snappedDistanceTraveled == other.snappedDistanceTraveled &&
+          startedAt == other.startedAt &&
+          endedAt == other.endedAt;
 }
 
 class VisualInstruction {
