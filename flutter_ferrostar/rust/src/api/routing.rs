@@ -1,9 +1,11 @@
 use crate::api::models::{Route, UserLocation, Waypoint};
 use ferrostar::routing_adapters::osrm::OsrmResponseParser;
 use ferrostar::routing_adapters::valhalla::ValhallaHttpRequestGenerator as FerrostarValhallaGenerator;
-use ferrostar::routing_adapters::{RouteRequest as FerrostarRouteRequest, RouteRequestGenerator, RouteResponseParser};
-use std::collections::HashMap;
+use ferrostar::routing_adapters::{RouteRequestGenerator, RouteResponseParser};
 use flutter_rust_bridge::frb;
+use std::collections::HashMap;
+
+pub use ferrostar::routing_adapters::RouteRequest as FerrostarRouteRequest;
 
 #[frb(mirror(FerrostarRouteRequest))]
 pub enum _RouteRequest {
