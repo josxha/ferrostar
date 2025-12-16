@@ -70,7 +70,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.11.1';
 
   @override
-  int get rustContentHash => 331825969;
+  int get rustContentHash => 1287184186;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -237,6 +237,12 @@ abstract class RustLibApi extends BaseApi {
     CourseOverGround? courseOverGround,
     required DateTime timestamp,
     Speed? speed,
+  });
+
+  Future<Waypoint> crateApiRoutingCreateWaypointWithValhallaProperties({
+    required GeographicCoordinate coordinate,
+    required WaypointKind kind,
+    required ValhallaWaypointProperties properties,
   });
 
   Future<void> crateApiSimpleInitApp();
@@ -1450,6 +1456,48 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<Waypoint> crateApiRoutingCreateWaypointWithValhallaProperties({
+    required GeographicCoordinate coordinate,
+    required WaypointKind kind,
+    required ValhallaWaypointProperties properties,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_geographic_coordinate(coordinate, serializer);
+          sse_encode_waypoint_kind(kind, serializer);
+          sse_encode_box_autoadd_valhalla_waypoint_properties(
+            properties,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 30,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_waypoint,
+          decodeErrorData: null,
+        ),
+        constMeta:
+            kCrateApiRoutingCreateWaypointWithValhallaPropertiesConstMeta,
+        argValues: [coordinate, kind, properties],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiRoutingCreateWaypointWithValhallaPropertiesConstMeta =>
+      const TaskConstMeta(
+        debugName: "create_waypoint_with_valhalla_properties",
+        argNames: ["coordinate", "kind", "properties"],
+      );
+
+  @override
   Future<void> crateApiSimpleInitApp() {
     return handler.executeNormal(
       NormalTask(
@@ -1458,7 +1506,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 30,
+            funcId: 31,
             port: port_,
           );
         },
@@ -1490,7 +1538,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 31,
+            funcId: 32,
             port: port_,
           );
         },
@@ -1848,6 +1896,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  double dco_decode_box_autoadd_f_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as double;
+  }
+
+  @protected
   double dco_decode_box_autoadd_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as double;
@@ -1929,9 +1983,42 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int dco_decode_box_autoadd_u_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
   BigInt dco_decode_box_autoadd_u_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_u_64(raw);
+  }
+
+  @protected
+  ValhallaLocationSearchFilter
+  dco_decode_box_autoadd_valhalla_location_search_filter(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_valhalla_location_search_filter(raw);
+  }
+
+  @protected
+  ValhallaRoadClass dco_decode_box_autoadd_valhalla_road_class(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_valhalla_road_class(raw);
+  }
+
+  @protected
+  ValhallaWaypointPreferredSide
+  dco_decode_box_autoadd_valhalla_waypoint_preferred_side(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_valhalla_waypoint_preferred_side(raw);
+  }
+
+  @protected
+  ValhallaWaypointProperties
+  dco_decode_box_autoadd_valhalla_waypoint_properties(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_valhalla_waypoint_properties(raw);
   }
 
   @protected
@@ -1981,6 +2068,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       degrees: dco_decode_u_16(arr[0]),
       accuracy: dco_decode_opt_box_autoadd_u_16(arr[1]),
     );
+  }
+
+  @protected
+  double dco_decode_f_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as double;
   }
 
   @protected
@@ -2240,9 +2333,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  double? dco_decode_opt_box_autoadd_f_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_f_32(raw);
+  }
+
+  @protected
   double? dco_decode_opt_box_autoadd_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_f_64(raw);
+  }
+
+  @protected
+  GeographicCoordinate? dco_decode_opt_box_autoadd_geographic_coordinate(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_geographic_coordinate(raw);
   }
 
   @protected
@@ -2284,9 +2393,41 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int? dco_decode_opt_box_autoadd_u_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_u_32(raw);
+  }
+
+  @protected
   BigInt? dco_decode_opt_box_autoadd_u_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_u_64(raw);
+  }
+
+  @protected
+  ValhallaLocationSearchFilter?
+  dco_decode_opt_box_autoadd_valhalla_location_search_filter(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_valhalla_location_search_filter(raw);
+  }
+
+  @protected
+  ValhallaRoadClass? dco_decode_opt_box_autoadd_valhalla_road_class(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_valhalla_road_class(raw);
+  }
+
+  @protected
+  ValhallaWaypointPreferredSide?
+  dco_decode_opt_box_autoadd_valhalla_waypoint_preferred_side(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null
+        ? null
+        : dco_decode_box_autoadd_valhalla_waypoint_preferred_side(raw);
   }
 
   @protected
@@ -2568,6 +2709,70 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   BigInt dco_decode_usize(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dcoDecodeU64(raw);
+  }
+
+  @protected
+  ValhallaLocationSearchFilter dco_decode_valhalla_location_search_filter(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 9)
+      throw Exception('unexpected arr length: expect 9 but see ${arr.length}');
+    return ValhallaLocationSearchFilter(
+      excludeTunnel: dco_decode_opt_box_autoadd_bool(arr[0]),
+      excludeBridge: dco_decode_opt_box_autoadd_bool(arr[1]),
+      excludeTolls: dco_decode_opt_box_autoadd_bool(arr[2]),
+      excludeFerry: dco_decode_opt_box_autoadd_bool(arr[3]),
+      excludeRamp: dco_decode_opt_box_autoadd_bool(arr[4]),
+      excludeClosures: dco_decode_opt_box_autoadd_bool(arr[5]),
+      minRoadClass: dco_decode_opt_box_autoadd_valhalla_road_class(arr[6]),
+      maxRoadClass: dco_decode_opt_box_autoadd_valhalla_road_class(arr[7]),
+      level: dco_decode_opt_box_autoadd_f_32(arr[8]),
+    );
+  }
+
+  @protected
+  ValhallaRoadClass dco_decode_valhalla_road_class(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ValhallaRoadClass.values[raw as int];
+  }
+
+  @protected
+  ValhallaWaypointPreferredSide dco_decode_valhalla_waypoint_preferred_side(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return ValhallaWaypointPreferredSide.values[raw as int];
+  }
+
+  @protected
+  ValhallaWaypointProperties dco_decode_valhalla_waypoint_properties(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 12)
+      throw Exception('unexpected arr length: expect 12 but see ${arr.length}');
+    return ValhallaWaypointProperties(
+      heading: dco_decode_opt_box_autoadd_u_16(arr[0]),
+      headingTolerance: dco_decode_opt_box_autoadd_u_16(arr[1]),
+      minimumReachability: dco_decode_opt_box_autoadd_u_16(arr[2]),
+      radius: dco_decode_opt_box_autoadd_u_16(arr[3]),
+      preferredSide:
+          dco_decode_opt_box_autoadd_valhalla_waypoint_preferred_side(arr[4]),
+      displayCoordinate: dco_decode_opt_box_autoadd_geographic_coordinate(
+        arr[5],
+      ),
+      searchCutoff: dco_decode_opt_box_autoadd_u_32(arr[6]),
+      nodeSnapTolerance: dco_decode_opt_box_autoadd_u_16(arr[7]),
+      streetSideTolerance: dco_decode_opt_box_autoadd_u_16(arr[8]),
+      streetSideMaxDistance: dco_decode_opt_box_autoadd_u_16(arr[9]),
+      streetSideCutoff: dco_decode_opt_box_autoadd_valhalla_road_class(arr[10]),
+      searchFilter: dco_decode_opt_box_autoadd_valhalla_location_search_filter(
+        arr[11],
+      ),
+    );
   }
 
   @protected
@@ -2961,6 +3166,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  double sse_decode_box_autoadd_f_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_f_32(deserializer));
+  }
+
+  @protected
   double sse_decode_box_autoadd_f_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_f_64(deserializer));
@@ -3056,9 +3267,50 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int sse_decode_box_autoadd_u_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_u_32(deserializer));
+  }
+
+  @protected
   BigInt sse_decode_box_autoadd_u_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_u_64(deserializer));
+  }
+
+  @protected
+  ValhallaLocationSearchFilter
+  sse_decode_box_autoadd_valhalla_location_search_filter(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_valhalla_location_search_filter(deserializer));
+  }
+
+  @protected
+  ValhallaRoadClass sse_decode_box_autoadd_valhalla_road_class(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_valhalla_road_class(deserializer));
+  }
+
+  @protected
+  ValhallaWaypointPreferredSide
+  sse_decode_box_autoadd_valhalla_waypoint_preferred_side(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_valhalla_waypoint_preferred_side(deserializer));
+  }
+
+  @protected
+  ValhallaWaypointProperties
+  sse_decode_box_autoadd_valhalla_waypoint_properties(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_valhalla_waypoint_properties(deserializer));
   }
 
   @protected
@@ -3105,6 +3357,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_degrees = sse_decode_u_16(deserializer);
     var var_accuracy = sse_decode_opt_box_autoadd_u_16(deserializer);
     return CourseOverGround(degrees: var_degrees, accuracy: var_accuracy);
+  }
+
+  @protected
+  double sse_decode_f_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getFloat32();
   }
 
   @protected
@@ -3510,11 +3768,35 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  double? sse_decode_opt_box_autoadd_f_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_f_32(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_f_64(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  GeographicCoordinate? sse_decode_opt_box_autoadd_geographic_coordinate(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_geographic_coordinate(deserializer));
     } else {
       return null;
     }
@@ -3593,11 +3875,67 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_u_32(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   BigInt? sse_decode_opt_box_autoadd_u_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_u_64(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  ValhallaLocationSearchFilter?
+  sse_decode_opt_box_autoadd_valhalla_location_search_filter(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_valhalla_location_search_filter(
+        deserializer,
+      ));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  ValhallaRoadClass? sse_decode_opt_box_autoadd_valhalla_road_class(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_valhalla_road_class(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  ValhallaWaypointPreferredSide?
+  sse_decode_opt_box_autoadd_valhalla_waypoint_preferred_side(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_valhalla_waypoint_preferred_side(
+        deserializer,
+      ));
     } else {
       return null;
     }
@@ -3953,6 +4291,99 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   BigInt sse_decode_usize(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getBigUint64();
+  }
+
+  @protected
+  ValhallaLocationSearchFilter sse_decode_valhalla_location_search_filter(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_excludeTunnel = sse_decode_opt_box_autoadd_bool(deserializer);
+    var var_excludeBridge = sse_decode_opt_box_autoadd_bool(deserializer);
+    var var_excludeTolls = sse_decode_opt_box_autoadd_bool(deserializer);
+    var var_excludeFerry = sse_decode_opt_box_autoadd_bool(deserializer);
+    var var_excludeRamp = sse_decode_opt_box_autoadd_bool(deserializer);
+    var var_excludeClosures = sse_decode_opt_box_autoadd_bool(deserializer);
+    var var_minRoadClass = sse_decode_opt_box_autoadd_valhalla_road_class(
+      deserializer,
+    );
+    var var_maxRoadClass = sse_decode_opt_box_autoadd_valhalla_road_class(
+      deserializer,
+    );
+    var var_level = sse_decode_opt_box_autoadd_f_32(deserializer);
+    return ValhallaLocationSearchFilter(
+      excludeTunnel: var_excludeTunnel,
+      excludeBridge: var_excludeBridge,
+      excludeTolls: var_excludeTolls,
+      excludeFerry: var_excludeFerry,
+      excludeRamp: var_excludeRamp,
+      excludeClosures: var_excludeClosures,
+      minRoadClass: var_minRoadClass,
+      maxRoadClass: var_maxRoadClass,
+      level: var_level,
+    );
+  }
+
+  @protected
+  ValhallaRoadClass sse_decode_valhalla_road_class(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return ValhallaRoadClass.values[inner];
+  }
+
+  @protected
+  ValhallaWaypointPreferredSide sse_decode_valhalla_waypoint_preferred_side(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return ValhallaWaypointPreferredSide.values[inner];
+  }
+
+  @protected
+  ValhallaWaypointProperties sse_decode_valhalla_waypoint_properties(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_heading = sse_decode_opt_box_autoadd_u_16(deserializer);
+    var var_headingTolerance = sse_decode_opt_box_autoadd_u_16(deserializer);
+    var var_minimumReachability = sse_decode_opt_box_autoadd_u_16(deserializer);
+    var var_radius = sse_decode_opt_box_autoadd_u_16(deserializer);
+    var var_preferredSide =
+        sse_decode_opt_box_autoadd_valhalla_waypoint_preferred_side(
+          deserializer,
+        );
+    var var_displayCoordinate =
+        sse_decode_opt_box_autoadd_geographic_coordinate(deserializer);
+    var var_searchCutoff = sse_decode_opt_box_autoadd_u_32(deserializer);
+    var var_nodeSnapTolerance = sse_decode_opt_box_autoadd_u_16(deserializer);
+    var var_streetSideTolerance = sse_decode_opt_box_autoadd_u_16(deserializer);
+    var var_streetSideMaxDistance = sse_decode_opt_box_autoadd_u_16(
+      deserializer,
+    );
+    var var_streetSideCutoff = sse_decode_opt_box_autoadd_valhalla_road_class(
+      deserializer,
+    );
+    var var_searchFilter =
+        sse_decode_opt_box_autoadd_valhalla_location_search_filter(
+          deserializer,
+        );
+    return ValhallaWaypointProperties(
+      heading: var_heading,
+      headingTolerance: var_headingTolerance,
+      minimumReachability: var_minimumReachability,
+      radius: var_radius,
+      preferredSide: var_preferredSide,
+      displayCoordinate: var_displayCoordinate,
+      searchCutoff: var_searchCutoff,
+      nodeSnapTolerance: var_nodeSnapTolerance,
+      streetSideTolerance: var_streetSideTolerance,
+      streetSideMaxDistance: var_streetSideMaxDistance,
+      streetSideCutoff: var_streetSideCutoff,
+      searchFilter: var_searchFilter,
+    );
   }
 
   @protected
@@ -4414,6 +4845,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_f_32(double self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_32(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_f_64(self, serializer);
@@ -4516,9 +4953,51 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_u_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_32(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_u_64(BigInt self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_u_64(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_valhalla_location_search_filter(
+    ValhallaLocationSearchFilter self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_valhalla_location_search_filter(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_valhalla_road_class(
+    ValhallaRoadClass self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_valhalla_road_class(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_valhalla_waypoint_preferred_side(
+    ValhallaWaypointPreferredSide self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_valhalla_waypoint_preferred_side(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_valhalla_waypoint_properties(
+    ValhallaWaypointProperties self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_valhalla_waypoint_properties(self, serializer);
   }
 
   @protected
@@ -4571,6 +5050,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_u_16(self.degrees, serializer);
     sse_encode_opt_box_autoadd_u_16(self.accuracy, serializer);
+  }
+
+  @protected
+  void sse_encode_f_32(double self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putFloat32(self);
   }
 
   @protected
@@ -4930,12 +5415,35 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_f_32(double? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_f_32(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_f_64(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_geographic_coordinate(
+    GeographicCoordinate? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_geographic_coordinate(self, serializer);
     }
   }
 
@@ -5012,12 +5520,61 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_u_32(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_opt_box_autoadd_u_64(BigInt? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_u_64(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_valhalla_location_search_filter(
+    ValhallaLocationSearchFilter? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_valhalla_location_search_filter(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_valhalla_road_class(
+    ValhallaRoadClass? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_valhalla_road_class(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_valhalla_waypoint_preferred_side(
+    ValhallaWaypointPreferredSide? self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_valhalla_waypoint_preferred_side(self, serializer);
     }
   }
 
@@ -5333,6 +5890,79 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_usize(BigInt self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putBigUint64(self);
+  }
+
+  @protected
+  void sse_encode_valhalla_location_search_filter(
+    ValhallaLocationSearchFilter self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_box_autoadd_bool(self.excludeTunnel, serializer);
+    sse_encode_opt_box_autoadd_bool(self.excludeBridge, serializer);
+    sse_encode_opt_box_autoadd_bool(self.excludeTolls, serializer);
+    sse_encode_opt_box_autoadd_bool(self.excludeFerry, serializer);
+    sse_encode_opt_box_autoadd_bool(self.excludeRamp, serializer);
+    sse_encode_opt_box_autoadd_bool(self.excludeClosures, serializer);
+    sse_encode_opt_box_autoadd_valhalla_road_class(
+      self.minRoadClass,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_valhalla_road_class(
+      self.maxRoadClass,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_f_32(self.level, serializer);
+  }
+
+  @protected
+  void sse_encode_valhalla_road_class(
+    ValhallaRoadClass self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_valhalla_waypoint_preferred_side(
+    ValhallaWaypointPreferredSide self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_valhalla_waypoint_properties(
+    ValhallaWaypointProperties self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_box_autoadd_u_16(self.heading, serializer);
+    sse_encode_opt_box_autoadd_u_16(self.headingTolerance, serializer);
+    sse_encode_opt_box_autoadd_u_16(self.minimumReachability, serializer);
+    sse_encode_opt_box_autoadd_u_16(self.radius, serializer);
+    sse_encode_opt_box_autoadd_valhalla_waypoint_preferred_side(
+      self.preferredSide,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_geographic_coordinate(
+      self.displayCoordinate,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_u_32(self.searchCutoff, serializer);
+    sse_encode_opt_box_autoadd_u_16(self.nodeSnapTolerance, serializer);
+    sse_encode_opt_box_autoadd_u_16(self.streetSideTolerance, serializer);
+    sse_encode_opt_box_autoadd_u_16(self.streetSideMaxDistance, serializer);
+    sse_encode_opt_box_autoadd_valhalla_road_class(
+      self.streetSideCutoff,
+      serializer,
+    );
+    sse_encode_opt_box_autoadd_valhalla_location_search_filter(
+      self.searchFilter,
+      serializer,
+    );
   }
 
   @protected

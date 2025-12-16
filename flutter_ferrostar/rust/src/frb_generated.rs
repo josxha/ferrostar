@@ -41,7 +41,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.11.1";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 331825969;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1287184186;
 
 // Section: executor
 
@@ -1489,6 +1489,49 @@ fn wire__crate__api__models__create_user_location_impl(
         },
     )
 }
+fn wire__crate__api__routing__create_waypoint_with_valhalla_properties_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "create_waypoint_with_valhalla_properties",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_coordinate =
+                <crate::api::models::GeographicCoordinate>::sse_decode(&mut deserializer);
+            let api_kind = <crate::api::models::WaypointKind>::sse_decode(&mut deserializer);
+            let api_properties =
+                <crate::api::models::ValhallaWaypointProperties>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, ()>((move || {
+                    let output_ok = Result::<_, ()>::Ok(
+                        crate::api::routing::create_waypoint_with_valhalla_properties(
+                            api_coordinate,
+                            api_kind,
+                            api_properties,
+                        ),
+                    )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
 fn wire__crate__api__simple__init_app_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -1764,6 +1807,41 @@ const _: fn() = || {
         let _: f64 = TripSummary.snapped_distance_traveled;
         let _: chrono::DateTime<chrono::Utc> = TripSummary.started_at;
         let _: Option<chrono::DateTime<chrono::Utc>> = TripSummary.ended_at;
+    }
+    {
+        let ValhallaLocationSearchFilter =
+            None::<crate::api::models::ValhallaLocationSearchFilter>.unwrap();
+        let _: Option<bool> = ValhallaLocationSearchFilter.exclude_tunnel;
+        let _: Option<bool> = ValhallaLocationSearchFilter.exclude_bridge;
+        let _: Option<bool> = ValhallaLocationSearchFilter.exclude_tolls;
+        let _: Option<bool> = ValhallaLocationSearchFilter.exclude_ferry;
+        let _: Option<bool> = ValhallaLocationSearchFilter.exclude_ramp;
+        let _: Option<bool> = ValhallaLocationSearchFilter.exclude_closures;
+        let _: Option<crate::api::models::ValhallaRoadClass> =
+            ValhallaLocationSearchFilter.min_road_class;
+        let _: Option<crate::api::models::ValhallaRoadClass> =
+            ValhallaLocationSearchFilter.max_road_class;
+        let _: Option<f32> = ValhallaLocationSearchFilter.level;
+    }
+    {
+        let ValhallaWaypointProperties =
+            None::<crate::api::models::ValhallaWaypointProperties>.unwrap();
+        let _: Option<u16> = ValhallaWaypointProperties.heading;
+        let _: Option<u16> = ValhallaWaypointProperties.heading_tolerance;
+        let _: Option<u16> = ValhallaWaypointProperties.minimum_reachability;
+        let _: Option<u16> = ValhallaWaypointProperties.radius;
+        let _: Option<crate::api::models::ValhallaWaypointPreferredSide> =
+            ValhallaWaypointProperties.preferred_side;
+        let _: Option<crate::api::models::GeographicCoordinate> =
+            ValhallaWaypointProperties.display_coordinate;
+        let _: Option<u32> = ValhallaWaypointProperties.search_cutoff;
+        let _: Option<u16> = ValhallaWaypointProperties.node_snap_tolerance;
+        let _: Option<u16> = ValhallaWaypointProperties.street_side_tolerance;
+        let _: Option<u16> = ValhallaWaypointProperties.street_side_max_distance;
+        let _: Option<crate::api::models::ValhallaRoadClass> =
+            ValhallaWaypointProperties.street_side_cutoff;
+        let _: Option<crate::api::models::ValhallaLocationSearchFilter> =
+            ValhallaWaypointProperties.search_filter;
     }
     {
         let VisualInstruction = None::<crate::api::models::VisualInstruction>.unwrap();
@@ -2054,6 +2132,13 @@ impl SseDecode for crate::api::models::CourseOverGround {
             degrees: var_degrees,
             accuracy: var_accuracy,
         };
+    }
+}
+
+impl SseDecode for f32 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_f32::<NativeEndian>().unwrap()
     }
 }
 
@@ -2507,11 +2592,35 @@ impl SseDecode for Option<crate::api::models::CourseOverGround> {
     }
 }
 
+impl SseDecode for Option<f32> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<f32>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<f64> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         if (<bool>::sse_decode(deserializer)) {
             return Some(<f64>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::GeographicCoordinate> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::api::models::GeographicCoordinate>::sse_decode(
+                deserializer,
+            ));
         } else {
             return None;
         }
@@ -2588,11 +2697,61 @@ impl SseDecode for Option<u16> {
     }
 }
 
+impl SseDecode for Option<u32> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<u32>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<u64> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         if (<bool>::sse_decode(deserializer)) {
             return Some(<u64>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::ValhallaLocationSearchFilter> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::api::models::ValhallaLocationSearchFilter>::sse_decode(deserializer),
+            );
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::ValhallaRoadClass> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::api::models::ValhallaRoadClass>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for Option<crate::api::models::ValhallaWaypointPreferredSide> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(
+                <crate::api::models::ValhallaWaypointPreferredSide>::sse_decode(deserializer),
+            );
         } else {
             return None;
         }
@@ -2963,6 +3122,104 @@ impl SseDecode for usize {
     }
 }
 
+impl SseDecode for crate::api::models::ValhallaLocationSearchFilter {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_excludeTunnel = <Option<bool>>::sse_decode(deserializer);
+        let mut var_excludeBridge = <Option<bool>>::sse_decode(deserializer);
+        let mut var_excludeTolls = <Option<bool>>::sse_decode(deserializer);
+        let mut var_excludeFerry = <Option<bool>>::sse_decode(deserializer);
+        let mut var_excludeRamp = <Option<bool>>::sse_decode(deserializer);
+        let mut var_excludeClosures = <Option<bool>>::sse_decode(deserializer);
+        let mut var_minRoadClass =
+            <Option<crate::api::models::ValhallaRoadClass>>::sse_decode(deserializer);
+        let mut var_maxRoadClass =
+            <Option<crate::api::models::ValhallaRoadClass>>::sse_decode(deserializer);
+        let mut var_level = <Option<f32>>::sse_decode(deserializer);
+        return crate::api::models::ValhallaLocationSearchFilter {
+            exclude_tunnel: var_excludeTunnel,
+            exclude_bridge: var_excludeBridge,
+            exclude_tolls: var_excludeTolls,
+            exclude_ferry: var_excludeFerry,
+            exclude_ramp: var_excludeRamp,
+            exclude_closures: var_excludeClosures,
+            min_road_class: var_minRoadClass,
+            max_road_class: var_maxRoadClass,
+            level: var_level,
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::ValhallaRoadClass {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::models::ValhallaRoadClass::Motorway,
+            1 => crate::api::models::ValhallaRoadClass::Trunk,
+            2 => crate::api::models::ValhallaRoadClass::Primary,
+            3 => crate::api::models::ValhallaRoadClass::Secondary,
+            4 => crate::api::models::ValhallaRoadClass::Tertiary,
+            5 => crate::api::models::ValhallaRoadClass::Unclassified,
+            6 => crate::api::models::ValhallaRoadClass::Residential,
+            7 => crate::api::models::ValhallaRoadClass::ServiceOther,
+            _ => unreachable!("Invalid variant for ValhallaRoadClass: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::ValhallaWaypointPreferredSide {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::models::ValhallaWaypointPreferredSide::Same,
+            1 => crate::api::models::ValhallaWaypointPreferredSide::Opposite,
+            2 => crate::api::models::ValhallaWaypointPreferredSide::Either,
+            _ => unreachable!(
+                "Invalid variant for ValhallaWaypointPreferredSide: {}",
+                inner
+            ),
+        };
+    }
+}
+
+impl SseDecode for crate::api::models::ValhallaWaypointProperties {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_heading = <Option<u16>>::sse_decode(deserializer);
+        let mut var_headingTolerance = <Option<u16>>::sse_decode(deserializer);
+        let mut var_minimumReachability = <Option<u16>>::sse_decode(deserializer);
+        let mut var_radius = <Option<u16>>::sse_decode(deserializer);
+        let mut var_preferredSide =
+            <Option<crate::api::models::ValhallaWaypointPreferredSide>>::sse_decode(deserializer);
+        let mut var_displayCoordinate =
+            <Option<crate::api::models::GeographicCoordinate>>::sse_decode(deserializer);
+        let mut var_searchCutoff = <Option<u32>>::sse_decode(deserializer);
+        let mut var_nodeSnapTolerance = <Option<u16>>::sse_decode(deserializer);
+        let mut var_streetSideTolerance = <Option<u16>>::sse_decode(deserializer);
+        let mut var_streetSideMaxDistance = <Option<u16>>::sse_decode(deserializer);
+        let mut var_streetSideCutoff =
+            <Option<crate::api::models::ValhallaRoadClass>>::sse_decode(deserializer);
+        let mut var_searchFilter =
+            <Option<crate::api::models::ValhallaLocationSearchFilter>>::sse_decode(deserializer);
+        return crate::api::models::ValhallaWaypointProperties {
+            heading: var_heading,
+            heading_tolerance: var_headingTolerance,
+            minimum_reachability: var_minimumReachability,
+            radius: var_radius,
+            preferred_side: var_preferredSide,
+            display_coordinate: var_displayCoordinate,
+            search_cutoff: var_searchCutoff,
+            node_snap_tolerance: var_nodeSnapTolerance,
+            street_side_tolerance: var_streetSideTolerance,
+            street_side_max_distance: var_streetSideMaxDistance,
+            street_side_cutoff: var_streetSideCutoff,
+            search_filter: var_searchFilter,
+        };
+    }
+}
+
 impl SseDecode for crate::api::models::VisualInstruction {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3126,8 +3383,14 @@ fn pde_ffi_dispatcher_primary_impl(
         29 => {
             wire__crate__api__models__create_user_location_impl(port, ptr, rust_vec_len, data_len)
         }
-        30 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
-        31 => {
+        30 => wire__crate__api__routing__create_waypoint_with_valhalla_properties_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        31 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        32 => {
             wire__crate__api__routing__parse_osrm_response_impl(port, ptr, rust_vec_len, data_len)
         }
         _ => unreachable!(),
@@ -3936,6 +4199,119 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::TripSummar
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for FrbWrapper<crate::api::models::ValhallaLocationSearchFilter>
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.exclude_tunnel.into_into_dart().into_dart(),
+            self.0.exclude_bridge.into_into_dart().into_dart(),
+            self.0.exclude_tolls.into_into_dart().into_dart(),
+            self.0.exclude_ferry.into_into_dart().into_dart(),
+            self.0.exclude_ramp.into_into_dart().into_dart(),
+            self.0.exclude_closures.into_into_dart().into_dart(),
+            self.0.min_road_class.into_into_dart().into_dart(),
+            self.0.max_road_class.into_into_dart().into_dart(),
+            self.0.level.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::ValhallaLocationSearchFilter>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::ValhallaLocationSearchFilter>>
+    for crate::api::models::ValhallaLocationSearchFilter
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::ValhallaLocationSearchFilter> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::ValhallaRoadClass> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self.0 {
+            crate::api::models::ValhallaRoadClass::Motorway => 0.into_dart(),
+            crate::api::models::ValhallaRoadClass::Trunk => 1.into_dart(),
+            crate::api::models::ValhallaRoadClass::Primary => 2.into_dart(),
+            crate::api::models::ValhallaRoadClass::Secondary => 3.into_dart(),
+            crate::api::models::ValhallaRoadClass::Tertiary => 4.into_dart(),
+            crate::api::models::ValhallaRoadClass::Unclassified => 5.into_dart(),
+            crate::api::models::ValhallaRoadClass::Residential => 6.into_dart(),
+            crate::api::models::ValhallaRoadClass::ServiceOther => 7.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::ValhallaRoadClass>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::ValhallaRoadClass>>
+    for crate::api::models::ValhallaRoadClass
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::ValhallaRoadClass> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for FrbWrapper<crate::api::models::ValhallaWaypointPreferredSide>
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self.0 {
+            crate::api::models::ValhallaWaypointPreferredSide::Same => 0.into_dart(),
+            crate::api::models::ValhallaWaypointPreferredSide::Opposite => 1.into_dart(),
+            crate::api::models::ValhallaWaypointPreferredSide::Either => 2.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::ValhallaWaypointPreferredSide>
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::ValhallaWaypointPreferredSide>>
+    for crate::api::models::ValhallaWaypointPreferredSide
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::ValhallaWaypointPreferredSide> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::ValhallaWaypointProperties> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.heading.into_into_dart().into_dart(),
+            self.0.heading_tolerance.into_into_dart().into_dart(),
+            self.0.minimum_reachability.into_into_dart().into_dart(),
+            self.0.radius.into_into_dart().into_dart(),
+            self.0.preferred_side.into_into_dart().into_dart(),
+            self.0.display_coordinate.into_into_dart().into_dart(),
+            self.0.search_cutoff.into_into_dart().into_dart(),
+            self.0.node_snap_tolerance.into_into_dart().into_dart(),
+            self.0.street_side_tolerance.into_into_dart().into_dart(),
+            self.0.street_side_max_distance.into_into_dart().into_dart(),
+            self.0.street_side_cutoff.into_into_dart().into_dart(),
+            self.0.search_filter.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::models::ValhallaWaypointProperties>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::api::models::ValhallaWaypointProperties>>
+    for crate::api::models::ValhallaWaypointProperties
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::models::ValhallaWaypointProperties> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::api::models::VisualInstruction> {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -4286,6 +4662,13 @@ impl SseEncode for crate::api::models::CourseOverGround {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <u16>::sse_encode(self.degrees, serializer);
         <Option<u16>>::sse_encode(self.accuracy, serializer);
+    }
+}
+
+impl SseEncode for f32 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_f32::<NativeEndian>(self).unwrap();
     }
 }
 
@@ -4671,12 +5054,32 @@ impl SseEncode for Option<crate::api::models::CourseOverGround> {
     }
 }
 
+impl SseEncode for Option<f32> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <f32>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for Option<f64> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
             <f64>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::GeographicCoordinate> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::GeographicCoordinate>::sse_encode(value, serializer);
         }
     }
 }
@@ -4741,12 +5144,52 @@ impl SseEncode for Option<u16> {
     }
 }
 
+impl SseEncode for Option<u32> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <u32>::sse_encode(value, serializer);
+        }
+    }
+}
+
 impl SseEncode for Option<u64> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
             <u64>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::ValhallaLocationSearchFilter> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::ValhallaLocationSearchFilter>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::ValhallaRoadClass> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::ValhallaRoadClass>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::api::models::ValhallaWaypointPreferredSide> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::api::models::ValhallaWaypointPreferredSide>::sse_encode(value, serializer);
         }
     }
 }
@@ -5066,6 +5509,96 @@ impl SseEncode for usize {
             .cursor
             .write_u64::<NativeEndian>(self as _)
             .unwrap();
+    }
+}
+
+impl SseEncode for crate::api::models::ValhallaLocationSearchFilter {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Option<bool>>::sse_encode(self.exclude_tunnel, serializer);
+        <Option<bool>>::sse_encode(self.exclude_bridge, serializer);
+        <Option<bool>>::sse_encode(self.exclude_tolls, serializer);
+        <Option<bool>>::sse_encode(self.exclude_ferry, serializer);
+        <Option<bool>>::sse_encode(self.exclude_ramp, serializer);
+        <Option<bool>>::sse_encode(self.exclude_closures, serializer);
+        <Option<crate::api::models::ValhallaRoadClass>>::sse_encode(
+            self.min_road_class,
+            serializer,
+        );
+        <Option<crate::api::models::ValhallaRoadClass>>::sse_encode(
+            self.max_road_class,
+            serializer,
+        );
+        <Option<f32>>::sse_encode(self.level, serializer);
+    }
+}
+
+impl SseEncode for crate::api::models::ValhallaRoadClass {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::models::ValhallaRoadClass::Motorway => 0,
+                crate::api::models::ValhallaRoadClass::Trunk => 1,
+                crate::api::models::ValhallaRoadClass::Primary => 2,
+                crate::api::models::ValhallaRoadClass::Secondary => 3,
+                crate::api::models::ValhallaRoadClass::Tertiary => 4,
+                crate::api::models::ValhallaRoadClass::Unclassified => 5,
+                crate::api::models::ValhallaRoadClass::Residential => 6,
+                crate::api::models::ValhallaRoadClass::ServiceOther => 7,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::api::models::ValhallaWaypointPreferredSide {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::models::ValhallaWaypointPreferredSide::Same => 0,
+                crate::api::models::ValhallaWaypointPreferredSide::Opposite => 1,
+                crate::api::models::ValhallaWaypointPreferredSide::Either => 2,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::api::models::ValhallaWaypointProperties {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Option<u16>>::sse_encode(self.heading, serializer);
+        <Option<u16>>::sse_encode(self.heading_tolerance, serializer);
+        <Option<u16>>::sse_encode(self.minimum_reachability, serializer);
+        <Option<u16>>::sse_encode(self.radius, serializer);
+        <Option<crate::api::models::ValhallaWaypointPreferredSide>>::sse_encode(
+            self.preferred_side,
+            serializer,
+        );
+        <Option<crate::api::models::GeographicCoordinate>>::sse_encode(
+            self.display_coordinate,
+            serializer,
+        );
+        <Option<u32>>::sse_encode(self.search_cutoff, serializer);
+        <Option<u16>>::sse_encode(self.node_snap_tolerance, serializer);
+        <Option<u16>>::sse_encode(self.street_side_tolerance, serializer);
+        <Option<u16>>::sse_encode(self.street_side_max_distance, serializer);
+        <Option<crate::api::models::ValhallaRoadClass>>::sse_encode(
+            self.street_side_cutoff,
+            serializer,
+        );
+        <Option<crate::api::models::ValhallaLocationSearchFilter>>::sse_encode(
+            self.search_filter,
+            serializer,
+        );
     }
 }
 

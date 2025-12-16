@@ -4,6 +4,10 @@ pub use ferrostar::models::{
     VisualInstructionContent, Waypoint, WaypointKind, BlockedLane, Speed, CourseOverGround,
     UserLocation
 };
+pub use ferrostar::routing_adapters::valhalla::{
+    ValhallaLocationSearchFilter, ValhallaRoadClass, ValhallaWaypointPreferredSide,
+    ValhallaWaypointProperties,
+};
 pub use ferrostar::navigation_controller::models::{
     TripProgress, TripState, TripSummary, CourseFiltering, WaypointAdvanceMode
 };
@@ -31,6 +35,54 @@ pub struct _Waypoint {
 pub enum _WaypointKind {
     Break,
     Via,
+}
+
+#[flutter_rust_bridge::frb(mirror(ValhallaWaypointPreferredSide))]
+pub enum _ValhallaWaypointPreferredSide {
+    Same,
+    Opposite,
+    Either,
+}
+
+#[flutter_rust_bridge::frb(mirror(ValhallaRoadClass))]
+pub enum _ValhallaRoadClass {
+    Motorway,
+    Trunk,
+    Primary,
+    Secondary,
+    Tertiary,
+    Unclassified,
+    Residential,
+    ServiceOther,
+}
+
+#[flutter_rust_bridge::frb(mirror(ValhallaLocationSearchFilter))]
+pub struct _ValhallaLocationSearchFilter {
+    pub exclude_tunnel: Option<bool>,
+    pub exclude_bridge: Option<bool>,
+    pub exclude_tolls: Option<bool>,
+    pub exclude_ferry: Option<bool>,
+    pub exclude_ramp: Option<bool>,
+    pub exclude_closures: Option<bool>,
+    pub min_road_class: Option<ValhallaRoadClass>,
+    pub max_road_class: Option<ValhallaRoadClass>,
+    pub level: Option<f32>,
+}
+
+#[flutter_rust_bridge::frb(mirror(ValhallaWaypointProperties))]
+pub struct _ValhallaWaypointProperties {
+    pub heading: Option<u16>,
+    pub heading_tolerance: Option<u16>,
+    pub minimum_reachability: Option<u16>,
+    pub radius: Option<u16>,
+    pub preferred_side: Option<ValhallaWaypointPreferredSide>,
+    pub display_coordinate: Option<GeographicCoordinate>,
+    pub search_cutoff: Option<u32>,
+    pub node_snap_tolerance: Option<u16>,
+    pub street_side_tolerance: Option<u16>,
+    pub street_side_max_distance: Option<u16>,
+    pub street_side_cutoff: Option<ValhallaRoadClass>,
+    pub search_filter: Option<ValhallaLocationSearchFilter>,
 }
 
 #[flutter_rust_bridge::frb(mirror(BoundingBox))]

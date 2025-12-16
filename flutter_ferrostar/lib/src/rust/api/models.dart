@@ -614,6 +614,133 @@ class TripSummary {
           endedAt == other.endedAt;
 }
 
+class ValhallaLocationSearchFilter {
+  final bool? excludeTunnel;
+  final bool? excludeBridge;
+  final bool? excludeTolls;
+  final bool? excludeFerry;
+  final bool? excludeRamp;
+  final bool? excludeClosures;
+  final ValhallaRoadClass? minRoadClass;
+  final ValhallaRoadClass? maxRoadClass;
+  final double? level;
+
+  const ValhallaLocationSearchFilter({
+    this.excludeTunnel,
+    this.excludeBridge,
+    this.excludeTolls,
+    this.excludeFerry,
+    this.excludeRamp,
+    this.excludeClosures,
+    this.minRoadClass,
+    this.maxRoadClass,
+    this.level,
+  });
+
+  @override
+  int get hashCode =>
+      excludeTunnel.hashCode ^
+      excludeBridge.hashCode ^
+      excludeTolls.hashCode ^
+      excludeFerry.hashCode ^
+      excludeRamp.hashCode ^
+      excludeClosures.hashCode ^
+      minRoadClass.hashCode ^
+      maxRoadClass.hashCode ^
+      level.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ValhallaLocationSearchFilter &&
+          runtimeType == other.runtimeType &&
+          excludeTunnel == other.excludeTunnel &&
+          excludeBridge == other.excludeBridge &&
+          excludeTolls == other.excludeTolls &&
+          excludeFerry == other.excludeFerry &&
+          excludeRamp == other.excludeRamp &&
+          excludeClosures == other.excludeClosures &&
+          minRoadClass == other.minRoadClass &&
+          maxRoadClass == other.maxRoadClass &&
+          level == other.level;
+}
+
+enum ValhallaRoadClass {
+  motorway,
+  trunk,
+  primary,
+  secondary,
+  tertiary,
+  unclassified,
+  residential,
+  serviceOther,
+}
+
+enum ValhallaWaypointPreferredSide { same, opposite, either }
+
+class ValhallaWaypointProperties {
+  final int? heading;
+  final int? headingTolerance;
+  final int? minimumReachability;
+  final int? radius;
+  final ValhallaWaypointPreferredSide? preferredSide;
+  final GeographicCoordinate? displayCoordinate;
+  final int? searchCutoff;
+  final int? nodeSnapTolerance;
+  final int? streetSideTolerance;
+  final int? streetSideMaxDistance;
+  final ValhallaRoadClass? streetSideCutoff;
+  final ValhallaLocationSearchFilter? searchFilter;
+
+  const ValhallaWaypointProperties({
+    this.heading,
+    this.headingTolerance,
+    this.minimumReachability,
+    this.radius,
+    this.preferredSide,
+    this.displayCoordinate,
+    this.searchCutoff,
+    this.nodeSnapTolerance,
+    this.streetSideTolerance,
+    this.streetSideMaxDistance,
+    this.streetSideCutoff,
+    this.searchFilter,
+  });
+
+  @override
+  int get hashCode =>
+      heading.hashCode ^
+      headingTolerance.hashCode ^
+      minimumReachability.hashCode ^
+      radius.hashCode ^
+      preferredSide.hashCode ^
+      displayCoordinate.hashCode ^
+      searchCutoff.hashCode ^
+      nodeSnapTolerance.hashCode ^
+      streetSideTolerance.hashCode ^
+      streetSideMaxDistance.hashCode ^
+      streetSideCutoff.hashCode ^
+      searchFilter.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ValhallaWaypointProperties &&
+          runtimeType == other.runtimeType &&
+          heading == other.heading &&
+          headingTolerance == other.headingTolerance &&
+          minimumReachability == other.minimumReachability &&
+          radius == other.radius &&
+          preferredSide == other.preferredSide &&
+          displayCoordinate == other.displayCoordinate &&
+          searchCutoff == other.searchCutoff &&
+          nodeSnapTolerance == other.nodeSnapTolerance &&
+          streetSideTolerance == other.streetSideTolerance &&
+          streetSideMaxDistance == other.streetSideMaxDistance &&
+          streetSideCutoff == other.streetSideCutoff &&
+          searchFilter == other.searchFilter;
+}
+
 class VisualInstruction {
   final VisualInstructionContent primaryContent;
   final VisualInstructionContent? secondaryContent;

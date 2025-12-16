@@ -205,6 +205,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   CourseOverGround dco_decode_box_autoadd_course_over_ground(dynamic raw);
 
   @protected
+  double dco_decode_box_autoadd_f_32(dynamic raw);
+
+  @protected
   double dco_decode_box_autoadd_f_64(dynamic raw);
 
   @protected
@@ -247,7 +250,25 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int dco_decode_box_autoadd_u_16(dynamic raw);
 
   @protected
+  int dco_decode_box_autoadd_u_32(dynamic raw);
+
+  @protected
   BigInt dco_decode_box_autoadd_u_64(dynamic raw);
+
+  @protected
+  ValhallaLocationSearchFilter
+  dco_decode_box_autoadd_valhalla_location_search_filter(dynamic raw);
+
+  @protected
+  ValhallaRoadClass dco_decode_box_autoadd_valhalla_road_class(dynamic raw);
+
+  @protected
+  ValhallaWaypointPreferredSide
+  dco_decode_box_autoadd_valhalla_waypoint_preferred_side(dynamic raw);
+
+  @protected
+  ValhallaWaypointProperties
+  dco_decode_box_autoadd_valhalla_waypoint_properties(dynamic raw);
 
   @protected
   VisualInstruction dco_decode_box_autoadd_visual_instruction(dynamic raw);
@@ -268,6 +289,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CourseOverGround dco_decode_course_over_ground(dynamic raw);
+
+  @protected
+  double dco_decode_f_32(dynamic raw);
 
   @protected
   double dco_decode_f_64(dynamic raw);
@@ -370,7 +394,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   CourseOverGround? dco_decode_opt_box_autoadd_course_over_ground(dynamic raw);
 
   @protected
+  double? dco_decode_opt_box_autoadd_f_32(dynamic raw);
+
+  @protected
   double? dco_decode_opt_box_autoadd_f_64(dynamic raw);
+
+  @protected
+  GeographicCoordinate? dco_decode_opt_box_autoadd_geographic_coordinate(
+    dynamic raw,
+  );
 
   @protected
   Impact? dco_decode_opt_box_autoadd_impact(dynamic raw);
@@ -391,7 +423,23 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int? dco_decode_opt_box_autoadd_u_16(dynamic raw);
 
   @protected
+  int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
+
+  @protected
   BigInt? dco_decode_opt_box_autoadd_u_64(dynamic raw);
+
+  @protected
+  ValhallaLocationSearchFilter?
+  dco_decode_opt_box_autoadd_valhalla_location_search_filter(dynamic raw);
+
+  @protected
+  ValhallaRoadClass? dco_decode_opt_box_autoadd_valhalla_road_class(
+    dynamic raw,
+  );
+
+  @protected
+  ValhallaWaypointPreferredSide?
+  dco_decode_opt_box_autoadd_valhalla_waypoint_preferred_side(dynamic raw);
 
   @protected
   VisualInstruction? dco_decode_opt_box_autoadd_visual_instruction(dynamic raw);
@@ -457,6 +505,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   BigInt dco_decode_usize(dynamic raw);
+
+  @protected
+  ValhallaLocationSearchFilter dco_decode_valhalla_location_search_filter(
+    dynamic raw,
+  );
+
+  @protected
+  ValhallaRoadClass dco_decode_valhalla_road_class(dynamic raw);
+
+  @protected
+  ValhallaWaypointPreferredSide dco_decode_valhalla_waypoint_preferred_side(
+    dynamic raw,
+  );
+
+  @protected
+  ValhallaWaypointProperties dco_decode_valhalla_waypoint_properties(
+    dynamic raw,
+  );
 
   @protected
   VisualInstruction dco_decode_visual_instruction(dynamic raw);
@@ -634,6 +700,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  double sse_decode_box_autoadd_f_32(SseDeserializer deserializer);
+
+  @protected
   double sse_decode_box_autoadd_f_64(SseDeserializer deserializer);
 
   @protected
@@ -688,7 +757,33 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int sse_decode_box_autoadd_u_16(SseDeserializer deserializer);
 
   @protected
+  int sse_decode_box_autoadd_u_32(SseDeserializer deserializer);
+
+  @protected
   BigInt sse_decode_box_autoadd_u_64(SseDeserializer deserializer);
+
+  @protected
+  ValhallaLocationSearchFilter
+  sse_decode_box_autoadd_valhalla_location_search_filter(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ValhallaRoadClass sse_decode_box_autoadd_valhalla_road_class(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ValhallaWaypointPreferredSide
+  sse_decode_box_autoadd_valhalla_waypoint_preferred_side(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ValhallaWaypointProperties
+  sse_decode_box_autoadd_valhalla_waypoint_properties(
+    SseDeserializer deserializer,
+  );
 
   @protected
   VisualInstruction sse_decode_box_autoadd_visual_instruction(
@@ -713,6 +808,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   CourseOverGround sse_decode_course_over_ground(SseDeserializer deserializer);
+
+  @protected
+  double sse_decode_f_32(SseDeserializer deserializer);
 
   @protected
   double sse_decode_f_64(SseDeserializer deserializer);
@@ -835,7 +933,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  double? sse_decode_opt_box_autoadd_f_32(SseDeserializer deserializer);
+
+  @protected
   double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer);
+
+  @protected
+  GeographicCoordinate? sse_decode_opt_box_autoadd_geographic_coordinate(
+    SseDeserializer deserializer,
+  );
 
   @protected
   Impact? sse_decode_opt_box_autoadd_impact(SseDeserializer deserializer);
@@ -862,7 +968,27 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int? sse_decode_opt_box_autoadd_u_16(SseDeserializer deserializer);
 
   @protected
+  int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
+
+  @protected
   BigInt? sse_decode_opt_box_autoadd_u_64(SseDeserializer deserializer);
+
+  @protected
+  ValhallaLocationSearchFilter?
+  sse_decode_opt_box_autoadd_valhalla_location_search_filter(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ValhallaRoadClass? sse_decode_opt_box_autoadd_valhalla_road_class(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ValhallaWaypointPreferredSide?
+  sse_decode_opt_box_autoadd_valhalla_waypoint_preferred_side(
+    SseDeserializer deserializer,
+  );
 
   @protected
   VisualInstruction? sse_decode_opt_box_autoadd_visual_instruction(
@@ -934,6 +1060,26 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   BigInt sse_decode_usize(SseDeserializer deserializer);
+
+  @protected
+  ValhallaLocationSearchFilter sse_decode_valhalla_location_search_filter(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ValhallaRoadClass sse_decode_valhalla_road_class(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ValhallaWaypointPreferredSide sse_decode_valhalla_waypoint_preferred_side(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ValhallaWaypointProperties sse_decode_valhalla_waypoint_properties(
+    SseDeserializer deserializer,
+  );
 
   @protected
   VisualInstruction sse_decode_visual_instruction(SseDeserializer deserializer);
@@ -1146,6 +1292,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_f_32(double self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer);
 
   @protected
@@ -1209,7 +1358,34 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_u_16(int self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_u_32(int self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_u_64(BigInt self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_valhalla_location_search_filter(
+    ValhallaLocationSearchFilter self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_valhalla_road_class(
+    ValhallaRoadClass self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_valhalla_waypoint_preferred_side(
+    ValhallaWaypointPreferredSide self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_valhalla_waypoint_properties(
+    ValhallaWaypointProperties self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_box_autoadd_visual_instruction(
@@ -1243,6 +1419,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     CourseOverGround self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_f_32(double self, SseSerializer serializer);
 
   @protected
   void sse_encode_f_64(double self, SseSerializer serializer);
@@ -1390,7 +1569,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_f_32(double? self, SseSerializer serializer);
+
+  @protected
   void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_geographic_coordinate(
+    GeographicCoordinate? self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_opt_box_autoadd_impact(
@@ -1423,7 +1611,28 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_opt_box_autoadd_u_16(int? self, SseSerializer serializer);
 
   @protected
+  void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer);
+
+  @protected
   void sse_encode_opt_box_autoadd_u_64(BigInt? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_valhalla_location_search_filter(
+    ValhallaLocationSearchFilter? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_valhalla_road_class(
+    ValhallaRoadClass? self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_opt_box_autoadd_valhalla_waypoint_preferred_side(
+    ValhallaWaypointPreferredSide? self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_opt_box_autoadd_visual_instruction(
@@ -1511,6 +1720,30 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_usize(BigInt self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_valhalla_location_search_filter(
+    ValhallaLocationSearchFilter self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_valhalla_road_class(
+    ValhallaRoadClass self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_valhalla_waypoint_preferred_side(
+    ValhallaWaypointPreferredSide self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_valhalla_waypoint_properties(
+    ValhallaWaypointProperties self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_visual_instruction(

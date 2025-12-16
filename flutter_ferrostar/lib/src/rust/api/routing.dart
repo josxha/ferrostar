@@ -18,6 +18,16 @@ Future<List<Route>> parseOsrmResponse({
   polylinePrecision: polylinePrecision,
 );
 
+Future<Waypoint> createWaypointWithValhallaProperties({
+  required GeographicCoordinate coordinate,
+  required WaypointKind kind,
+  required ValhallaWaypointProperties properties,
+}) => RustLib.instance.api.crateApiRoutingCreateWaypointWithValhallaProperties(
+  coordinate: coordinate,
+  kind: kind,
+  properties: properties,
+);
+
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ValhallaHttpRequestGenerator>>
 abstract class ValhallaHttpRequestGenerator implements RustOpaqueInterface {
   Future<FerrostarRouteRequest> generateRequest({
