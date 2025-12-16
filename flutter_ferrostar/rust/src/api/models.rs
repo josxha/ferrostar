@@ -412,6 +412,7 @@ pub enum _TripState {
     },
 }
 
+#[frb(sync)]
 pub fn create_user_location(
     coordinates: GeographicCoordinate,
     horizontal_accuracy: f64,

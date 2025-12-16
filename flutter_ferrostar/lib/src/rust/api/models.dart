@@ -38,7 +38,7 @@ Future<RouteDeviationTracking> createRouteDeviationTrackingStaticThreshold({
       maxAcceptableDeviation: maxAcceptableDeviation,
     );
 
-Future<UserLocation> createUserLocation({
+UserLocation createUserLocation({
   required GeographicCoordinate coordinates,
   required double horizontalAccuracy,
   CourseOverGround? courseOverGround,

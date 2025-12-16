@@ -39,7 +39,7 @@ class _MapPageState extends State<MapPage> {
 
   Future<void> _verifyFerrostar() async {
     try {
-      final location = await createUserLocation(
+      final location = createUserLocation(
         coordinates: GeographicCoordinate(
           lat: _start.latitude,
           lng: _start.longitude,
@@ -77,12 +77,12 @@ class _MapPageState extends State<MapPage> {
         );
       }
 
-      final generator = await ValhallaHttpRequestGenerator.newInstance(
+      final generator = ValhallaHttpRequestGenerator(
         endpointUrl: 'https://api.stadiamaps.com/route/v1?api_key=66acce60-37b4-438f-a525-7be77d0b3757',
         profile: 'auto',
       );
 
-      final userLocation = await createUserLocation(
+      final userLocation = createUserLocation(
         coordinates: GeographicCoordinate(
           lat: startCoord.latitude,
           lng: startCoord.longitude,

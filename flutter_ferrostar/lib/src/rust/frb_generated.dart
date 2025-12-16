@@ -59,7 +59,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 
   @override
   Future<void> executeRustInitializers() async {
-    await api.crateApiSimpleInitApp();
+    await api.crateApiInitApp();
   }
 
   @override
@@ -70,7 +70,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.11.1';
 
   @override
-  int get rustContentHash => 1287184186;
+  int get rustContentHash => -1347012423;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -207,8 +207,7 @@ abstract class RustLibApi extends BaseApi {
     required List<Waypoint> waypoints,
   });
 
-  Future<ValhallaHttpRequestGenerator>
-  crateApiRoutingValhallaHttpRequestGeneratorNew({
+  ValhallaHttpRequestGenerator crateApiRoutingValhallaHttpRequestGeneratorNew({
     required String endpointUrl,
     required String profile,
   });
@@ -231,7 +230,7 @@ abstract class RustLibApi extends BaseApi {
     required double maxAcceptableDeviation,
   });
 
-  Future<UserLocation> crateApiModelsCreateUserLocation({
+  UserLocation crateApiModelsCreateUserLocation({
     required GeographicCoordinate coordinates,
     required double horizontalAccuracy,
     CourseOverGround? courseOverGround,
@@ -245,7 +244,7 @@ abstract class RustLibApi extends BaseApi {
     required ValhallaWaypointProperties properties,
   });
 
-  Future<void> crateApiSimpleInitApp();
+  Future<void> crateApiInitApp();
 
   Future<List<Route>> crateApiRoutingParseOsrmResponse({
     required List<int> response,
@@ -1221,23 +1220,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<ValhallaHttpRequestGenerator>
-  crateApiRoutingValhallaHttpRequestGeneratorNew({
+  ValhallaHttpRequestGenerator crateApiRoutingValhallaHttpRequestGeneratorNew({
     required String endpointUrl,
     required String profile,
   }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(endpointUrl, serializer);
           sse_encode_String(profile, serializer);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 25,
-            port: port_,
-          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 25)!;
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -1399,16 +1392,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<UserLocation> crateApiModelsCreateUserLocation({
+  UserLocation crateApiModelsCreateUserLocation({
     required GeographicCoordinate coordinates,
     required double horizontalAccuracy,
     CourseOverGround? courseOverGround,
     required DateTime timestamp,
     Speed? speed,
   }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_geographic_coordinate(coordinates, serializer);
           sse_encode_f_64(horizontalAccuracy, serializer);
@@ -1418,12 +1411,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
           sse_encode_Chrono_Utc(timestamp, serializer);
           sse_encode_opt_box_autoadd_speed(speed, serializer);
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 29,
-            port: port_,
-          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 29)!;
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -1498,7 +1486,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<void> crateApiSimpleInitApp() {
+  Future<void> crateApiInitApp() {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
@@ -1514,14 +1502,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_unit,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiSimpleInitAppConstMeta,
+        constMeta: kCrateApiInitAppConstMeta,
         argValues: [],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiSimpleInitAppConstMeta =>
+  TaskConstMeta get kCrateApiInitAppConstMeta =>
       const TaskConstMeta(debugName: "init_app", argNames: []);
 
   @override

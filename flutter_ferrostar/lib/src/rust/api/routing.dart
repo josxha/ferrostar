@@ -35,8 +35,7 @@ abstract class ValhallaHttpRequestGenerator implements RustOpaqueInterface {
     required List<Waypoint> waypoints,
   });
 
-  // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
-  static Future<ValhallaHttpRequestGenerator> newInstance({
+  factory ValhallaHttpRequestGenerator({
     required String endpointUrl,
     required String profile,
   }) => RustLib.instance.api.crateApiRoutingValhallaHttpRequestGeneratorNew(

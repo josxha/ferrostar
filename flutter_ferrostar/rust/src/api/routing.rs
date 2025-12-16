@@ -21,11 +21,13 @@ pub enum _RouteRequest {
     },
 }
 
+#[frb(opaque)]
 pub struct ValhallaHttpRequestGenerator {
     inner: FerrostarValhallaGenerator,
 }
 
 impl ValhallaHttpRequestGenerator {
+    #[frb(sync)]
     pub fn new(endpoint_url: String, profile: String) -> Self {
         Self {
             inner: FerrostarValhallaGenerator::new(endpoint_url, profile, serde_json::Map::new()),

@@ -41,7 +41,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.11.1";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1287184186;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1347012423;
 
 // Section: executor
 
@@ -1279,16 +1279,15 @@ fn wire__crate__api__routing__ValhallaHttpRequestGenerator_generate_request_impl
     )
 }
 fn wire__crate__api__routing__ValhallaHttpRequestGenerator_new_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
     data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
             debug_name: "ValhallaHttpRequestGenerator_new",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
         move || {
             let message = unsafe {
@@ -1303,17 +1302,14 @@ fn wire__crate__api__routing__ValhallaHttpRequestGenerator_new_impl(
             let api_endpoint_url = <String>::sse_decode(&mut deserializer);
             let api_profile = <String>::sse_decode(&mut deserializer);
             deserializer.end();
-            move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let output_ok = Result::<_, ()>::Ok(
-                        crate::api::routing::ValhallaHttpRequestGenerator::new(
-                            api_endpoint_url,
-                            api_profile,
-                        ),
-                    )?;
-                    Ok(output_ok)
-                })())
-            }
+            transform_result_sse::<_, ()>((move || {
+                let output_ok =
+                    Result::<_, ()>::Ok(crate::api::routing::ValhallaHttpRequestGenerator::new(
+                        api_endpoint_url,
+                        api_profile,
+                    ))?;
+                Ok(output_ok)
+            })())
         },
     )
 }
@@ -1445,16 +1441,15 @@ fn wire__crate__api__models__create_route_deviation_tracking_static_threshold_im
     )
 }
 fn wire__crate__api__models__create_user_location_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
     data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
             debug_name: "create_user_location",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
         move || {
             let message = unsafe {
@@ -1474,18 +1469,16 @@ fn wire__crate__api__models__create_user_location_impl(
             let api_timestamp = <chrono::DateTime<chrono::Utc>>::sse_decode(&mut deserializer);
             let api_speed = <Option<crate::api::models::Speed>>::sse_decode(&mut deserializer);
             deserializer.end();
-            move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let output_ok = Result::<_, ()>::Ok(crate::api::models::create_user_location(
-                        api_coordinates,
-                        api_horizontal_accuracy,
-                        api_course_over_ground,
-                        api_timestamp,
-                        api_speed,
-                    ))?;
-                    Ok(output_ok)
-                })())
-            }
+            transform_result_sse::<_, ()>((move || {
+                let output_ok = Result::<_, ()>::Ok(crate::api::models::create_user_location(
+                    api_coordinates,
+                    api_horizontal_accuracy,
+                    api_course_over_ground,
+                    api_timestamp,
+                    api_speed,
+                ))?;
+                Ok(output_ok)
+            })())
         },
     )
 }
@@ -1532,7 +1525,7 @@ fn wire__crate__api__routing__create_waypoint_with_valhalla_properties_impl(
         },
     )
 }
-fn wire__crate__api__simple__init_app_impl(
+fn wire__crate__api__init_app_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -1558,7 +1551,7 @@ fn wire__crate__api__simple__init_app_impl(
             move |context| {
                 transform_result_sse::<_, ()>((move || {
                     let output_ok = Result::<_, ()>::Ok({
-                        crate::api::simple::init_app();
+                        crate::api::init_app();
                     })?;
                     Ok(output_ok)
                 })())
@@ -3356,12 +3349,6 @@ fn pde_ffi_dispatcher_primary_impl(
             rust_vec_len,
             data_len,
         ),
-        25 => wire__crate__api__routing__ValhallaHttpRequestGenerator_new_impl(
-            port,
-            ptr,
-            rust_vec_len,
-            data_len,
-        ),
         26 => wire__crate__api__models__create_navigation_controller_config_impl(
             port,
             ptr,
@@ -3380,16 +3367,13 @@ fn pde_ffi_dispatcher_primary_impl(
             rust_vec_len,
             data_len,
         ),
-        29 => {
-            wire__crate__api__models__create_user_location_impl(port, ptr, rust_vec_len, data_len)
-        }
         30 => wire__crate__api__routing__create_waypoint_with_valhalla_properties_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        31 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        31 => wire__crate__api__init_app_impl(port, ptr, rust_vec_len, data_len),
         32 => {
             wire__crate__api__routing__parse_osrm_response_impl(port, ptr, rust_vec_len, data_len)
         }
@@ -3423,6 +3407,8 @@ fn pde_ffi_dispatcher_sync_impl(
 21 => wire__crate__api__models__UserLocation_auto_accessor_set_course_over_ground_impl(ptr, rust_vec_len, data_len),
 22 => wire__crate__api__models__UserLocation_auto_accessor_set_horizontal_accuracy_impl(ptr, rust_vec_len, data_len),
 23 => wire__crate__api__models__UserLocation_auto_accessor_set_speed_impl(ptr, rust_vec_len, data_len),
+25 => wire__crate__api__routing__ValhallaHttpRequestGenerator_new_impl(ptr, rust_vec_len, data_len),
+29 => wire__crate__api__models__create_user_location_impl(ptr, rust_vec_len, data_len),
                         _ => unreachable!(),
                     }
 }
