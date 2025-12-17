@@ -40,7 +40,7 @@ class _MapPageState extends State<MapPage> {
   Future<void> _verifyFerrostar() async {
     try {
       final location = createUserLocation(
-        coordinates: GeographicCoordinate(
+        coordinates: await makeGeographicCoordinate(
           lat: _start.latitude,
           lng: _start.longitude,
         ),
@@ -52,7 +52,7 @@ class _MapPageState extends State<MapPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Ferrostar OK: ${location.coordinates.lat.toStringAsFixed(4)}, ${location.coordinates.lng.toStringAsFixed(4)}',
+            'Ferrostar OK: ${_start.latitude.toStringAsFixed(4)}, ${_start.longitude.toStringAsFixed(4)}',
           ),
         ),
       );
@@ -73,17 +73,16 @@ class _MapPageState extends State<MapPage> {
 
       if (_selectedStart == null || _selectedDest == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Tap the map to pick both start and end. Using defaults.')),
+          const SnackBar(
+            content: Text(
+              'Tap the map to pick both start and end. Using defaults.',
+            ),
+          ),
         );
       }
 
-      final generator = ValhallaHttpRequestGenerator(
-        endpointUrl: 'https://api.stadiamaps.com/route/v1?api_key=66acce60-37b4-438f-a525-7be77d0b3757',
-        profile: 'auto',
-      );
-
       final userLocation = createUserLocation(
-        coordinates: GeographicCoordinate(
+        coordinates: await makeGeographicCoordinate(
           lat: startCoord.latitude,
           lng: startCoord.longitude,
         ),
@@ -92,19 +91,18 @@ class _MapPageState extends State<MapPage> {
       );
 
       final destination = await createWaypointWithValhallaProperties(
-        coordinate: GeographicCoordinate(
+        coordinate: await makeGeographicCoordinate(
           lat: destCoord.latitude,
           lng: destCoord.longitude,
         ),
-        kind: WaypointKind.break_,
-        properties: const ValhallaWaypointProperties(
-          preferredSide: ValhallaWaypointPreferredSide.same,
-          streetSideTolerance: 5,
-          searchFilter: ValhallaLocationSearchFilter(excludeTolls: true),
-        ),
+        kind: await waypointKindBreak(),
+        properties: await defaultValhallaWaypointProperties(),
       );
 
-      final request = await generator.generateRequest(
+      final request = await generateValhallaRequest(
+        endpointUrl:
+            'https://api.stadiamaps.com/route/v1?api_key=66acce60-37b4-438f-a525-7be77d0b3757',
+        profile: 'auto',
         userLocation: userLocation,
         waypoints: [destination],
       );
@@ -113,13 +111,17 @@ class _MapPageState extends State<MapPage> {
       if (request is FerrostarRouteRequest_HttpPost) {
         responseBytes = await _sendPost(
           url: request.url,
-          headers: request.headers,
+          headers: Map.fromEntries(
+            request.headers.map((e) => MapEntry(e.$1, e.$2)),
+          ),
           body: request.body,
         );
       } else if (request is FerrostarRouteRequest_HttpGet) {
         responseBytes = await _sendGet(
           url: request.url,
-          headers: request.headers,
+          headers: Map.fromEntries(
+            request.headers.map((e) => MapEntry(e.$1, e.$2)),
+          ),
         );
       } else {
         throw Exception('Unsupported route request type');
@@ -134,7 +136,8 @@ class _MapPageState extends State<MapPage> {
         throw Exception('No routes returned');
       }
 
-      final geometry = routes.first.geometry
+      final geometryCoords = await routeGeometry(route: routes.first);
+      final geometry = geometryCoords
           .map((coord) => LatLng(coord.lat, coord.lng))
           .toList(growable: false);
 
@@ -145,23 +148,33 @@ class _MapPageState extends State<MapPage> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Valhalla route loaded (${geometry.length} points)')),
+        SnackBar(
+          content: Text('Valhalla route loaded (${geometry.length} points)'),
+        ),
       );
     } catch (e) {
       if (!mounted) return;
       setState(() => _routing = false);
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Valhalla routing error: $e')));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Valhalla routing error: $e')));
     }
   }
 
-  Future<List<int>> _sendPost({required String url, required Map<String, String> headers, required List<int> body}) async {
+  Future<List<int>> _sendPost({
+    required String url,
+    required Map<String, String> headers,
+    required List<int> body,
+  }) async {
     final client = HttpClient();
     final request = await client.postUrl(Uri.parse(url));
     headers.forEach(request.headers.set);
     request.add(body);
     final response = await request.close();
-    final bytes = await response.fold<List<int>>(<int>[], (prev, chunk) => prev..addAll(chunk));
+    final bytes = await response.fold<List<int>>(
+      <int>[],
+      (prev, chunk) => prev..addAll(chunk),
+    );
     client.close(force: true);
     if (response.statusCode >= 400) {
       throw HttpException('Status ${response.statusCode}', uri: Uri.parse(url));
@@ -169,12 +182,18 @@ class _MapPageState extends State<MapPage> {
     return bytes;
   }
 
-  Future<List<int>> _sendGet({required String url, required Map<String, String> headers}) async {
+  Future<List<int>> _sendGet({
+    required String url,
+    required Map<String, String> headers,
+  }) async {
     final client = HttpClient();
     final request = await client.getUrl(Uri.parse(url));
     headers.forEach(request.headers.set);
     final response = await request.close();
-    final bytes = await response.fold<List<int>>(<int>[], (prev, chunk) => prev..addAll(chunk));
+    final bytes = await response.fold<List<int>>(
+      <int>[],
+      (prev, chunk) => prev..addAll(chunk),
+    );
     client.close(force: true);
     if (response.statusCode >= 400) {
       throw HttpException('Status ${response.statusCode}', uri: Uri.parse(url));
@@ -266,7 +285,9 @@ class _MapPageState extends State<MapPage> {
             icon: const Icon(Icons.route),
           ),
           const SizedBox(height: 8),
-          if (_routePoints.isNotEmpty || _selectedStart != null || _selectedDest != null)
+          if (_routePoints.isNotEmpty ||
+              _selectedStart != null ||
+              _selectedDest != null)
             FloatingActionButton.small(
               heroTag: 'clear',
               onPressed: () {

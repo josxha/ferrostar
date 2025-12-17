@@ -1,5 +1,5 @@
 [workspace]
-members = ["uniffi-bindgen", "uniffi-bindgen-swift", "ferrostar"]
+members = ["uniffi-bindgen", "uniffi-bindgen-swift", "ferrostar", "flutter-rust-bridge"]
 resolver = "2"
 
 [workspace.package]

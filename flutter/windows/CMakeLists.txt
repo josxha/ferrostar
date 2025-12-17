@@ -9,7 +9,8 @@ set(PROJECT_NAME "flutter_ferrostar")
 project(${PROJECT_NAME} LANGUAGES CXX)
 
 include("../cargokit/cmake/cargokit.cmake")
-apply_cargokit(${PROJECT_NAME} ../rust flutter_ferrostar "")
+# Path is relative to the symlinked plugin source dir under example/windows/flutter/ephemeral/.plugin_symlinks
+apply_cargokit(${PROJECT_NAME} ../../../../../../../../common/flutter-rust-bridge flutter_rust_bridge "")
 
 # List of absolute paths to libraries that should be bundled with the plugin.
 # This list could contain prebuilt libraries, or libraries created by an

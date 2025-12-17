@@ -237,28 +237,30 @@ List<String> getArtifactNames({
   required bool remote,
   AritifactType? aritifactType,
 }) {
+  // Cargo converts dashes in crate names to underscores for artifact filenames.
+  final sanitizedLibraryName = libraryName.replaceAll('-', '_');
   aritifactType ??= artifactTypeForTarget(target);
   if (target.darwinArch != null) {
     if (aritifactType == AritifactType.staticlib) {
-      return ['lib$libraryName.a'];
+      return ['lib$sanitizedLibraryName.a'];
     } else {
-      return ['lib$libraryName.dylib'];
+      return ['lib$sanitizedLibraryName.dylib'];
     }
   } else if (target.rust.contains('-windows-')) {
     if (aritifactType == AritifactType.staticlib) {
-      return ['$libraryName.lib'];
+      return ['$sanitizedLibraryName.lib'];
     } else {
       return [
-        '$libraryName.dll',
-        '$libraryName.dll.lib',
-        if (!remote) '$libraryName.pdb'
+        '$sanitizedLibraryName.dll',
+        '$sanitizedLibraryName.dll.lib',
+        if (!remote) '$sanitizedLibraryName.pdb'
       ];
     }
   } else if (target.rust.contains('-linux-')) {
     if (aritifactType == AritifactType.staticlib) {
-      return ['lib$libraryName.a'];
+      return ['lib$sanitizedLibraryName.a'];
     } else {
-      return ['lib$libraryName.so'];
+      return ['lib$sanitizedLibraryName.so'];
     }
   } else {
     throw Exception("Unsupported target: ${target.rust}");

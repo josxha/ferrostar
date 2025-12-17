@@ -1,0 +1,13 @@
+[package]
+name = "flutter-rust-bridge"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ferrostar = { path = "../ferrostar" }
+flutter_rust_bridge = "=2.11.1"
+chrono = { version = "0.4.41", features = ["serde"] }
+serde_json = { version = "1.0.145" }
+
+[lib]
+crate-type = ["cdylib", "staticlib", "lib"]

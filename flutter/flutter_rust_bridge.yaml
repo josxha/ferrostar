@@ -1,3 +1,4 @@
-rust_input: crate::api
-rust_root: rust/
-dart_output: lib/src/rust
+rust_input: crate
+rust_root: ../common/flutter-rust-bridge
+dart_output: lib/bridge_generated.dart
+rust_output: ../common/flutter-rust-bridge/src/frb_generated.rs
