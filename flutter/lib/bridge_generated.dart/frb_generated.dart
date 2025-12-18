@@ -64,7 +64,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.11.1';
 
   @override
-  int get rustContentHash => 241456012;
+  int get rustContentHash => -749657543;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -75,40 +75,8 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 }
 
 abstract class RustLibApi extends BaseApi {
-  Future<TripState> crateFlutterNavStateTripState({
-    required FlutterNavState that,
-  });
-
-  Future<FlutterNavState> crateFlutterNavigationControllerAdvanceToNextStep({
-    required FlutterNavigationController that,
-    required FlutterNavState state,
-  });
-
-  Future<FlutterNavState> crateFlutterNavigationControllerGetInitialState({
-    required FlutterNavigationController that,
-    required UserLocation location,
-  });
-
-  Future<FlutterNavigationController> crateFlutterNavigationControllerNew({
-    required Route route,
-    required NavigationControllerConfig config,
-  });
-
-  Future<FlutterNavState> crateFlutterNavigationControllerUpdateUserLocation({
-    required FlutterNavigationController that,
-    required UserLocation location,
-    required FlutterNavState state,
-  });
-
-  Future<RouteRequest> crateValhallaHttpRequestGeneratorGenerateRequest({
-    required ValhallaHttpRequestGenerator that,
-    required UserLocation userLocation,
-    required List<Waypoint> waypoints,
-  });
-
-  ValhallaHttpRequestGenerator crateValhallaHttpRequestGeneratorNew({
-    required String endpointUrl,
-    required String profile,
+  Future<LocationSimulationState> crateAdvanceLocationSimulation({
+    required LocationSimulationState state,
   });
 
   UserLocation crateCreateUserLocation({
@@ -127,6 +95,50 @@ abstract class RustLibApi extends BaseApi {
 
   Future<ValhallaWaypointProperties> crateDefaultValhallaWaypointProperties();
 
+  Future<NavigationControllerConfig> crateDemoNavigationConfig();
+
+  Future<FlutterNavigationController> crateDemoNavigationController();
+
+  Future<Route> crateDemoRoute();
+
+  Future<UserLocation> crateDemoUserLocationNext();
+
+  Future<UserLocation> crateDemoUserLocationStart();
+
+  Future<UserLocationSnapshot> crateDescribeUserLocation({
+    required UserLocation location,
+  });
+
+  Future<TripState> crateFlutterNavStateTripState({
+    required FlutterNavState that,
+  });
+
+  Future<FlutterNavState> crateFlutterNavigationControllerAdvanceToNextStep({
+    required FlutterNavigationController that,
+    required FlutterNavState state,
+  });
+
+  FlutterNavigationController crateFlutterNavigationControllerFromRouteHandle({
+    required RouteHandle handle,
+    required NavigationControllerConfig config,
+  });
+
+  Future<FlutterNavState> crateFlutterNavigationControllerGetInitialState({
+    required FlutterNavigationController that,
+    required UserLocation location,
+  });
+
+  Future<FlutterNavigationController> crateFlutterNavigationControllerNew({
+    required Route route,
+    required NavigationControllerConfig config,
+  });
+
+  Future<FlutterNavState> crateFlutterNavigationControllerUpdateUserLocation({
+    required FlutterNavigationController that,
+    required UserLocation location,
+    required FlutterNavState state,
+  });
+
   Future<FerrostarRouteRequest> crateGenerateValhallaRequest({
     required String endpointUrl,
     required String profile,
@@ -134,9 +146,71 @@ abstract class RustLibApi extends BaseApi {
     required List<Waypoint> waypoints,
   });
 
+  Future<FerrostarRouteRequest> crateGenerateValhallaRequestSimple({
+    required String endpointUrl,
+    required String profile,
+    required SimpleGeographicCoordinate userLocation,
+    required List<SimpleGeographicCoordinate> waypoints,
+  });
+
+  Future<SimpleGeographicCoordinate> crateGeographicCoordinateComponents({
+    required GeographicCoordinate coord,
+  });
+
+  Future<LocationSimulationState> crateLocationSimulationFromCoordinates({
+    required List<GeographicCoordinate> coordinates,
+    double? resampleDistance,
+    required LocationBias bias,
+  });
+
+  Future<LocationSimulationState> crateLocationSimulationFromDemoRoute({
+    double? resampleDistance,
+    required LocationBias bias,
+  });
+
+  Future<LocationSimulationState> crateLocationSimulationFromLatLng({
+    required List<SimpleGeographicCoordinate> coordinates,
+    double? resampleDistance,
+    required LocationBias bias,
+  });
+
+  Future<LocationSimulationState> crateLocationSimulationFromPolyline({
+    required String polyline,
+    required int precision,
+    double? resampleDistance,
+    required LocationBias bias,
+  });
+
+  Future<LocationSimulationState> crateLocationSimulationFromRoute({
+    required Route route,
+    double? resampleDistance,
+    required LocationBias bias,
+  });
+
+  Future<UserLocation> crateLocationSimulationStateCurrentLocation({
+    required LocationSimulationState that,
+  });
+
+  Future<BoundingBox> crateMakeBoundingBox({
+    required double swLat,
+    required double swLng,
+    required double neLat,
+    required double neLng,
+  });
+
+  Future<Waypoint> crateMakeBreakWaypoint({
+    required double lat,
+    required double lng,
+  });
+
   Future<GeographicCoordinate> crateMakeGeographicCoordinate({
     required double lat,
     required double lng,
+  });
+
+  Future<FlutterNavigationController> crateNavigationControllerFromRouteHandle({
+    required RouteHandle handle,
+    required NavigationControllerConfig config,
   });
 
   Future<List<Route>> crateParseOsrmResponse({
@@ -148,11 +222,44 @@ abstract class RustLibApi extends BaseApi {
     required GeographicCoordinate coord,
   });
 
+  Future<void> crateReleaseRoute({required RouteHandle handle});
+
+  Future<RouteHandle> crateRetainRoute({required Route route});
+
   Future<List<SimpleGeographicCoordinate>> crateRouteGeometry({
     required Route route,
   });
 
+  Future<List<SimpleGeographicCoordinate>> crateRouteGeometryFromHandle({
+    required RouteHandle handle,
+  });
+
+  Future<List<SimpleRouteStep>> crateRouteStepsFromHandle({
+    required RouteHandle handle,
+  });
+
+  Future<String> crateTripStateVariant({required TripState state});
+
+  Future<RouteRequest> crateValhallaHttpRequestGeneratorGenerateRequest({
+    required ValhallaHttpRequestGenerator that,
+    required UserLocation userLocation,
+    required List<Waypoint> waypoints,
+  });
+
+  ValhallaHttpRequestGenerator crateValhallaHttpRequestGeneratorNew({
+    required String endpointUrl,
+    required String profile,
+  });
+
   Future<WaypointKind> crateWaypointKindBreak();
+
+  RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_BoundingBox;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_BoundingBox;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_BoundingBoxPtr;
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_CourseOverGround;
@@ -162,24 +269,6 @@ abstract class RustLibApi extends BaseApi {
 
   CrossPlatformFinalizerArg
   get rust_arc_decrement_strong_count_CourseOverGroundPtr;
-
-  RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_FlutterNavState;
-
-  RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_FlutterNavState;
-
-  CrossPlatformFinalizerArg
-  get rust_arc_decrement_strong_count_FlutterNavStatePtr;
-
-  RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_FlutterNavigationController;
-
-  RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_FlutterNavigationController;
-
-  CrossPlatformFinalizerArg
-  get rust_arc_decrement_strong_count_FlutterNavigationControllerPtr;
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_GeographicCoordinate;
@@ -236,15 +325,6 @@ abstract class RustLibApi extends BaseApi {
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_UserLocationPtr;
 
   RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_ValhallaHttpRequestGenerator;
-
-  RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_ValhallaHttpRequestGenerator;
-
-  CrossPlatformFinalizerArg
-  get rust_arc_decrement_strong_count_ValhallaHttpRequestGeneratorPtr;
-
-  RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_ValhallaWaypointProperties;
 
   RustArcDecrementStrongCountFnType
@@ -279,17 +359,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
-  Future<TripState> crateFlutterNavStateTripState({
-    required FlutterNavState that,
+  Future<LocationSimulationState> crateAdvanceLocationSimulation({
+    required LocationSimulationState state,
   }) {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-            that,
-            serializer,
-          );
+          sse_encode_box_autoadd_location_simulation_state(state, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -298,275 +375,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
         },
         codec: SseCodec(
-          decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripState,
+          decodeSuccessData: sse_decode_location_simulation_state,
           decodeErrorData: null,
         ),
-        constMeta: kCrateFlutterNavStateTripStateConstMeta,
-        argValues: [that],
+        constMeta: kCrateAdvanceLocationSimulationConstMeta,
+        argValues: [state],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateFlutterNavStateTripStateConstMeta =>
+  TaskConstMeta get kCrateAdvanceLocationSimulationConstMeta =>
       const TaskConstMeta(
-        debugName: "FlutterNavState_trip_state",
-        argNames: ["that"],
-      );
-
-  @override
-  Future<FlutterNavState> crateFlutterNavigationControllerAdvanceToNextStep({
-    required FlutterNavigationController that,
-    required FlutterNavState state,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-            that,
-            serializer,
-          );
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-            state,
-            serializer,
-          );
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 2,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateFlutterNavigationControllerAdvanceToNextStepConstMeta,
-        argValues: [that, state],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateFlutterNavigationControllerAdvanceToNextStepConstMeta =>
-      const TaskConstMeta(
-        debugName: "FlutterNavigationController_advance_to_next_step",
-        argNames: ["that", "state"],
-      );
-
-  @override
-  Future<FlutterNavState> crateFlutterNavigationControllerGetInitialState({
-    required FlutterNavigationController that,
-    required UserLocation location,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-            that,
-            serializer,
-          );
-          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
-            location,
-            serializer,
-          );
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 3,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateFlutterNavigationControllerGetInitialStateConstMeta,
-        argValues: [that, location],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateFlutterNavigationControllerGetInitialStateConstMeta =>
-      const TaskConstMeta(
-        debugName: "FlutterNavigationController_get_initial_state",
-        argNames: ["that", "location"],
-      );
-
-  @override
-  Future<FlutterNavigationController> crateFlutterNavigationControllerNew({
-    required Route route,
-    required NavigationControllerConfig config,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRoute(
-            route,
-            serializer,
-          );
-          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
-            config,
-            serializer,
-          );
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 4,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateFlutterNavigationControllerNewConstMeta,
-        argValues: [route, config],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateFlutterNavigationControllerNewConstMeta =>
-      const TaskConstMeta(
-        debugName: "FlutterNavigationController_new",
-        argNames: ["route", "config"],
-      );
-
-  @override
-  Future<FlutterNavState> crateFlutterNavigationControllerUpdateUserLocation({
-    required FlutterNavigationController that,
-    required UserLocation location,
-    required FlutterNavState state,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-            that,
-            serializer,
-          );
-          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
-            location,
-            serializer,
-          );
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-            state,
-            serializer,
-          );
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 5,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateFlutterNavigationControllerUpdateUserLocationConstMeta,
-        argValues: [that, location, state],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateFlutterNavigationControllerUpdateUserLocationConstMeta =>
-      const TaskConstMeta(
-        debugName: "FlutterNavigationController_update_user_location",
-        argNames: ["that", "location", "state"],
-      );
-
-  @override
-  Future<RouteRequest> crateValhallaHttpRequestGeneratorGenerateRequest({
-    required ValhallaHttpRequestGenerator that,
-    required UserLocation userLocation,
-    required List<Waypoint> waypoints,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-            that,
-            serializer,
-          );
-          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
-            userLocation,
-            serializer,
-          );
-          sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerWaypoint(
-            waypoints,
-            serializer,
-          );
-          pdeCallFfi(
-            generalizedFrbRustBinding,
-            serializer,
-            funcId: 6,
-            port: port_,
-          );
-        },
-        codec: SseCodec(
-          decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteRequest,
-          decodeErrorData: sse_decode_String,
-        ),
-        constMeta: kCrateValhallaHttpRequestGeneratorGenerateRequestConstMeta,
-        argValues: [that, userLocation, waypoints],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta
-  get kCrateValhallaHttpRequestGeneratorGenerateRequestConstMeta =>
-      const TaskConstMeta(
-        debugName: "ValhallaHttpRequestGenerator_generate_request",
-        argNames: ["that", "userLocation", "waypoints"],
-      );
-
-  @override
-  ValhallaHttpRequestGenerator crateValhallaHttpRequestGeneratorNew({
-    required String endpointUrl,
-    required String profile,
-  }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_String(endpointUrl, serializer);
-          sse_encode_String(profile, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 7)!;
-        },
-        codec: SseCodec(
-          decodeSuccessData:
-              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator,
-          decodeErrorData: null,
-        ),
-        constMeta: kCrateValhallaHttpRequestGeneratorNewConstMeta,
-        argValues: [endpointUrl, profile],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kCrateValhallaHttpRequestGeneratorNewConstMeta =>
-      const TaskConstMeta(
-        debugName: "ValhallaHttpRequestGenerator_new",
-        argNames: ["endpointUrl", "profile"],
+        debugName: "advance_location_simulation",
+        argNames: ["state"],
       );
 
   @override
@@ -595,7 +417,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             speed,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 2)!;
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -651,7 +473,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 9,
+            funcId: 3,
             port: port_,
           );
         },
@@ -682,7 +504,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 10,
+            funcId: 4,
             port: port_,
           );
         },
@@ -702,6 +524,415 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(
         debugName: "default_valhalla_waypoint_properties",
         argNames: [],
+      );
+
+  @override
+  Future<NavigationControllerConfig> crateDemoNavigationConfig() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 5,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateDemoNavigationConfigConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateDemoNavigationConfigConstMeta =>
+      const TaskConstMeta(debugName: "demo_navigation_config", argNames: []);
+
+  @override
+  Future<FlutterNavigationController> crateDemoNavigationController() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 6,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_flutter_navigation_controller,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateDemoNavigationControllerConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateDemoNavigationControllerConstMeta =>
+      const TaskConstMeta(
+        debugName: "demo_navigation_controller",
+        argNames: [],
+      );
+
+  @override
+  Future<Route> crateDemoRoute() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 7,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRoute,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateDemoRouteConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateDemoRouteConstMeta =>
+      const TaskConstMeta(debugName: "demo_route", argNames: []);
+
+  @override
+  Future<UserLocation> crateDemoUserLocationNext() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 8,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateDemoUserLocationNextConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateDemoUserLocationNextConstMeta =>
+      const TaskConstMeta(debugName: "demo_user_location_next", argNames: []);
+
+  @override
+  Future<UserLocation> crateDemoUserLocationStart() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 9,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateDemoUserLocationStartConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateDemoUserLocationStartConstMeta =>
+      const TaskConstMeta(debugName: "demo_user_location_start", argNames: []);
+
+  @override
+  Future<UserLocationSnapshot> crateDescribeUserLocation({
+    required UserLocation location,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            location,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 10,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_user_location_snapshot,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateDescribeUserLocationConstMeta,
+        argValues: [location],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateDescribeUserLocationConstMeta => const TaskConstMeta(
+    debugName: "describe_user_location",
+    argNames: ["location"],
+  );
+
+  @override
+  Future<TripState> crateFlutterNavStateTripState({
+    required FlutterNavState that,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_flutter_nav_state(that, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 11,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripState,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateFlutterNavStateTripStateConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateFlutterNavStateTripStateConstMeta =>
+      const TaskConstMeta(
+        debugName: "flutter_nav_state_trip_state",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<FlutterNavState> crateFlutterNavigationControllerAdvanceToNextStep({
+    required FlutterNavigationController that,
+    required FlutterNavState state,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_flutter_navigation_controller(
+            that,
+            serializer,
+          );
+          sse_encode_box_autoadd_flutter_nav_state(state, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 12,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_flutter_nav_state,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateFlutterNavigationControllerAdvanceToNextStepConstMeta,
+        argValues: [that, state],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateFlutterNavigationControllerAdvanceToNextStepConstMeta =>
+      const TaskConstMeta(
+        debugName: "flutter_navigation_controller_advance_to_next_step",
+        argNames: ["that", "state"],
+      );
+
+  @override
+  FlutterNavigationController crateFlutterNavigationControllerFromRouteHandle({
+    required RouteHandle handle,
+    required NavigationControllerConfig config,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_route_handle(handle, serializer);
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
+            config,
+            serializer,
+          );
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_flutter_navigation_controller,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateFlutterNavigationControllerFromRouteHandleConstMeta,
+        argValues: [handle, config],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateFlutterNavigationControllerFromRouteHandleConstMeta =>
+      const TaskConstMeta(
+        debugName: "flutter_navigation_controller_from_route_handle",
+        argNames: ["handle", "config"],
+      );
+
+  @override
+  Future<FlutterNavState> crateFlutterNavigationControllerGetInitialState({
+    required FlutterNavigationController that,
+    required UserLocation location,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_flutter_navigation_controller(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            location,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 14,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_flutter_nav_state,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateFlutterNavigationControllerGetInitialStateConstMeta,
+        argValues: [that, location],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateFlutterNavigationControllerGetInitialStateConstMeta =>
+      const TaskConstMeta(
+        debugName: "flutter_navigation_controller_get_initial_state",
+        argNames: ["that", "location"],
+      );
+
+  @override
+  Future<FlutterNavigationController> crateFlutterNavigationControllerNew({
+    required Route route,
+    required NavigationControllerConfig config,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRoute(
+            route,
+            serializer,
+          );
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
+            config,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 15,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_flutter_navigation_controller,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateFlutterNavigationControllerNewConstMeta,
+        argValues: [route, config],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateFlutterNavigationControllerNewConstMeta =>
+      const TaskConstMeta(
+        debugName: "flutter_navigation_controller_new",
+        argNames: ["route", "config"],
+      );
+
+  @override
+  Future<FlutterNavState> crateFlutterNavigationControllerUpdateUserLocation({
+    required FlutterNavigationController that,
+    required UserLocation location,
+    required FlutterNavState state,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_flutter_navigation_controller(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            location,
+            serializer,
+          );
+          sse_encode_box_autoadd_flutter_nav_state(state, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 16,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_flutter_nav_state,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateFlutterNavigationControllerUpdateUserLocationConstMeta,
+        argValues: [that, location, state],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateFlutterNavigationControllerUpdateUserLocationConstMeta =>
+      const TaskConstMeta(
+        debugName: "flutter_navigation_controller_update_user_location",
+        argNames: ["that", "location", "state"],
       );
 
   @override
@@ -728,7 +959,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 11,
+            funcId: 17,
             port: port_,
           );
         },
@@ -750,6 +981,383 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<FerrostarRouteRequest> crateGenerateValhallaRequestSimple({
+    required String endpointUrl,
+    required String profile,
+    required SimpleGeographicCoordinate userLocation,
+    required List<SimpleGeographicCoordinate> waypoints,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(endpointUrl, serializer);
+          sse_encode_String(profile, serializer);
+          sse_encode_box_autoadd_simple_geographic_coordinate(
+            userLocation,
+            serializer,
+          );
+          sse_encode_list_simple_geographic_coordinate(waypoints, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 18,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_ferrostar_route_request,
+          decodeErrorData: sse_decode_String,
+        ),
+        constMeta: kCrateGenerateValhallaRequestSimpleConstMeta,
+        argValues: [endpointUrl, profile, userLocation, waypoints],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateGenerateValhallaRequestSimpleConstMeta =>
+      const TaskConstMeta(
+        debugName: "generate_valhalla_request_simple",
+        argNames: ["endpointUrl", "profile", "userLocation", "waypoints"],
+      );
+
+  @override
+  Future<SimpleGeographicCoordinate> crateGeographicCoordinateComponents({
+    required GeographicCoordinate coord,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGeographicCoordinate(
+            coord,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 19,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_simple_geographic_coordinate,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateGeographicCoordinateComponentsConstMeta,
+        argValues: [coord],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateGeographicCoordinateComponentsConstMeta =>
+      const TaskConstMeta(
+        debugName: "geographic_coordinate_components",
+        argNames: ["coord"],
+      );
+
+  @override
+  Future<LocationSimulationState> crateLocationSimulationFromCoordinates({
+    required List<GeographicCoordinate> coordinates,
+    double? resampleDistance,
+    required LocationBias bias,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGeographicCoordinate(
+            coordinates,
+            serializer,
+          );
+          sse_encode_opt_box_autoadd_f_64(resampleDistance, serializer);
+          sse_encode_box_autoadd_location_bias(bias, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 20,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_location_simulation_state,
+          decodeErrorData: sse_decode_simulation_error,
+        ),
+        constMeta: kCrateLocationSimulationFromCoordinatesConstMeta,
+        argValues: [coordinates, resampleDistance, bias],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateLocationSimulationFromCoordinatesConstMeta =>
+      const TaskConstMeta(
+        debugName: "location_simulation_from_coordinates",
+        argNames: ["coordinates", "resampleDistance", "bias"],
+      );
+
+  @override
+  Future<LocationSimulationState> crateLocationSimulationFromDemoRoute({
+    double? resampleDistance,
+    required LocationBias bias,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_opt_box_autoadd_f_64(resampleDistance, serializer);
+          sse_encode_box_autoadd_location_bias(bias, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 21,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_location_simulation_state,
+          decodeErrorData: sse_decode_simulation_error,
+        ),
+        constMeta: kCrateLocationSimulationFromDemoRouteConstMeta,
+        argValues: [resampleDistance, bias],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateLocationSimulationFromDemoRouteConstMeta =>
+      const TaskConstMeta(
+        debugName: "location_simulation_from_demo_route",
+        argNames: ["resampleDistance", "bias"],
+      );
+
+  @override
+  Future<LocationSimulationState> crateLocationSimulationFromLatLng({
+    required List<SimpleGeographicCoordinate> coordinates,
+    double? resampleDistance,
+    required LocationBias bias,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_list_simple_geographic_coordinate(coordinates, serializer);
+          sse_encode_opt_box_autoadd_f_64(resampleDistance, serializer);
+          sse_encode_box_autoadd_location_bias(bias, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 22,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_location_simulation_state,
+          decodeErrorData: sse_decode_simulation_error,
+        ),
+        constMeta: kCrateLocationSimulationFromLatLngConstMeta,
+        argValues: [coordinates, resampleDistance, bias],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateLocationSimulationFromLatLngConstMeta =>
+      const TaskConstMeta(
+        debugName: "location_simulation_from_lat_lng",
+        argNames: ["coordinates", "resampleDistance", "bias"],
+      );
+
+  @override
+  Future<LocationSimulationState> crateLocationSimulationFromPolyline({
+    required String polyline,
+    required int precision,
+    double? resampleDistance,
+    required LocationBias bias,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(polyline, serializer);
+          sse_encode_u_32(precision, serializer);
+          sse_encode_opt_box_autoadd_f_64(resampleDistance, serializer);
+          sse_encode_box_autoadd_location_bias(bias, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 23,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_location_simulation_state,
+          decodeErrorData: sse_decode_simulation_error,
+        ),
+        constMeta: kCrateLocationSimulationFromPolylineConstMeta,
+        argValues: [polyline, precision, resampleDistance, bias],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateLocationSimulationFromPolylineConstMeta =>
+      const TaskConstMeta(
+        debugName: "location_simulation_from_polyline",
+        argNames: ["polyline", "precision", "resampleDistance", "bias"],
+      );
+
+  @override
+  Future<LocationSimulationState> crateLocationSimulationFromRoute({
+    required Route route,
+    double? resampleDistance,
+    required LocationBias bias,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRoute(
+            route,
+            serializer,
+          );
+          sse_encode_opt_box_autoadd_f_64(resampleDistance, serializer);
+          sse_encode_box_autoadd_location_bias(bias, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 24,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_location_simulation_state,
+          decodeErrorData: sse_decode_simulation_error,
+        ),
+        constMeta: kCrateLocationSimulationFromRouteConstMeta,
+        argValues: [route, resampleDistance, bias],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateLocationSimulationFromRouteConstMeta =>
+      const TaskConstMeta(
+        debugName: "location_simulation_from_route",
+        argNames: ["route", "resampleDistance", "bias"],
+      );
+
+  @override
+  Future<UserLocation> crateLocationSimulationStateCurrentLocation({
+    required LocationSimulationState that,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_location_simulation_state(that, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 25,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateLocationSimulationStateCurrentLocationConstMeta,
+        argValues: [that],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateLocationSimulationStateCurrentLocationConstMeta =>
+      const TaskConstMeta(
+        debugName: "location_simulation_state_current_location",
+        argNames: ["that"],
+      );
+
+  @override
+  Future<BoundingBox> crateMakeBoundingBox({
+    required double swLat,
+    required double swLng,
+    required double neLat,
+    required double neLng,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_f_64(swLat, serializer);
+          sse_encode_f_64(swLng, serializer);
+          sse_encode_f_64(neLat, serializer);
+          sse_encode_f_64(neLng, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 26,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateMakeBoundingBoxConstMeta,
+        argValues: [swLat, swLng, neLat, neLng],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateMakeBoundingBoxConstMeta => const TaskConstMeta(
+    debugName: "make_bounding_box",
+    argNames: ["swLat", "swLng", "neLat", "neLng"],
+  );
+
+  @override
+  Future<Waypoint> crateMakeBreakWaypoint({
+    required double lat,
+    required double lng,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_f_64(lat, serializer);
+          sse_encode_f_64(lng, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 27,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerWaypoint,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateMakeBreakWaypointConstMeta,
+        argValues: [lat, lng],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateMakeBreakWaypointConstMeta => const TaskConstMeta(
+    debugName: "make_break_waypoint",
+    argNames: ["lat", "lng"],
+  );
+
+  @override
   Future<GeographicCoordinate> crateMakeGeographicCoordinate({
     required double lat,
     required double lng,
@@ -763,7 +1371,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 12,
+            funcId: 28,
             port: port_,
           );
         },
@@ -786,6 +1394,44 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<FlutterNavigationController> crateNavigationControllerFromRouteHandle({
+    required RouteHandle handle,
+    required NavigationControllerConfig config,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_route_handle(handle, serializer);
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerNavigationControllerConfig(
+            config,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 29,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_flutter_navigation_controller,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateNavigationControllerFromRouteHandleConstMeta,
+        argValues: [handle, config],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateNavigationControllerFromRouteHandleConstMeta =>
+      const TaskConstMeta(
+        debugName: "navigation_controller_from_route_handle",
+        argNames: ["handle", "config"],
+      );
+
+  @override
   Future<List<Route>> crateParseOsrmResponse({
     required List<int> response,
     required int polylinePrecision,
@@ -799,7 +1445,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 13,
+            funcId: 30,
             port: port_,
           );
         },
@@ -835,7 +1481,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 14,
+            funcId: 31,
             port: port_,
           );
         },
@@ -857,6 +1503,65 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   );
 
   @override
+  Future<void> crateReleaseRoute({required RouteHandle handle}) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_route_handle(handle, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 32,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateReleaseRouteConstMeta,
+        argValues: [handle],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateReleaseRouteConstMeta =>
+      const TaskConstMeta(debugName: "release_route", argNames: ["handle"]);
+
+  @override
+  Future<RouteHandle> crateRetainRoute({required Route route}) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRoute(
+            route,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 33,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_route_handle,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateRetainRouteConstMeta,
+        argValues: [route],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateRetainRouteConstMeta =>
+      const TaskConstMeta(debugName: "retain_route", argNames: ["route"]);
+
+  @override
   Future<List<SimpleGeographicCoordinate>> crateRouteGeometry({
     required Route route,
   }) {
@@ -871,7 +1576,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 15,
+            funcId: 34,
             port: port_,
           );
         },
@@ -890,6 +1595,180 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "route_geometry", argNames: ["route"]);
 
   @override
+  Future<List<SimpleGeographicCoordinate>> crateRouteGeometryFromHandle({
+    required RouteHandle handle,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_route_handle(handle, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 35,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_simple_geographic_coordinate,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateRouteGeometryFromHandleConstMeta,
+        argValues: [handle],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateRouteGeometryFromHandleConstMeta =>
+      const TaskConstMeta(
+        debugName: "route_geometry_from_handle",
+        argNames: ["handle"],
+      );
+
+  @override
+  Future<List<SimpleRouteStep>> crateRouteStepsFromHandle({
+    required RouteHandle handle,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_route_handle(handle, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 36,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_simple_route_step,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateRouteStepsFromHandleConstMeta,
+        argValues: [handle],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateRouteStepsFromHandleConstMeta => const TaskConstMeta(
+    debugName: "route_steps_from_handle",
+    argNames: ["handle"],
+  );
+
+  @override
+  Future<String> crateTripStateVariant({required TripState state}) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerTripState(
+            state,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 37,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateTripStateVariantConstMeta,
+        argValues: [state],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateTripStateVariantConstMeta =>
+      const TaskConstMeta(debugName: "trip_state_variant", argNames: ["state"]);
+
+  @override
+  Future<RouteRequest> crateValhallaHttpRequestGeneratorGenerateRequest({
+    required ValhallaHttpRequestGenerator that,
+    required UserLocation userLocation,
+    required List<Waypoint> waypoints,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_valhalla_http_request_generator(
+            that,
+            serializer,
+          );
+          sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
+            userLocation,
+            serializer,
+          );
+          sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerWaypoint(
+            waypoints,
+            serializer,
+          );
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 38,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData:
+              sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerRouteRequest,
+          decodeErrorData: sse_decode_String,
+        ),
+        constMeta: kCrateValhallaHttpRequestGeneratorGenerateRequestConstMeta,
+        argValues: [that, userLocation, waypoints],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateValhallaHttpRequestGeneratorGenerateRequestConstMeta =>
+      const TaskConstMeta(
+        debugName: "valhalla_http_request_generator_generate_request",
+        argNames: ["that", "userLocation", "waypoints"],
+      );
+
+  @override
+  ValhallaHttpRequestGenerator crateValhallaHttpRequestGeneratorNew({
+    required String endpointUrl,
+    required String profile,
+  }) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_String(endpointUrl, serializer);
+          sse_encode_String(profile, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 39)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_valhalla_http_request_generator,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateValhallaHttpRequestGeneratorNewConstMeta,
+        argValues: [endpointUrl, profile],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateValhallaHttpRequestGeneratorNewConstMeta =>
+      const TaskConstMeta(
+        debugName: "valhalla_http_request_generator_new",
+        argNames: ["endpointUrl", "profile"],
+      );
+
+  @override
   Future<WaypointKind> crateWaypointKindBreak() {
     return handler.executeNormal(
       NormalTask(
@@ -898,7 +1777,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 16,
+            funcId: 40,
             port: port_,
           );
         },
@@ -918,28 +1797,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "waypoint_kind_break", argNames: []);
 
   RustArcIncrementStrongCountFnType
+  get rust_arc_increment_strong_count_BoundingBox => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox;
+
+  RustArcDecrementStrongCountFnType
+  get rust_arc_decrement_strong_count_BoundingBox => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox;
+
+  RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_CourseOverGround => wire
       .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround;
 
   RustArcDecrementStrongCountFnType
   get rust_arc_decrement_strong_count_CourseOverGround => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround;
-
-  RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_FlutterNavState => wire
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState;
-
-  RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_FlutterNavState => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState;
-
-  RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_FlutterNavigationController => wire
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController;
-
-  RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_FlutterNavigationController => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController;
 
   RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_GeographicCoordinate => wire
@@ -998,14 +1869,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation;
 
   RustArcIncrementStrongCountFnType
-  get rust_arc_increment_strong_count_ValhallaHttpRequestGenerator => wire
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator;
-
-  RustArcDecrementStrongCountFnType
-  get rust_arc_decrement_strong_count_ValhallaHttpRequestGenerator => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator;
-
-  RustArcIncrementStrongCountFnType
   get rust_arc_increment_strong_count_ValhallaWaypointProperties => wire
       .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties;
 
@@ -1030,32 +1893,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerWaypointKind;
 
   @protected
+  BoundingBox
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return BoundingBoxImpl.frbInternalDcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
   CourseOverGround
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
     dynamic raw,
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return CourseOverGroundImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  FlutterNavState
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return FlutterNavStateImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  FlutterNavigationController
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return FlutterNavigationControllerImpl.frbInternalDcoDecode(
-      raw as List<dynamic>,
-    );
   }
 
   @protected
@@ -1124,17 +1976,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  ValhallaHttpRequestGenerator
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return ValhallaHttpRequestGeneratorImpl.frbInternalDcoDecode(
-      raw as List<dynamic>,
-    );
-  }
-
-  @protected
   ValhallaWaypointProperties
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties(
     dynamic raw,
@@ -1164,40 +2005,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FlutterNavState
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return FlutterNavStateImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  FlutterNavigationController
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return FlutterNavigationControllerImpl.frbInternalDcoDecode(
-      raw as List<dynamic>,
-    );
-  }
-
-  @protected
-  ValhallaHttpRequestGenerator
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return ValhallaHttpRequestGeneratorImpl.frbInternalDcoDecode(
-      raw as List<dynamic>,
-    );
-  }
-
-  @protected
   DateTime dco_decode_Chrono_Utc(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dcoDecodeTimestamp(ts: dco_decode_i_64(raw).toInt(), isUtc: true);
+  }
+
+  @protected
+  BoundingBox
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return BoundingBoxImpl.frbInternalDcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -1207,26 +2026,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return CourseOverGroundImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  FlutterNavState
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return FlutterNavStateImpl.frbInternalDcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
-  FlutterNavigationController
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return FlutterNavigationControllerImpl.frbInternalDcoDecode(
-      raw as List<dynamic>,
-    );
   }
 
   @protected
@@ -1295,17 +2094,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  ValhallaHttpRequestGenerator
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    dynamic raw,
-  ) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return ValhallaHttpRequestGeneratorImpl.frbInternalDcoDecode(
-      raw as List<dynamic>,
-    );
-  }
-
-  @protected
   ValhallaWaypointProperties
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties(
     dynamic raw,
@@ -1363,6 +2151,59 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  double dco_decode_box_autoadd_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as double;
+  }
+
+  @protected
+  FlutterNavState dco_decode_box_autoadd_flutter_nav_state(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_flutter_nav_state(raw);
+  }
+
+  @protected
+  FlutterNavigationController
+  dco_decode_box_autoadd_flutter_navigation_controller(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_flutter_navigation_controller(raw);
+  }
+
+  @protected
+  LocationBias dco_decode_box_autoadd_location_bias(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_location_bias(raw);
+  }
+
+  @protected
+  LocationSimulationState dco_decode_box_autoadd_location_simulation_state(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_location_simulation_state(raw);
+  }
+
+  @protected
+  RouteHandle dco_decode_box_autoadd_route_handle(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_route_handle(raw);
+  }
+
+  @protected
+  SimpleGeographicCoordinate
+  dco_decode_box_autoadd_simple_geographic_coordinate(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_simple_geographic_coordinate(raw);
+  }
+
+  @protected
+  ValhallaHttpRequestGenerator
+  dco_decode_box_autoadd_valhalla_http_request_generator(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_valhalla_http_request_generator(raw);
+  }
+
+  @protected
   double dco_decode_f_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as double;
@@ -1389,9 +2230,42 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  FlutterNavState dco_decode_flutter_nav_state(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return FlutterNavState(id: dco_decode_u_64(arr[0]));
+  }
+
+  @protected
+  FlutterNavigationController dco_decode_flutter_navigation_controller(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return FlutterNavigationController(id: dco_decode_u_64(arr[0]));
+  }
+
+  @protected
   PlatformInt64 dco_decode_i_64(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dcoDecodeI64(raw);
+  }
+
+  @protected
+  List<GeographicCoordinate>
+  dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGeographicCoordinate(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>)
+        .map(
+          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGeographicCoordinate,
+        )
+        .toList();
   }
 
   @protected
@@ -1449,6 +2323,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<SimpleRouteStep> dco_decode_list_simple_route_step(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_simple_route_step).toList();
+  }
+
+  @protected
+  LocationBias dco_decode_location_bias(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return LocationBias_Left(dco_decode_f_64(raw[1]));
+      case 1:
+        return LocationBias_Right(dco_decode_f_64(raw[1]));
+      case 2:
+        return LocationBias_Random(dco_decode_f_64(raw[1]));
+      case 3:
+        return LocationBias_None();
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  LocationSimulationState dco_decode_location_simulation_state(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return LocationSimulationState(id: dco_decode_u_64(arr[0]));
+  }
+
+  @protected
   CourseOverGround?
   dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
     dynamic raw,
@@ -1475,6 +2381,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  double? dco_decode_opt_box_autoadd_f_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_f_64(raw);
+  }
+
+  @protected
   (String, String) dco_decode_record_string_string(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
@@ -1482,6 +2394,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       throw Exception('Expected 2 elements, got ${arr.length}');
     }
     return (dco_decode_String(arr[0]), dco_decode_String(arr[1]));
+  }
+
+  @protected
+  RouteHandle dco_decode_route_handle(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return RouteHandle(id: dco_decode_u_64(arr[0]));
   }
 
   @protected
@@ -1499,9 +2420,40 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  SimpleRouteStep dco_decode_simple_route_step(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return SimpleRouteStep(
+      geometry: dco_decode_list_simple_geographic_coordinate(arr[0]),
+      instruction: dco_decode_String(arr[1]),
+    );
+  }
+
+  @protected
+  SimulationError dco_decode_simulation_error(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return SimulationError_PolylineError(error: dco_decode_String(raw[1]));
+      case 1:
+        return SimulationError_NotEnoughPoints();
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
   int dco_decode_u_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as int;
+  }
+
+  @protected
+  BigInt dco_decode_u_64(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dcoDecodeU64(raw);
   }
 
   @protected
@@ -1517,9 +2469,44 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  UserLocationSnapshot dco_decode_user_location_snapshot(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return UserLocationSnapshot(
+      coordinates: dco_decode_simple_geographic_coordinate(arr[0]),
+      horizontalAccuracy: dco_decode_f_64(arr[1]),
+    );
+  }
+
+  @protected
   BigInt dco_decode_usize(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dcoDecodeU64(raw);
+  }
+
+  @protected
+  ValhallaHttpRequestGenerator dco_decode_valhalla_http_request_generator(
+    dynamic raw,
+  ) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return ValhallaHttpRequestGenerator.raw(id: dco_decode_u_64(arr[0]));
+  }
+
+  @protected
+  BoundingBox
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return BoundingBoxImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
   }
 
   @protected
@@ -1529,30 +2516,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return CourseOverGroundImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
-  FlutterNavState
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return FlutterNavStateImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
-  FlutterNavigationController
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return FlutterNavigationControllerImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -1643,18 +2606,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  ValhallaHttpRequestGenerator
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return ValhallaHttpRequestGeneratorImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
   ValhallaWaypointProperties
   sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties(
     SseDeserializer deserializer,
@@ -1691,46 +2642,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FlutterNavState
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return FlutterNavStateImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
-  FlutterNavigationController
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return FlutterNavigationControllerImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
-  ValhallaHttpRequestGenerator
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return ValhallaHttpRequestGeneratorImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
   DateTime sse_decode_Chrono_Utc(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_i_64(deserializer);
     return DateTime.fromMicrosecondsSinceEpoch(inner.toInt(), isUtc: true);
+  }
+
+  @protected
+  BoundingBox
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return BoundingBoxImpl.frbInternalSseDecode(
+      sse_decode_usize(deserializer),
+      sse_decode_i_32(deserializer),
+    );
   }
 
   @protected
@@ -1740,30 +2667,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return CourseOverGroundImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
-  FlutterNavState
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return FlutterNavStateImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
-  FlutterNavigationController
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return FlutterNavigationControllerImpl.frbInternalSseDecode(
       sse_decode_usize(deserializer),
       sse_decode_i_32(deserializer),
     );
@@ -1854,18 +2757,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  ValhallaHttpRequestGenerator
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    SseDeserializer deserializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return ValhallaHttpRequestGeneratorImpl.frbInternalSseDecode(
-      sse_decode_usize(deserializer),
-      sse_decode_i_32(deserializer),
-    );
-  }
-
-  @protected
   ValhallaWaypointProperties
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties(
     SseDeserializer deserializer,
@@ -1931,6 +2822,71 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  double sse_decode_box_autoadd_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_f_64(deserializer));
+  }
+
+  @protected
+  FlutterNavState sse_decode_box_autoadd_flutter_nav_state(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_flutter_nav_state(deserializer));
+  }
+
+  @protected
+  FlutterNavigationController
+  sse_decode_box_autoadd_flutter_navigation_controller(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_flutter_navigation_controller(deserializer));
+  }
+
+  @protected
+  LocationBias sse_decode_box_autoadd_location_bias(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_location_bias(deserializer));
+  }
+
+  @protected
+  LocationSimulationState sse_decode_box_autoadd_location_simulation_state(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_location_simulation_state(deserializer));
+  }
+
+  @protected
+  RouteHandle sse_decode_box_autoadd_route_handle(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_route_handle(deserializer));
+  }
+
+  @protected
+  SimpleGeographicCoordinate
+  sse_decode_box_autoadd_simple_geographic_coordinate(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_simple_geographic_coordinate(deserializer));
+  }
+
+  @protected
+  ValhallaHttpRequestGenerator
+  sse_decode_box_autoadd_valhalla_http_request_generator(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_valhalla_http_request_generator(deserializer));
+  }
+
+  @protected
   double sse_decode_f_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getFloat64();
@@ -1966,9 +2922,44 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  FlutterNavState sse_decode_flutter_nav_state(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_u_64(deserializer);
+    return FlutterNavState(id: var_id);
+  }
+
+  @protected
+  FlutterNavigationController sse_decode_flutter_navigation_controller(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_u_64(deserializer);
+    return FlutterNavigationController(id: var_id);
+  }
+
+  @protected
   PlatformInt64 sse_decode_i_64(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getPlatformInt64();
+  }
+
+  @protected
+  List<GeographicCoordinate>
+  sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGeographicCoordinate(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <GeographicCoordinate>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(
+        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGeographicCoordinate(
+          deserializer,
+        ),
+      );
+    }
+    return ans_;
   }
 
   @protected
@@ -2052,6 +3043,51 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<SimpleRouteStep> sse_decode_list_simple_route_step(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <SimpleRouteStep>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_simple_route_step(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  LocationBias sse_decode_location_bias(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_field0 = sse_decode_f_64(deserializer);
+        return LocationBias_Left(var_field0);
+      case 1:
+        var var_field0 = sse_decode_f_64(deserializer);
+        return LocationBias_Right(var_field0);
+      case 2:
+        var var_field0 = sse_decode_f_64(deserializer);
+        return LocationBias_Random(var_field0);
+      case 3:
+        return LocationBias_None();
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  LocationSimulationState sse_decode_location_simulation_state(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_u_64(deserializer);
+    return LocationSimulationState(id: var_id);
+  }
+
+  @protected
   CourseOverGround?
   sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
     SseDeserializer deserializer,
@@ -2084,6 +3120,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_f_64(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
   (String, String) sse_decode_record_string_string(
     SseDeserializer deserializer,
   ) {
@@ -2091,6 +3138,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_field0 = sse_decode_String(deserializer);
     var var_field1 = sse_decode_String(deserializer);
     return (var_field0, var_field1);
+  }
+
+  @protected
+  RouteHandle sse_decode_route_handle(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_u_64(deserializer);
+    return RouteHandle(id: var_id);
   }
 
   @protected
@@ -2104,9 +3158,44 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  SimpleRouteStep sse_decode_simple_route_step(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_geometry = sse_decode_list_simple_geographic_coordinate(
+      deserializer,
+    );
+    var var_instruction = sse_decode_String(deserializer);
+    return SimpleRouteStep(
+      geometry: var_geometry,
+      instruction: var_instruction,
+    );
+  }
+
+  @protected
+  SimulationError sse_decode_simulation_error(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_error = sse_decode_String(deserializer);
+        return SimulationError_PolylineError(error: var_error);
+      case 1:
+        return SimulationError_NotEnoughPoints();
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
   int sse_decode_u_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getUint32();
+  }
+
+  @protected
+  BigInt sse_decode_u_64(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getBigUint64();
   }
 
   @protected
@@ -2121,9 +3210,31 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  UserLocationSnapshot sse_decode_user_location_snapshot(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_coordinates = sse_decode_simple_geographic_coordinate(deserializer);
+    var var_horizontalAccuracy = sse_decode_f_64(deserializer);
+    return UserLocationSnapshot(
+      coordinates: var_coordinates,
+      horizontalAccuracy: var_horizontalAccuracy,
+    );
+  }
+
+  @protected
   BigInt sse_decode_usize(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getBigUint64();
+  }
+
+  @protected
+  ValhallaHttpRequestGenerator sse_decode_valhalla_http_request_generator(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_u_64(deserializer);
+    return ValhallaHttpRequestGenerator.raw(id: var_id);
   }
 
   @protected
@@ -2140,6 +3251,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    BoundingBox self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as BoundingBoxImpl).frbInternalSseEncode(move: true),
+      serializer,
+    );
+  }
+
+  @protected
+  void
   sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
     CourseOverGround self,
     SseSerializer serializer,
@@ -2147,34 +3271,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
       (self as CourseOverGroundImpl).frbInternalSseEncode(move: true),
-      serializer,
-    );
-  }
-
-  @protected
-  void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    FlutterNavState self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as FlutterNavStateImpl).frbInternalSseEncode(move: true),
-      serializer,
-    );
-  }
-
-  @protected
-  void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    FlutterNavigationController self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as FlutterNavigationControllerImpl).frbInternalSseEncode(
-        move: true,
-      ),
       serializer,
     );
   }
@@ -2272,21 +3368,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    ValhallaHttpRequestGenerator self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as ValhallaHttpRequestGeneratorImpl).frbInternalSseEncode(
-        move: true,
-      ),
-      serializer,
-    );
-  }
-
-  @protected
-  void
   sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties(
     ValhallaWaypointProperties self,
     SseSerializer serializer,
@@ -2325,53 +3406,23 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    FlutterNavState self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as FlutterNavStateImpl).frbInternalSseEncode(move: false),
-      serializer,
-    );
-  }
-
-  @protected
-  void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    FlutterNavigationController self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as FlutterNavigationControllerImpl).frbInternalSseEncode(
-        move: false,
-      ),
-      serializer,
-    );
-  }
-
-  @protected
-  void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    ValhallaHttpRequestGenerator self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as ValhallaHttpRequestGeneratorImpl).frbInternalSseEncode(
-        move: false,
-      ),
-      serializer,
-    );
-  }
-
-  @protected
   void sse_encode_Chrono_Utc(DateTime self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_64(
       PlatformInt64Util.from(self.microsecondsSinceEpoch),
+      serializer,
+    );
+  }
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    BoundingBox self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(
+      (self as BoundingBoxImpl).frbInternalSseEncode(move: null),
       serializer,
     );
   }
@@ -2385,34 +3436,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(
       (self as CourseOverGroundImpl).frbInternalSseEncode(move: null),
-      serializer,
-    );
-  }
-
-  @protected
-  void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    FlutterNavState self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as FlutterNavStateImpl).frbInternalSseEncode(move: null),
-      serializer,
-    );
-  }
-
-  @protected
-  void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    FlutterNavigationController self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as FlutterNavigationControllerImpl).frbInternalSseEncode(
-        move: null,
-      ),
       serializer,
     );
   }
@@ -2510,21 +3533,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    ValhallaHttpRequestGenerator self,
-    SseSerializer serializer,
-  ) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(
-      (self as ValhallaHttpRequestGeneratorImpl).frbInternalSseEncode(
-        move: null,
-      ),
-      serializer,
-    );
-  }
-
-  @protected
-  void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties(
     ValhallaWaypointProperties self,
     SseSerializer serializer,
@@ -2595,6 +3603,75 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_f_64(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_flutter_nav_state(
+    FlutterNavState self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_flutter_nav_state(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_flutter_navigation_controller(
+    FlutterNavigationController self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_flutter_navigation_controller(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_location_bias(
+    LocationBias self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_location_bias(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_location_simulation_state(
+    LocationSimulationState self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_location_simulation_state(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_route_handle(
+    RouteHandle self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_route_handle(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_simple_geographic_coordinate(
+    SimpleGeographicCoordinate self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_simple_geographic_coordinate(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_valhalla_http_request_generator(
+    ValhallaHttpRequestGenerator self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_valhalla_http_request_generator(self, serializer);
+  }
+
+  @protected
   void sse_encode_f_64(double self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putFloat64(self);
@@ -2627,9 +3704,43 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_flutter_nav_state(
+    FlutterNavState self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_64(self.id, serializer);
+  }
+
+  @protected
+  void sse_encode_flutter_navigation_controller(
+    FlutterNavigationController self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_64(self.id, serializer);
+  }
+
+  @protected
   void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putPlatformInt64(self);
+  }
+
+  @protected
+  void
+  sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGeographicCoordinate(
+    List<GeographicCoordinate> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGeographicCoordinate(
+        item,
+        serializer,
+      );
+    }
   }
 
   @protected
@@ -2711,6 +3822,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_simple_route_step(
+    List<SimpleRouteStep> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_simple_route_step(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_location_bias(LocationBias self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case LocationBias_Left(field0: final field0):
+        sse_encode_i_32(0, serializer);
+        sse_encode_f_64(field0, serializer);
+      case LocationBias_Right(field0: final field0):
+        sse_encode_i_32(1, serializer);
+        sse_encode_f_64(field0, serializer);
+      case LocationBias_Random(field0: final field0):
+        sse_encode_i_32(2, serializer);
+        sse_encode_f_64(field0, serializer);
+      case LocationBias_None():
+        sse_encode_i_32(3, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_location_simulation_state(
+    LocationSimulationState self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_64(self.id, serializer);
+  }
+
+  @protected
   void
   sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
     CourseOverGround? self,
@@ -2745,6 +3895,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_f_64(self, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_record_string_string(
     (String, String) self,
     SseSerializer serializer,
@@ -2752,6 +3912,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.$1, serializer);
     sse_encode_String(self.$2, serializer);
+  }
+
+  @protected
+  void sse_encode_route_handle(RouteHandle self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_64(self.id, serializer);
   }
 
   @protected
@@ -2765,9 +3931,40 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_simple_route_step(
+    SimpleRouteStep self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_list_simple_geographic_coordinate(self.geometry, serializer);
+    sse_encode_String(self.instruction, serializer);
+  }
+
+  @protected
+  void sse_encode_simulation_error(
+    SimulationError self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case SimulationError_PolylineError(error: final error):
+        sse_encode_i_32(0, serializer);
+        sse_encode_String(error, serializer);
+      case SimulationError_NotEnoughPoints():
+        sse_encode_i_32(1, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_u_32(int self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putUint32(self);
+  }
+
+  @protected
+  void sse_encode_u_64(BigInt self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putBigUint64(self);
   }
 
   @protected
@@ -2782,9 +3979,28 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_user_location_snapshot(
+    UserLocationSnapshot self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_simple_geographic_coordinate(self.coordinates, serializer);
+    sse_encode_f_64(self.horizontalAccuracy, serializer);
+  }
+
+  @protected
   void sse_encode_usize(BigInt self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putBigUint64(self);
+  }
+
+  @protected
+  void sse_encode_valhalla_http_request_generator(
+    ValhallaHttpRequestGenerator self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_64(self.id, serializer);
   }
 
   @protected
@@ -2798,6 +4014,26 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putUint8(self ? 1 : 0);
   }
+}
+
+@sealed
+class BoundingBoxImpl extends RustOpaque implements BoundingBox {
+  // Not to be used by end users
+  BoundingBoxImpl.frbInternalDcoDecode(List<dynamic> wire)
+    : super.frbInternalDcoDecode(wire, _kStaticData);
+
+  // Not to be used by end users
+  BoundingBoxImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
+    : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_BoundingBox,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_BoundingBox,
+    rustArcDecrementStrongCountPtr:
+        RustLib.instance.api.rust_arc_decrement_strong_count_BoundingBoxPtr,
+  );
 }
 
 @sealed
@@ -2821,79 +4057,6 @@ class CourseOverGroundImpl extends RustOpaque implements CourseOverGround {
         .instance
         .api
         .rust_arc_decrement_strong_count_CourseOverGroundPtr,
-  );
-}
-
-@sealed
-class FlutterNavStateImpl extends RustOpaque implements FlutterNavState {
-  // Not to be used by end users
-  FlutterNavStateImpl.frbInternalDcoDecode(List<dynamic> wire)
-    : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  FlutterNavStateImpl.frbInternalSseDecode(BigInt ptr, int externalSizeOnNative)
-    : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount:
-        RustLib.instance.api.rust_arc_increment_strong_count_FlutterNavState,
-    rustArcDecrementStrongCount:
-        RustLib.instance.api.rust_arc_decrement_strong_count_FlutterNavState,
-    rustArcDecrementStrongCountPtr:
-        RustLib.instance.api.rust_arc_decrement_strong_count_FlutterNavStatePtr,
-  );
-
-  Future<TripState> tripState() =>
-      RustLib.instance.api.crateFlutterNavStateTripState(that: this);
-}
-
-@sealed
-class FlutterNavigationControllerImpl extends RustOpaque
-    implements FlutterNavigationController {
-  // Not to be used by end users
-  FlutterNavigationControllerImpl.frbInternalDcoDecode(List<dynamic> wire)
-    : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  FlutterNavigationControllerImpl.frbInternalSseDecode(
-    BigInt ptr,
-    int externalSizeOnNative,
-  ) : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib
-        .instance
-        .api
-        .rust_arc_increment_strong_count_FlutterNavigationController,
-    rustArcDecrementStrongCount: RustLib
-        .instance
-        .api
-        .rust_arc_decrement_strong_count_FlutterNavigationController,
-    rustArcDecrementStrongCountPtr: RustLib
-        .instance
-        .api
-        .rust_arc_decrement_strong_count_FlutterNavigationControllerPtr,
-  );
-
-  Future<FlutterNavState> advanceToNextStep({required FlutterNavState state}) =>
-      RustLib.instance.api.crateFlutterNavigationControllerAdvanceToNextStep(
-        that: this,
-        state: state,
-      );
-
-  Future<FlutterNavState> getInitialState({required UserLocation location}) =>
-      RustLib.instance.api.crateFlutterNavigationControllerGetInitialState(
-        that: this,
-        location: location,
-      );
-
-  Future<FlutterNavState> updateUserLocation({
-    required UserLocation location,
-    required FlutterNavState state,
-  }) => RustLib.instance.api.crateFlutterNavigationControllerUpdateUserLocation(
-    that: this,
-    location: location,
-    state: state,
   );
 }
 
@@ -3052,44 +4215,6 @@ class UserLocationImpl extends RustOpaque implements UserLocation {
         RustLib.instance.api.rust_arc_decrement_strong_count_UserLocation,
     rustArcDecrementStrongCountPtr:
         RustLib.instance.api.rust_arc_decrement_strong_count_UserLocationPtr,
-  );
-}
-
-@sealed
-class ValhallaHttpRequestGeneratorImpl extends RustOpaque
-    implements ValhallaHttpRequestGenerator {
-  // Not to be used by end users
-  ValhallaHttpRequestGeneratorImpl.frbInternalDcoDecode(List<dynamic> wire)
-    : super.frbInternalDcoDecode(wire, _kStaticData);
-
-  // Not to be used by end users
-  ValhallaHttpRequestGeneratorImpl.frbInternalSseDecode(
-    BigInt ptr,
-    int externalSizeOnNative,
-  ) : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib
-        .instance
-        .api
-        .rust_arc_increment_strong_count_ValhallaHttpRequestGenerator,
-    rustArcDecrementStrongCount: RustLib
-        .instance
-        .api
-        .rust_arc_decrement_strong_count_ValhallaHttpRequestGenerator,
-    rustArcDecrementStrongCountPtr: RustLib
-        .instance
-        .api
-        .rust_arc_decrement_strong_count_ValhallaHttpRequestGeneratorPtr,
-  );
-
-  Future<RouteRequest> generateRequest({
-    required UserLocation userLocation,
-    required List<Waypoint> waypoints,
-  }) => RustLib.instance.api.crateValhallaHttpRequestGeneratorGenerateRequest(
-    that: this,
-    userLocation: userLocation,
-    waypoints: waypoints,
   );
 }
 

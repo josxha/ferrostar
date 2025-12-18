@@ -21,16 +21,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   });
 
   CrossPlatformFinalizerArg
+  get rust_arc_decrement_strong_count_BoundingBoxPtr => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox;
+
+  CrossPlatformFinalizerArg
   get rust_arc_decrement_strong_count_CourseOverGroundPtr => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround;
-
-  CrossPlatformFinalizerArg
-  get rust_arc_decrement_strong_count_FlutterNavStatePtr => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState;
-
-  CrossPlatformFinalizerArg
-  get rust_arc_decrement_strong_count_FlutterNavigationControllerPtr => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController;
 
   CrossPlatformFinalizerArg
   get rust_arc_decrement_strong_count_GeographicCoordinatePtr => wire
@@ -59,10 +55,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation;
 
   CrossPlatformFinalizerArg
-  get rust_arc_decrement_strong_count_ValhallaHttpRequestGeneratorPtr => wire
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator;
-
-  CrossPlatformFinalizerArg
   get rust_arc_decrement_strong_count_ValhallaWaypointPropertiesPtr => wire
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties;
 
@@ -75,20 +67,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerWaypointKind;
 
   @protected
+  BoundingBox
+  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    dynamic raw,
+  );
+
+  @protected
   CourseOverGround
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
-    dynamic raw,
-  );
-
-  @protected
-  FlutterNavState
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    dynamic raw,
-  );
-
-  @protected
-  FlutterNavigationController
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
     dynamic raw,
   );
 
@@ -135,12 +121,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  ValhallaHttpRequestGenerator
-  dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    dynamic raw,
-  );
-
-  @protected
   ValhallaWaypointProperties
   dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties(
     dynamic raw,
@@ -159,41 +139,17 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  FlutterNavState
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    dynamic raw,
-  );
-
-  @protected
-  FlutterNavigationController
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    dynamic raw,
-  );
-
-  @protected
-  ValhallaHttpRequestGenerator
-  dco_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    dynamic raw,
-  );
-
-  @protected
   DateTime dco_decode_Chrono_Utc(dynamic raw);
+
+  @protected
+  BoundingBox
+  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    dynamic raw,
+  );
 
   @protected
   CourseOverGround
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
-    dynamic raw,
-  );
-
-  @protected
-  FlutterNavState
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    dynamic raw,
-  );
-
-  @protected
-  FlutterNavigationController
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
     dynamic raw,
   );
 
@@ -240,12 +196,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  ValhallaHttpRequestGenerator
-  dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    dynamic raw,
-  );
-
-  @protected
   ValhallaWaypointProperties
   dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties(
     dynamic raw,
@@ -279,13 +229,56 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  double dco_decode_box_autoadd_f_64(dynamic raw);
+
+  @protected
+  FlutterNavState dco_decode_box_autoadd_flutter_nav_state(dynamic raw);
+
+  @protected
+  FlutterNavigationController
+  dco_decode_box_autoadd_flutter_navigation_controller(dynamic raw);
+
+  @protected
+  LocationBias dco_decode_box_autoadd_location_bias(dynamic raw);
+
+  @protected
+  LocationSimulationState dco_decode_box_autoadd_location_simulation_state(
+    dynamic raw,
+  );
+
+  @protected
+  RouteHandle dco_decode_box_autoadd_route_handle(dynamic raw);
+
+  @protected
+  SimpleGeographicCoordinate
+  dco_decode_box_autoadd_simple_geographic_coordinate(dynamic raw);
+
+  @protected
+  ValhallaHttpRequestGenerator
+  dco_decode_box_autoadd_valhalla_http_request_generator(dynamic raw);
+
+  @protected
   double dco_decode_f_64(dynamic raw);
 
   @protected
   FerrostarRouteRequest dco_decode_ferrostar_route_request(dynamic raw);
 
   @protected
+  FlutterNavState dco_decode_flutter_nav_state(dynamic raw);
+
+  @protected
+  FlutterNavigationController dco_decode_flutter_navigation_controller(
+    dynamic raw,
+  );
+
+  @protected
   PlatformInt64 dco_decode_i_64(dynamic raw);
+
+  @protected
+  List<GeographicCoordinate>
+  dco_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGeographicCoordinate(
+    dynamic raw,
+  );
 
   @protected
   List<Route>
@@ -314,6 +307,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<SimpleRouteStep> dco_decode_list_simple_route_step(dynamic raw);
+
+  @protected
+  LocationBias dco_decode_location_bias(dynamic raw);
+
+  @protected
+  LocationSimulationState dco_decode_location_simulation_state(dynamic raw);
+
+  @protected
   CourseOverGround?
   dco_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
     dynamic raw,
@@ -326,7 +328,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  double? dco_decode_opt_box_autoadd_f_64(dynamic raw);
+
+  @protected
   (String, String) dco_decode_record_string_string(dynamic raw);
+
+  @protected
+  RouteHandle dco_decode_route_handle(dynamic raw);
 
   @protected
   SimpleGeographicCoordinate dco_decode_simple_geographic_coordinate(
@@ -334,7 +342,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  SimpleRouteStep dco_decode_simple_route_step(dynamic raw);
+
+  @protected
+  SimulationError dco_decode_simulation_error(dynamic raw);
+
+  @protected
   int dco_decode_u_32(dynamic raw);
+
+  @protected
+  BigInt dco_decode_u_64(dynamic raw);
 
   @protected
   int dco_decode_u_8(dynamic raw);
@@ -343,23 +360,25 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void dco_decode_unit(dynamic raw);
 
   @protected
+  UserLocationSnapshot dco_decode_user_location_snapshot(dynamic raw);
+
+  @protected
   BigInt dco_decode_usize(dynamic raw);
+
+  @protected
+  ValhallaHttpRequestGenerator dco_decode_valhalla_http_request_generator(
+    dynamic raw,
+  );
+
+  @protected
+  BoundingBox
+  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    SseDeserializer deserializer,
+  );
 
   @protected
   CourseOverGround
   sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  FlutterNavState
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  FlutterNavigationController
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
     SseDeserializer deserializer,
   );
 
@@ -406,12 +425,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  ValhallaHttpRequestGenerator
-  sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   ValhallaWaypointProperties
   sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties(
     SseDeserializer deserializer,
@@ -430,41 +443,17 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  FlutterNavState
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  FlutterNavigationController
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  ValhallaHttpRequestGenerator
-  sse_decode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   DateTime sse_decode_Chrono_Utc(SseDeserializer deserializer);
+
+  @protected
+  BoundingBox
+  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    SseDeserializer deserializer,
+  );
 
   @protected
   CourseOverGround
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  FlutterNavState
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    SseDeserializer deserializer,
-  );
-
-  @protected
-  FlutterNavigationController
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
     SseDeserializer deserializer,
   );
 
@@ -511,12 +500,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  ValhallaHttpRequestGenerator
-  sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    SseDeserializer deserializer,
-  );
-
-  @protected
   ValhallaWaypointProperties
   sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties(
     SseDeserializer deserializer,
@@ -550,6 +533,45 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  double sse_decode_box_autoadd_f_64(SseDeserializer deserializer);
+
+  @protected
+  FlutterNavState sse_decode_box_autoadd_flutter_nav_state(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  FlutterNavigationController
+  sse_decode_box_autoadd_flutter_navigation_controller(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  LocationBias sse_decode_box_autoadd_location_bias(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  LocationSimulationState sse_decode_box_autoadd_location_simulation_state(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  RouteHandle sse_decode_box_autoadd_route_handle(SseDeserializer deserializer);
+
+  @protected
+  SimpleGeographicCoordinate
+  sse_decode_box_autoadd_simple_geographic_coordinate(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  ValhallaHttpRequestGenerator
+  sse_decode_box_autoadd_valhalla_http_request_generator(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   double sse_decode_f_64(SseDeserializer deserializer);
 
   @protected
@@ -558,7 +580,21 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  FlutterNavState sse_decode_flutter_nav_state(SseDeserializer deserializer);
+
+  @protected
+  FlutterNavigationController sse_decode_flutter_navigation_controller(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   PlatformInt64 sse_decode_i_64(SseDeserializer deserializer);
+
+  @protected
+  List<GeographicCoordinate>
+  sse_decode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGeographicCoordinate(
+    SseDeserializer deserializer,
+  );
 
   @protected
   List<Route>
@@ -589,6 +625,19 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  List<SimpleRouteStep> sse_decode_list_simple_route_step(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  LocationBias sse_decode_location_bias(SseDeserializer deserializer);
+
+  @protected
+  LocationSimulationState sse_decode_location_simulation_state(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   CourseOverGround?
   sse_decode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
     SseDeserializer deserializer,
@@ -601,9 +650,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  double? sse_decode_opt_box_autoadd_f_64(SseDeserializer deserializer);
+
+  @protected
   (String, String) sse_decode_record_string_string(
     SseDeserializer deserializer,
   );
+
+  @protected
+  RouteHandle sse_decode_route_handle(SseDeserializer deserializer);
 
   @protected
   SimpleGeographicCoordinate sse_decode_simple_geographic_coordinate(
@@ -611,7 +666,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  SimpleRouteStep sse_decode_simple_route_step(SseDeserializer deserializer);
+
+  @protected
+  SimulationError sse_decode_simulation_error(SseDeserializer deserializer);
+
+  @protected
   int sse_decode_u_32(SseDeserializer deserializer);
+
+  @protected
+  BigInt sse_decode_u_64(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_8(SseDeserializer deserializer);
@@ -620,7 +684,17 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_decode_unit(SseDeserializer deserializer);
 
   @protected
+  UserLocationSnapshot sse_decode_user_location_snapshot(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   BigInt sse_decode_usize(SseDeserializer deserializer);
+
+  @protected
+  ValhallaHttpRequestGenerator sse_decode_valhalla_http_request_generator(
+    SseDeserializer deserializer,
+  );
 
   @protected
   int sse_decode_i_32(SseDeserializer deserializer);
@@ -630,22 +704,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
+  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    BoundingBox self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void
   sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
     CourseOverGround self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    FlutterNavState self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    FlutterNavigationController self,
     SseSerializer serializer,
   );
 
@@ -700,13 +767,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-  sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    ValhallaHttpRequestGenerator self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
   sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties(
     ValhallaWaypointProperties self,
     SseSerializer serializer,
@@ -727,47 +787,19 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
-  void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    FlutterNavState self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    FlutterNavigationController self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
-  sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    ValhallaHttpRequestGenerator self,
-    SseSerializer serializer,
-  );
-
-  @protected
   void sse_encode_Chrono_Utc(DateTime self, SseSerializer serializer);
+
+  @protected
+  void
+  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    BoundingBox self,
+    SseSerializer serializer,
+  );
 
   @protected
   void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
     CourseOverGround self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    FlutterNavState self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    FlutterNavigationController self,
     SseSerializer serializer,
   );
 
@@ -822,13 +854,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-  sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    ValhallaHttpRequestGenerator self,
-    SseSerializer serializer,
-  );
-
-  @protected
-  void
   sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties(
     ValhallaWaypointProperties self,
     SseSerializer serializer,
@@ -866,6 +891,51 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_f_64(double self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_flutter_nav_state(
+    FlutterNavState self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_flutter_navigation_controller(
+    FlutterNavigationController self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_location_bias(
+    LocationBias self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_location_simulation_state(
+    LocationSimulationState self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_route_handle(
+    RouteHandle self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_simple_geographic_coordinate(
+    SimpleGeographicCoordinate self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_valhalla_http_request_generator(
+    ValhallaHttpRequestGenerator self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_f_64(double self, SseSerializer serializer);
 
   @protected
@@ -875,7 +945,26 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_flutter_nav_state(
+    FlutterNavState self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_flutter_navigation_controller(
+    FlutterNavigationController self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_i_64(PlatformInt64 self, SseSerializer serializer);
+
+  @protected
+  void
+  sse_encode_list_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerGeographicCoordinate(
+    List<GeographicCoordinate> self,
+    SseSerializer serializer,
+  );
 
   @protected
   void
@@ -913,6 +1002,21 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_list_simple_route_step(
+    List<SimpleRouteStep> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_location_bias(LocationBias self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_location_simulation_state(
+    LocationSimulationState self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void
   sse_encode_opt_box_autoadd_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
     CourseOverGround? self,
@@ -927,10 +1031,16 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_f_64(double? self, SseSerializer serializer);
+
+  @protected
   void sse_encode_record_string_string(
     (String, String) self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_route_handle(RouteHandle self, SseSerializer serializer);
 
   @protected
   void sse_encode_simple_geographic_coordinate(
@@ -939,7 +1049,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_simple_route_step(
+    SimpleRouteStep self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_simulation_error(
+    SimulationError self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_u_32(int self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_u_64(BigInt self, SseSerializer serializer);
 
   @protected
   void sse_encode_u_8(int self, SseSerializer serializer);
@@ -948,7 +1073,19 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_unit(void self, SseSerializer serializer);
 
   @protected
+  void sse_encode_user_location_snapshot(
+    UserLocationSnapshot self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_usize(BigInt self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_valhalla_http_request_generator(
+    ValhallaHttpRequestGenerator self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
@@ -963,6 +1100,22 @@ class RustLibWire implements BaseWire {
   RustLibWire.fromExternalLibrary(ExternalLibrary lib);
 
   void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+        ptr,
+      );
+
+  void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    int ptr,
+  ) => wasmModule
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+        ptr,
+      );
+
+  void
   rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
     int ptr,
   ) => wasmModule
@@ -975,38 +1128,6 @@ class RustLibWire implements BaseWire {
     int ptr,
   ) => wasmModule
       .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
-        ptr,
-      );
-
-  void
-  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    int ptr,
-  ) => wasmModule
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-        ptr,
-      );
-
-  void
-  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    int ptr,
-  ) => wasmModule
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-        ptr,
-      );
-
-  void
-  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    int ptr,
-  ) => wasmModule
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-        ptr,
-      );
-
-  void
-  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    int ptr,
-  ) => wasmModule
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
         ptr,
       );
 
@@ -1123,22 +1244,6 @@ class RustLibWire implements BaseWire {
       );
 
   void
-  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    int ptr,
-  ) => wasmModule
-      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-        ptr,
-      );
-
-  void
-  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    int ptr,
-  ) => wasmModule
-      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-        ptr,
-      );
-
-  void
   rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaWaypointProperties(
     int ptr,
   ) => wasmModule
@@ -1194,32 +1299,22 @@ external RustLibWasmModule get wasmModule;
 @anonymous
 extension type RustLibWasmModule._(JSObject _) implements JSObject {
   external void
+  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    int ptr,
+  );
+
+  external void
+  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBoundingBox(
+    int ptr,
+  );
+
+  external void
   rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
     int ptr,
   );
 
   external void
   rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerCourseOverGround(
-    int ptr,
-  );
-
-  external void
-  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    int ptr,
-  );
-
-  external void
-  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavState(
-    int ptr,
-  );
-
-  external void
-  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
-    int ptr,
-  );
-
-  external void
-  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerFlutterNavigationController(
     int ptr,
   );
 
@@ -1290,16 +1385,6 @@ extension type RustLibWasmModule._(JSObject _) implements JSObject {
 
   external void
   rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerUserLocation(
-    int ptr,
-  );
-
-  external void
-  rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
-    int ptr,
-  );
-
-  external void
-  rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerValhallaHttpRequestGenerator(
     int ptr,
   );
 

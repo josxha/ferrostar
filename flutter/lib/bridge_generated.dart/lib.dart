@@ -8,6 +8,9 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 part 'lib.freezed.dart';
 
+// These functions are ignored because they are not marked as `pub`: `next_id`, `route_from_handle`, `simple_route_from_coords`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `from`, `from`, `from`, `from`, `from`
+
 Future<GeographicCoordinate> passthroughCoordinate({
   required GeographicCoordinate coord,
 }) => RustLib.instance.api.cratePassthroughCoordinate(coord: coord);
@@ -17,6 +20,60 @@ Future<GeographicCoordinate> makeGeographicCoordinate({
   required double lat,
   required double lng,
 }) => RustLib.instance.api.crateMakeGeographicCoordinate(lat: lat, lng: lng);
+
+/// Build a bounding box from corner coordinates.
+Future<BoundingBox> makeBoundingBox({
+  required double swLat,
+  required double swLng,
+  required double neLat,
+  required double neLng,
+}) => RustLib.instance.api.crateMakeBoundingBox(
+  swLat: swLat,
+  swLng: swLng,
+  neLat: neLat,
+  neLng: neLng,
+);
+
+/// Convenience helper to build a break waypoint from primitives.
+Future<Waypoint> makeBreakWaypoint({
+  required double lat,
+  required double lng,
+}) => RustLib.instance.api.crateMakeBreakWaypoint(lat: lat, lng: lng);
+
+/// A ready-made demo route for integration testing.
+Future<Route> demoRoute() => RustLib.instance.api.crateDemoRoute();
+
+/// Demo navigation controller configuration for integration tests.
+Future<NavigationControllerConfig> demoNavigationConfig() =>
+    RustLib.instance.api.crateDemoNavigationConfig();
+
+/// Demo navigation controller using an internal route/config so Dart does not need to construct them.
+Future<FlutterNavigationController> demoNavigationController() =>
+    RustLib.instance.api.crateDemoNavigationController();
+
+/// Store a route in a handle map to prevent premature disposal on the Dart side.
+Future<RouteHandle> retainRoute({required Route route}) =>
+    RustLib.instance.api.crateRetainRoute(route: route);
+
+/// Release a previously retained route handle.
+Future<void> releaseRoute({required RouteHandle handle}) =>
+    RustLib.instance.api.crateReleaseRoute(handle: handle);
+
+Future<FlutterNavigationController> navigationControllerFromRouteHandle({
+  required RouteHandle handle,
+  required NavigationControllerConfig config,
+}) => RustLib.instance.api.crateNavigationControllerFromRouteHandle(
+  handle: handle,
+  config: config,
+);
+
+/// Demo user location on the start of the demo route.
+Future<UserLocation> demoUserLocationStart() =>
+    RustLib.instance.api.crateDemoUserLocationStart();
+
+/// Demo user location slightly along the route.
+Future<UserLocation> demoUserLocationNext() =>
+    RustLib.instance.api.crateDemoUserLocationNext();
 
 /// Parses an OSRM/Valhalla response into routes using the core parser.
 Future<List<Route>> parseOsrmResponse({
@@ -46,6 +103,10 @@ Future<ValhallaWaypointProperties> defaultValhallaWaypointProperties() =>
 Future<WaypointKind> waypointKindBreak() =>
     RustLib.instance.api.crateWaypointKindBreak();
 
+/// Human-readable variant name for a `TripState`.
+Future<String> tripStateVariant({required TripState state}) =>
+    RustLib.instance.api.crateTripStateVariant(state: state);
+
 /// Sync helper to create a user location (keeps Flutter API compatibility).
 UserLocation createUserLocation({
   required GeographicCoordinate coordinates,
@@ -61,10 +122,54 @@ UserLocation createUserLocation({
   speed: speed,
 );
 
+/// Extract lat/lng from an opaque coordinate.
+Future<SimpleGeographicCoordinate> geographicCoordinateComponents({
+  required GeographicCoordinate coord,
+}) => RustLib.instance.api.crateGeographicCoordinateComponents(coord: coord);
+
+/// Extract a test-friendly view of `UserLocation` without exposing core internals to Dart.
+Future<UserLocationSnapshot> describeUserLocation({
+  required UserLocation location,
+}) => RustLib.instance.api.crateDescribeUserLocation(location: location);
+
+/// Build a simulation using plain lat/lng inputs to avoid opaque types on the Dart side.
+Future<LocationSimulationState> locationSimulationFromLatLng({
+  required List<SimpleGeographicCoordinate> coordinates,
+  double? resampleDistance,
+  required LocationBias bias,
+}) => RustLib.instance.api.crateLocationSimulationFromLatLng(
+  coordinates: coordinates,
+  resampleDistance: resampleDistance,
+  bias: bias,
+);
+
+/// Convenience wrapper to generate a Valhalla request from plain coordinate inputs.
+Future<FerrostarRouteRequest> generateValhallaRequestSimple({
+  required String endpointUrl,
+  required String profile,
+  required SimpleGeographicCoordinate userLocation,
+  required List<SimpleGeographicCoordinate> waypoints,
+}) => RustLib.instance.api.crateGenerateValhallaRequestSimple(
+  endpointUrl: endpointUrl,
+  profile: profile,
+  userLocation: userLocation,
+  waypoints: waypoints,
+);
+
 /// Extract route geometry into simple coordinates for Dart consumption.
 Future<List<SimpleGeographicCoordinate>> routeGeometry({
   required Route route,
 }) => RustLib.instance.api.crateRouteGeometry(route: route);
+
+/// Extract route geometry from a retained handle.
+Future<List<SimpleGeographicCoordinate>> routeGeometryFromHandle({
+  required RouteHandle handle,
+}) => RustLib.instance.api.crateRouteGeometryFromHandle(handle: handle);
+
+/// Extract per-step geometry and instruction from a retained handle.
+Future<List<SimpleRouteStep>> routeStepsFromHandle({
+  required RouteHandle handle,
+}) => RustLib.instance.api.crateRouteStepsFromHandle(handle: handle);
 
 /// Generate a Valhalla request and return a Dart-friendly shape.
 Future<FerrostarRouteRequest> generateValhallaRequest({
@@ -79,34 +184,60 @@ Future<FerrostarRouteRequest> generateValhallaRequest({
   waypoints: waypoints,
 );
 
+/// Creates a location simulation from a set of coordinates.
+Future<LocationSimulationState> locationSimulationFromCoordinates({
+  required List<GeographicCoordinate> coordinates,
+  double? resampleDistance,
+  required LocationBias bias,
+}) => RustLib.instance.api.crateLocationSimulationFromCoordinates(
+  coordinates: coordinates,
+  resampleDistance: resampleDistance,
+  bias: bias,
+);
+
+/// Creates a location simulation from a route.
+Future<LocationSimulationState> locationSimulationFromRoute({
+  required Route route,
+  double? resampleDistance,
+  required LocationBias bias,
+}) => RustLib.instance.api.crateLocationSimulationFromRoute(
+  route: route,
+  resampleDistance: resampleDistance,
+  bias: bias,
+);
+
+/// Creates a location simulation from a polyline.
+Future<LocationSimulationState> locationSimulationFromPolyline({
+  required String polyline,
+  required int precision,
+  double? resampleDistance,
+  required LocationBias bias,
+}) => RustLib.instance.api.crateLocationSimulationFromPolyline(
+  polyline: polyline,
+  precision: precision,
+  resampleDistance: resampleDistance,
+  bias: bias,
+);
+
+/// Advances the simulation to the next location.
+Future<LocationSimulationState> advanceLocationSimulation({
+  required LocationSimulationState state,
+}) => RustLib.instance.api.crateAdvanceLocationSimulation(state: state);
+
+/// Convenience wrapper to build a simulation from the demo route.
+Future<LocationSimulationState> locationSimulationFromDemoRoute({
+  double? resampleDistance,
+  required LocationBias bias,
+}) => RustLib.instance.api.crateLocationSimulationFromDemoRoute(
+  resampleDistance: resampleDistance,
+  bias: bias,
+);
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<BoundingBox>>
+abstract class BoundingBox implements RustOpaqueInterface {}
+
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<CourseOverGround>>
 abstract class CourseOverGround implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavState>>
-abstract class FlutterNavState implements RustOpaqueInterface {
-  Future<TripState> tripState();
-}
-
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<FlutterNavigationController>>
-abstract class FlutterNavigationController implements RustOpaqueInterface {
-  Future<FlutterNavState> advanceToNextStep({required FlutterNavState state});
-
-  Future<FlutterNavState> getInitialState({required UserLocation location});
-
-  // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
-  static Future<FlutterNavigationController> newInstance({
-    required Route route,
-    required NavigationControllerConfig config,
-  }) => RustLib.instance.api.crateFlutterNavigationControllerNew(
-    route: route,
-    config: config,
-  );
-
-  Future<FlutterNavState> updateUserLocation({
-    required UserLocation location,
-    required FlutterNavState state,
-  });
-}
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<GeographicCoordinate>>
 abstract class GeographicCoordinate implements RustOpaqueInterface {}
@@ -128,23 +259,6 @@ abstract class TripState implements RustOpaqueInterface {}
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<UserLocation>>
 abstract class UserLocation implements RustOpaqueInterface {}
-
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ValhallaHttpRequestGenerator>>
-abstract class ValhallaHttpRequestGenerator implements RustOpaqueInterface {
-  Future<RouteRequest> generateRequest({
-    required UserLocation userLocation,
-    required List<Waypoint> waypoints,
-  });
-
-  /// Creates a Valhalla request generator with no additional options.
-  factory ValhallaHttpRequestGenerator({
-    required String endpointUrl,
-    required String profile,
-  }) => RustLib.instance.api.crateValhallaHttpRequestGeneratorNew(
-    endpointUrl: endpointUrl,
-    profile: profile,
-  );
-}
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<ValhallaWaypointProperties>>
 abstract class ValhallaWaypointProperties implements RustOpaqueInterface {}
@@ -170,6 +284,127 @@ sealed class FerrostarRouteRequest with _$FerrostarRouteRequest {
   }) = FerrostarRouteRequest_HttpPost;
 }
 
+class FlutterNavState {
+  final BigInt id;
+
+  const FlutterNavState({required this.id});
+
+  Future<TripState> tripState() =>
+      RustLib.instance.api.crateFlutterNavStateTripState(that: this);
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FlutterNavState &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
+}
+
+/// Flutter-facing wrapper around the navigation controller using handle-based storage.
+class FlutterNavigationController {
+  final BigInt id;
+
+  const FlutterNavigationController({required this.id});
+
+  Future<FlutterNavState> advanceToNextStep({required FlutterNavState state}) =>
+      RustLib.instance.api.crateFlutterNavigationControllerAdvanceToNextStep(
+        that: this,
+        state: state,
+      );
+
+  static FlutterNavigationController fromRouteHandle({
+    required RouteHandle handle,
+    required NavigationControllerConfig config,
+  }) => RustLib.instance.api.crateFlutterNavigationControllerFromRouteHandle(
+    handle: handle,
+    config: config,
+  );
+
+  Future<FlutterNavState> getInitialState({required UserLocation location}) =>
+      RustLib.instance.api.crateFlutterNavigationControllerGetInitialState(
+        that: this,
+        location: location,
+      );
+
+  // HINT: Make it `#[frb(sync)]` to let it become the default constructor of Dart class.
+  static Future<FlutterNavigationController> newInstance({
+    required Route route,
+    required NavigationControllerConfig config,
+  }) => RustLib.instance.api.crateFlutterNavigationControllerNew(
+    route: route,
+    config: config,
+  );
+
+  Future<FlutterNavState> updateUserLocation({
+    required UserLocation location,
+    required FlutterNavState state,
+  }) => RustLib.instance.api.crateFlutterNavigationControllerUpdateUserLocation(
+    that: this,
+    location: location,
+    state: state,
+  );
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FlutterNavigationController &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
+}
+
+@freezed
+sealed class LocationBias with _$LocationBias {
+  const LocationBias._();
+
+  const factory LocationBias.left(double field0) = LocationBias_Left;
+  const factory LocationBias.right(double field0) = LocationBias_Right;
+  const factory LocationBias.random(double field0) = LocationBias_Random;
+  const factory LocationBias.none() = LocationBias_None;
+}
+
+/// The current state of a location simulation stored via handle.
+class LocationSimulationState {
+  final BigInt id;
+
+  const LocationSimulationState({required this.id});
+
+  /// Access the current simulated location.
+  Future<UserLocation> currentLocation() => RustLib.instance.api
+      .crateLocationSimulationStateCurrentLocation(that: this);
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is LocationSimulationState &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
+}
+
+class RouteHandle {
+  final BigInt id;
+
+  const RouteHandle({required this.id});
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is RouteHandle &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
+}
+
 /// Simple coordinate DTO to allow Dart to read lat/lng.
 class SimpleGeographicCoordinate {
   final double lat;
@@ -187,4 +422,88 @@ class SimpleGeographicCoordinate {
           runtimeType == other.runtimeType &&
           lat == other.lat &&
           lng == other.lng;
+}
+
+class SimpleRouteStep {
+  final List<SimpleGeographicCoordinate> geometry;
+  final String instruction;
+
+  const SimpleRouteStep({required this.geometry, required this.instruction});
+
+  @override
+  int get hashCode => geometry.hashCode ^ instruction.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SimpleRouteStep &&
+          runtimeType == other.runtimeType &&
+          geometry == other.geometry &&
+          instruction == other.instruction;
+}
+
+@freezed
+sealed class SimulationError with _$SimulationError implements FrbException {
+  const SimulationError._();
+
+  const factory SimulationError.polylineError({required String error}) =
+      SimulationError_PolylineError;
+  const factory SimulationError.notEnoughPoints() =
+      SimulationError_NotEnoughPoints;
+}
+
+class UserLocationSnapshot {
+  final SimpleGeographicCoordinate coordinates;
+  final double horizontalAccuracy;
+
+  const UserLocationSnapshot({
+    required this.coordinates,
+    required this.horizontalAccuracy,
+  });
+
+  @override
+  int get hashCode => coordinates.hashCode ^ horizontalAccuracy.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is UserLocationSnapshot &&
+          runtimeType == other.runtimeType &&
+          coordinates == other.coordinates &&
+          horizontalAccuracy == other.horizontalAccuracy;
+}
+
+/// Shim wrapper around the core Valhalla HTTP request generator using a handle map.
+class ValhallaHttpRequestGenerator {
+  final BigInt id;
+
+  const ValhallaHttpRequestGenerator.raw({required this.id});
+
+  Future<RouteRequest> generateRequest({
+    required UserLocation userLocation,
+    required List<Waypoint> waypoints,
+  }) => RustLib.instance.api.crateValhallaHttpRequestGeneratorGenerateRequest(
+    that: this,
+    userLocation: userLocation,
+    waypoints: waypoints,
+  );
+
+  /// Creates a Valhalla request generator with no additional options.
+  factory ValhallaHttpRequestGenerator({
+    required String endpointUrl,
+    required String profile,
+  }) => RustLib.instance.api.crateValhallaHttpRequestGeneratorNew(
+    endpointUrl: endpointUrl,
+    profile: profile,
+  );
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ValhallaHttpRequestGenerator &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
 }
